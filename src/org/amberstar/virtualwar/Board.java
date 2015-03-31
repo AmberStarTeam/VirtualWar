@@ -92,9 +92,9 @@ public class Board {
 
         while (nmbObstacl >= 0 && lsEmpty.size() > 1) {
             Cell tmp = lsEmpty.remove(r.nextInt(lsEmpty.size() - 1));
-            tmp.setObscacle();
+            tmp.setObstacle();
             if (!hasPath(containsTank)) {
-                tmp.removeObscacle();
+                tmp.removeObstacle();
             } else {
                 nmbObstacl--;
             }
@@ -113,7 +113,7 @@ public class Board {
         int[][] tmpGrind = new int[sizeHeight][sizeWidth];
         for (int i = 0; i < grindToInt.length; i++) {
             for (int j = 0; j < tmpGrind[0].length; j++) {
-                if (grind[i][j].isObscacle()) {
+                if (grind[i][j].isObstacle()) {
                     grindToInt[i][j] = 0;
                 } else {
                     grindToInt[i][j] = 1;
@@ -285,7 +285,7 @@ public class Board {
      * @return true if obstacle
      */
     public boolean isObstacle(Coordinates coordinates) {
-        return (isValid(coordinates)) ? getCell(coordinates).isObscacle()
+        return (isValid(coordinates)) ? getCell(coordinates).isObstacle()
                 : false;
     }
 
@@ -341,7 +341,7 @@ public class Board {
                     case 0:
                         if (tmp instanceof Base) {
                             build.append("   |");
-                        } else if (tmp.isObscacle()) {
+                        } else if (tmp.isObstacle()) {
                             build.append("   |");
                         } else if (tmp.mineContains() == equipe
                                 || (tmp.mineContains() != 0 && equipe == -1)) {
@@ -362,7 +362,7 @@ public class Board {
                     case 1:
                         if (tmp instanceof Base) {
                             build.append((tmp.isBase() == 1) ? " b |" : " B |");
-                        } else if (tmp.isObscacle()) {
+                        } else if (tmp.isObstacle()) {
                             build.append(" O |");
                         } else if (tmp.mineContains() == equipe
                                 || (tmp.mineContains() != 0 && equipe == -1)) {
@@ -381,7 +381,7 @@ public class Board {
                     case 2:
                         if (tmp instanceof Base) {
                             build.append("   |");
-                        } else if (tmp.isObscacle()) {
+                        } else if (tmp.isObstacle()) {
                             build.append("   |");
                         } else if (tmp.mineContains() != 0) {
                             build.append("   |");
@@ -431,7 +431,7 @@ public class Board {
                 if (grind[i][j] instanceof Base) {
                     ret += "B";
                 } else {
-                    if (grind[i][j].isObscacle()) {
+                    if (grind[i][j].isObstacle()) {
                         ret += "*";
                     } else {
                         ret += ".";

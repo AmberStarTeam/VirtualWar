@@ -61,7 +61,7 @@ public abstract class Robot {
     }
 
     /**
-     * @return the maximal amout of energy the robot can have
+     * @return the maximal amount of energy the robot can have
      */
     public int getMaxEng() {
         return maxEng;

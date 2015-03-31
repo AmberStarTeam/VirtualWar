@@ -6,9 +6,9 @@ package org.amberstar.virtualwar;
  *
  */
 public abstract class Action {
-    /** TODO:javadoc. */
+    /** the robot source */
     private Robot robotIn;
-    /** TODO:javadoc. */
+    /** the direction of action */
     private Coordinates direction;
 
     /**
@@ -22,21 +22,24 @@ public abstract class Action {
         this.robotIn = robot;
         this.direction = dir;
     }
+
     /**
      * 
-     * @return TODO
+     * @return the source of the action
      */
     public Robot getRobotSource() {
         return robotIn;
     }
+
     /**
      * 
-     * @return TODO
+     * @return the direction of the action
      */
     public Coordinates getDirection() {
         return direction;
     }
-    /** TODO:javadoc. */
+
+    /** run the action */
     abstract void act();
 
 }
