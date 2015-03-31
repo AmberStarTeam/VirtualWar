@@ -10,7 +10,7 @@ import java.util.List;
  */
 public final class Constant {
     /**
-     * private constructor so we don't creat it
+     * private constructor so we don't create it
      */
     private Constant() {
     }
