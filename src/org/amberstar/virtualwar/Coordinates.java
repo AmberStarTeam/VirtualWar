@@ -17,7 +17,7 @@ public class Coordinates {
 	}
 
 	/**
-	 * @return the height
+	 * @return the height 
 	 */
 	public int getHeight() {
 		return height;

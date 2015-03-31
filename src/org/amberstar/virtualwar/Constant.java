@@ -17,7 +17,7 @@ public final class Constant {
 
     /** UP movement up */
     static final Coordinates UP = new Coordinates(0, 1);
-    /** DOWN movement down */
+    /** DOWN movement down */ 
     static final Coordinates DOWN = new Coordinates(1, 0);
     /** RIGHT movement right*/
     static final Coordinates RIGHT = new Coordinates(1, 0);
