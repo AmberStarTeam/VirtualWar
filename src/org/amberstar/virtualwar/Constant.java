@@ -102,6 +102,9 @@ public final class Constant {
 	
 	/** The Constant SCAVENGER_DAMAGE_SUBMIT. */
 	static final int SCAVENGER_DAMAGE_SUBMIT = 2;
+	
+	/** The Constant SCAVENGER_MAX_MINE. */
+	static final int SCAVENGER_MAX_MINE = 10;
 
 	
 	/** The Constant TANK_RANGE. */

@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class Scavenger extends Robot {
 	/** the number of mine inside */
-	private int nmbMine = 10;
+	private int nmbMine = Constant.SCAVENGER_MAX_MINE;
 
 	/**
 	 * Default constructor
@@ -25,7 +25,6 @@ public class Scavenger extends Robot {
 	public Scavenger(int team, Coordinates coordinates, Board board) {
 		super(team, coordinates, board, Constant.SCAVENGER_ENERGY_REGEN,
 				Constant.SCAVENGER_ENERGY_INITIAL);
-		// TODO Auto-generated constructor stub
 	}
 
 	/**
@@ -38,32 +37,27 @@ public class Scavenger extends Robot {
 
 	@Override
 	public int getCostAction() {
-		// TODO Auto-generated method stub
 		return Constant.SCAVENGER_ENERGY_ACTION;
 	}
 
 	@Override
 	public int getCoastMoving() {
-		// TODO Auto-generated method stub
 		return Constant.SCAVENGER_ENERGY_MOVE;
 	}
 
 	@Override
 	public int getDamageTaken() {
-		// TODO Auto-generated method stub
 		return Constant.SCAVENGER_DAMAGE_SUBMIT;
 	}
 
 	@Override
 	public int getRange() {
-		// TODO Auto-generated method stub
 		return Constant.SCAVENGER_RANGE;
 	}
 
 
 	@Override
 	public String getType() {
-		// TODO Auto-generated method stub
 		return "Scavenger";
 	}
 

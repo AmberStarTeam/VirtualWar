@@ -27,31 +27,26 @@ public class Shooter extends Robot {
 
     @Override
     public int getCostAction() {
-        // TODO Auto-generated method stub
         return Constant.SHOOTER_ENERGY_ACTION;
     }
 
     @Override
     public int getCoastMoving() {
-        // TODO Auto-generated method stub
         return Constant.SHOOTER_ENERGY_MOVE;
     }
 
     @Override
     public int getDamageTaken() {
-        // TODO Auto-generated method stub
         return Constant.SHOOTER_DAMAGE_SUBMIT;
     }
 
     @Override
     public int getRange() {
-        // TODO Auto-generated method stub
         return Constant.SHOOTER_RANGE;
     }
 
     @Override
     public String getType() {
-        // TODO Auto-generated method stub
         return "Shooter";
     }
 
