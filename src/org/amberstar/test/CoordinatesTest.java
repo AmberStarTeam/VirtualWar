@@ -10,7 +10,7 @@ import org.amberstar.virtualwar.Coordinates;
 import org.junit.Test;
 
 /**
- * . TODO
+ * . TODO javadoc
  * 
  * @author beaussan
  *
