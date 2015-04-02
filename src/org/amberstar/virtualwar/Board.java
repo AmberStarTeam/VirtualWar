@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
+import java.util.Scanner;
 
 /**
  * The Board class is the class for the actual board of game containing robots,
@@ -240,13 +241,18 @@ public class Board {
      *            robot to set to
      * @param coordinates
      *            the place to set to
+     * @return the success
      */
-    public void setRobot(Robot r, Coordinates coordinates) {
+    public boolean setRobot(Robot r, Coordinates coordinates) {
         Cell tmp = getCell(coordinates);
         if (tmp == null) {
-            return;
+            return false;
         }
-        tmp.moveOn(r);
+        if (r.getCoordinates() != null && getCell(r.getCoordinates()) != null) {
+            getCell(r.getCoordinates()).setRobotIn(null);
+        }
+        r.setCoordinates(coordinates);
+        return tmp.moveOn(r);
     }
 
     /**
@@ -274,8 +280,8 @@ public class Board {
      *            the position of the test
      * @return true if base
      */
-    public boolean isBase(Coordinates coordinates) {
-        return getCell(coordinates) instanceof Base;
+    public int isBase(Coordinates coordinates) {
+        return (isValid(coordinates)) ? getCell(coordinates).isBase() : 0;
     }
 
     /**
@@ -443,6 +449,40 @@ public class Board {
         return ret;
     }
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + Arrays.hashCode(grind);
+        result = prime * result + sizeHeight;
+        result = prime * result + sizeWidth;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Board other = (Board) obj;
+        if (!Arrays.deepEquals(grind, other.grind)) {
+            return false;
+        }
+        if (sizeHeight != other.sizeHeight) {
+            return false;
+        }
+        if (sizeWidth != other.sizeWidth) {
+            return false;
+        }
+        return true;
+    }
+
     /**
      * debug command
      * 
@@ -450,7 +490,7 @@ public class Board {
      *            input stream parameters
      */
     public static void main(String[] args) {
-        Board b = new Board(5, 7);
+        Board b = new Board(3, 8);
         // b.generate(300, true);
         // System.out.println(b);
         // System.out.println(b);
@@ -462,22 +502,76 @@ public class Board {
 
         System.out.println(b);
         System.out.println(b.outGrind(1));
-        Coordinates tanCop = new Coordinates(2, 2);
-        Coordinates topCop = new Coordinates(1, 2);
-        Coordinates lopCop = new Coordinates(1, 1);
-        Robot tan = new Tank(1, tanCop, b);
-        Robot top = new Shooter(1, topCop, b);
-        Robot lop = new Scavenger(1, lopCop, b); // tan.setEnergy(1);
-        b.setRobot(tan, tanCop);
+        //Coordinates tanCop = new Coordinates(2, 2);
+        Coordinates topCop = new Coordinates(0, 0);
+        //Coordinates lopCop = new Coordinates(1, 1);
+        // Robot tan = new Tank(1, tanCop, b);
+        Robot top = new Scavenger(1, topCop, b);
+        // Robot lop = new Scavenger(1, lopCop, b); // tan.setEnergy(1);
+        // b.setRobot(tan, tanCop);
         b.setRobot(top, topCop);
-        b.setRobot(lop, lopCop);
+        // b.setRobot(lop, lopCop);
 
-        Coordinates min = new Coordinates(0, 4);
-        Coordinates min2 = new Coordinates(2, 4);
+        Coordinates min = new Coordinates(0, 2);
+        Coordinates min2 = new Coordinates(2, 1);
+        b.generate(5, true);
         b.setMine(min, 2);
         b.setMine(min2, 1);
         b.setMine(new Coordinates(0, 6), 1);
-        System.out.println(b.outGrind(1));
+        //System.out.println(b.outGrind(1));
+        System.out.println(Constant.MOVE_LIGHT_ROBOT);
+        Scanner sc = new Scanner(System.in);
+        String input = "";
+        Action ac = null;
+        while (!input.equals("stop")) {
+            System.out.println(b.outGrind(-1));
+            input = sc.nextLine();
+            switch (input) {
+            case "up":
+                ac = new Move(top, Constant.UP);
+                break;
+
+            case "down":
+                ac = new Move(top, Constant.DOWN);
+                break;
+
+            case "right":
+                ac = new Move(top, Constant.RIGHT);
+                break;
+
+            case "left":
+                ac = new Move(top, Constant.LEFT);
+                break;
+            case "up right":
+                ac = new Move(top, Constant.DIAG_UP_RIGHT);
+                break;
+
+            case "up left":
+                ac = new Move(top, Constant.DIAG_UP_LEFT);
+                break;
+
+            case "down right":
+                ac = new Move(top, Constant.DIAG_DOWN_RIGHT);
+                break;
+
+            case "down left":
+                ac = new Move(top, Constant.DIAG_DOWN_LEFT);
+                break;
+                
+            default:
+                break;
+            }
+            //System.out.println("before : " + top.getMoving());
+            if (ac != null) {
+                ac.act();
+                ac = null;
+            }
+            System.out.println("After : " + top);
+            //System.out.println(top.getMoving());
+
+        }
+        //System.out.println(Constant.MOVE_LIGHT_ROBOT);
+        sc.close();
         /*
          * f //System.out.println(b.outGrind(-1)); String tmp = b.outGrind(-1);
          * String[] splied = tmp.split("\n"); for (String str : splited) {

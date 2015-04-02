@@ -19,7 +19,7 @@ public class Coordinates {
      * @param width
      *            width coordinates
      */
-    public Coordinates(int height, int width) {
+    public Coordinates(int width, int height) {
         this.width = width;
         this.height = height;
     }
@@ -45,7 +45,7 @@ public class Coordinates {
      */
     @Override
     public String toString() {
-        return "Coordinates [width=" + width + ", height=" + height + "]";
+        return "Coordinates [height=" + height + ", width=" + width + "]";
     }
 
     /**
@@ -55,7 +55,7 @@ public class Coordinates {
      * @return a new coordinate
      */
     public Coordinates add(Coordinates c) {
-        return new Coordinates(height + c.height, width + c.width);
+        return new Coordinates(width + c.width, height + c.height);
     }
 
     /**
@@ -65,10 +65,8 @@ public class Coordinates {
      * @return a new coordinate
      */
     public Coordinates minus(Coordinates c) {
-        return new Coordinates(height - c.height, width - c.width);
+        return new Coordinates(width - c.width, height - c.height);
     }
-    
-    
 
     /**
      * 
@@ -77,7 +75,47 @@ public class Coordinates {
      * @return a new coordinate
      */
     public Coordinates times(int n) {
-        return new Coordinates(height * n, width * n);
+        return new Coordinates(width * n, height * n);
+    }
+
+    /**
+     * 
+     * @param n
+     *            the number to divide by
+     * @return a new coordinate
+     */
+    public Coordinates divide(int n) {
+        return new Coordinates(width / n, height / n);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + height;
+        result = prime * result + width;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Coordinates other = (Coordinates) obj;
+        if (height != other.height) {
+            return false;
+        }
+        if (width != other.width) {
+            return false;
+        }
+        return true;
     }
 
 }

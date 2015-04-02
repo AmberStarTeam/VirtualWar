@@ -9,17 +9,17 @@ import java.util.List;
  *
  */
 public abstract class Robot {
-    /** TODO:javadoc. */
+    /** the current energy of the robot */
     private int energy;
-    /** TODO:javadoc. */
+    /** the current team of the robot */
     private int team;
-    /** TODO:javadoc. */
+    /** the current coordinates of the robot */
     private Coordinates coordinates;
-    /** TODO:javadoc. */
+    /** the number of energy regenerated from idle in base */
     private final int regenBase;
-    /** TODO:javadoc. */
+    /** the maximum energy it can holds */
     private final int maxEng;
-    /** TODO:javadoc. */
+    /** the current board the robot is in */
     private Board board;
 
     /**
@@ -71,7 +71,7 @@ public abstract class Robot {
      * @return if the robot is in a base
      */
     public boolean isInBase() {
-        return board.isBase(coordinates);
+        return board.isBase(coordinates) == team;
     }
 
     /**
@@ -110,7 +110,10 @@ public abstract class Robot {
     public void setEnergy(int energy) {
         this.energy = energy;
         if (energy > maxEng) {
-            energy = maxEng;
+            this.energy = maxEng;
+        }
+        if (this.energy < 0) {
+            this.energy = 0;
         }
     }
 
@@ -178,6 +181,57 @@ public abstract class Robot {
 
     public void hasBeenMined() {
         energy -= getDamageTaken();
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((board == null) ? 0 : board.hashCode());
+        result = prime * result
+                + ((coordinates == null) ? 0 : coordinates.hashCode());
+        result = prime * result + energy;
+        result = prime * result + maxEng;
+        result = prime * result + regenBase;
+        result = prime * result + team;
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Robot other = (Robot) obj;
+        if (board == null) {
+            if (other.board != null)
+                return false;
+        } else if (!board.equals(other.board))
+            return false;
+        if (coordinates == null) {
+            if (other.coordinates != null)
+                return false;
+        } else if (!coordinates.equals(other.coordinates))
+            return false;
+        if (energy != other.energy)
+            return false;
+        if (maxEng != other.maxEng)
+            return false;
+        if (regenBase != other.regenBase)
+            return false;
+        if (team != other.team)
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Robot [energy=" + energy + ", team=" + team + ", coordinates="
+                + coordinates + ", regenBase=" + regenBase + ", maxEng="
+                + maxEng + ", moves=" + getMoving() + "]";
     }
 
 }

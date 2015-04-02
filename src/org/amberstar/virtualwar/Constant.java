@@ -16,13 +16,13 @@ public final class Constant {
     }
 
     /** UP movement up */
-    static final Coordinates UP = new Coordinates(0, 1);
+    static final Coordinates UP = new Coordinates(0, -1);
     /** DOWN movement down */ 
-    static final Coordinates DOWN = new Coordinates(1, 0);
+    static final Coordinates DOWN = new Coordinates(0, 1);
     /** RIGHT movement right*/
     static final Coordinates RIGHT = new Coordinates(1, 0);
     /** LEFT movement left*/
-    static final Coordinates LEFT = new Coordinates(0, 1);
+    static final Coordinates LEFT = new Coordinates(-1, 0);
     /** DIAG_UP_RIGHT movement up right */
     static final Coordinates DIAG_UP_RIGHT = UP.add(RIGHT);
     /** DIAG_UP_LEFT movement up left */
@@ -43,13 +43,13 @@ public final class Constant {
         MOVE_TANK.add(LEFT.add(LEFT));
 
         MOVE_LIGHT_ROBOT = new ArrayList<Coordinates>();
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
-                if (j == 0 && i == 0) {
-                    continue;
-                }
-                MOVE_LIGHT_ROBOT.add(new Coordinates(i, j));
-            }
-        }
+        MOVE_LIGHT_ROBOT.add(UP);
+        MOVE_LIGHT_ROBOT.add(DOWN);
+        MOVE_LIGHT_ROBOT.add(RIGHT);
+        MOVE_LIGHT_ROBOT.add(LEFT);
+        MOVE_LIGHT_ROBOT.add(DIAG_UP_RIGHT);
+        MOVE_LIGHT_ROBOT.add(DIAG_UP_LEFT);
+        MOVE_LIGHT_ROBOT.add(DIAG_DOWN_RIGHT);
+        MOVE_LIGHT_ROBOT.add(DIAG_DOWN_LEFT);
     }
 }

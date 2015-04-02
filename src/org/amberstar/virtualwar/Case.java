@@ -29,10 +29,15 @@ public class Case extends Cell {
 
     @Override
     boolean moveOn(Robot robot) {
-        if (super.getRobotIn() != null) {
+        if (super.getRobotIn() != null || robot == null) {
+            System.out.println("Can't print");
             return false;
         }
+        System.out.println("Moved on " + super.getCoordinates());
         // robot.getCoordinates();
+        if (robot.getCoordinates() != null) {
+            robot.getBoard().getCell(robot.getCoordinates()).setRobotIn(null);
+        }
         robot.setCoordinates(super.getCoordinates());
         super.setRobotIn(robot);
         return true;

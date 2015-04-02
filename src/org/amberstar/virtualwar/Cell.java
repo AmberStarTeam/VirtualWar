@@ -128,4 +128,55 @@ public abstract class Cell {
     /** clear the cell */
     abstract void clearBox();
 
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result
+                + ((coordinates == null) ? 0 : coordinates.hashCode());
+        result = prime * result + home;
+        result = prime * result + (isObstacle ? 1231 : 1237);
+        result = prime * result + mine;
+        result = prime * result + ((robotIn == null) ? 0 : robotIn.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        Cell other = (Cell) obj;
+        if (coordinates == null) {
+            if (other.coordinates != null) {
+                return false;
+            }
+        } else if (!coordinates.equals(other.coordinates)) {
+            return false;
+        }
+        if (home != other.home) {
+            return false;
+        }
+        if (isObstacle != other.isObstacle) {
+            return false;
+        }
+        if (mine != other.mine) {
+            return false;
+        }
+        if (robotIn == null) {
+            if (other.robotIn != null) {
+                return false;
+            }
+        } else if (!robotIn.equals(other.robotIn)) {
+            return false;
+        }
+        return true;
+    }
+
 }
