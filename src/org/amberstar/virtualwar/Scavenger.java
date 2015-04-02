@@ -41,7 +41,7 @@ public class Scavenger extends Robot {
 	}
 
 	@Override
-	public int getCoastMoving() {
+	public int getCostMoving() {
 		return Constant.SCAVENGER_ENERGY_MOVE;
 	}
 

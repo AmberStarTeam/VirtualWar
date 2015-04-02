@@ -117,11 +117,19 @@ public abstract class Robot {
         }
     }
 
+    /**
+     * @param energy
+     *            the energy to remove
+     */
+    public void removeEnergy(int eng) {
+    	setEnergy(this.energy - eng);
+    }
+
     /** @return the cost of a action */
     public abstract int getCostAction();
 
     /** @return the coast of moving */
-    public abstract int getCoastMoving();
+    public abstract int getCostMoving();
 
     /** @return the amount of damage it takes */
     public abstract int getDamageTaken();

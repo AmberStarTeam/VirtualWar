@@ -31,7 +31,7 @@ public class Move extends Action {
         Robot rob = super.getRobotSource();
 
         if (rob.getBoard().setRobot(rob, toAct.getCoordinates())) {
-            rob.setEnergy(rob.getEnergy() - rob.getCoastMoving());
+            rob.setEnergy(rob.getEnergy() - rob.getCostMoving());
         }
     }
 

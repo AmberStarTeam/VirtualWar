@@ -30,7 +30,7 @@ public class Tank extends Robot {
     }
 
     @Override
-    public int getCoastMoving() {
+    public int getCostMoving() {
         return Constant.TANK_ENERGY_MOVE;
     }
 

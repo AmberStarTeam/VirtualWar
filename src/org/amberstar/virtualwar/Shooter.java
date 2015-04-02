@@ -31,7 +31,7 @@ public class Shooter extends Robot {
     }
 
     @Override
-    public int getCoastMoving() {
+    public int getCostMoving() {
         return Constant.SHOOTER_ENERGY_MOVE;
     }
 
