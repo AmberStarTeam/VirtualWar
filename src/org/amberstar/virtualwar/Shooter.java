@@ -65,4 +65,14 @@ public class Shooter extends Robot {
         return (retVal.size() == 0) ? null : retVal;
     }
 
+	@Override
+	public String getAttackSound() {
+		return "sounds/shotShooter.wav";
+	}
+
+	@Override
+	public String getMoveSound() {
+		return "sounds/running.wav";
+	}
+
 }

@@ -66,4 +66,14 @@ public class Tank extends Robot {
         return (retVal.size() == 0) ? null : retVal;
     }
 
+	@Override
+	public String getAttackSound() {
+		return "sounds/shotTank.wav";
+	}
+
+	@Override
+	public String getMoveSound() {
+		return "sounds/moveTank.wav";
+	}
+
 }

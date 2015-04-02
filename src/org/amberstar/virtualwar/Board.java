@@ -506,17 +506,17 @@ public class Board {
 		Coordinates topCop = new Coordinates(0, 0);
 		// Coordinates lopCop = new Coordinates(1, 1);
 		Robot tan = new Tank(1, tanCop, b);
-		Robot top = new Scavenger(1, topCop, b);
+		Robot top = new Shooter(1, topCop, b);
 		// Robot lop = new Scavenger(1, lopCop, b); // tan.setEnergy(1);
 		b.setRobot(tan, tanCop);
 		b.setRobot(top, topCop);
 		// b.setRobot(lop, lopCop);
 
-		Coordinates min = new Coordinates(0, 2);
+		//Coordinates min = new Coordinates(0, 2);
 		Coordinates min2 = new Coordinates(2, 1);
-		b.generate(5, true);
-		b.setMine(min, 2);
-		b.setMine(min2, 1);
+		// b.generate(5, true);
+		// b.setMine(min, 2);
+		b.setMine(min2, 2);
 		b.setMine(new Coordinates(0, 6), 1);
 		// System.out.println(b.outGrind(1));
 		System.out.println(Constant.MOVE_LIGHT_ROBOT);
@@ -524,7 +524,7 @@ public class Board {
 		String input = "";
 		Action ac = null;
 		while (!input.equals("stop")) {
-			System.out.println(b.outGrind(2));
+			System.out.println(b.outGrind(-1));
 			input = sc.nextLine();
 			switch (input) {
 			case "up":

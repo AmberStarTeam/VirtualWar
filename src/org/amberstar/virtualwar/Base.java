@@ -31,7 +31,7 @@ public class Base extends Cell {
     @Override
     boolean moveOn(Robot robot) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
 
     }
 

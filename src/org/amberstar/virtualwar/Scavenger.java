@@ -104,4 +104,14 @@ public class Scavenger extends Robot {
 		return false;
 	}
 
+	@Override
+	public String getAttackSound() {
+		return null;
+	}
+
+	@Override
+	public String getMoveSound() {
+		return "sounds/running.wav";
+	}
+
 }

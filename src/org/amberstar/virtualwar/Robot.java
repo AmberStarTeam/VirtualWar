@@ -143,6 +143,12 @@ public abstract class Robot {
     /** @return the range of action it can perform */
     public abstract int getRange();
 
+    /** @return the sound of attack */
+    public abstract String getAttackSound();
+
+    /** @return the sound of moving */
+    public abstract String getMoveSound();
+
     /**
      * @return if robot has a valid target and can attack it
      */
