@@ -502,13 +502,13 @@ public class Board {
 
         System.out.println(b);
         System.out.println(b.outGrind(1));
-        //Coordinates tanCop = new Coordinates(2, 2);
+        Coordinates tanCop = new Coordinates(2, 2);
         Coordinates topCop = new Coordinates(0, 0);
-        //Coordinates lopCop = new Coordinates(1, 1);
-        // Robot tan = new Tank(1, tanCop, b);
+        // Coordinates lopCop = new Coordinates(1, 1);
+        Robot tan = new Tank(1, tanCop, b);
         Robot top = new Scavenger(1, topCop, b);
         // Robot lop = new Scavenger(1, lopCop, b); // tan.setEnergy(1);
-        // b.setRobot(tan, tanCop);
+        b.setRobot(tan, tanCop);
         b.setRobot(top, topCop);
         // b.setRobot(lop, lopCop);
 
@@ -518,13 +518,13 @@ public class Board {
         b.setMine(min, 2);
         b.setMine(min2, 1);
         b.setMine(new Coordinates(0, 6), 1);
-        //System.out.println(b.outGrind(1));
+        // System.out.println(b.outGrind(1));
         System.out.println(Constant.MOVE_LIGHT_ROBOT);
         Scanner sc = new Scanner(System.in);
         String input = "";
         Action ac = null;
         while (!input.equals("stop")) {
-            System.out.println(b.outGrind(-1));
+            System.out.println(b.outGrind(2));
             input = sc.nextLine();
             switch (input) {
             case "up":
@@ -557,20 +557,20 @@ public class Board {
             case "down left":
                 ac = new Move(top, Constant.DIAG_DOWN_LEFT);
                 break;
-                
+
             default:
                 break;
             }
-            //System.out.println("before : " + top.getMoving());
+            // System.out.println("before : " + top.getMoving());
             if (ac != null) {
                 ac.act();
                 ac = null;
             }
             System.out.println("After : " + top);
-            //System.out.println(top.getMoving());
+            // System.out.println(top.getMoving());
 
         }
-        //System.out.println(Constant.MOVE_LIGHT_ROBOT);
+        // System.out.println(Constant.MOVE_LIGHT_ROBOT);
         sc.close();
         /*
          * f //System.out.println(b.outGrind(-1)); String tmp = b.outGrind(-1);

@@ -72,8 +72,6 @@ public class Scavenger extends Robot {
             if (getBoard().isValid(tmp) && !getBoard().isObstacle(tmp)
                     && getBoard().isMine(tmp) != super.getTeam()) {
                 retVal.add(tmp);
-            } else {
-                System.out.println("Not valid : " + tmp);
             }
         }
         return (retVal.size() == 0) ? null : retVal;
