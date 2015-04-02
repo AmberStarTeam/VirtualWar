@@ -10,11 +10,6 @@ import java.util.List;
  */
 public class Shooter extends Robot {
 
-    /** the number of energy regen in base */
-    static final int REGEN_BASE = 2;
-    /** the maximal ammout of energy */
-    static final int MAX_ENERGY = 40;
-
     /**
      * Default constructor
      * 
@@ -26,25 +21,32 @@ public class Shooter extends Robot {
      *            the board where the robot is in
      */
     public Shooter(int team, Coordinates coordinates, Board board) {
-        super(team, coordinates, board, REGEN_BASE, MAX_ENERGY);
+        super(team, coordinates, board, Constant.SHOOTER_ENERGY_REGEN,
+				Constant.SHOOTER_ENERGY_INITIAL);
     }
 
     @Override
     public int getCostAction() {
         // TODO Auto-generated method stub
-        return 0;
+        return Constant.SHOOTER_ENERGY_ACTION;
     }
 
     @Override
     public int getCoastMoving() {
         // TODO Auto-generated method stub
-        return 11;
+        return Constant.SHOOTER_ENERGY_MOVE;
     }
 
     @Override
     public int getDamageTaken() {
         // TODO Auto-generated method stub
-        return 0;
+        return Constant.SHOOTER_DAMAGE_SUBMIT;
+    }
+
+    @Override
+    public int getRange() {
+        // TODO Auto-generated method stub
+        return Constant.SHOOTER_RANGE;
     }
 
     @Override
@@ -66,12 +68,6 @@ public class Shooter extends Robot {
             }
         }
         return (retVal.size() == 0) ? null : retVal;
-    }
-
-    @Override
-    public int getRange() {
-        // TODO Auto-generated method stub
-        return 4;
     }
 
 }

@@ -9,12 +9,6 @@ import java.util.List;
  *
  */
 public class Tank extends Robot {
-
-    /** the number of energy regen in base */
-    static final int REGEN_BASE = 2;
-    /** the maximal ammout of energy */
-    static final int MAX_ENERGY = 40;
-
     /**
      * Default constructor
      * 
@@ -26,26 +20,27 @@ public class Tank extends Robot {
      *            the board where the robot is in
      */
     public Tank(int team, Coordinates coordinates, Board board) {
-        super(team, coordinates, board, REGEN_BASE, MAX_ENERGY);
+        super(team, coordinates, board, Constant.TANK_ENERGY_REGEN,
+				Constant.TANK_ENERGY_INITIAL);
         // TODO Auto-generated constructor stub
     }
 
     @Override
     public int getCostAction() {
         // TODO Auto-generated method stub
-        return 0;
+        return Constant.TANK_ENERGY_ACTION;
     }
 
     @Override
     public int getCoastMoving() {
         // TODO Auto-generated method stub
-        return 3;
+        return Constant.TANK_ENERGY_MOVE;
     }
 
     @Override
     public int getDamageTaken() {
         // TODO Auto-generated method stub
-        return 0;
+        return Constant.TANK_DAMAGE_SUBMIT;
     }
 
     @Override
