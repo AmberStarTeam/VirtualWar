@@ -199,31 +199,42 @@ public abstract class Robot {
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj)
+        if (this == obj) {
             return true;
-        if (obj == null)
+        }
+        if (obj == null) {
             return false;
-        if (getClass() != obj.getClass())
+        }
+        if (getClass() != obj.getClass()) {
             return false;
+        }
         Robot other = (Robot) obj;
         if (board == null) {
-            if (other.board != null)
+            if (other.board != null) {
                 return false;
-        } else if (!board.equals(other.board))
+            }
+        } else if (!board.equals(other.board)) {
             return false;
+        }
         if (coordinates == null) {
-            if (other.coordinates != null)
+            if (other.coordinates != null) {
                 return false;
-        } else if (!coordinates.equals(other.coordinates))
+            }
+        } else if (!coordinates.equals(other.coordinates)) {
             return false;
-        if (energy != other.energy)
+        }
+        if (energy != other.energy) {
             return false;
-        if (maxEng != other.maxEng)
+        }
+        if (maxEng != other.maxEng) {
             return false;
-        if (regenBase != other.regenBase)
+        }
+        if (regenBase != other.regenBase) {
             return false;
-        if (team != other.team)
+        }
+        if (team != other.team) {
             return false;
+        }
         return true;
     }
 

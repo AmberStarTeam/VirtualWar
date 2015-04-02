@@ -57,7 +57,7 @@ public class Board {
     /**
      * 
      * @param pourcentageGen
-     *            0<= the percentage of obstacles in the way
+     *            the percentage of obstacles in the way
      * @param containsTank
      *            True will generate for tanks, False for other (tank can't go
      *            in diagonal)
