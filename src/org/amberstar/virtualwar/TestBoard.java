@@ -45,7 +45,7 @@ public class TestBoard {
         for (int i : dataGen.keySet()) {
             System.out.println("For " + i + " % of obstacle it took "
                     + dataGen.get(i) + "ms to generate on a " + b.getHeight()
-                    + "/" + b.getWidth() + " board");
+                    + "/" + b.getWidth() + " board (" + (b.getHeight() * b.getWidth()) + " cells !!)");
         }
         sc.close();
 
