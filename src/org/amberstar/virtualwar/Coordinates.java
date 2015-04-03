@@ -15,7 +15,7 @@
 package org.amberstar.virtualwar;
 
 /**
- * The Coordinates Class.
+ * The Coordinates rightClass.
  *
  * @author beaussan
  */

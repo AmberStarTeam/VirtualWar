@@ -37,7 +37,7 @@ public final class SoundTest {
     public static void main(String[] args) {
         ThreadSoundRun tmp;
 
-        for (String str : ("640.wav\n" + "boom.wav\ndeathOfRobots.wav\n"
+        for (String str : ("boom.wav\ndeathOfRobots.wav\n"
                 + "moveTank.wav\nrunning.wav" + "\nshotShooter.wav\n"
                 + "shotTank.wav").split("\n")) {
             System.out.println(str);
@@ -53,7 +53,7 @@ public final class SoundTest {
             }
         }
 
-        tmp = new ThreadSoundRun("src/Son/running.wav", 1000);
+        tmp = new ThreadSoundRun("sounds/running.wav", 1000);
         tmp.start();
 
     }
