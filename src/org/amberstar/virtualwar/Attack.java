@@ -1,24 +1,64 @@
 package org.amberstar.virtualwar;
+
+import org.amberstar.virtualwar.sound.ThreadSoundRun;
+
 /**
  * 
  * @author beaussan
  *
  */
 public class Attack extends Action {
-    /**
-     * make a robot attack in a direction
-     * @param robot the robot from
-     * @param dir the direction in 0 1 coordinates
-     */
-    public Attack(Robot robot, Coordinates dir) {
-        super(robot, dir);
-        // TODO Auto-generated constructor stub
-    }
+	/**
+	 * make a robot attack in a direction
+	 * 
+	 * @param robot
+	 *            the robot from
+	 * @param dir
+	 *            the direction in 0 1 coordinates
+	 */
+	public Attack(Robot robot, Coordinates dir) {
+		super(robot, dir);
+		// TODO Auto-generated constructor stub
+	}
 
-    @Override
-    void act() {
-        // TODO Auto-generated method stub
+	/**
+	 * 
+	 * @return the Robot of objective, if none then null
+	 */
+	private Robot getObjectif() {
+		for (int i = 0; i < super.getRobotSource().getRange(); i++) {
+			Coordinates tmp = super.getDirection().times(i + 1);
+			Cell cellOf = super.getRobotSource().getBoard().getCell(tmp);
+			if (cellOf.isObstacle() || cellOf.isBase() == 0) {
+				return null;
+			} else if (cellOf.getRobotIn() != null) {
+				if (cellOf.getRobotIn().getTeam() == super.getRobotSource()
+						.getTeam()) {
+					return null;
+				}
+				return cellOf.getRobotIn();
+			}
+		}
+		return null;
+	}
 
-    }
+	@Override
+	void act() {
+		if (!(super.getRobotSource() instanceof Scavenger)) {
+			Robot toAttack = getObjectif();
+			if (toAttack == null) {
+				return;
+			}
+			super.getRobotSource().removeEnergy(
+					super.getRobotSource().getCostAction());
+			toAttack.hasBeenShoot();
+		} else {
+			Coordinates cords = super.getRobotSource().getCoordinates().add(super.getDirection());
+			super.getRobotSource().getBoard().setMine(cords, super.getRobotSource().getTeam());
+			super.getRobotSource().removeEnergy(super.getRobotSource().getCostAction());
+            new ThreadSoundRun(super.getRobotSource().getMoveSound(), 300).start();
+		}
+
+	}
 
 }
