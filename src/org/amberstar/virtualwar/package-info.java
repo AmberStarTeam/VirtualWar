@@ -2,6 +2,7 @@
  * 
  */
 /**
+ * The main package of the game
  * @author amberStar
  *
  */
