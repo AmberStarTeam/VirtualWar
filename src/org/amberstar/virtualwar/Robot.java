@@ -1,30 +1,51 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.amberstar.virtualwar;
 
 import java.util.ArrayList;
 import java.util.List;
 
+
 /**
- * 
- * @author beaussan
+ * The Robot Class.
  *
+ * @author beaussan
  */
 public abstract class Robot {
-    /** the current energy of the robot */
+
+    /** the current energy of the robot. */
     private int energy;
-    /** the current team of the robot */
+
+    /** the current team of the robot. */
     private int team;
-    /** the current coordinates of the robot */
+
+    /** the current coordinates of the robot. */
     private Coordinates coordinates;
-    /** the number of energy regenerated from idle in base */
+
+    /** the number of energy regenerated from idle in base. */
     private final int regenBase;
-    /** the maximum energy it can holds */
+
+    /** the maximum energy it can holds. */
     private final int maxEng;
-    /** the current board the robot is in */
+
+    /** the current board the robot is in. */
     private Board board;
 
     /**
-     * Create a robot
-     * 
+     * Create a robot.
+     *
      * @param team
      *            team of robot
      * @param coordinates
@@ -47,6 +68,8 @@ public abstract class Robot {
     }
 
     /**
+     * Gets the current board the robot is in.
+     *
      * @return board where the robot is in
      */
     public Board getBoard() {
@@ -54,6 +77,8 @@ public abstract class Robot {
     }
 
     /**
+     * Gets the number of energy regenerated from idle in base.
+     *
      * @return the amount of energy gain per round in base
      */
     public int getRegenBase() {
@@ -61,6 +86,8 @@ public abstract class Robot {
     }
 
     /**
+     * Gets the maximum energy it can holds.
+     *
      * @return the maximal amount of energy the robot can have
      */
     public int getMaxEng() {
@@ -68,6 +95,8 @@ public abstract class Robot {
     }
 
     /**
+     * Checks if is in base.
+     *
      * @return if the robot is in a base
      */
     public boolean isInBase() {
@@ -75,6 +104,8 @@ public abstract class Robot {
     }
 
     /**
+     * Gets the current coordinates of the robot.
+     *
      * @return the coordinates
      */
     public Coordinates getCoordinates() {
@@ -82,6 +113,8 @@ public abstract class Robot {
     }
 
     /**
+     * Sets the current coordinates of the robot.
+     *
      * @param coordinates
      *            the coordinates to set
      */
@@ -90,6 +123,8 @@ public abstract class Robot {
     }
 
     /**
+     * Gets the current energy of the robot.
+     *
      * @return the energy
      */
     public int getEnergy() {
@@ -97,6 +132,8 @@ public abstract class Robot {
     }
 
     /**
+     * Gets the current team of the robot.
+     *
      * @return the team
      */
     public int getTeam() {
@@ -104,6 +141,8 @@ public abstract class Robot {
     }
 
     /**
+     * Sets the current energy of the robot.
+     *
      * @param energy
      *            the energy to set
      */
@@ -118,38 +157,74 @@ public abstract class Robot {
     }
 
     /**
+     * Removes the energy.
+     *
      * @param eng
      *            the energy to remove
      */
     public void removeEnergy(int eng) {
-    	setEnergy(this.energy - eng);
+        setEnergy(this.energy - eng);
     }
 
-    /** @return the cost of a action */
+    /**
+     * Gets the cost action.
+     *
+     * @return the cost of a action
+     */
     public abstract int getCostAction();
 
-    /** @return the coast of moving */
+    /**
+     * Gets the cost moving.
+     *
+     * @return the coast of moving
+     */
     public abstract int getCostMoving();
 
-    /** @return the amount of damage it takes */
+    /**
+     * Gets the damage taken.
+     *
+     * @return the amount of damage it takes
+     */
     public abstract int getDamageTaken();
 
-    /** @return the type of robot */
+    /**
+     * Gets the type.
+     *
+     * @return the type of robot
+     */
     public abstract String getType();
 
-    /** @return the list of Coordinates it can moves */
+    /**
+     * Gets the moving.
+     *
+     * @return the list of Coordinates it can moves
+     */
     public abstract List<Coordinates> getMoving();
 
-    /** @return the range of action it can perform */
+    /**
+     * Gets the range.
+     *
+     * @return the range of action it can perform
+     */
     public abstract int getRange();
 
-    /** @return the sound of attack */
+    /**
+     * Gets the attack sound.
+     *
+     * @return the sound of attack
+     */
     public abstract String getAttackSound();
 
-    /** @return the sound of moving */
+    /**
+     * Gets the move sound.
+     *
+     * @return the sound of moving
+     */
     public abstract String getMoveSound();
 
     /**
+     * Can attack.
+     *
      * @return if robot has a valid target and can attack it
      */
     public boolean canAttack() {
@@ -183,20 +258,25 @@ public abstract class Robot {
     }
 
     /**
-     * submit damage from a shoot
+     * submit damage from a shoot.
      */
     public void hasBeenShoot() {
         energy -= getDamageTaken();
     }
 
     /**
-     * submit damage from a mine
+     * submit damage from a mine.
      */
 
     public void hasBeenMined() {
         energy -= getDamageTaken();
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -211,6 +291,11 @@ public abstract class Robot {
         return result;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -252,6 +337,11 @@ public abstract class Robot {
         return true;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#toString()
+     */
     @Override
     public String toString() {
         return "Robot [energy=" + energy + ", team=" + team + ", coordinates="

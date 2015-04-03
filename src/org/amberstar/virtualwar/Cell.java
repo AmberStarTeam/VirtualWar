@@ -1,26 +1,46 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.amberstar.virtualwar;
 
 import java.util.List;
 
 /**
- * @author Asus UX302L
+ * The Cell Class.
  *
+ * @author Asus UX302L
  */
 public abstract class Cell {
-    /** mine contains */
+
+    /** mine contains. */
     private int mine;
-    /** if is home */
+
+    /** if is home. */
     private int home;
-    /** the coordinate of the current Cell */
+
+    /** the coordinate of the current Cell. */
     private Coordinates coordinates;
-    /** the current robot inside */
+
+    /** the current robot inside. */
     private Robot robotIn;
-    /** if is obstacle */
+
+    /** if is obstacle. */
     private boolean isObstacle;
 
     /**
-     * default constructor
-     * 
+     * default constructor.
+     *
      * @param coordinates
      *            the coordinate of Cell
      */
@@ -29,8 +49,8 @@ public abstract class Cell {
     }
 
     /**
-     * the constructor for bases
-     * 
+     * the constructor for bases.
+     *
      * @param coordinates
      *            the coordinates of the Cell
      * @param bases
@@ -42,6 +62,8 @@ public abstract class Cell {
     }
 
     /**
+     * Checks if is obstacle.
+     *
      * @return the isObstacle
      */
     public boolean isObstacle() {
@@ -49,20 +71,22 @@ public abstract class Cell {
     }
 
     /**
-     * set the Cell as obstacle
+     * set the Cell as obstacle.
      */
     public void setObstacle() {
         this.isObstacle = true;
     }
 
     /**
-	 * 
-	 */
+     * Removes the obstacle.
+     */
     public void removeObstacle() {
         this.isObstacle = false;
     }
 
     /**
+     * Mine contains.
+     *
      * @return the number of mines
      */
     public int mineContains() {
@@ -70,6 +94,8 @@ public abstract class Cell {
     }
 
     /**
+     * Sets the mine contains.
+     *
      * @param mineIn
      *            the mine to set
      */
@@ -78,6 +104,8 @@ public abstract class Cell {
     }
 
     /**
+     * Checks if is base.
+     *
      * @return if it's a base, 0 = no, else team
      */
     public int isBase() {
@@ -85,6 +113,8 @@ public abstract class Cell {
     }
 
     /**
+     * Gets the coordinate of the current Cell.
+     *
      * @return the coordinates
      */
     public Coordinates getCoordinates() {
@@ -92,6 +122,8 @@ public abstract class Cell {
     }
 
     /**
+     * Gets the current robot inside.
+     *
      * @return the robotIn
      */
     public Robot getRobotIn() {
@@ -99,6 +131,8 @@ public abstract class Cell {
     }
 
     /**
+     * Sets the current robot inside.
+     *
      * @param robot
      *            set the robot inside the case
      */
@@ -106,10 +140,16 @@ public abstract class Cell {
         this.robotIn = robot;
     }
 
-    /** @return a list of robot */
+    /**
+     * Gets the contents.
+     *
+     * @return a list of robot
+     */
     public abstract List<Robot> getContents();
 
     /**
+     * Move on.
+     *
      * @param robot
      *            the robot to get in
      * @return if success
@@ -117,17 +157,24 @@ public abstract class Cell {
     abstract boolean moveOn(Robot robot);
 
     /**
-     * set the mine inside
-     * 
+     * set the mine inside.
+     *
      * @param team
      *            the team number
      * @return if success
      */
     abstract boolean addMine(int team);
 
-    /** clear the cell */
+    /**
+     * clear the cell.
+     */
     abstract void clearBox();
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#hashCode()
+     */
     @Override
     public int hashCode() {
         final int prime = 31;
@@ -141,6 +188,11 @@ public abstract class Cell {
         return result;
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

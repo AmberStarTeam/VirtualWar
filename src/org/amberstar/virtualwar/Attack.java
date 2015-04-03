@@ -1,20 +1,44 @@
-package org.amberstar.virtualwar;
-/**
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
  * 
- * @author beaussan
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package org.amberstar.virtualwar;
+
+/**
+ * The Attack Class.
  *
+ * @author beaussan
  */
 public class Attack extends Action {
+
     /**
-     * make a robot attack in a direction
-     * @param robot the robot from
-     * @param dir the direction in 0 1 coordinates
+     * make a robot attack in a direction.
+     *
+     * @param robot
+     *            the robot from
+     * @param dir
+     *            the direction in 0 1 coordinates
      */
     public Attack(Robot robot, Coordinates dir) {
         super(robot, dir);
         // TODO Auto-generated constructor stub
     }
 
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.amberstar.virtualwar.Action#act()
+     */
     @Override
     void act() {
         // TODO Auto-generated method stub

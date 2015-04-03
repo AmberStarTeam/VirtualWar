@@ -1,3 +1,17 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.amberstar.test;
 
 import static org.junit.Assert.assertEquals;
@@ -10,7 +24,7 @@ import org.amberstar.virtualwar.Coordinates;
 import org.junit.Test;
 
 /**
- * . TODO javadoc
+ * Testing of Coordinates.
  * 
  * @author beaussan
  *
@@ -18,7 +32,7 @@ import org.junit.Test;
 public class CoordinatesTest {
 
     /**
-     * test constructor
+     * test constructor.
      */
     @Test
     public void testCoordinates() {
@@ -28,7 +42,7 @@ public class CoordinatesTest {
     }
 
     /**
-     * test getter width
+     * test getter width.
      */
     @Test
     public void testGetWidth() {
@@ -37,7 +51,7 @@ public class CoordinatesTest {
     }
 
     /**
-     * test getter height
+     * test getter height.
      */
     @Test
     public void testGetHeight() {
@@ -46,7 +60,7 @@ public class CoordinatesTest {
     }
 
     /**
-     * test toString
+     * test toString.
      */
     @Test
     public void testToString() {
@@ -55,7 +69,7 @@ public class CoordinatesTest {
     }
 
     /**
-     * test add
+     * test add.
      */
     @Test
     public void testAdd() {
@@ -68,7 +82,7 @@ public class CoordinatesTest {
     }
 
     /**
-     * test minus function
+     * test minus function.
      */
     @Test
     public void testMinus() {
@@ -79,7 +93,7 @@ public class CoordinatesTest {
     }
 
     /**
-     * test multiplying
+     * test multiplying.
      */
     @Test
     public void testTimes() {
@@ -88,7 +102,7 @@ public class CoordinatesTest {
     }
 
     /**
-     * test dividing coordinates
+     * test dividing coordinates.
      */
     @Test
     public void testDivide() {
@@ -96,7 +110,7 @@ public class CoordinatesTest {
     }
 
     /**
-     * test equals
+     * test equals.
      */
     @Test
     public void testEqualsObject() {
