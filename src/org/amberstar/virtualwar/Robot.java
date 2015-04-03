@@ -221,6 +221,12 @@ public abstract class Robot {
      * @return the sound of moving
      */
     public abstract String getMoveSound();
+    
+    
+    /**
+     * Run base action.
+     */
+    public abstract void runBaseAction();
 
     /**
      * Can attack.

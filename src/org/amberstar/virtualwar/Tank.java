@@ -115,4 +115,10 @@ public class Tank extends Robot {
 		return "sounds/moveTank.wav";
 	}
 
+    @Override
+    public void runBaseAction() {
+        setEnergy(super.getEnergy()+super.getRegenBase());
+    }
+
+
 }

@@ -42,6 +42,11 @@ public class Move extends Action {
      */
     @Override
     void act() {
+        if (super.getRobotSource().getEnergy()
+                - super.getRobotSource().getCostMoving() < 0) {
+            System.out.println("Pas assez d'énergie !");
+            return;
+        }
         Cell toAct = getObjectif();
         if (toAct == null) {
             return;
@@ -77,6 +82,10 @@ public class Move extends Action {
         Robot robSour = super.getRobotSource();
 
         if (robSour instanceof Tank) {
+            if (!Constant.MOVE_TANK.contains(super.getDirection().times(2))) {
+                System.out.println("BUG : pas deplacement autoriser");
+                return null;
+            }
             tmp = robSour.getCoordinates().add(super.getDirection().times(2));
             if (!robSour.getBoard().isValid(tmp)
                     || robSour.getBoard().getCell(tmp).getRobotIn() != null
@@ -87,8 +96,13 @@ public class Move extends Action {
                             .getRobotSource().getBoard().isBase(tmp) != super
                             .getRobotSource().getTeam())) {
                 tmp = tmp.minus(super.getDirection());
+                
             }
         } else {
+            if (!Constant.MOVE_LIGHT_ROBOT.contains(super.getDirection())) {
+                System.out.println("BUG : pas deplacement autoriser");
+                return null;
+            }
             tmp = robSour.getCoordinates().add(super.getDirection());
         }
 

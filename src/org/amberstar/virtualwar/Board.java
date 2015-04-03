@@ -47,9 +47,9 @@ public class Board {
      *            the width size of the board
      */
     public Board(int height, int width) {
-    	if (height <= 0 || width <= 0) {
-			return;
-		}
+        if (height <= 0 || width <= 0) {
+            return;
+        }
         this.sizeHeight = height;
         this.sizeWidth = width;
         initEmptyGrind();
@@ -457,7 +457,6 @@ public class Board {
         return build.toString();
     }
 
-    
     /**
      * Out grind plus legend.
      *
@@ -465,79 +464,80 @@ public class Board {
      *            the equip
      * @return the string
      */
-    public String outGrindPlusLegend(int equipe){
-    	String[] out = outGrind(equipe).split("\n");
-    	boolean[] status = new boolean[out.length];
-    	
-    	for (int i = 0; i < out.length; i++) {
-			out[i].replace("\n","");
-			status[i] = false;
-		}
-    	
-    	if (out.length < 22) {
-			out[0] 			 += " +--------------------+";
-			out[1] 			 += " |     Légande        |";
-            out[3]           += " |   B/b : base       |";
-            out[4]           += " |   C/c : char       |";
-            out[5]           += " |   T/t : tireur     |";
-            out[6]           += " |   X/x : mine       |";
-            out[7]           += " |   O : obstacle     |";
-            out[8]           += " |   E : energie      |";
-            out[9]           += " |   M : nbr de mines |";
-            out[out.length-3]+= " |   q - quitter      |";
-            out[out.length-4]+= " |   h - regles       |";
-			out[out.length-1]+= " +--------------------+";
-			
-			for (int i = 3; i < 10; i++) {
-			    status[i] = true;
+    public String outGrindPlusLegend(int equipe) {
+        String[] out = outGrind(equipe).split("\n");
+        boolean[] status = new boolean[out.length];
+
+        for (int i = 0; i < out.length; i++) {
+            out[i].replace("\n", "");
+            out[i] += "   ";
+            status[i] = false;
+        }
+
+        if (out.length < 22) {
+            out[0] += "+--------------------+";
+            out[1] += "|     Légande        |";
+            out[3] += "|   B/b : base       |";
+            out[4] += "|   C/c : char       |";
+            out[5] += "|   T/t : tireur     |";
+            out[6] += "|   P/p : piegeur    |";
+            out[7] += "|   X/x : mine       |";
+            out[8] += "|   O : obstacle     |";
+            out[9] += "|   E : energie      |";
+            out[10] += "|   M : nbr de mines |";
+            out[out.length - 3] += "|   q - quitter      |";
+            out[out.length - 4] += "|   h - regles       |";
+            out[out.length - 1] += "+--------------------+";
+
+            for (int i = 3; i < 11; i++) {
+                status[i] = true;
             }
             status[0] = true;
             status[1] = true;
-            status[out.length-3] = true;
-            status[out.length-4] = true;
-            status[out.length-1] = true;
-		}else{
-            out[0]           += " +--------------------+";
-            out[2]           += " |     Légande        |";
-            out[4]           += " |   B/b : base       |";
-            out[6]           += " |   C/c : char       |";
-            out[8]           += " |   T/t : tireur     |";
-            out[10]          += " |   X/x : mine       |";
-            out[12]          += " |   O : obstacle     |";
-            out[14]          += " |   E : energie      |";
-            out[16]          += " |   M : nbr de mines |";
-            out[out.length-3]+= " |   q - quitter      |";
-            out[out.length-4]+= " |   h - regles       |";
-            out[out.length-1]+= " +--------------------+";
-            
-            for (int i = 4; i < 17; i+=2) {
+            status[out.length - 3] = true;
+            status[out.length - 4] = true;
+            status[out.length - 1] = true;
+        } else {
+            out[0] += "+--------------------+";
+            out[2] += "|     Légande        |";
+            out[4] += "|   B/b : base       |";
+            out[6] += "|   C/c : char       |";
+            out[8] += "|   T/t : tireur     |";
+            out[10] += "|   P/p : piegeur    |";
+            out[12] += "|   X/x : mine       |";
+            out[14] += "|   O : obstacle     |";
+            out[16] += "|   E : energie      |";
+            out[18] += "|   M : nbr de mines |";
+            out[out.length - 3] += "|   q - quitter      |";
+            out[out.length - 4] += "|   h - regles       |";
+            out[out.length - 1] += "+--------------------+";
+
+            for (int i = 4; i < 19; i += 2) {
                 status[i] = true;
             }
-            
-            
+
             status[0] = true;
             status[2] = true;
-            status[out.length-3] = true;
-            status[out.length-4] = true;
-            status[out.length-1] = true;
-		    
-		}
-    	
-    	for (int i = 0; i < status.length; i++) {
+            status[out.length - 3] = true;
+            status[out.length - 4] = true;
+            status[out.length - 1] = true;
+
+        }
+
+        for (int i = 0; i < status.length; i++) {
             if (!status[i]) {
-                out[i] += " |                    |";
+                out[i] += "|                    |";
             }
         }
-    	
-    	StringBuilder finalOut = new StringBuilder();
-    	for (String string : out) {
-    		finalOut.append(string);
-    		finalOut.append('\n');
-		}
-    	return finalOut.toString();
+
+        StringBuilder finalOut = new StringBuilder();
+        for (String string : out) {
+            finalOut.append(string);
+            finalOut.append('\n');
+        }
+        return finalOut.toString();
     }
-    
-    
+
     /**
      * To string.
      *
@@ -606,112 +606,5 @@ public class Board {
         return true;
     }
 
-    /**
-     * debug command.
-     *
-     * @param args
-     *            input stream parameters
-     */
-    public static void main2(String[] args) {
-
-        Board b = new Board(3, 8);
-        // b.generate(300, true);
-        // System.out.println(b);
-        // System.out.println(b);
-        /*
-         * Board da = new Board(30, 30); for (int i = 0; i < 100; i++) {
-         * da.generate(i, false); // System.out.println(i+"\n"+da.toString());
-         * System.out.println(i); }
-         */
-
-        System.out.println(b);
-        System.out.println(b.outGrind(1));
-        Coordinates tanCop = new Coordinates(2, 2);
-        Coordinates topCop = new Coordinates(0, 0);
-        Coordinates otherCop = new Coordinates(7, 0);
-        // Coordinates lopCop = new Coordinates(1, 1);
-        Robot tan = new Tank(1, tanCop, b);
-        Robot top = new Scavenger(1, topCop, b);
-        Robot other = new Shooter(2, otherCop, b);
-        // Robot lop = new Scavenger(1, lopCop, b); // tan.setEnergy(1);
-        b.setRobot(tan, tanCop);
-        b.setRobot(top, topCop);
-        b.setRobot(other, otherCop);
-        // b.setRobot(lop, lopCop);
-
-        // Coordinates min = new Coordinates(0, 2);
-        Coordinates min2 = new Coordinates(2, 1);
-        // b.generate(5, true);
-        // b.setMine(min, 2);
-        b.setMine(min2, 2);
-        b.setMine(new Coordinates(0, 6), 1);
-        // System.out.println(b.outGrind(1));
-        System.out.println(Constant.MOVE_LIGHT_ROBOT);
-        Scanner sc = new Scanner(System.in);
-        String input = "";
-        Action ac = null;
-        while (!input.equals("stop")) {
-            System.out.println(' ' + b.outGrind(-1).replaceAll("\n", "\n "));
-            input = sc.nextLine();
-            switch (input) {
-            case "up":
-                ac = new Move(top, Constant.UP);
-                break;
-
-            case "down":
-                ac = new Move(top, Constant.DOWN);
-                break;
-
-            case "right":
-                ac = new Move(top, Constant.RIGHT);
-                break;
-
-            case "left":
-                ac = new Move(top, Constant.LEFT);
-                break;
-            case "up right":
-                ac = new Move(top, Constant.DIAG_UP_RIGHT);
-                break;
-
-            case "up left":
-                ac = new Move(top, Constant.DIAG_UP_LEFT);
-                break;
-
-            case "down right":
-                ac = new Move(top, Constant.DIAG_DOWN_RIGHT);
-                break;
-
-            case "down left":
-                ac = new Move(top, Constant.DIAG_DOWN_LEFT);
-                break;
-            case "shoot right":
-            	ac = new Attack(top, Constant.RIGHT);
-            default:
-                break;
-            }
-            // System.out.println("before : " + top.getMoving());
-            if (ac != null) {
-                ac.act();
-                ac = null;
-            }
-            // System.out.println("After : " + top);
-            // System.out.println(top.getMoving());
-
-        }
-        // System.out.println(Constant.MOVE_LIGHT_ROBOT);
-        sc.close();
-        /*
-         * f //System.out.println(b.outGrind(-1)); String tmp = b.outGrind(-1);
-         * String[] splied = tmp.split("\n"); for (String str : splited) {
-         * System.out.println(str + " lol "); }
-         */
-
-    }
-
-    public static void main(String[] args) {
-		for (int i = 3; i < 8; i++) {
-			System.out.println(new Board(i, i).outGrindPlusLegend(-1));
-		}
-	}
+    
 }
-

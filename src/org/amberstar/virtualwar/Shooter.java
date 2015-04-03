@@ -128,4 +128,9 @@ public class Shooter extends Robot {
         return "sounds/running.wav";
     }
 
+    @Override
+    public void runBaseAction() {
+        setEnergy(super.getEnergy()+super.getRegenBase());
+    }
+
 }

@@ -195,4 +195,10 @@ public class Scavenger extends Robot {
 		return "sounds/running.wav";
 	}
 
+    @Override
+    public void runBaseAction() {
+        this.nmbMine = Constant.SCAVENGER_MAX_MINE;
+        setEnergy(super.getEnergy()+super.getRegenBase());
+    }
+
 }
