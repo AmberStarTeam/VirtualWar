@@ -17,7 +17,6 @@ package org.amberstar.virtualwar;
 import java.util.ArrayList;
 import java.util.List;
 
-
 /**
  * The Shooter Class.
  *
@@ -130,7 +129,7 @@ public class Shooter extends Robot {
 
     @Override
     public void runBaseAction() {
-        setEnergy(super.getEnergy()+super.getRegenBase());
+        setEnergy(super.getEnergy() + super.getRegenBase());
     }
 
 }

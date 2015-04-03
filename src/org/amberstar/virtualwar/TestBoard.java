@@ -1,16 +1,43 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.amberstar.virtualwar;
 
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class TestBoard {
+// TODO: Auto-generated Javadoc
+/**
+ * The TestBoard Class.
+ */
+public final class TestBoard {
 
+    /**
+     * Instantiates a new test board.
+     */
+    private TestBoard() {
+    }
+
+    /**
+     * Test gen.
+     */
     public static void testGen() {
         Scanner sc = new Scanner(System.in);
         String input = "";
         Long timeBef, timeAft;
         HashMap<Integer, Long> dataGen = new HashMap<Integer, Long>();
-        
+
         System.out.println("Veuillez entrer la taille du plateau (h w)");
         Board b = new Board(sc.nextInt(), sc.nextInt());
         // System.out.println("Le plateau contient des tanks?");
@@ -36,7 +63,7 @@ public class TestBoard {
             if (showBoard) {
                 System.out.println(b);
             }
-            if(i%5 == 0){
+            if (i % 5 == 0) {
                 System.out.print(" .");
             }
 
@@ -45,7 +72,8 @@ public class TestBoard {
         for (int i : dataGen.keySet()) {
             System.out.println("For " + i + " % of obstacle it took "
                     + dataGen.get(i) + "ms to generate on a " + b.getHeight()
-                    + "/" + b.getWidth() + " board (" + (b.getHeight() * b.getWidth()) + " cells !!)");
+                    + "/" + b.getWidth() + " board ("
+                    + (b.getHeight() * b.getWidth()) + " cells !!)");
         }
         sc.close();
 
@@ -58,7 +86,6 @@ public class TestBoard {
      *            input stream parameters
      */
     public static void main(String[] args) {
-
         Board b = new Board(5, 8);
         Scanner sc = new Scanner(System.in);
         String input = "";
@@ -152,9 +179,10 @@ public class TestBoard {
                     break;
                 case "left":
                     ac = new Move(top, Constant.DIAG_DOWN_LEFT);
+                    break;
                 default:
                     ac = new Move(top, Constant.DOWN);
-                    ;
+                    break;
                 }
                 break;
 
@@ -169,12 +197,10 @@ public class TestBoard {
                 switch (splitedInput[1]) {
                 case "up":
                     ac = new Attack(top, Constant.UP);
-                    ;
                     break;
 
                 case "down":
                     ac = new Attack(top, Constant.DOWN);
-                    ;
                     break;
 
                 case "right":
@@ -183,6 +209,8 @@ public class TestBoard {
 
                 case "left":
                     ac = new Attack(top, Constant.LEFT);
+                    break;
+                default:
                     break;
                 }
                 break;

@@ -17,6 +17,7 @@ package org.amberstar.virtualwar;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Scavenger Class.
  *
@@ -51,6 +52,12 @@ public class Scavenger extends Robot {
 		return nmbMine;
 	}
 
+	/**
+     * Sets the number of mine inside.
+     *
+     * @param nmbMine
+     *            the new number of mine inside
+     */
 	public void setNmbMine(int nmbMine) {
 		if (nmbMine < 0) {
 			this.nmbMine = 0;
@@ -62,6 +69,9 @@ public class Scavenger extends Robot {
 	}
 
 
+	/**
+     * Drop mine.
+     */
 	public void dropMine() {
 		this.nmbMine--;
 		if (nmbMine < 0) {
@@ -193,12 +203,15 @@ public class Scavenger extends Robot {
 	@Override
 	public String getMoveSound() {
 		return "sounds/running.wav";
-	}
+    }
 
+    /* (non-Javadoc)
+     * @see org.amberstar.virtualwar.Robot#runBaseAction()
+     */
     @Override
     public void runBaseAction() {
         this.nmbMine = Constant.SCAVENGER_MAX_MINE;
-        setEnergy(super.getEnergy()+super.getRegenBase());
+        setEnergy(super.getEnergy() + super.getRegenBase());
     }
 
 }

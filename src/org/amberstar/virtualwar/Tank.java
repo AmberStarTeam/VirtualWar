@@ -113,11 +113,11 @@ public class Tank extends Robot {
 	@Override
 	public String getMoveSound() {
 		return "sounds/moveTank.wav";
-	}
+    }
 
     @Override
     public void runBaseAction() {
-        setEnergy(super.getEnergy()+super.getRegenBase());
+        setEnergy(super.getEnergy() + super.getRegenBase());
     }
 
 
