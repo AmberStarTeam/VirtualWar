@@ -47,6 +47,9 @@ public class Board {
      *            the width size of the board
      */
     public Board(int height, int width) {
+    	if (height <= 0 || width <= 0) {
+			return;
+		}
         this.sizeHeight = height;
         this.sizeWidth = width;
         initEmptyGrind();
@@ -454,6 +457,72 @@ public class Board {
         return build.toString();
     }
 
+    
+    public String outGrindPlus(int equipe){
+    	String[] out = outGrind(equipe).split("\n");
+    	
+    	
+    	for (int i = 0; i < out.length; i++) {
+			out[i].replace("\n","");
+		}
+    	
+    	if (out.length < 22) {
+			out[0] 			  = "+-------------------+";
+			out[1] 			  = "|     Légande       |";
+			out[2]			  = "|                   |";
+			out[out.length-1] = "+-------------------+";
+		}
+    	
+    	/**
+    	 * +-------------------+
+|     Légande		|
+|                   |
+|   B/b : base		|
+|   C/c : char		|
+|   T/t : tireur	|
+|   X/x : mine 		|
+|   O : obstacle	|
+|   E : energie		|
+|   M : nbr de mines|
+|                   |
+|   q - quitter     |
+|   h - regles      |
+|                   |
++-------------------+
+
++-------------------+
+|                   |
+|     Légande		|
+|                   |
+|   B/b : base		|
+|                   |
+|   C/c : char		|
+|                   |
+|   T/t : tireur	|
+|                   |
+|   X/x : mine 		|
+|                   |
+|   O : obstacle	|
+|                   |
+|   E : energie		|
+|                   |
+|   M : nbr de mines|
+|                   |
+|   q - quitter     |
+|   h - regles      |
+|                   |
++-------------------+
+    	 */
+    	
+    	StringBuilder finalOut = new StringBuilder();
+    	for (String string : out) {
+    		finalOut.append(string);
+    		finalOut.append('\n');
+		}
+    	return finalOut.toString();
+    }
+    
+    
     /**
      * To string.
      *
@@ -528,7 +597,8 @@ public class Board {
      * @param args
      *            input stream parameters
      */
-    public static void main(String[] args) {
+    public static void main2(String[] args) {
+
         Board b = new Board(3, 8);
         // b.generate(300, true);
         // System.out.println(b);
@@ -566,7 +636,7 @@ public class Board {
         String input = "";
         Action ac = null;
         while (!input.equals("stop")) {
-            System.out.println(b.outGrind(-1));
+            System.out.println(' ' + b.outGrind(-1).replaceAll("\n", "\n "));
             input = sc.nextLine();
             switch (input) {
             case "up":
@@ -609,7 +679,7 @@ public class Board {
                 ac.act();
                 ac = null;
             }
-            System.out.println("After : " + top);
+            // System.out.println("After : " + top);
             // System.out.println(top.getMoving());
 
         }
@@ -622,4 +692,11 @@ public class Board {
          */
 
     }
+
+    public static void main(String[] args) {
+		for (int i = 3; i < 8; i++) {
+			System.out.println(new Board(i, i).outGrindPlus(-1));
+		}
+	}
 }
+

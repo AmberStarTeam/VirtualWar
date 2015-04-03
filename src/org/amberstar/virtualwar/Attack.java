@@ -85,6 +85,7 @@ public class Attack extends Action {
 			Coordinates cords = loc.getCoordinates().add(super.getDirection());
 			loc.getBoard().setMine(cords, loc.getTeam());
 			loc.removeEnergy(loc.getCostAction());
+			loc.dropMine();
 
 		}
 	}
