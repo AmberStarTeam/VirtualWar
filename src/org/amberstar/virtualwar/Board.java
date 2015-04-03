@@ -458,61 +458,76 @@ public class Board {
     }
 
     
-    public String outGrindPlus(int equipe){
+    /**
+     * Out grind plus legend.
+     *
+     * @param equipe
+     *            the equip
+     * @return the string
+     */
+    public String outGrindPlusLegend(int equipe){
     	String[] out = outGrind(equipe).split("\n");
-    	
+    	boolean[] status = new boolean[out.length];
     	
     	for (int i = 0; i < out.length; i++) {
 			out[i].replace("\n","");
+			status[i] = false;
 		}
     	
     	if (out.length < 22) {
-			out[0] 			  = "+-------------------+";
-			out[1] 			  = "|     Légande       |";
-			out[2]			  = "|                   |";
-			out[out.length-1] = "+-------------------+";
+			out[0] 			 += " +--------------------+";
+			out[1] 			 += " |     Légande        |";
+            out[3]           += " |   B/b : base       |";
+            out[4]           += " |   C/c : char       |";
+            out[5]           += " |   T/t : tireur     |";
+            out[6]           += " |   X/x : mine       |";
+            out[7]           += " |   O : obstacle     |";
+            out[8]           += " |   E : energie      |";
+            out[9]           += " |   M : nbr de mines |";
+            out[out.length-3]+= " |   q - quitter      |";
+            out[out.length-4]+= " |   h - regles       |";
+			out[out.length-1]+= " +--------------------+";
+			
+			for (int i = 3; i < 10; i++) {
+			    status[i] = true;
+            }
+            status[0] = true;
+            status[1] = true;
+            status[out.length-3] = true;
+            status[out.length-4] = true;
+            status[out.length-1] = true;
+		}else{
+            out[0]           += " +--------------------+";
+            out[2]           += " |     Légande        |";
+            out[4]           += " |   B/b : base       |";
+            out[6]           += " |   C/c : char       |";
+            out[8]           += " |   T/t : tireur     |";
+            out[10]          += " |   X/x : mine       |";
+            out[12]          += " |   O : obstacle     |";
+            out[14]          += " |   E : energie      |";
+            out[16]          += " |   M : nbr de mines |";
+            out[out.length-3]+= " |   q - quitter      |";
+            out[out.length-4]+= " |   h - regles       |";
+            out[out.length-1]+= " +--------------------+";
+            
+            for (int i = 4; i < 17; i+=2) {
+                status[i] = true;
+            }
+            
+            
+            status[0] = true;
+            status[2] = true;
+            status[out.length-3] = true;
+            status[out.length-4] = true;
+            status[out.length-1] = true;
+		    
 		}
     	
-    	/**
-    	 * +-------------------+
-|     Légande		|
-|                   |
-|   B/b : base		|
-|   C/c : char		|
-|   T/t : tireur	|
-|   X/x : mine 		|
-|   O : obstacle	|
-|   E : energie		|
-|   M : nbr de mines|
-|                   |
-|   q - quitter     |
-|   h - regles      |
-|                   |
-+-------------------+
-
-+-------------------+
-|                   |
-|     Légande		|
-|                   |
-|   B/b : base		|
-|                   |
-|   C/c : char		|
-|                   |
-|   T/t : tireur	|
-|                   |
-|   X/x : mine 		|
-|                   |
-|   O : obstacle	|
-|                   |
-|   E : energie		|
-|                   |
-|   M : nbr de mines|
-|                   |
-|   q - quitter     |
-|   h - regles      |
-|                   |
-+-------------------+
-    	 */
+    	for (int i = 0; i < status.length; i++) {
+            if (!status[i]) {
+                out[i] += " |                    |";
+            }
+        }
     	
     	StringBuilder finalOut = new StringBuilder();
     	for (String string : out) {
@@ -695,7 +710,7 @@ public class Board {
 
     public static void main(String[] args) {
 		for (int i = 3; i < 8; i++) {
-			System.out.println(new Board(i, i).outGrindPlus(-1));
+			System.out.println(new Board(i, i).outGrindPlusLegend(-1));
 		}
 	}
 }
