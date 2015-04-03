@@ -154,7 +154,7 @@ public abstract class Cell {
      *            the robot to get in
      * @return if success
      */
-    abstract boolean moveOn(Robot robot);
+    public abstract boolean moveOn(Robot robot);
 
     /**
      * set the mine inside.
@@ -163,12 +163,12 @@ public abstract class Cell {
      *            the team number
      * @return if success
      */
-    abstract boolean addMine(int team);
+    public abstract boolean addMine(int team);
 
     /**
      * clear the cell.
      */
-    abstract void clearBox();
+    public abstract void clearBox();
 
     /*
      * (non-Javadoc)

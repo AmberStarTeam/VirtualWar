@@ -53,7 +53,7 @@ public class Base extends Cell {
      * @see org.amberstar.virtualwar.Cell#moveOn(org.amberstar.virtualwar.Robot)
      */
     @Override
-    boolean moveOn(Robot robot) {
+    public boolean moveOn(Robot robot) {
         // TODO Auto-generated method stub
         return true;
 
@@ -65,7 +65,7 @@ public class Base extends Cell {
      * @see org.amberstar.virtualwar.Cell#addMine(int)
      */
     @Override
-    boolean addMine(int team) {
+    public boolean addMine(int team) {
         // TODO Auto-generated method stub
         return false;
 
@@ -77,7 +77,7 @@ public class Base extends Cell {
      * @see org.amberstar.virtualwar.Cell#clearBox()
      */
     @Override
-    void clearBox() {
+    public void clearBox() {
         // TODO Auto-generated method stub
     }
 

@@ -52,7 +52,7 @@ public class Case extends Cell {
      * @see org.amberstar.virtualwar.Cell#moveOn(org.amberstar.virtualwar.Robot)
      */
     @Override
-    boolean moveOn(Robot robot) {
+    public boolean moveOn(Robot robot) {
         if (super.getRobotIn() != null || robot == null) {
             System.out.println("Can't print");
             return false;
@@ -86,7 +86,7 @@ public class Case extends Cell {
      * @see org.amberstar.virtualwar.Cell#clearBox()
      */
     @Override
-    void clearBox() {
+    public void clearBox() {
         super.setRobotIn(null);
     }
 
