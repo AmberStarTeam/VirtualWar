@@ -118,7 +118,7 @@ public abstract class Robot {
     }
 
     /**
-     * @param energy
+     * @param eng
      *            the energy to remove
      */
     public void removeEnergy(int eng) {
