@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * The Robot Class.
  *
- * @author beaussan
+ * @author amberStar
  */
 public abstract class Robot {
 

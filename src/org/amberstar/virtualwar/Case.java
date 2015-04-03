@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * The Case Class that contains mines or is obstacle or contains a robot
  *
- * @author beaussan
+ * @author amberStar
  */
 public class Case extends Cell {
 

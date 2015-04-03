@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * The Cell Class.
  *
- * @author Asus UX302L
+ * @author amberStar
  */
 public abstract class Cell {
 

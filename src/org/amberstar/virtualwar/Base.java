@@ -19,7 +19,7 @@ import java.util.List;
 /**
  * The Base Class who stock multiple robots.
  *
- * @author beaussan
+ * @author amberStar
  */
 public class Base extends Cell {
 

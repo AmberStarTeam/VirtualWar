@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * The Scavenger Class.
  *
- * @author beaussan
+ * @author amberStar
  */
 public class Scavenger extends Robot {
 

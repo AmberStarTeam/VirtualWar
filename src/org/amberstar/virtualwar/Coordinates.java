@@ -17,7 +17,7 @@ package org.amberstar.virtualwar;
 /**
  * The Coordinates rightClass.
  *
- * @author beaussan
+ * @author amberStar
  */
 public class Coordinates {
 

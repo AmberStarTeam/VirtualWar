@@ -21,7 +21,7 @@ import java.util.List;
 /**
  * The Shooter Class.
  *
- * @author beaussan
+ * @author amberStar
  */
 public class Shooter extends Robot {
 

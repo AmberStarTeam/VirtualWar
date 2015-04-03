@@ -17,7 +17,7 @@ package org.amberstar.virtualwar;
 /**
  * The Attack Class.
  *
- * @author beaussan
+ * @author amberStar
  */
 public class Attack extends Action {
 

@@ -26,7 +26,7 @@ import org.junit.Test;
 /**
  * Testing of Coordinates.
  * 
- * @author beaussan
+ * @author amberStar
  *
  */
 public class CoordinatesTest {

@@ -29,6 +29,7 @@ import javax.sound.sampled.SourceDataLine;
 // TODO: Auto-generated Javadoc
 /**
  * The Class Sound.
+ * @author amberStar
  */
 public class Sound {
 

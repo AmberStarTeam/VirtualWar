@@ -9,7 +9,7 @@ import org.junit.Test;
 /**
  * The Class BoardTest.
  *
- * @author beaussan
+ * @author amberStar
  */
 public class BoardTest {
     

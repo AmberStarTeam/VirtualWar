@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * The Tank Class.
  *
- * @author beaussan
+ * @author amberStar
  */
 public class Tank extends Robot {
     

@@ -24,7 +24,7 @@ import java.util.Scanner;
  * The Board class is the class for the actual board of game containing robots,
  * obstacle and mines.
  * 
- * @author AmberStar
+ * @author amberStar
  *
  */
 public class Board {

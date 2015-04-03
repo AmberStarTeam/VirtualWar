@@ -19,7 +19,7 @@ import org.amberstar.virtualwar.sound.ThreadSoundRun;
 /**
  * The Move Class.
  *
- * @author beaussan
+ * @author amberStar
  */
 public class Move extends Action {
 

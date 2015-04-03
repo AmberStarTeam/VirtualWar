@@ -20,6 +20,7 @@ import java.io.InputStream;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ThreadSoundRun.
+ * @author amberStar
  */
 public class ThreadSoundRun extends Thread {
 

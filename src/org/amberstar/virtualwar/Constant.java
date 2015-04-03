@@ -20,7 +20,7 @@ import java.util.List;
 /**
  * The Constant Class.
  *
- * @author beaussan
+ * @author amberStar
  */
 public final class Constant {
 

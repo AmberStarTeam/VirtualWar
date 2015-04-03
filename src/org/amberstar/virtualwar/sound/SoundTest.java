@@ -18,7 +18,7 @@ package org.amberstar.virtualwar.sound;
 /**
  * The Class SoundTest.
  *
- * @author beaussan
+ * @author amberStar
  */
 public final class SoundTest {
 

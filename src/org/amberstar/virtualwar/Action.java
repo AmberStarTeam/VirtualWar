@@ -17,6 +17,7 @@ package org.amberstar.virtualwar;
 // TODO: Auto-generated Javadoc
 /**
  * The Action Class.
+ * @author amberStar
  */
 public abstract class Action {
 
