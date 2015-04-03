@@ -41,9 +41,10 @@ public class Attack extends Action {
 	 */
 	private Robot getObjectif() {
 		for (int i = 0; i < super.getRobotSource().getRange(); i++) {
-			Coordinates tmp = super.getDirection().times(i + 1);
+			Coordinates tmp = super.getRobotSource().getCoordinates()
+					.add(super.getDirection().times(i + 1));
 			Cell cellOf = super.getRobotSource().getBoard().getCell(tmp);
-			if (cellOf.isObstacle() || cellOf.isBase() == 0) {
+			if (cellOf.isObstacle() || cellOf.isBase() != 0) {
 				return null;
 			} else if (cellOf.getRobotIn() != null) {
 				if (cellOf.getRobotIn().getTeam() == super.getRobotSource()
@@ -58,19 +59,33 @@ public class Attack extends Action {
 
 	@Override
 	void act() {
+		if (super.getRobotSource().getEnergy()
+				- super.getRobotSource().getCostAction() < 0) {
+			return;
+		}
+
 		if (!(super.getRobotSource() instanceof Scavenger)) {
+
 			Robot toAttack = getObjectif();
 			if (toAttack == null) {
+				System.out.println("Nothing to attack");
 				return;
 			}
 			super.getRobotSource().removeEnergy(
 					super.getRobotSource().getCostAction());
 			toAttack.hasBeenShoot();
+			new ThreadSoundRun(super.getRobotSource().getAttackSound(), 300)
+					.start();
+
 		} else {
-			Coordinates cords = super.getRobotSource().getCoordinates().add(super.getDirection());
-			super.getRobotSource().getBoard().setMine(cords, super.getRobotSource().getTeam());
-			super.getRobotSource().removeEnergy(super.getRobotSource().getCostAction());
-            new ThreadSoundRun(super.getRobotSource().getMoveSound(), 300).start();
+			Scavenger loc = (Scavenger) super.getRobotSource();
+			if (loc.getStock() <= 0) {
+				return;
+			}
+			Coordinates cords = loc.getCoordinates().add(super.getDirection());
+			loc.getBoard().setMine(cords, loc.getTeam());
+			loc.removeEnergy(loc.getCostAction());
+
 		}
 	}
 }

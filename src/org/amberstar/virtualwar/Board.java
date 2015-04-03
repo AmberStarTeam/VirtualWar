@@ -543,12 +543,15 @@ public class Board {
         System.out.println(b.outGrind(1));
         Coordinates tanCop = new Coordinates(2, 2);
         Coordinates topCop = new Coordinates(0, 0);
+        Coordinates otherCop = new Coordinates(7, 0);
         // Coordinates lopCop = new Coordinates(1, 1);
         Robot tan = new Tank(1, tanCop, b);
-        Robot top = new Shooter(1, topCop, b);
+        Robot top = new Scavenger(1, topCop, b);
+        Robot other = new Shooter(2, otherCop, b);
         // Robot lop = new Scavenger(1, lopCop, b); // tan.setEnergy(1);
         b.setRobot(tan, tanCop);
         b.setRobot(top, topCop);
+        b.setRobot(other, otherCop);
         // b.setRobot(lop, lopCop);
 
         // Coordinates min = new Coordinates(0, 2);
@@ -596,7 +599,8 @@ public class Board {
             case "down left":
                 ac = new Move(top, Constant.DIAG_DOWN_LEFT);
                 break;
-
+            case "shoot right":
+            	ac = new Attack(top, Constant.RIGHT);
             default:
                 break;
             }
