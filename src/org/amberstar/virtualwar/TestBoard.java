@@ -106,6 +106,7 @@ public final class TestBoard {
             case "tireur":
             case "shooter":
                 top = new Shooter(1, topCop, b);
+                break;
             case "gen":
                 testGen();
                 System.exit(0);
@@ -113,14 +114,6 @@ public final class TestBoard {
                 break;
             }
         }
-        // b.generate(300, true);
-        // System.out.println(b);
-        // System.out.println(b);
-        /*
-         * Board da = new Board(30, 30); for (int i = 0; i < 100; i++) {
-         * da.generate(i, false); // System.out.println(i+"\n"+da.toString());
-         * System.out.println(i); }
-         */
 
         // System.out.println(b);
         // System.out.println(b.outGrind(1));
