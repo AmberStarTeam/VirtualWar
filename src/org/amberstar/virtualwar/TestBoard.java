@@ -39,7 +39,7 @@ public final class TestBoard {
         HashMap<Integer, Long> dataGen = new HashMap<Integer, Long>();
 
         System.out.println("Veuillez entrer la taille du plateau (h w)");
-        Board b = new Board(sc.nextInt(), sc.nextInt());
+        Board b = Board.newBoard(sc.nextInt(), sc.nextInt());
         // System.out.println("Le plateau contient des tanks?");
         // input = sc.nextLine();
         boolean tankIn = false;
@@ -86,7 +86,7 @@ public final class TestBoard {
      *            input stream parameters
      */
     public static void main(String[] args) {
-        Board b = new Board(5, 8);
+        Board b = Board.newBoard(5, 8);
         Scanner sc = new Scanner(System.in);
         String input = "";
         Robot top = null;
