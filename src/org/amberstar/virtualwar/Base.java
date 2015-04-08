@@ -72,10 +72,33 @@ public class Base extends Cell {
 	/*
 	 * (non-Javadoc)
 	 * 
+	 * @see org.amberstar.virtualwar.Cell#setRobotIn(org.amberstar.virtualwar.Robot)
+	 */
+	@Override
+	public boolean setRobotIn(Robot robot) {
+		// TODO à faire
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.amberstar.virtualwar.Cell#removeRobotIn(org.amberstar.virtualwar.Robot)
+	 */
+	@Override
+	public boolean removeRobotIn(Robot robot) {
+		// TODO à faire
+		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see org.amberstar.virtualwar.Cell#getRobotIn()
 	 */
 	@Override
 	public Robot getRobotIn() {
+		return this.listRobot.get(0);
 
 	}
 

@@ -61,8 +61,7 @@ public class Case extends Cell {
             robot.getBoard().getCell(robot.getCoordinates()).setRobotIn(null);
         }
         robot.setCoordinates(super.getCoordinates());
-        super.setRobotIn(robot);
-        return true;
+        return super.setRobotIn(robot);
     }
 
     /*
