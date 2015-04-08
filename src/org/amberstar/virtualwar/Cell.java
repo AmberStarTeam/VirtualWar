@@ -161,7 +161,6 @@ public abstract class Cell {
 		} else {
 			return false;
 		}
-
 	}
 
 	/**
