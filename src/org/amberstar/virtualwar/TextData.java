@@ -63,7 +63,7 @@ public enum TextData {
             "Création impossible : les valeurs doivent être positives");
 
     /** The name. */
-    private String name = "";
+    private String nameFr = "";
 
     // Constructeur
     /**
@@ -72,8 +72,8 @@ public enum TextData {
      * @param name
      *            the name
      */
-    TextData(String name) {
-        this.name = name;
+    TextData(String nameFr) {
+        this.nameFr = nameFr;
     }
 
     /**.
@@ -83,6 +83,6 @@ public enum TextData {
      * @return the value of field
      */
     public String toString() {
-        return name;
+        return nameFr;
     }
 }
