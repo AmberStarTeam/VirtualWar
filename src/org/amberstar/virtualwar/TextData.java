@@ -69,7 +69,7 @@ public enum TextData {
     /**
      * Instantiates a new text data.
      *
-     * @param name
+     * @param nameFr
      *            the name
      */
     TextData(String nameFr) {
