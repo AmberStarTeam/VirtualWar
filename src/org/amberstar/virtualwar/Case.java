@@ -46,23 +46,23 @@ public class Case extends Cell {
         return tmp;
     }
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.amberstar.virtualwar.Cell#moveOn(org.amberstar.virtualwar.Robot)
-     */
-    @Override
-    public boolean moveOn(Robot robot) {
-        if (super.getRobotIn() != null || robot == null) {
-            return false;
-        }
-        // robot.getCoordinates();
-        if (robot.getCoordinates() != null) {
-            robot.getBoard().getCell(robot.getCoordinates()).setRobotIn(null);
-        }
-        robot.setCoordinates(super.getCoordinates());
-        return super.setRobotIn(robot);
-    }
+//    /*
+//     * (non-Javadoc)
+//     * 
+//     * @see org.amberstar.virtualwar.Cell#moveOn(org.amberstar.virtualwar.Robot)
+//     */
+//    @Override
+//    public boolean moveOn(Robot robot) {
+//        if (super.getRobotIn() != null || robot == null) {
+//            return false;
+//        }
+//        // robot.getCoordinates();
+//        if (robot.getCoordinates() != null) {
+//            robot.getBoard().getCell(robot.getCoordinates()).setRobotIn(null);
+//        }
+//        robot.setCoordinates(super.getCoordinates());
+//        return super.setRobotIn(robot);
+//    }
 
     /*
      * (non-Javadoc)

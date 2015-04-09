@@ -47,7 +47,7 @@ public class Board {
 	 * @return the instance, if nt valid, get a null instance
 	 */
 	public static Board newBoard(int height, int width) {
-		if (height <= 5 || width <= 5) {
+		if (height <= 3 || width <= 3) {
 			return null;
 		}
 		return new Board(height, width);

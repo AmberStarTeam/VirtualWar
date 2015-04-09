@@ -24,104 +24,103 @@ import java.util.List;
  */
 public class Base extends Cell {
 
-	/**
-	 * public constructor.
-	 *
-	 * @param coordinates
-	 *            coordinates of Base
-	 * @param baseTeam
-	 *            Owner of base
-	 */
-	List<Robot> listRobot = new ArrayList<Robot>();
+    /** the list of robots inside */
+    private List<Robot> listRobot = new ArrayList<Robot>();
 
-	public Base(Coordinates coordinates, int baseTeam) {
-		super(coordinates, baseTeam);
-		// TODO Auto-generated constructor stub
-	}
+    /**
+     * public constructor.
+     *
+     * @param coordinates
+     *            coordinates of Base
+     * @param baseTeam
+     *            Owner of base
+     */
+    public Base(Coordinates coordinates, int baseTeam) {
+        super(coordinates, baseTeam);
+        // TODO Auto-generated constructor stub
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.amberstar.virtualwar.Cell#getContents()
-	 */
-	@Override
-	public List<Robot> getContents() {
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.amberstar.virtualwar.Cell#getContents()
+     */
+    @Override
+    public List<Robot> getContents() {
 
-		// return list of robots
-		if (listRobot.size() != 0)
-			return listRobot;
-		else
-			return null;
+        // return list of robots
+        if (listRobot.size() != 0) {
+            return listRobot;
+        } else {
+            return null;
+        }
 
-	}
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.amberstar.virtualwar.Cell#moveOn(org.amberstar.virtualwar.Robot)
-	 */
-	@Override
-	public boolean moveOn(Robot robot) {
-		// move on robot in base
+//    /*
+//     * (non-Javadoc)
+//     * 
+//     * @see org.amberstar.virtualwar.Cell#moveOn(org.amberstar.virtualwar.Robot)
+//     */
+//    @Override
+//    public boolean moveOn(Robot robot) {
+//        return robot.getBoard().getCell(robot.getCoordinates())
+//                .removeRobotIn(robot)
+//                && setRobotIn(robot);
+//    }
 
-		listRobot.add(robot);
-		return true;
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.amberstar.virtualwar.Cell#setRobotIn(org.amberstar.virtualwar.Robot)
+     */
+    @Override
+    public boolean setRobotIn(Robot robot) {
+        return listRobot.add(robot);
+    }
 
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.amberstar.virtualwar.Cell#removeRobotIn(org.amberstar.virtualwar.
+     * Robot)
+     */
+    @Override
+    public boolean removeRobotIn(Robot robot) {
+        return listRobot.remove(robot);
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.amberstar.virtualwar.Cell#setRobotIn(org.amberstar.virtualwar.Robot)
-	 */
-	@Override
-	public boolean setRobotIn(Robot robot) {
-		// TODO à faire
-		return false;
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.amberstar.virtualwar.Cell#getRobotIn()
+     */
+    @Override
+    public Robot getRobotIn() {
+        return this.listRobot.get(0);
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.amberstar.virtualwar.Cell#removeRobotIn(org.amberstar.virtualwar.Robot)
-	 */
-	@Override
-	public boolean removeRobotIn(Robot robot) {
-		// TODO à faire
-		return false;
-	}
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.amberstar.virtualwar.Cell#getRobotIn()
-	 */
-	@Override
-	public Robot getRobotIn() {
-		return this.listRobot.get(0);
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.amberstar.virtualwar.Cell#addMine(int)
+     */
+    @Override
+    public boolean addMine(int team) {
+        return false;
 
-	}
+    }
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.amberstar.virtualwar.Cell#addMine(int)
-	 */
-	@Override
-	public boolean addMine(int team) {
-		return false;
-
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see org.amberstar.virtualwar.Cell#clearBox()
-	 */
-	@Override
-	public void clearBox() {
-		// clear the box
-		for (int i = 0; i < this.listRobot.size(); i++)
-			this.listRobot.remove(0);
-	}
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.amberstar.virtualwar.Cell#clearBox()
+     */
+    @Override
+    public void clearBox() {
+        listRobot = new ArrayList<Robot>();
+    }
 }

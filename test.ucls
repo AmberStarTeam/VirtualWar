@@ -1,6 +1,573 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.8" icons="true" automaticImage="PNG" always-add-relationships="true" generalizations="true" 
   realizations="true" associations="true" dependencies="true" nesting-relationships="true">  
+  <class id="1" language="java" name="org.amberstar.virtualwar.Coordinates" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Coordinates.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="105" y="3268"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="org.amberstar.virtualwar.Shooter" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Shooter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="176" x="115" y="1006"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="org.amberstar.virtualwar.Constant" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Constant.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="849" y="3070"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="org.amberstar.virtualwar.Cell" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Cell.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="423" width="168" x="148" y="2179"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="org.amberstar.virtualwar.Tank" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Tank.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="243" width="173" x="400" y="1006"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="org.amberstar.virtualwar.Board" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Board.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="477" width="263" x="34" y="1289"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="org.amberstar.virtualwar.Base" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Base.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="152" x="-49" y="2642"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="org.amberstar.virtualwar.Case" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Case.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="152" x="164" y="2642"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="org.amberstar.virtualwar.Attack" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Attack.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="117" width="154" x="130" y="206"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="org.amberstar.virtualwar.Robot" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Robot.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="603" width="194" x="312" y="363"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="org.amberstar.virtualwar.Action" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Action.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="135" width="154" x="473" y="31"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="org.amberstar.virtualwar.Move" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Move.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="563" y="265"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="org.amberstar.virtualwar.Scavenger" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/Scavenger.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="333" width="264" x="52" y="1806"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="org.amberstar.virtualwar.sound.Sound" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/sound/Sound.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="207" width="205" x="657" y="652"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="org.amberstar.virtualwar.sound.ThreadSoundRun" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/sound/ThreadSoundRun.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="153" width="209" x="657" y="459"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="org.amberstar.virtualwar.sound.SoundTest" project="VirtualWar" 
+    file="/VirtualWar/src/org/amberstar/virtualwar/sound/SoundTest.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="99" width="139" x="657" y="320"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <dependency id="17">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="18">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <association id="19">    
+    <bendpoint x="708" y="206"/>    
+    <bendpoint x="708" y="363"/>    
+    <bendpoint x="708" y="1006"/>    
+    <bendpoint x="708" y="1289"/>    
+    <bendpoint x="708" y="1806"/>    
+    <bendpoint x="708" y="2179"/>    
+    <bendpoint x="708" y="2642"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="20" name="direction"/>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="23" name="DIAG_UP_LEFT"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="25">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="26">    
+    <bendpoint x="624" y="1006"/>    
+    <bendpoint x="635" y="1289"/>    
+    <bendpoint x="645" y="1806"/>    
+    <bendpoint x="666" y="2179"/>    
+    <bendpoint x="666" y="2642"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="27" name="coordinates"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="29">    
+    <bendpoint x="388" y="2179"/>    
+    <bendpoint x="451" y="1806"/>    
+    <bendpoint x="410" y="1289"/>    
+    <bendpoint x="369" y="1006"/>    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="30">    
+    <bendpoint x="43" y="363"/>    
+    <bendpoint x="43" y="1006"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="31">    
+    <bendpoint x="645" y="363"/>    
+    <bendpoint x="645" y="1006"/>    
+    <bendpoint x="582" y="1289"/>    
+    <bendpoint x="430" y="1806"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="32">    
+    <bendpoint x="21" y="1806"/>    
+    <bendpoint x="21" y="2179"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="8"/>  
+  </dependency>  
+  <association id="33">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="34" name="sound"/>      
+      <multiplicity id="35" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="36">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="37" name="listRobot"/>      
+      <multiplicity id="38" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="39">    
+    <bendpoint x="666" y="363"/>    
+    <bendpoint x="666" y="1006"/>    
+    <bendpoint x="666" y="1289"/>    
+    <bendpoint x="666" y="1806"/>    
+    <bendpoint x="645" y="2179"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="40">    
+    <bendpoint x="84" y="363"/>    
+    <bendpoint x="84" y="1006"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <association id="41">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="42" name="MOVE_LIGHT_ROBOT"/>      
+      <multiplicity id="43" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="44">    
+    <bendpoint x="-59" y="2179"/>    
+    <bendpoint x="-63" y="1806"/>    
+    <bendpoint x="-21" y="1289"/>    
+    <bendpoint x="22" y="1006"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <association id="45">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="46" name="LEFT"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="48">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="49">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <dependency id="50">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="51">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="52">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <dependency id="53">    
+    <bendpoint x="561" y="1289"/>    
+    <bendpoint x="592" y="1806"/>    
+    <bendpoint x="624" y="2179"/>    
+    <bendpoint x="645" y="2642"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="54">    
+    <bendpoint x="472" y="1289"/>    
+    <bendpoint x="472" y="1806"/>    
+    <bendpoint x="472" y="2179"/>    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="55">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <association id="56">    
+    <bendpoint x="346" y="2642"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="57" name="coordinates"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="59">    
+    <bendpoint x="321" y="1006"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="60" name="board"/>      
+      <multiplicity id="61" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="62">    
+    <bendpoint x="536" y="363"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <association id="63">    
+    <bendpoint x="388" y="1806"/>    
+    <bendpoint x="388" y="1289"/>    
+    <bendpoint x="348" y="1006"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="64" name="robotIn"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="66">    
+    <bendpoint x="557" y="363"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <generalization id="67">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <dependency id="68">    
+    <bendpoint x="603" y="1006"/>    
+    <bendpoint x="603" y="1289"/>    
+    <bendpoint x="603" y="1806"/>    
+    <bendpoint x="603" y="2179"/>    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="69">    
+    <bendpoint x="346" y="2179"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <dependency id="70">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <dependency id="71">    
+    <bendpoint x="-41" y="363"/>    
+    <bendpoint x="-41" y="1006"/>    
+    <bendpoint x="-41" y="1289"/>    
+    <bendpoint x="-21" y="1806"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="4"/>  
+  </dependency>  
+  <association id="72">    
+    <bendpoint x="346" y="1806"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="73" name="grind"/>      
+      <multiplicity id="74" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="75">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="2"/>  
+  </dependency>  
+  <generalization id="76">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="11"/>  
+  </generalization>  
+  <generalization id="77">    
+    <bendpoint x="327" y="1289"/>    
+    <bendpoint x="327" y="1006"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <dependency id="78">    
+    <bendpoint x="117" y="2179"/>    
+    <bendpoint x="133" y="2642"/>    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="79">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="80" name="DIAG_DOWN_RIGHT"/>      
+      <multiplicity id="81" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="83" name="UP"/>      
+      <multiplicity id="84" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="85">    
+    <bendpoint x="-20" y="1289"/>    
+    <bendpoint x="-42" y="1806"/>    
+    <bendpoint x="-80" y="2179"/>    
+    <bendpoint x="-80" y="2642"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="86">    
+    <bendpoint x="401" y="206"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="87" name="robotIn"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="89">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <dependency id="90">    
+    <bendpoint x="687" y="363"/>    
+    <bendpoint x="687" y="1006"/>    
+    <bendpoint x="687" y="1289"/>    
+    <bendpoint x="687" y="1806"/>    
+    <bendpoint x="687" y="2179"/>    
+    <bendpoint x="687" y="2642"/>    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="91">    
+    <bendpoint x="-101" y="363"/>    
+    <bendpoint x="-101" y="1006"/>    
+    <bendpoint x="-101" y="1289"/>    
+    <bendpoint x="-101" y="1806"/>    
+    <bendpoint x="-101" y="2179"/>    
+    <bendpoint x="-101" y="2642"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="92">    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
+  <association id="93">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="94" name="DIAG_UP_RIGHT"/>      
+      <multiplicity id="95" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="96">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="97" name="DOWN"/>      
+      <multiplicity id="98" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="99">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="10"/>  
+  </dependency>  
+  <association id="100">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="101" name="MOVE_TANK"/>      
+      <multiplicity id="102" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="103">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
+  </generalization>  
+  <association id="104">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="105" name="DIAG_DOWN_LEFT"/>      
+      <multiplicity id="106" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="107">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <dependency id="108">    
+    <bendpoint x="367" y="1806"/>    
+    <bendpoint x="367" y="2179"/>    
+    <bendpoint x="367" y="2642"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
+  <association id="109">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="110" name="RIGHT"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <dependency id="112">    
+    <bendpoint x="367" y="1289"/>    
+    <bendpoint x="409" y="1806"/>    
+    <bendpoint x="409" y="2179"/>    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </dependency>  
+  <generalization id="113">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="10"/>  
+  </generalization>  
+  <dependency id="114">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="115">    
+    <bendpoint x="0" y="1806"/>    
+    <bendpoint x="0" y="2179"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </dependency>  
+  <dependency id="116">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </dependency>  
+  <dependency id="117">    
+    <bendpoint x="1" y="363"/>    
+    <bendpoint x="1" y="1006"/>    
+    <bendpoint x="1" y="1289"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="13"/>  
+  </dependency>  
+  <dependency id="118">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="15"/>  
+  </dependency>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    
