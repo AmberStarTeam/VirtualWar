@@ -43,7 +43,6 @@ public class Base extends Cell {
      */
     @Override
     public List<Robot> getContents() {
-        // TODO Auto-generated method stub
         return null;
     }
 
