@@ -17,7 +17,7 @@ package org.amberstar.virtualwar;
 import java.util.ArrayList;
 import java.util.List;
 
-
+// TODO: Auto-generated Javadoc
 /**
  * The Robot Class.
  *
@@ -157,6 +157,31 @@ public abstract class Robot {
     }
 
     /**
+     * Checks if is valid.
+     *
+     * @param cords
+     *            the coordinates of the cell to test
+     * @return not board || obstacle || mine || not empty || null
+     */
+    public String isValid(Coordinates cords) {
+        if (!board.isValid(cords)) {
+            return "not board";
+        }
+        Cell tmp = board.getCell(cords);
+        if (tmp.isObstacle()) {
+            return "obstacle";
+        }
+        if (tmp.mineContains() == team) {
+            return "mine";
+        }
+        if (tmp.getRobotIn() != null) {
+            return "not empty";
+        }
+
+        return null;
+    }
+
+    /**
      * Removes the energy.
      *
      * @param eng
@@ -221,8 +246,7 @@ public abstract class Robot {
      * @return the sound of moving
      */
     public abstract String getMoveSound();
-    
-    
+
     /**
      * Run base action.
      */
@@ -234,33 +258,58 @@ public abstract class Robot {
      * @return if robot has a valid target and can attack it
      */
     public boolean canAttack() {
-        if (getEnergy() - getCostAction() < 0) {
-            return false;
-        }
-        List<Coordinates> forDir = new ArrayList<Coordinates>();
-        forDir.add(Constant.UP);
-        forDir.add(Constant.DOWN);
-        forDir.add(Constant.RIGHT);
-        forDir.add(Constant.LEFT);
-
-        for (Coordinates directions : forDir) {
-            for (int i = 1; i <= getRange(); i++) {
-                Coordinates tmp = directions.times(i).add(coordinates);
-                if (!board.isValid(tmp)) {
-                    break;
-                }
-                if (board.isObstacle(tmp)) {
-                    break;
-                }
-                Robot other = board.getRobot(tmp);
-                if (other == null) {
-                    continue;
-                }
-                return (other.team == team);
+        for (Coordinates cords : Constant.CARDINAL_DIRECTION) {
+            if (!new Attack(this, cords).canDoIt()) {
+                return false;
             }
         }
+        return true;
+    }
 
-        return false;
+    /**
+     * Can move.
+     *
+     * @return if robot can move
+     */
+    public boolean canMove() {
+        for (Coordinates cords : getMoving()) {
+            if (!new Move(this, cords).canDoIt()) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Gets the available move.
+     *
+     * @return the available move
+     */
+    public List<Action> getAvailableMove() {
+        List<Action> retVal = new ArrayList<Action>();
+        for (Coordinates cords : getMoving()) {
+            Action tmp = new Move(this, cords);
+            if (tmp.canDoIt()) {
+                retVal.add(tmp);
+            }
+        }
+        return (retVal.size() == 0) ? null : retVal;
+    }
+
+    /**
+     * Gets the available move.
+     *
+     * @return the available move
+     */
+    public List<Action> getAvailableAtacks() {
+        List<Action> retVal = new ArrayList<Action>();
+        for (Coordinates cords : Constant.CARDINAL_DIRECTION) {
+            Action tmp = new Attack(this, cords);
+            if (tmp.canDoIt()) {
+                retVal.add(tmp);
+            }
+        }
+        return (retVal.size() == 0) ? null : retVal;
     }
 
     /**
@@ -350,9 +399,9 @@ public abstract class Robot {
      */
     @Override
     public String toString() {
-        return getType() + "[energy=" + energy + ", team=" + team + ", coordinates="
-                + coordinates + ", regenBase=" + regenBase + ", maxEng="
-                + maxEng + ", moves=" + getMoving() + "]";
+        return getType() + "[energy=" + energy + ", team=" + team
+                + ", coordinates=" + coordinates + ", regenBase=" + regenBase
+                + ", maxEng=" + maxEng + ", moves=" + getMoving() + "]";
     }
 
 }

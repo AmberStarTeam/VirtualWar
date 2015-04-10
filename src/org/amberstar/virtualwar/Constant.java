@@ -53,6 +53,16 @@ public final class Constant {
 
     /** DIAG_DOWN_LEFT movement down left. */
     static final Coordinates DIAG_DOWN_LEFT = DOWN.add(LEFT);
+    
+    /** CARDINAL_DIRECTION cardinal directions. */
+    static final List<Coordinates> CARDINAL_DIRECTION;
+    static {
+        CARDINAL_DIRECTION = new ArrayList<Coordinates>();
+        CARDINAL_DIRECTION.add(UP);
+        CARDINAL_DIRECTION.add(DOWN);
+        CARDINAL_DIRECTION.add(RIGHT);
+        CARDINAL_DIRECTION.add(LEFT);
+    }
 
     /** MOVE_TANK movement for tanks. */
     static final List<Coordinates> MOVE_TANK;

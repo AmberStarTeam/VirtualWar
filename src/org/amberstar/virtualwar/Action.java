@@ -62,5 +62,8 @@ public abstract class Action {
      * run the action.
      */
     abstract void act();
+    
+    /** @return if possible */
+    abstract boolean canDoIt();
 
 }

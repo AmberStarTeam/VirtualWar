@@ -14,7 +14,6 @@
  */
 package org.amberstar.virtualwar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -96,15 +95,7 @@ public class Shooter extends Robot {
      */
     @Override
     public List<Coordinates> getMoving() {
-        List<Coordinates> retVal = new ArrayList<Coordinates>();
-        for (Coordinates toA : Constant.MOVE_LIGHT_ROBOT) {
-            Coordinates tmp = super.getCoordinates().add(toA);
-            if (getBoard().isValid(tmp) && !getBoard().isObstacle(tmp)
-                    && getBoard().isMine(tmp) != super.getTeam()) {
-                retVal.add(tmp);
-            }
-        }
-        return (retVal.size() == 0) ? null : retVal;
+        return Constant.MOVE_LIGHT_ROBOT;
     }
 
     /*

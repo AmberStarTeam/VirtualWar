@@ -14,7 +14,6 @@
  */
 package org.amberstar.virtualwar;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -84,19 +83,7 @@ public class Tank extends Robot {
      */
     @Override
     public List<Coordinates> getMoving() {
-        List<Coordinates> retVal = new ArrayList<Coordinates>();
-        for (Coordinates toA : Constant.MOVE_TANK) {
-            Coordinates tmp = toA.add(getCoordinates());
-            if (!getBoard().isValid(tmp) || getBoard().isObstacle(tmp)
-                    || getBoard().isMine(tmp) == super.getTeam()) {
-                tmp = tmp.minus(toA.divide(2));
-            }
-            if (getBoard().isValid(tmp) && !getBoard().isObstacle(tmp)
-                    && getBoard().isMine(tmp) != super.getTeam()) {
-                retVal.add(tmp);
-            }
-        }
-        return (retVal.size() == 0) ? null : retVal;
+        return Constant.MOVE_TANK;
     }
 
 	/* (non-Javadoc)

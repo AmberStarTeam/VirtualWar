@@ -82,11 +82,8 @@ public class Move extends Action {
         Robot robSour = super.getRobotSource();
 
         if (robSour instanceof Tank) {
-            if (!Constant.MOVE_TANK.contains(super.getDirection().times(2))) {
-                System.out.println("BUG : pas deplacement autoriser");
-                return null;
-            }
             tmp = robSour.getCoordinates().add(super.getDirection().times(2));
+
             if (!robSour.getBoard().isValid(tmp)
                     || robSour.getBoard().getCell(tmp).getRobotIn() != null
                     || robSour.getBoard().isObstacle(tmp)
@@ -96,13 +93,9 @@ public class Move extends Action {
                             .getRobotSource().getBoard().isBase(tmp) != super
                             .getRobotSource().getTeam())) {
                 tmp = tmp.minus(super.getDirection());
-                
+
             }
         } else {
-            if (!Constant.MOVE_LIGHT_ROBOT.contains(super.getDirection())) {
-                System.out.println("BUG : pas deplacement autoriser");
-                return null;
-            }
             tmp = robSour.getCoordinates().add(super.getDirection());
         }
 
@@ -120,5 +113,11 @@ public class Move extends Action {
         }
 
         return cellOfTmp;
+    }
+
+    @Override
+    boolean canDoIt() {
+        // TODO Auto-generated method stub
+        return false;
     }
 }
