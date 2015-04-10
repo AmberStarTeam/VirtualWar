@@ -46,7 +46,7 @@ public class Game {
 		System.out.println(t2);
 		
 		System.out.println(board.outGrindPlusLegend(1));
-		System.out.println(board.outGrindPlusLegend(2));
+		//System.out.println(board.outGrindPlusLegend(2));
 		boolean end = false;
 		while (end == false) {
 

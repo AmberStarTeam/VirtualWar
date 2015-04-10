@@ -350,7 +350,7 @@ public abstract class Robot {
      */
     @Override
     public String toString() {
-        return "Robot [energy=" + energy + ", team=" + team + ", coordinates="
+        return getType() + "[energy=" + energy + ", team=" + team + ", coordinates="
                 + coordinates + ", regenBase=" + regenBase + ", maxEng="
                 + maxEng + ", moves=" + getMoving() + "]";
     }
