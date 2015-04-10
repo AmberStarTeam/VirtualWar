@@ -36,7 +36,7 @@ public class Game {
 		}
 		System.out.println("Poucentage d'obstacle : ");
 		int pourcent = Integer.parseInt(sc.nextLine().toLowerCase());
-		Board board = new Board(height, width);
+		Board board = Board.newBoard(height, width);
 
 		System.out.println("Choisissez le type de vos robots \nequipe 1 :");
 		List<Robot> t1 = choiceOfRobots(nbRobotTeam1, 1, board);

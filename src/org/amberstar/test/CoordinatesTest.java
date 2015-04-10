@@ -119,7 +119,7 @@ public class CoordinatesTest {
         assertFalse("Equals",
                 new Coordinates(0, 10).equals(new Coordinates(1, 10)));
         assertFalse("Equals", new Coordinates(0, 10).equals(null));
-        assertFalse("Equals", new Coordinates(0, 10).equals(new Board(1, 1)));
+        assertFalse("Equals", new Coordinates(0, 10).equals(Board.newBoard(5, 5)));
 
     }
 

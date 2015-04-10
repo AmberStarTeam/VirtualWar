@@ -135,17 +135,36 @@ public abstract class Cell {
      *
      * @param robot
      *            set the robot inside the case
+     * @return if sucess
      */
-    public void setRobotIn(Robot robot) {
-        this.robotIn = robot;
+    public boolean setRobotIn(Robot robot) {
+        if (robotIn != null || isObstacle
+                || (mine != 0 && robot.getTeam() == mine)) {
+            return false;
+        } else {
+            robot.setCoordinates(coordinates);
+            robotIn = robot;
+            return true;
+        }
+
     }
 
     /**
-     * Gets the contents.
+     * Sets the current robot inside.
      *
-     * @return a list of robot
+     * @param robot
+     *            set the robot inside the case
+     * @return if sucess
      */
-    public abstract List<Robot> getContents();
+    public boolean removeRobotIn(Robot robot) {
+        if (robotIn.equals(robot)) {
+            robotIn = null;
+            robot.setCoordinates(null);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     /**
      * Move on.
@@ -154,7 +173,21 @@ public abstract class Cell {
      *            the robot to get in
      * @return if success
      */
-    public abstract boolean moveOn(Robot robot);
+    public boolean moveOn(Robot robot) {
+        if (robot.getCoordinates() == null) {
+            return setRobotIn(robot);
+        }
+        return robot.getBoard().getCell(robot.getCoordinates())
+                .removeRobotIn(robot)
+                && setRobotIn(robot);
+    }
+
+    /**
+     * Gets the contents.
+     *
+     * @return a list of robot
+     */
+    public abstract List<Robot> getContents();
 
     /**
      * set the mine inside.
