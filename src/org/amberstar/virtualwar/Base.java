@@ -1,19 +1,20 @@
 /*
  * This program is free software: you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation, either version 3 of the License, or
- *  (at your option) any later version.
- * 
- *  This program is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- * 
- *  You should have received a copy of the GNU General Public License
- *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package org.amberstar.virtualwar;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,6 +23,9 @@ import java.util.List;
  * @author amberStar
  */
 public class Base extends Cell {
+
+    /** the list of robots inside */
+    private List<Robot> listRobot = new ArrayList<Robot>();
 
     /**
      * public constructor.
@@ -43,18 +47,59 @@ public class Base extends Cell {
      */
     @Override
     public List<Robot> getContents() {
-        return null;
+
+        // return list of robots
+        if (listRobot.size() != 0) {
+            return listRobot;
+        } else {
+            return null;
+        }
+
+    }
+
+//    /*
+//     * (non-Javadoc)
+//     * 
+//     * @see org.amberstar.virtualwar.Cell#moveOn(org.amberstar.virtualwar.Robot)
+//     */
+//    @Override
+//    public boolean moveOn(Robot robot) {
+//        return robot.getBoard().getCell(robot.getCoordinates())
+//                .removeRobotIn(robot)
+//                && setRobotIn(robot);
+//    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see
+     * org.amberstar.virtualwar.Cell#setRobotIn(org.amberstar.virtualwar.Robot)
+     */
+    @Override
+    public boolean setRobotIn(Robot robot) {
+        return listRobot.add(robot);
     }
 
     /*
      * (non-Javadoc)
      * 
-     * @see org.amberstar.virtualwar.Cell#moveOn(org.amberstar.virtualwar.Robot)
+     * @see
+     * org.amberstar.virtualwar.Cell#removeRobotIn(org.amberstar.virtualwar.
+     * Robot)
      */
     @Override
-    public boolean moveOn(Robot robot) {
-        // TODO Auto-generated method stub
-        return true;
+    public boolean removeRobotIn(Robot robot) {
+        return listRobot.remove(robot);
+    }
+
+    /*
+     * (non-Javadoc)
+     * 
+     * @see org.amberstar.virtualwar.Cell#getRobotIn()
+     */
+    @Override
+    public Robot getRobotIn() {
+        return this.listRobot.get(0);
 
     }
 
@@ -65,7 +110,6 @@ public class Base extends Cell {
      */
     @Override
     public boolean addMine(int team) {
-        // TODO Auto-generated method stub
         return false;
 
     }
@@ -77,7 +121,6 @@ public class Base extends Cell {
      */
     @Override
     public void clearBox() {
-        // TODO Auto-generated method stub
+        listRobot = new ArrayList<Robot>();
     }
-
 }
