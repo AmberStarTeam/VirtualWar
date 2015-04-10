@@ -288,7 +288,7 @@ public class Board {
 			return false;
 		}
 		if (r.getCoordinates() != null && getCell(r.getCoordinates()) != null) {
-			getCell(r.getCoordinates()).setRobotIn(null);
+			getCell(r.getCoordinates()).removeRobotIn(r);
 		}
 		r.setCoordinates(coordinates);
 		return tmp.moveOn(r);

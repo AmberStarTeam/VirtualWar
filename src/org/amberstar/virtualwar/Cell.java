@@ -157,6 +157,14 @@ public abstract class Cell {
      * @return if sucess
      */
     public boolean removeRobotIn(Robot robot) {
+    	if (robot == null) {
+			robotIn = null;
+			return true;
+		}
+    	if (robotIn == null) {
+            robotIn = null;
+            return true;
+		}
         if (robotIn.equals(robot)) {
             robotIn = null;
             robot.setCoordinates(null);
