@@ -147,5 +147,11 @@ public final class Constant {
 
     /** The Constant TANK_DAMAGE_SUBMIT. */
     static final int TANK_DAMAGE_SUBMIT = 6;
+	
+	/** The id team a. */
+	public static int ID_TEAM_A = 1;
+	
+	/** The id team b. */
+	public static int ID_TEAM_B = 2;
 
 }

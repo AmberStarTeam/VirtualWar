@@ -363,6 +363,105 @@ public class Board {
 	}
 
 	/**
+	 * Get the string value of a cell
+	 *
+	 * @param cell
+	 *            the cell of chose
+	 * @param state
+	 *            1, 2 or 3
+	 * @param equipe
+	 *            the equip
+	 * @return the string
+	 */
+	private String getValueOf(Cell cell, int state, int equipe) {
+		if (equipe != Constant.ID_TEAM_A && equipe != Constant.ID_TEAM_B) {
+			equipe = -1;
+		}
+		switch (state) {
+		case 0:
+			if (cell instanceof Base) {
+				return "   |";
+			} else if (cell.isObstacle()) {
+				return "   |";
+			} else if (cell.mineContains() == equipe
+					|| (cell.mineContains() != 0 && equipe == -1)) {
+				return "   |";
+			} else if (cell.getRobotIn() == null) {
+				return "   |";
+			} else if (cell.getRobotIn() instanceof Tank) {
+				if (cell.getRobotIn().getTeam() == Constant.ID_TEAM_A) {
+					return " " + TextData.LABEL_TANK_TEAM_A + " |";
+				} else if (cell.getRobotIn().getTeam() == Constant.ID_TEAM_B) {
+					return " " + TextData.LABEL_TANK_TEAM_B + " |";
+				}
+
+			} else if (cell.getRobotIn() instanceof Scavenger) {
+				if (cell.getRobotIn().getTeam() == Constant.ID_TEAM_A) {
+					return " " + TextData.LABEL_SCAVENGER_TEAM_A + " |";
+				} else if (cell.getRobotIn().getTeam() == Constant.ID_TEAM_B) {
+					return " " + TextData.LABEL_SCAVENGER_TEAM_B + " |";
+				}
+
+			} else if (cell.getRobotIn() instanceof Shooter) {
+				if (cell.getRobotIn().getTeam() == Constant.ID_TEAM_A) {
+					return " " + TextData.LABEL_TANK_TEAM_A + " |";
+				} else if (cell.getRobotIn().getTeam() == Constant.ID_TEAM_B) {
+					return " " + TextData.LABEL_TANK_TEAM_B + " |";
+				}
+			}
+			break;
+		case 1:
+			if (cell instanceof Base) {
+				if (cell.isBase() == Constant.ID_TEAM_A) {
+					return " " + TextData.LABEL_BASE_TEAM_A + " |";
+				} else if (cell.isBase() == Constant.ID_TEAM_B) {
+					return " " + TextData.LABEL_BASE_TEAM_B + " |";
+				}
+
+			} else if (cell.isObstacle()) {
+				return " " + TextData.LABEL_OBSTACLE + " |";
+
+			} else if (cell.mineContains() == equipe
+					|| (cell.mineContains() != 0 && equipe == -1)) {
+
+				if (cell.mineContains() == Constant.ID_TEAM_A) {
+					return " " + TextData.LABEL_MINE_TEAM_A + " |";
+				} else if (cell.mineContains() == Constant.ID_TEAM_B) {
+					return " " + TextData.LABEL_MINE_TEAM_B + " |";
+				}
+
+			} else if (cell.getRobotIn() == null) {
+				return "   |";
+			} else if (!(cell.getRobotIn() instanceof Scavenger)) {
+				return "   |";
+			} else if (cell.getRobotIn() instanceof Scavenger) {
+				return String.format("M%02d|",
+						((Scavenger) cell.getRobotIn()).getStock());
+			}
+
+			break;
+		case 2:
+			if (cell instanceof Base) {
+				return "   |";
+			} else if (cell.isObstacle()) {
+				return "   |";
+			} else if (cell.mineContains() != 0) {
+				return "   |";
+			} else if (cell.getRobotIn() == null) {
+				return "   |";
+			} else if (cell.getRobotIn() != null) {
+				return String.format("E%02d|", cell.getRobotIn().getEnergy());
+			}
+
+			break;
+
+		default:
+			break;
+		}
+		return "   |";
+	}
+
+	/**
 	 * generate a printable version.
 	 *
 	 * @param equipe
@@ -385,66 +484,7 @@ public class Board {
 				build.append("||");
 				for (int xLo = 0; xLo < grind[0].length; xLo++) {
 					Cell tmp = grind[yLo][xLo];
-					switch (cpt) {
-					case 0:
-						if (tmp instanceof Base) {
-							build.append("   |");
-						} else if (tmp.isObstacle()) {
-							build.append("   |");
-						} else if (tmp.mineContains() == equipe
-								|| (tmp.mineContains() != 0 && equipe == -1)) {
-							build.append("   |");
-						} else if (tmp.getRobotIn() == null) {
-							build.append("   |");
-						} else if (tmp.getRobotIn() instanceof Tank) {
-							build.append((tmp.getRobotIn().getTeam() == 1) ? " c |"
-									: " C |");
-						} else if (tmp.getRobotIn() instanceof Scavenger) {
-							build.append((tmp.getRobotIn().getTeam() == 1) ? " p |"
-									: " P |");
-						} else if (tmp.getRobotIn() instanceof Shooter) {
-							build.append((tmp.getRobotIn().getTeam() == 1) ? " t |"
-									: " T |");
-						}
-						break;
-					case 1:
-						if (tmp instanceof Base) {
-							build.append((tmp.isBase() == 1) ? " b |" : " B |");
-						} else if (tmp.isObstacle()) {
-							build.append(" O |");
-						} else if (tmp.mineContains() == equipe
-								|| (tmp.mineContains() != 0 && equipe == -1)) {
-							build.append((tmp.mineContains() == 1) ? " x |"
-									: " X |");
-						} else if (tmp.getRobotIn() == null) {
-							build.append("   |");
-						} else if (!(tmp.getRobotIn() instanceof Scavenger)) {
-							build.append("   |");
-						} else if (tmp.getRobotIn() instanceof Scavenger) {
-							build.append(String.format("M%02d|",
-									((Scavenger) tmp.getRobotIn()).getStock()));
-						}
-
-						break;
-					case 2:
-						if (tmp instanceof Base) {
-							build.append("   |");
-						} else if (tmp.isObstacle()) {
-							build.append("   |");
-						} else if (tmp.mineContains() != 0) {
-							build.append("   |");
-						} else if (tmp.getRobotIn() == null) {
-							build.append("   |");
-						} else if (tmp.getRobotIn() != null) {
-							build.append(String.format("E%02d|", tmp
-									.getRobotIn().getEnergy()));
-						}
-
-						break;
-
-					default:
-						break;
-					}
+					build.append(getValueOf(tmp, cpt, equipe));
 				}
 				build.append("|\n");
 			}
@@ -485,56 +525,37 @@ public class Board {
 			out[i] += "   ";
 			status[i] = false;
 		}
-
-		if (out.length < 22) {
-			out[0] += "+--------------------+";
-			out[1] += "|     Légande        |";
-			out[3] += "|   B/b : base       |";
-			out[4] += "|   C/c : char       |";
-			out[5] += "|   T/t : tireur     |";
-			out[6] += "|   P/p : piegeur    |";
-			out[7] += "|   X/x : mine       |";
-			out[8] += "|   O : obstacle     |";
-			out[9] += "|   E : energie      |";
-			out[10] += "|   M : nbr de mines |";
-			out[out.length - 3] += "|   q - quitter      |";
-			out[out.length - 4] += "|   h - regles       |";
-			out[out.length - 1] += "+--------------------+";
-
-			for (int i = 3; i < 11; i++) {
-				status[i] = true;
-			}
-			status[0] = true;
-			status[1] = true;
-			status[out.length - 3] = true;
-			status[out.length - 4] = true;
-			status[out.length - 1] = true;
-		} else {
-			out[0] += "+--------------------+";
-			out[2] += "|     Légande        |";
-			out[4] += "|   B/b : base       |";
-			out[6] += "|   C/c : char       |";
-			out[8] += "|   T/t : tireur     |";
-			out[10] += "|   P/p : piegeur    |";
-			out[12] += "|   X/x : mine       |";
-			out[14] += "|   O : obstacle     |";
-			out[16] += "|   E : energie      |";
-			out[18] += "|   M : nbr de mines |";
-			out[out.length - 3] += "|   q - quitter      |";
-			out[out.length - 4] += "|   h - regles       |";
-			out[out.length - 1] += "+--------------------+";
-
-			for (int i = 4; i < 19; i += 2) {
-				status[i] = true;
-			}
-
-			status[0] = true;
-			status[2] = true;
-			status[out.length - 3] = true;
-			status[out.length - 4] = true;
-			status[out.length - 1] = true;
-
+		int[] lsInt = new int[] { 2, 4, 6, 8, 10, 12, 14, 16, 18 };
+		String[] lsTxt = new String[] {
+				TextData.LABEL_LEGENDE_TITLE.toString(),
+				TextData.LABEL_LEGENDE_BASE.toString(),
+				TextData.LABEL_LEGENDE_CHAR.toString(),
+				TextData.LABEL_LEGENDE_SHOOTER.toString(),
+				TextData.LABEL_LEGENDE_SCAVENGER.toString(),
+				TextData.LABEL_LEGENDE_MINE.toString(),
+				TextData.LABEL_LEGENDE_OBSTACLE.toString(),
+				TextData.LABEL_LEGENDE_ENERGY.toString(),
+				TextData.LABEL_LEGENDE_NMB_MINE.toString() };
+		if (sizeHeight == 4) {
+			lsInt = new int[] { 1, 3, 4, 5, 6, 7, 8, 9, 10 };
 		}
+		for (int i = 0; i < lsTxt.length; i++) {
+			out[lsInt[i]] += String.format("|   %-17s|",
+					String.format("%.17s", lsTxt[i]));
+			status[lsInt[i]] = true;
+		}
+
+		out[0] += "+--------------------+";
+		out[out.length - 3] += String.format("|   %-17s|",
+				String.format("%.17s", TextData.LABEL_LEGENDE_HELP.toString()));
+		out[out.length - 4] += String.format("|   %-17s|",
+				String.format("%.17s", TextData.LABEL_LEGENDE_QUIT.toString()));
+		out[out.length - 1] += "+--------------------+";
+
+		status[0] = true;
+		status[out.length - 3] = true;
+		status[out.length - 4] = true;
+		status[out.length - 1] = true;
 
 		for (int i = 0; i < status.length; i++) {
 			if (!status[i]) {
