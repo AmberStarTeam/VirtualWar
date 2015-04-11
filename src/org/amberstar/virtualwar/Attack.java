@@ -26,50 +26,47 @@ public class Attack extends Action {
 	 * @return the Robot of objective, if none then null
 	 */
 	private Robot getObjectif() {
-		//parcours chaque case se trouvant dans la trajectoire du tir et test s'il y a un ennemi
 		for (int i = 0; i < super.getRobotSource().getRange(); i++) {
-			Cell cellOf = super
-					.getRobotSource()
-					.getBoard()
-					.getCell(
-							super.getRobotSource().getCoordinates()
-									.add(super.getDirection().times(i + 1)));
-			
-			//test de la présence d'un obstacle ou d'une base
-
-		if (cellOf.isObstacle() || cellOf.isBase() != 0) {
+			Coordinates tmp = super.getRobotSource().getCoordinates()
+					.add(super.getDirection().times(i + 1));
+			Cell cellOf = super.getRobotSource().getBoard().getCell(tmp);
+			if (cellOf.isObstacle() || cellOf.isBase() != 0) {
 				return null;
-			//test la présence d'un robot allié
-			} else if (cellOf.getRobotIn() != null
-					&& cellOf.getRobotIn().getTeam() == super.getRobotSource()
-							.getTeam()) {
-				return null;
+			} else if (cellOf.getRobotIn() != null) {
+				if (cellOf.getRobotIn().getTeam() == super.getRobotSource()
+						.getTeam()) {
+					return null;
+				}
+				return cellOf.getRobotIn();
 			}
-			//retourne la cellule contenant le robot ennemi
-			return cellOf.getRobotIn();
 		}
 		return null;
 	}
 
 	@Override
 	void act() {
-		//test s'il y a assez de point pour tirer
+		// test s'il y a assez de point pour tirer
 		if (super.getRobotSource().getEnergy()
 				- super.getRobotSource().getCostAction() < 0) {
 			return;
-		}//test si l'on peut tirer hors du plateau
-		if(super.getDirection()==Constant.UP && super.getRobotSource().getCoordinates().getHeight()==0){
+		}// test si l'on peut tirer hors du plateau
+		if (super.getDirection() == Constant.UP
+				&& super.getRobotSource().getCoordinates().getHeight() == 0) {
 			return;
-		}else if(super.getDirection()==Constant.LEFT && super.getRobotSource().getCoordinates().getWidth()==0){
+		} else if (super.getDirection() == Constant.LEFT
+				&& super.getRobotSource().getCoordinates().getWidth() == 0) {
 			return;
-		}else if(super.getDirection()==Constant.RIGHT && super.getRobotSource().getCoordinates().getWidth()==super.getRobotSource().getBoard().getWidth()){
+		} else if (super.getDirection() == Constant.RIGHT
+				&& super.getRobotSource().getCoordinates().getWidth() == super
+						.getRobotSource().getBoard().getWidth()) {
 			return;
-		}else if(super.getDirection()==Constant.DOWN && super.getRobotSource().getCoordinates().getHeight()==super.getRobotSource().getBoard().getHeight()){
+		} else if (super.getDirection() == Constant.DOWN
+				&& super.getRobotSource().getCoordinates().getHeight() == super
+						.getRobotSource().getBoard().getHeight()) {
 			return;
 		}
-			
-			
-		//test si le robot qui attaque n'est pas un mineur
+
+		// test si le robot qui attaque n'est pas un mineur
 		if (!(super.getRobotSource() instanceof Scavenger)) {
 			Robot toAttack = getObjectif();
 			if (toAttack == null
@@ -95,9 +92,9 @@ public class Attack extends Action {
 				return;
 			}
 			if (loc.getBoard().isObstacle(cords) != true) {
-                System.out.println("Il y a déjà un obstacle !");
-                return;
-            }
+				System.out.println("Il y a déjà un obstacle !");
+				return;
+			}
 			if (loc.getBoard().isBase(cords) != 0) {
 				System.out.println("Tu ne peut pas miner une base !");
 				return;
