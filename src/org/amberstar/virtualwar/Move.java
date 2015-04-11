@@ -117,7 +117,6 @@ public class Move extends Action {
 
     @Override
     boolean canDoIt() {
-        // TODO Auto-generated method stub
         return false;
     }
 }
