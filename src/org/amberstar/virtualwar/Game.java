@@ -29,15 +29,10 @@ public class Game {
 		System.out.println("Largeur :");
 		int width = Integer.parseInt(sc.nextLine().toLowerCase());
 
-		while (width < 3 || height < 3) { // A changer avec : factory
-			System.out.println("Choisissez une nouvelle taille du plateau");
-			height = Integer.parseInt(sc.nextLine().toLowerCase());
-			width = Integer.parseInt(sc.nextLine().toLowerCase());
-		}
 		System.out.println("Poucentage d'obstacle : ");
 		int pourcent = Integer.parseInt(sc.nextLine().toLowerCase());
 		Board board = Board.newBoard(height, width);
-
+		
 		System.out.println("Choisissez le type de vos robots \nequipe 1 :");
 		List<Robot> t1 = choiceOfRobots(nbRobotTeam1, 1, board);
 		System.out.println("equipe 2 :");
