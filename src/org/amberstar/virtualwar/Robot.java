@@ -17,8 +17,6 @@ package org.amberstar.virtualwar;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.virtualwar.action.Attack;
-import org.virtualwar.action.Move;
 
 // TODO: Auto-generated Javadoc
 /**

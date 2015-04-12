@@ -17,9 +17,6 @@ package org.amberstar.virtualwar;
 import java.util.HashMap;
 import java.util.Scanner;
 
-import org.virtualwar.action.Attack;
-import org.virtualwar.action.Move;
-
 // TODO: Auto-generated Javadoc
 /**
  * The TestBoard Class.
