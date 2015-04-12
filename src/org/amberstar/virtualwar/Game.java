@@ -3,6 +3,9 @@ package org.amberstar.virtualwar;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import org.virtualwar.action.Attack;
+import org.virtualwar.action.Move;
 /**
  * 
  * @author amberStar

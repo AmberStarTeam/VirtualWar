@@ -16,6 +16,8 @@ package org.amberstar.virtualwar;
 
 import java.util.List;
 
+import org.virtualwar.action.Attack;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Scavenger Class.
