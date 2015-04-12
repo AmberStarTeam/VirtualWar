@@ -23,101 +23,101 @@ import org.amberstar.virtualwar.sound.ThreadSoundRun;
  */
 public class Move extends Action {
 
-    /**
-     * default constructor.
-     *
-     * @param robotIn
-     *            the robot from
-     * @param direction
-     *            the coordinate of movement
-     */
-    public Move(Robot robotIn, Coordinates direction) {
-        super(robotIn, direction);
-    }
+	/**
+	 * default constructor.
+	 *
+	 * @param robotIn
+	 *            the robot from
+	 * @param direction
+	 *            the coordinate of movement
+	 */
+	public Move(Robot robotIn, Coordinates direction) {
+		super(robotIn, direction);
+	}
 
-    /*
-     * (non-Javadoc)
-     * 
-     * @see org.amberstar.virtualwar.Action#act()
-     */
-    @Override
-    void act() {
-        if (super.getRobotSource().getEnergy()
-                - super.getRobotSource().getCostMoving() < 0) {
-            System.out.println("Pas assez d'énergie !");
-            return;
-        }
-        Cell toAct = getObjectif();
-        if (toAct == null) {
-            return;
-        }
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.amberstar.virtualwar.Action#act()
+	 */
+	@Override
+	void act() {
+		if (super.getRobotSource().getEnergy()
+				- super.getRobotSource().getCostMoving() < 0) {
+			System.out.println("Pas assez d'énergie !");
+			return;
+		}
+		Cell toAct = getObjectif();
+		if (toAct == null) {
+			return;
+		}
 
-        Robot rob = super.getRobotSource();
+		Robot rob = super.getRobotSource();
 
-        if (rob.getBoard().setRobot(rob, toAct.getCoordinates())) {
-            rob.setEnergy(rob.getEnergy() - rob.getCostMoving());
-            new ThreadSoundRun(rob.getMoveSound(), 1000).start();
-        }
+		if (rob.getBoard().setRobot(rob, toAct.getCoordinates())) {
+			rob.setEnergy(rob.getEnergy() - rob.getCostMoving());
+			new ThreadSoundRun(rob.getMoveSound(), 1000).start();
+		}
 
-        if (toAct.mineContains() != 0) {
-            rob.hasBeenMined();
-            toAct.setMine(0);
-            try {
-                Thread.sleep(700);
-            } catch (InterruptedException e) {
+		if (toAct.mineContains() != 0) {
+			rob.hasBeenMined();
+			toAct.setMine(0);
+			try {
+				Thread.sleep(700);
+			} catch (InterruptedException e) {
 
-            }
-            new ThreadSoundRun("sounds/boom.wav", 800).start();
-        }
-    }
+			}
+			new ThreadSoundRun("sounds/boom.wav", 800).start();
+		}
+	}
 
-    /**
-     * Gets the objectif.
-     *
-     * @return the cell of objective
-     */
-    private Cell getObjectif() {
-        Coordinates tmp;
-        Cell cellOfTmp;
-        Robot robSour = super.getRobotSource();
+	/**
+	 * Gets the objectif.
+	 *
+	 * @return the cell of objective
+	 */
+	private Cell getObjectif() {
+		Coordinates tmp;
+		Cell cellOfTmp;
+		Robot robSour = super.getRobotSource();
 
-        if (robSour instanceof Tank) {
-            tmp = robSour.getCoordinates().add(super.getDirection().times(2));
+		if (robSour instanceof Tank) {
+			tmp = robSour.getCoordinates().add(super.getDirection().times(2));
 
-            if (!robSour.getBoard().isValid(tmp)
-                    || robSour.getBoard().getCell(tmp).getRobotIn() != null
-                    || robSour.getBoard().isObstacle(tmp)
-                    || robSour.getBoard().getCell(tmp).mineContains() == robSour
-                            .getTeam()
-                    || (robSour.getBoard().isBase(tmp) != 0 && super
-                            .getRobotSource().getBoard().isBase(tmp) != super
-                            .getRobotSource().getTeam())) {
-                tmp = tmp.minus(super.getDirection());
+			if (!robSour.getBoard().isValid(tmp)
+					|| robSour.getBoard().getCell(tmp).getRobotIn() != null
+					|| robSour.getBoard().isObstacle(tmp)
+					|| robSour.getBoard().getCell(tmp).mineContains() == robSour
+							.getTeam()
+					|| (robSour.getBoard().isBase(tmp) != 0 && super
+							.getRobotSource().getBoard().isBase(tmp) != super
+							.getRobotSource().getTeam())) {
+				tmp = tmp.minus(super.getDirection());
 
-            }
-        } else {
-            tmp = robSour.getCoordinates().add(super.getDirection());
-        }
+			}
+		} else {
+			tmp = robSour.getCoordinates().add(super.getDirection());
+		}
 
-        cellOfTmp = robSour.getBoard().getCell(tmp);
+		cellOfTmp = robSour.getBoard().getCell(tmp);
 
-        if (cellOfTmp == null || cellOfTmp.getRobotIn() != null) {
-            return null;
-        }
-        if (cellOfTmp.isObstacle()
-                || cellOfTmp.mineContains() == robSour.getTeam()
-                || (robSour.getBoard().isBase(tmp) != 0 && super
-                        .getRobotSource().getBoard().isBase(tmp) != super
-                        .getRobotSource().getTeam())) {
-            return null;
-        }
+		if (cellOfTmp == null || cellOfTmp.getRobotIn() != null) {
+			return null;
+		}
+		if (cellOfTmp.isObstacle()
+				|| cellOfTmp.mineContains() == robSour.getTeam()
+				|| (robSour.getBoard().isBase(tmp) != 0 && super
+						.getRobotSource().getBoard().isBase(tmp) != super
+						.getRobotSource().getTeam())) {
+			return null;
+		}
 
-        return cellOfTmp;
-    }
+		return cellOfTmp;
+	}
 
-    @Override
-    boolean canDoIt() {
-        // TODO Auto-generated method stub
-        return false;
-    }
+	@Override
+	boolean canDoIt() {
+		// TODO Auto-generated method stub	
+		return false;
+	}
 }

@@ -301,7 +301,7 @@ public abstract class Robot {
      *
      * @return the available move
      */
-    public List<Action> getAvailableAtacks() {
+    public List<Action> getAvailableAtacks(Robot robot) {
         List<Action> retVal = new ArrayList<Action>();
         for (Coordinates cords : Constant.CARDINAL_DIRECTION) {
             Action tmp = new Attack(this, cords);
