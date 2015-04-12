@@ -42,18 +42,50 @@ public class Game {
 		int pourcent = Integer.parseInt(sc.nextLine().toLowerCase());
 		Board board = Board.newBoard(height, width);
 
+		Coordinates b1 = new Coordinates(0, 0);
+		Coordinates b2 = new Coordinates(board.getHeight() - 1,
+				board.getWidth() - 1);
+
 		System.out.println("Choisissez le type de vos robots \nequipe 1 :");
-		List<Robot> r1 = choiceOfRobots(nbRobotTeam1, 1, board);
+		List<Robot> r1 = choiceOfRobots(nbRobotTeam1, 1, board, b1);
 		System.out.println("equipe 2 :");
-		List<Robot> r2 = choiceOfRobots(nbRobotTeam2, 2, board);
-		System.out.println(r1);
-		System.out.println(r2);
-		
+		List<Robot> r2 = choiceOfRobots(nbRobotTeam2, 2, board, b2);
+
 		board.generate(pourcent, containsTank(r1, r2));
 		System.out.println(board.outGrindPlusLegend(-1));
 
 		boolean end = false;
 		while (end == false) {
+			Action act;
+			Robot robot;
+			System.out
+					.println("Team 1 :\nChoix de l'action:\n1-Se déplacemer\n2-Attaquer");
+			int choiceOfAction = Integer.parseInt(sc.nextLine().toLowerCase());
+			if (choiceOfAction == 1) {
+				System.out.println("Choisissez un robot :\n"
+						+ displayOfRobotsByTeam(r1));
+				int choiceR = Integer.parseInt(sc.nextLine().toLowerCase());
+
+				System.out.println("Choisissez une direction :\n"
+						+ r1.get(choiceR - 1).getAvailableMove());
+
+			} else {
+				System.out.println("Choisissez un robot :\n"
+						+ displayOfRobotsByTeam(r1));
+
+			}
+
+			System.out
+					.println("Team 2 :\nChoix de l'action:\n1-Se déplacemer\n2-Attaquer");
+			choiceOfAction = Integer.parseInt(sc.nextLine().toLowerCase());
+			if (choiceOfAction == 1) {
+				System.out.println("Choisissez un robot :\n"
+						+ displayOfRobotsByTeam(r2));
+
+			} else {
+				System.out.println("Choisissez un robot :\n"
+						+ displayOfRobotsByTeam(r2));
+			}
 
 			if (nbRobotTeam1 == 0 || nbRobotTeam2 == 0) {
 				end = true;
@@ -61,12 +93,10 @@ public class Game {
 		}
 	}
 
-	public List<Robot> choiceOfRobots(int nb, int team, Board board) {
+	public List<Robot> choiceOfRobots(int nb, int team, Board board,
+			Coordinates b) {
 		List<Robot> l = new ArrayList<Robot>();
 		Robot robot;
-		Coordinates b1 = new Coordinates(0, 0);
-		Coordinates b2 = new Coordinates(board.getHeight() - 1,
-				board.getWidth() - 1);
 
 		for (int i = 0; i < nb; i++) {
 			System.out.println("1-Tireur\n2-Piegeur\n3-Char");
@@ -76,29 +106,18 @@ public class Game {
 						.println("Tu as choisi un mauvais numéro ! Try again !");
 				r = Integer.parseInt(sc.nextLine().toLowerCase());
 			}
-			if (team == 1) {
-				if (r == 1) {
-					robot = new Shooter(team, b1, board);
-					l.add(robot);
-				} else if (r == 2) {
-					robot = new Scavenger(team, b1, board);
-					l.add(robot);
-				} else if (r == 3) {
-					robot = new Tank(team, b1, board);
-					l.add(robot);
-				}
-			} else if (team == 2) {
-				if (r == 1) {
-					robot = new Shooter(team, b2, board);
-					l.add(robot);
-				} else if (r == 2) {
-					robot = new Scavenger(team, b2, board);
-					l.add(robot);
-				} else if (r == 3) {
-					robot = new Tank(team, b2, board);
-					l.add(robot);
-				}
+
+			if (r == 1) {
+				robot = new Shooter(team, b, board);
+				l.add(robot);
+			} else if (r == 2) {
+				robot = new Scavenger(team, b, board);
+				l.add(robot);
+			} else if (r == 3) {
+				robot = new Tank(team, b, board);
+				l.add(robot);
 			}
+
 		}
 		return l;
 	}
@@ -115,4 +134,13 @@ public class Game {
 
 		return false;
 	}
+
+	public String displayOfRobotsByTeam(List<Robot> l) {
+		String result = "";
+		for (int i = 0; i < l.size(); i++) {
+			result = result + (i + 1) + "-" + l.get(i) + "\n";
+		}
+		return result;
+	}
+
 }
