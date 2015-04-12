@@ -17,8 +17,77 @@ package org.amberstar.virtualwar;
 // TODO: Auto-generated Javadoc
 /**
  * The TextData Enum.
+ *
+ * @author amberStar
  */
 public enum TextData {
+
+
+	/** The label tank team a. */
+	LABEL_TANK_TEAM_A("t"),
+	
+	/** The label tank team b. */
+	LABEL_TANK_TEAM_B("T"),
+	
+	/** The label scavenger team a. */
+	LABEL_SCAVENGER_TEAM_A("p"),
+	
+	/** The label scavenger team b. */
+	LABEL_SCAVENGER_TEAM_B("P"),
+	
+	/** The label shooter team a. */
+	LABEL_SHOOTER_TEAM_A("s"),
+	
+	/** The label shooter team b. */
+	LABEL_SHOOTER_TEAM_B("S"),
+	
+	/** The label base team a. */
+	LABEL_BASE_TEAM_A("b"),
+	
+	/** The label base team b. */
+	LABEL_BASE_TEAM_B("B"),
+	
+	/** The label mine team a. */
+	LABEL_MINE_TEAM_A("x"),
+	
+	/** The label mine team b. */
+	LABEL_MINE_TEAM_B("X"),
+	
+	/** The label obstacle. */
+	LABEL_OBSTACLE("O"),
+	
+	/** The label legende title. */
+	LABEL_LEGENDE_TITLE("Légande"),
+	
+	/** The label legende base. */
+	LABEL_LEGENDE_BASE(LABEL_BASE_TEAM_A + "\\" + LABEL_BASE_TEAM_B + " : base"),
+	
+	/** The label legende char. */
+	LABEL_LEGENDE_CHAR(LABEL_TANK_TEAM_A + "\\" + LABEL_TANK_TEAM_B + " : char"),
+	
+	/** The label legende shooter. */
+	LABEL_LEGENDE_SHOOTER(LABEL_SHOOTER_TEAM_A + "\\" + LABEL_SHOOTER_TEAM_B + " : tireur"),
+	
+	/** The label legende scavenger. */
+	LABEL_LEGENDE_SCAVENGER(LABEL_SCAVENGER_TEAM_A + "\\" + LABEL_SCAVENGER_TEAM_B + " : piegeur"),
+	
+	/** The label legende mine. */
+	LABEL_LEGENDE_MINE(LABEL_MINE_TEAM_A + "\\" + LABEL_MINE_TEAM_B + " : mine"),
+	
+	/** The label legende obstacle. */
+	LABEL_LEGENDE_OBSTACLE(LABEL_OBSTACLE + " : obstacle"),
+	
+	/** The label legende energy. */
+	LABEL_LEGENDE_ENERGY("E : energie"),
+	
+	/** The label legende nmb mine. */
+	LABEL_LEGENDE_NMB_MINE("M : nbr de mines"),
+	
+	/** The label legende help. */
+	LABEL_LEGENDE_HELP("h - regles"),
+	
+	/** The label legende quit. */
+	LABEL_LEGENDE_QUIT("q - quitter"),
 
     /** The tank name. */
     TANK_NAME("tank"),
@@ -76,11 +145,12 @@ public enum TextData {
         this.nameFr = nameFr;
     }
 
-    /**.
+    /**
+     * .
      * (non-Javadoc)
-     * 
-     * @see java.lang.Enum#toString()
+     *
      * @return the value of field
+     * @see java.lang.Enum#toString()
      */
     public String toString() {
         return nameFr;
