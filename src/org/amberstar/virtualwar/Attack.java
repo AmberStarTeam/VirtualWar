@@ -91,7 +91,7 @@ public class Attack extends Action {
 				System.out.println("Il y a déjà une mine !");
 				return;
 			}
-			if (loc.getBoard().isObstacle(cords) != true) {
+			if (loc.getBoard().isObstacle(cords) == true) {
 				System.out.println("Il y a déjà un obstacle !");
 				return;
 			}
