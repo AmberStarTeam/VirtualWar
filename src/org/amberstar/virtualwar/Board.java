@@ -404,9 +404,9 @@ public class Board {
 
 			} else if (cell.getRobotIn() instanceof Shooter) {
 				if (cell.getRobotIn().getTeam() == Constant.ID_TEAM_A) {
-					return " " + TextData.LABEL_TANK_TEAM_A + " |";
+					return " " + TextData.LABEL_SHOOTER_TEAM_A + " |";
 				} else if (cell.getRobotIn().getTeam() == Constant.ID_TEAM_B) {
-					return " " + TextData.LABEL_TANK_TEAM_B + " |";
+					return " " + TextData.LABEL_SHOOTER_TEAM_B + " |";
 				}
 			}
 			break;
