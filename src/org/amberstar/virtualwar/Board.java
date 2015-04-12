@@ -48,7 +48,7 @@ public class Board {
 	 */
 	public static Board newBoard(int height, int width) {
 		if (height <= 3 || width <= 3) {
-			return null;
+			return new Board(4,4); // C'est temporaire (Si ça retourne null ça plante) 
 		}
 		return new Board(height, width);
 	}

@@ -6,14 +6,23 @@ import java.util.Scanner;
 
 public class Game {
 
-	public static void main(String[] args) {
+	private Scanner sc = new Scanner(System.in);
 
-		Scanner sc = new Scanner(System.in);
+	public Game() {
+
+	}
+
+	public void run() {
+		game();
+	}
+
+	public void game() {
+
 		// System.out.println(Rules.rules());
 		System.out.println("Nom de la team 1 :");
-		String T1 = sc.nextLine().toLowerCase();
+		String t1 = sc.nextLine().toLowerCase();
 		System.out.println("Nom de la team 2 :");
-		String T2 = sc.nextLine().toLowerCase();
+		String t2 = sc.nextLine().toLowerCase();
 
 		System.out.println("Choisissez le nombre de robot pour  les équipes :");
 		int nbRobotTeam1 = Integer.parseInt(sc.nextLine().toLowerCase());
@@ -32,16 +41,17 @@ public class Game {
 		System.out.println("Poucentage d'obstacle : ");
 		int pourcent = Integer.parseInt(sc.nextLine().toLowerCase());
 		Board board = Board.newBoard(height, width);
-		
+
 		System.out.println("Choisissez le type de vos robots \nequipe 1 :");
-		List<Robot> t1 = choiceOfRobots(nbRobotTeam1, 1, board);
+		List<Robot> r1 = choiceOfRobots(nbRobotTeam1, 1, board);
 		System.out.println("equipe 2 :");
-		List<Robot> t2 = choiceOfRobots(nbRobotTeam2, 2, board);
-		System.out.println(t1);
-		System.out.println(t2);
+		List<Robot> r2 = choiceOfRobots(nbRobotTeam2, 2, board);
+		System.out.println(r1);
+		System.out.println(r2);
 		
-		System.out.println(board.outGrindPlusLegend(1));
-		//System.out.println(board.outGrindPlusLegend(2));
+		board.generate(pourcent, containsTank(r1, r2));
+		System.out.println(board.outGrindPlusLegend(-1));
+
 		boolean end = false;
 		while (end == false) {
 
@@ -51,14 +61,13 @@ public class Game {
 		}
 	}
 
-	public static List<Robot> choiceOfRobots(int nb, int team, Board board) {
-		Scanner sc = new Scanner(System.in);
+	public List<Robot> choiceOfRobots(int nb, int team, Board board) {
 		List<Robot> l = new ArrayList<Robot>();
 		Robot robot;
 		Coordinates b1 = new Coordinates(0, 0);
 		Coordinates b2 = new Coordinates(board.getHeight() - 1,
 				board.getWidth() - 1);
-		
+
 		for (int i = 0; i < nb; i++) {
 			System.out.println("1-Tireur\n2-Piegeur\n3-Char");
 			int r = Integer.parseInt(sc.nextLine().toLowerCase());
@@ -92,5 +101,18 @@ public class Game {
 			}
 		}
 		return l;
+	}
+
+	public boolean containsTank(List<Robot> r1, List<Robot> r2) {
+		for (int i = 0; i < r1.size(); i++) {
+			Robot robot1 = r1.get(i);
+			Robot robot2 = r2.get(i);
+			if (robot1 instanceof Tank || robot2 instanceof Tank) {
+				return true;
+			}
+
+		}
+
+		return false;
 	}
 }
