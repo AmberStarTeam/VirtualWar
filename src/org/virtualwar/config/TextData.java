@@ -168,67 +168,71 @@ public enum TextData {
 	SHOOTER_NAME("tireur"),
 
 	/** The error move is obstacle. */
-	ERROR_MOVE_IS_OBSTACLE("Déplacement imposible : il y a un obstacle !"),
+	ERROR_MOVE_IS_OBSTACLE("Déplacement imposible : Il y a un obstacle !"),
 
 	/** The error move is obstacle. */
 	ERROR_MOVE_NOT_ENOUTH_ENERGY(
-			"Déplacement imposible : il y pas assez d'énergie"),
+			"Déplacement imposible : Il y pas assez d'énergie"),
 
 	/** The error move is obstacle. */
 	ERROR_ATTACK_NOT_ENOUTH_ENERGY(
-			"Attaque imposible : il y pas assez d'énergie"),
+			"Attaque imposible : Il y pas assez d'énergie"),
 
 	/** The error nothing to attack. */
-	ERROR_ATTACK_NOTHING_TO_ATTACK("Attaque imposible : il y a rien à attaquer"),
+	ERROR_ATTACK_NOTHING_TO_ATTACK("Attaque imposible : Il y a rien à attaquer"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_NOT_ENOUTH_MINE(
-			"Attaque imposible : il y a pas assez de mines"),
+			"Attaque imposible : Il y a pas assez de mines"),
 
 	/** The error nothing to attack. */
-	ERROR_ATTACK_ALREADY_MINED("Attaque imposible : il y a déja une mine !"),
+	ERROR_ATTACK_ALREADY_MINED("Attaque imposible : Il y a déja une mine !"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_MINE_BASE(
-			"Attaque imposible : tu ne peut pas miner une base !"),
+			"Attaque imposible : Tu ne peut pas miner une base !"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_MINE_ROBOT(
-			"Attaque imposible : tu ne peut pas miner un robot !"),
+			"Attaque imposible : Tu ne peut pas miner un robot !"),
+
+	/** The error nothing to attack. */
+	ERROR_ATTACK_CANT_MINE_OBSTACLE(
+			"Attaque imposible : Il y a déjà un obstacle !"),
 
 	/** The error move is out of bound. */
 	ERROR_ATTTACK_IS_OUT_OF_BOUND(
-			"Attaque imposible : ce n'est pas sur le plateau !"),
+			"Attaque imposible : Ce n'est pas sur le plateau !"),
 
 	/** The error move is occupied. */
 	ERROR_MOVE_IS_OCCUPED(
-			"Déplacement imposible : il y a déjà un robot présent !"),
+			"Déplacement imposible : Il y a déjà un robot présent !"),
 
 	/** The error move is mine. */
 	ERROR_MOVE_IS_MINE(
-			"Déplacement imposible : il y a une mine de votre équipe !"),
+			"Déplacement imposible : Il y a une mine de votre équipe !"),
 
 	/** The error move is out of bound. */
 	ERROR_MOVE_IS_OUT_OF_BOUND(
-			"Déplacement imposible : ce n'est pas sur le plateau !"),
+			"Déplacement imposible : Ce n'est pas sur le plateau !"),
 
 	/** The error move is base other. */
 	ERROR_MOVE_IS_BASE_OTHER(
-			"Déplacement imposible : ce n'est pas votre base !"),
+			"Déplacement imposible : Ce n'est pas votre base !"),
 
 	/** The error move is not valid. */
 	ERROR_MOVE_IS_NOT_VALID(
-			"Déplacement imposible : ce n'est pas un déplacement possible pour cette unitée !"),
+			"Déplacement imposible : Ce n'est pas un déplacement possible pour cette unitée !"),
 
 	/** The error board too small. */
-	ERROR_BOARD_TOO_SMALL("Création impossible : le plateau est trop petit !"),
+	ERROR_BOARD_TOO_SMALL("Création impossible : Le plateau est trop petit !"),
 
 	/** The error board too big. */
-	ERROR_BOARD_TOO_BIG("Création impossible : le plateau est trop grand !"),
+	ERROR_BOARD_TOO_BIG("Création impossible : Le plateau est trop grand !"),
 
 	/** The error board must be positive. */
 	ERROR_BOARD_MUST_BE_POSITIF(
-			"Création impossible : les valeurs doivent être positives");
+			"Création impossible : Les valeurs doivent être positives");
 
 	/** The name. */
 	private String nameFr = "";

@@ -99,6 +99,10 @@ public class Attack extends Action {
 				System.out.println(TextData.ERROR_ATTTACK_IS_OUT_OF_BOUND);
 				return;
 			}
+			if (loc.getBoard().isObstacle(cords) == true) {
+				System.out.println(TextData.ERROR_ATTACK_CANT_MINE_OBSTACLE);
+				return;
+			}
 			loc.getBoard().setMine(cords, loc.getTeam());
 			loc.removeEnergy(loc.getCostAction());
 			loc.dropMine();
