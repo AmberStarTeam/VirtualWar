@@ -25,7 +25,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The Tank Class.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Tank extends Robot {
     

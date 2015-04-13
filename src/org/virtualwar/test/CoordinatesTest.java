@@ -28,7 +28,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * Testing of Coordinates.
  * 
- * @author Nicolas Beaussart
+ * @author amberstar
  *
  */
 public class CoordinatesTest {

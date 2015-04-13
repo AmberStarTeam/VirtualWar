@@ -22,7 +22,7 @@ import java.io.InputStream;
 /**
  * The Class ThreadSoundRun.
  * 
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class ThreadSoundRun extends Thread {
 

@@ -22,7 +22,7 @@ import org.virtualwar.config.TextData;
 /**
  * The Coordinates rightClass.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Coordinates {
 

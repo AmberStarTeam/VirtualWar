@@ -2,7 +2,8 @@
  * 
  */
 /**
- * @author Nicolas Beaussart
+ * The utilities package
+ * @author amberstar
  *
  */
 package org.virtualwar.util;

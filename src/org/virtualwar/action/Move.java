@@ -26,7 +26,7 @@ import org.virtualwar.util.sound.ThreadSoundRun;
 /**
  * The Move Class.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Move extends Action {
 

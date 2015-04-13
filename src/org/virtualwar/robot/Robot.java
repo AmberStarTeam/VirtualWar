@@ -30,7 +30,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The Robot Class.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public abstract class Robot {
 

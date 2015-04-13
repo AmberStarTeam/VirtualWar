@@ -26,7 +26,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The Scavenger Class.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Scavenger extends Robot {
 

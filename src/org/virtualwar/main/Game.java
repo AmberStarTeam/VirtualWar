@@ -35,7 +35,7 @@ import org.virtualwar.util.sound.ThreadSoundRun;
 /**
  * The Class Game.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Game {
 

@@ -34,7 +34,7 @@ package org.virtualwar.config;
 /**
  * The TextData Enum.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public enum TextData {
 

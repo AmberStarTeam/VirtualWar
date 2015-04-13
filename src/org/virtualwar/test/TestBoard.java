@@ -44,7 +44,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The TestBoard Class.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public final class TestBoard {
 	

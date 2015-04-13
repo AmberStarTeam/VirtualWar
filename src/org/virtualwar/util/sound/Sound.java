@@ -31,7 +31,7 @@ import javax.sound.sampled.SourceDataLine;
 /**
  * The Class Sound.
  * 
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Sound {
 

@@ -25,7 +25,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The Case Class that contains mines or is obstacle or contains a robot.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Case extends Cell {
 

@@ -22,7 +22,7 @@ import org.virtualwar.util.Coordinates;
 // TODO: Auto-generated Javadoc
 /**
  * The Action Class.
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public abstract class Action {
 

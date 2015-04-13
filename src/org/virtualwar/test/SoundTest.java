@@ -22,7 +22,7 @@ import org.virtualwar.util.sound.ThreadSoundRun;
 /**
  * The Class SoundTest.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public final class SoundTest {
 

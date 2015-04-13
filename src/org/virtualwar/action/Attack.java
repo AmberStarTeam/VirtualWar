@@ -13,7 +13,7 @@ import org.virtualwar.util.sound.ThreadSoundRun;
 /**
  * The Attack Class.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Attack extends Action {
 

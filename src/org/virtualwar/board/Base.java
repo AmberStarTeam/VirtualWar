@@ -25,7 +25,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The Base Class who stock multiple robots.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Base extends Cell {
 

@@ -19,6 +19,7 @@ import org.virtualwar.board.Board;
 // TODO: Auto-generated Javadoc
 /**
  * The TestingFormater Class.
+ * @author amberstar
  */
 public class TestingFormater {
 	

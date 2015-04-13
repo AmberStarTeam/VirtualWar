@@ -33,7 +33,7 @@ import org.virtualwar.util.Coordinates;
  * The Board class is the class for the actual board of game containing robots,
  * obstacle and mines.
  * 
- * @author Nicolas Beaussart
+ * @author amberstar
  *
  */
 public class Board {

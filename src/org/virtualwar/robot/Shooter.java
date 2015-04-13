@@ -25,7 +25,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The Shooter Class.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Shooter extends Robot {
 

@@ -24,7 +24,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The Cell Class.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public abstract class Cell {
 

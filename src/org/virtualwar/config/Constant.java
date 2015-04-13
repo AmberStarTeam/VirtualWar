@@ -24,7 +24,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The Constant Class.
  * 
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public final class Constant {
 

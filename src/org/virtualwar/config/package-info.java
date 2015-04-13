@@ -2,7 +2,8 @@
  * 
  */
 /**
- * @author Nicolas Beaussart
+ * The configuration package
+ * @author amberstar
  *
  */
 package org.virtualwar.config;
