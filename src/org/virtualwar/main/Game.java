@@ -237,6 +237,9 @@ public class Game {
 				actT1 = null;
 			}
 
+			checkAlive(t1);
+			checkAlive(t2);
+
 			System.out.println(board.outGrindPlusLegend(Constant.ID_TEAM_B));
 			if (anyCanDo(t2)) {
 				System.out.println("Au tour de " + nameTeam2);
