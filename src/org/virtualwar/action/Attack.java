@@ -64,6 +64,9 @@ public class Attack extends Action {
 			System.out.println(TextData.ERROR_ATTACK_NOT_ENOUTH_ENERGY);
 			return;
 		}
+		if (super.getRobotSource() instanceof Base){
+			return;
+		}
 
 		if (!(super.getRobotSource() instanceof Scavenger)) {
 
@@ -76,6 +79,7 @@ public class Attack extends Action {
 					super.getRobotSource().getCostAction());
 			toAttack.hasBeenShoot(super.getRobotSource());
 			new ThreadSoundRun(super.getRobotSource().getAttackSound()).start();
+			System.out.println(super.getRobotSource().getType()+TextData().ROBOT_HAS_BEEN_SHOT);
 
 		} else {
 			Scavenger loc = (Scavenger) super.getRobotSource();
@@ -106,6 +110,7 @@ public class Attack extends Action {
 			loc.getBoard().setMine(cords, loc.getTeam());
 			loc.removeEnergy(loc.getCostAction());
 			loc.dropMine();
+			System.out.println(TextData().ROBOT_MINE)
 		}
 	}
 

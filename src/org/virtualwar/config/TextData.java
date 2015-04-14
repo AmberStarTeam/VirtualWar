@@ -233,7 +233,13 @@ public enum TextData {
 	/** The error board must be positive. */
 	ERROR_BOARD_MUST_BE_POSITIF(
 			"Création impossible : Les valeurs doivent être positives");
-
+	
+	ROBOT_HAS_BEEN_SHOT(" a été touché !");
+	
+	ROBOT_HAS_BEEN_MINE(" a été piégé !");
+	
+	ROBOT_MINE("Un piégeur a miné !")
+	
 	/** The name. */
 	private String nameFr = "";
 

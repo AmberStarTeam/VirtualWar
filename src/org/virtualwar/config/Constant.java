@@ -127,7 +127,7 @@ public final class Constant {
 	public static final int SCAVENGER_ENERGY_MOVE = 2;
 
 	/** The Constant SCAVENGER_DAMAGE_SUBMIT. */
-	public static final int SCAVENGER_DAMAGE_SUBMIT = 2;
+	public static final int SCAVENGER_DAMAGE_SUBMIT = 2;	
 
 	/** The Constant SCAVENGER_MAX_MINE. */
 	public static final int SCAVENGER_MAX_MINE = 10;
