@@ -88,6 +88,24 @@ public class Game {
 		sc = new Scanner(System.in);
 	}
 
+
+	/**
+	 * Safely read a int
+	 * 
+	 * @return the value
+	 */
+	private int readSafeInt() {
+		while (true) {
+			try {
+				return readSafeInt();
+			} catch (NumberFormatException e) {
+				System.out.println("Pas un nombre!");
+				continue;
+			}
+		}
+	}
+
+
 	/**
 	 * Inits the team.
 	 */
@@ -97,17 +115,16 @@ public class Game {
 		System.out.println("Nom de la team 2 :");
 		nameTeam2 = sc.nextLine();
 	}
-
 	/**
 	 * Inits the nmb robot.
 	 */
 	private void initNmbRobot() {
 		// System.out.println(Rules.rules());
 		System.out.println("Choisissez le nombre de robot pour les équipes :");
-		nmbRobots = Integer.parseInt(sc.nextLine().toLowerCase());
+		nmbRobots = readSafeInt();
 		while (nmbRobots >= 6) {
 			System.out.println("Choisissez un nouveau nombre de robot");
-			nmbRobots = Integer.parseInt(sc.nextLine().toLowerCase());
+			nmbRobots = readSafeInt();
 		}
 		// int nbRobotTeam2 = nbRobotTeam1;
 	}
@@ -118,17 +135,17 @@ public class Game {
 	private void initBoard() {
 		System.out.println("Choisissez la taille du plateau"
 				+ "(elle ne doit pas être inférieur à 3)\n Hauteur :");
-		height = Integer.parseInt(sc.nextLine().toLowerCase());
+		height = readSafeInt();
 		System.out.println("Largeur :");
-		width = Integer.parseInt(sc.nextLine().toLowerCase());
+		width = readSafeInt();
 
 		while (width < 3 || height < 3) { // A changer avec : factory
 			System.out.println("Choisissez une nouvelle taille du plateau");
-			height = Integer.parseInt(sc.nextLine().toLowerCase());
-			width = Integer.parseInt(sc.nextLine().toLowerCase());
+			height = readSafeInt();
+			width = readSafeInt();
 		}
 		System.out.println("Poucentage d'obstacle : ");
-		pourcent = Integer.parseInt(sc.nextLine().toLowerCase());
+		pourcent = readSafeInt();
 		board = Board.newBoard(height, width);
 		b2 = new Coordinates(board.getHeight() - 1, board.getWidth() - 1);
 	}
@@ -437,11 +454,11 @@ public class Game {
 
 		for (int i = 0; i < nb; i++) {
 			System.out.println("1-Tireur\n2-Piegeur\n3-Char");
-			int r = Integer.parseInt(sc.nextLine().toLowerCase());
+			int r = readSafeInt();
 			while (0 > r || r > 3) {
 				System.out
 						.println("Tu as choisi un mauvais numéro ! Try again !");
-				r = Integer.parseInt(sc.nextLine().toLowerCase());
+				r = readSafeInt();
 			}
 			if (team == 1) {
 				if (r == 1) {
