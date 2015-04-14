@@ -103,7 +103,7 @@ public class Game {
 	 */
 	private void initNmbRobot() {
 		// System.out.println(Rules.rules());
-		System.out.println("Choisissez le nombre de robot pour  les équipes :");
+		System.out.println("Choisissez le nombre de robot pour les équipes :");
 		nmbRobots = Integer.parseInt(sc.nextLine().toLowerCase());
 		while (nmbRobots >= 6) {
 			System.out.println("Choisissez un nouveau nombre de robot");

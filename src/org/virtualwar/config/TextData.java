@@ -41,10 +41,10 @@ public enum TextData {
 	/** The label regle. */
 	LABEL_REGLE(
 			"\tRègles du jeu :\n"
-					+ "Les pays s'affrontent en faisent combattre les robots sur un plateau.\n\n"
+					+ "Les pays s'affrontent en faisant combattre des robots sur un plateau.\n\n"
 					+ "Le jeu se déroule au tour par tour."
 					+ " L'équipe qui commence est choisie aléatoirement.\n\n"
-					+ "Les robot commencent dans leur base respective.\n\n"
+					+ "Les robots commencent dans leur base respective.\n\n"
 					+ "A chaque tour, chaque équipe choisit"
 					+ " un de ses robots pour réaliser une de ses actions.\n\n"
 					+ "Une équipe ne peut pas passer son tour.\n"
@@ -53,18 +53,18 @@ public enum TextData {
 					+ "Au cours de la partie chaque équipe doit"
 					+ " conserver au moins un robot hors de sa base.\n\n"
 					+ "La partie se termine dès que l'un des deux"
-					+ " parties ne possède plus de robot vivant.\n\n"
+					+ " partis ne possède plus de robot vivant.\n\n"
 					+ "\t Comment jouer ? : \n\n"
 					+ "A) Les robots : \n\n"
 					+ "Tireur : Robot léger, capable de tirer sur une courte distance."
 					+ " Peut se déplacer dans tout les sens.\n\n"
 					+ "Piégeur : Poseur de mine. Peut se déplacer dans tous les sens.\n\n"
-					+ "Char : Robot lourd, capable de tirer sur de longues distanfces."
-					+ " Ne peut pas ce déplacer en diagonale.\n\n\n"
+					+ "Char : Robot lourd, capable de tirer sur de longues distances."
+					+ " Ne peut pas se déplacer en diagonale.\n\n\n"
 					+ "B) Bases et energie : \n\n"
 					+ "Chaque action coûte de l'énergie."
 					+ "Quand un robot n'a plus d'énergie, il ne peut plus jouer.\n\n"
-					+ "Quand il retrouve dans sa base, un robot récupère peu à peu son énergie."),
+					+ "Quand il retourne dans sa base, un robot récupère peu à peu son énergie."),
 
 	/** The label up. */
 	LABEL_UP("haut"),
@@ -124,7 +124,7 @@ public enum TextData {
 	LABEL_OBSTACLE("O"),
 
 	/** The label legende title. */
-	LABEL_LEGENDE_TITLE("Légande"),
+	LABEL_LEGENDE_TITLE("Légende"),
 
 	/** The label legende base. */
 	LABEL_LEGENDE_BASE(LABEL_BASE_TEAM_A + "\\" + LABEL_BASE_TEAM_B + " : base"),
@@ -150,7 +150,7 @@ public enum TextData {
 	LABEL_LEGENDE_ENERGY("E : energie"),
 
 	/** The label legende nmb mine. */
-	LABEL_LEGENDE_NMB_MINE("M : nbr de mines"),
+	LABEL_LEGENDE_NMB_MINE("M : nombre de mines"),
 
 	/** The label legende help. */
 	LABEL_LEGENDE_HELP("h - regles"),
@@ -172,29 +172,29 @@ public enum TextData {
 
 	/** The error move is obstacle. */
 	ERROR_MOVE_NOT_ENOUTH_ENERGY(
-			"Déplacement imposible : Il y pas assez d'énergie"),
+			"Déplacement imposible : Il n'a pas assez d'énergie"),
 
 	/** The error move is obstacle. */
 	ERROR_ATTACK_NOT_ENOUTH_ENERGY(
-			"Attaque imposible : Il y pas assez d'énergie"),
+			"Attaque imposible : Il n'a pas assez d'énergie"),
 
 	/** The error nothing to attack. */
-	ERROR_ATTACK_NOTHING_TO_ATTACK("Attaque imposible : Il y a rien à attaquer"),
+	ERROR_ATTACK_NOTHING_TO_ATTACK("Attaque imposible : Il n'y a rien à attaquer"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_NOT_ENOUTH_MINE(
-			"Attaque imposible : Il y a pas assez de mines"),
+			"Attaque imposible : Il n'a pas assez de mines"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_ALREADY_MINED("Attaque imposible : Il y a déja une mine !"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_MINE_BASE(
-			"Attaque imposible : Tu ne peut pas miner une base !"),
+			"Attaque imposible : Tu ne peux pas miner une base !"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_MINE_ROBOT(
-			"Attaque imposible : Tu ne peut pas miner un robot !"),
+			"Attaque imposible : Tu ne peux pas miner un robot !"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_MINE_OBSTACLE(
