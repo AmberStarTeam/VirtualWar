@@ -325,11 +325,12 @@ public abstract class Robot {
 
 	/**
 	 * submit damage from a shoot.
+	 * @param rob the robot who's attacking
 	 */
-	public void hasBeenShoot() {
-		setEnergy(energy - getDamageTaken());
+	public void hasBeenShoot(Robot rob) {
+			setEnergy(energy - rob.getDamageTaken());
 	}
-
+	
 	/**
 	 * submit damage from a mine.
 	 */

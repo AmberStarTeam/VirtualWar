@@ -74,7 +74,7 @@ public class Attack extends Action {
 			}
 			super.getRobotSource().removeEnergy(
 					super.getRobotSource().getCostAction());
-			toAttack.hasBeenShoot();
+			toAttack.hasBeenShoot(super.getRobotSource());
 			new ThreadSoundRun(super.getRobotSource().getAttackSound()).start();
 
 		} else {
