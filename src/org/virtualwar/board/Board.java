@@ -557,17 +557,17 @@ public class Board {
 			lsInt = new int[] { 1, 3, 4, 5, 6, 7, 8, 9, 10 };
 		}
 		for (int i = 0; i < lsTxt.length; i++) {
-			out[lsInt[i]] += String.format("|   %-17s|",
-					String.format("%.17s", lsTxt[i]));
+			out[lsInt[i]] += String.format("|   %-20s|",
+					String.format("%.19s", lsTxt[i]));
 			status[lsInt[i]] = true;
 		}
 
-		out[0] += "+--------------------+";
-		out[out.length - 3] += String.format("|   %-17s|",
+		out[0] += "+-----------------------+";
+		out[out.length - 3] += String.format("|   %-20s|",
 				String.format("%.17s", TextData.LABEL_LEGENDE_HELP.toString()));
-		out[out.length - 4] += String.format("|   %-17s|",
+		out[out.length - 4] += String.format("|   %-20s|",
 				String.format("%.17s", TextData.LABEL_LEGENDE_QUIT.toString()));
-		out[out.length - 1] += "+--------------------+";
+		out[out.length - 1] += "+-----------------------+";
 
 		status[0] = true;
 		status[out.length - 3] = true;
@@ -576,7 +576,7 @@ public class Board {
 
 		for (int i = 0; i < status.length; i++) {
 			if (!status[i]) {
-				out[i] += "|                    |";
+				out[i] += "|                       |";
 			}
 		}
 
