@@ -219,7 +219,6 @@ public class Game {
 			if (anyCanDo(t1)) {
 				System.out.println("Au tour de " + nameTeam1);
 				actT1 = getAction(t1);
-				System.out.println("Asked !");
 			}
 
 			if (actT1 != null) {
@@ -248,6 +247,13 @@ public class Game {
 				end = true;
 			}
 		}
+		if (t1.isEmpty() || !anyCanDo(t1)) {
+			System.out.println("L'équipe "  + nameTeam2 + " à gagner !");
+		} else {
+			System.out.println("L'équipe "  + nameTeam1 + " à gagner !");
+		}
+		System.out.println("Apuillez sur une touche pour quiter.");
+		sc.nextLine();
 	}
 
 	/**
@@ -416,9 +422,28 @@ public class Game {
 			Robot robTmp = robotListFinal.get(idxRob);
 			List<Action> lsAction = null;
 			do {
-				String type = getInputValue("1\n2", "(1)Déplacer ou (2)"
-						+ ((robTmp instanceof Scavenger) ? "pieger"
-								: "attaquer"));
+				String inData = "";
+				String outData = "";
+				outData += "(0) annuler, ";
+				inData+="0\n";
+				if (robTmp.canMove()){
+					inData +="1\n";
+					outData +="(1) Déplacer";
+				}
+				if (robTmp.canAttack()) {
+					inData +="2\n";
+					if (!outData.equals("(0) annuler, ")) {
+						outData += " ou ";
+					}
+					outData += ((robTmp instanceof Scavenger) ? "(2) pieger"
+							: "(2) attaquer");
+					
+				}
+
+				String type = getInputValue(inData, outData);
+				if (type.equals("0")) {
+					continue;
+				}
 				if (type.equals("1")) {
 					lsAction = robTmp.getAvailableMove();
 				} else {

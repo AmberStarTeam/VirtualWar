@@ -270,12 +270,7 @@ public abstract class Robot {
 	 * @return if robot has a valid target and can attack it
 	 */
 	public boolean canAttack() {
-		for (Coordinates cords : Constant.CARDINAL_DIRECTION) {
-			if (!new Attack(this, cords).canDoIt()) {
-				return false;
-			}
-		}
-		return true;
+		return getAvailableAtacks() != null;
 	}
 
 	/**
@@ -284,12 +279,7 @@ public abstract class Robot {
 	 * @return if robot can move
 	 */
 	public boolean canMove() {
-		for (Coordinates cords : getMoving()) {
-			if (!new Move(this, cords).canDoIt()) {
-				return false;
-			}
-		}
-		return true;
+		return getAvailableMove() != null;
 	}
 
 	/**
