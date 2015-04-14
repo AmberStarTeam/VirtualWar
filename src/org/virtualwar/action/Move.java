@@ -65,17 +65,18 @@ public class Move extends Action {
 						toAct.getCoordinates().minus(rob.getCoordinates()))) {
 			Cell middle = rob.getBoard().getCell(rob.getCoordinates().add(super.getDirection().divide(2)));
 			if (middle != null && middle.mineContains() != 0) {
+				System.out.println(super.getRobotSource().getType()+TextData.ROBOT_HAS_BEEN_MINE);
 				rob.hasBeenMined();
 				middle.setMine(0);
 			}
 
 		}
-		System.out.println(super.getRobotSource().getType()+TextData.ROBOT_HAS_BEEN_SHOT);
 		rob.getBoard().setRobot(rob, toAct.getCoordinates());
 		rob.setEnergy(rob.getEnergy() - rob.getCostMoving());
 		new ThreadSoundRun(rob.getMoveSound(), 1000).start();
 
 		if (toAct.mineContains() != 0) {
+			System.out.println(super.getRobotSource().getType()+TextData.ROBOT_HAS_BEEN_MINE);
 			rob.hasBeenMined();
 			toAct.setMine(0);
 		}

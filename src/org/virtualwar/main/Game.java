@@ -152,7 +152,8 @@ public class Game {
 		System.out.println("Poucentage d'obstacle : ");
 		pourcent = readSafeInt();
 		board = Board.newBoard(height, width);
-		b2 = new Coordinates(board.getHeight() - 1, board.getWidth() - 1);
+
+		b2 = new Coordinates(board.getWidth() - 1, board.getHeight() - 1);
 	}
 
 	/**
@@ -186,8 +187,10 @@ public class Game {
 		nameTeam1 = "team 1";
 		nameTeam2 = "team 2";
 		nmbRobots = 2;
-		board = Board.newBoard(4, 4);
-		b2 = new Coordinates(board.getHeight() - 1, board.getWidth() - 1);
+		board = Board.newBoard(4, 6);
+		
+		b2 = new Coordinates(board.getWidth() - 1, board.getHeight() - 1);
+		
 		t1 = new ArrayList<Robot>();
 		t1.add(new Tank(1, b1, board));
 		t1.add(new Scavenger(1, b1, board));
@@ -195,6 +198,7 @@ public class Game {
 		t2 = new ArrayList<Robot>();
 		t2.add(new Tank(2, b2, board));
 		t2.add(new Shooter(2, b2, board));
+		
 		containsTank = true;
 		board.generate(10, containsTank);
 
@@ -212,14 +216,15 @@ public class Game {
 			startNormal();
 		}
 
-		System.out.println(t1);
-		System.out.println(t2);
+		//System.out.println(t1);
+		//System.out.println(t2);
 
-		System.out.println(board.outGrindPlusLegend(1));
+		//System.out.println(board.outGrindPlusLegend(1));
 		// System.out.println(board.outGrindPlusLegend(2));
 
 		Action actT1 = null;
 		Action actT2 = null;
+		
 		while (!end) {
 			System.out.println(board.outGrindPlusLegend(Constant.ID_TEAM_A));
 			if (anyCanDo(t1)) {
@@ -249,10 +254,11 @@ public class Game {
 			checkAlive(t2);
 
 			if (t1.isEmpty() || t2.isEmpty()
-					|| (!anyCanDo(t1) || !anyCanDo(t2))) {
+					|| !(anyCanDo(t1) && anyCanDo(t2))) {
 				end = true;
 			}
 		}
+
 		if (t1.isEmpty() || !anyCanDo(t1)) {
 			System.out.println("L'équipe " + nameTeam2 + " à gagner !");
 		} else {
@@ -448,7 +454,7 @@ public class Game {
 
 				String type = getInputValue(inData, outData);
 				if (type.equals("0")) {
-					continue;
+					return getAction(lsRobot);
 				}
 				if (type.equals("1")) {
 					lsAction = robTmp.getAvailableMove();

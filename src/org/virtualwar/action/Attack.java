@@ -87,7 +87,7 @@ public class Attack extends Action {
 					super.getRobotSource().getCostAction());
 			toAttack.hasBeenShoot(super.getRobotSource());
 			new ThreadSoundRun(super.getRobotSource().getAttackSound()).start();
-			System.out.println(super.getRobotSource().getType()+TextData.ROBOT_HAS_BEEN_SHOT);
+			System.out.println(toAttack.getType()+TextData.ROBOT_HAS_BEEN_SHOT);
 
 		} else {
 			Scavenger loc = (Scavenger) super.getRobotSource();

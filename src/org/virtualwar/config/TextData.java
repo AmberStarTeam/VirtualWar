@@ -213,6 +213,9 @@ public enum TextData {
 	ERROR_ATTTACK_IS_OUT_OF_BOUND(
 			"Attaque imposible : Ce n'est pas sur le plateau !"),
 
+	/** The robot has been shot. */
+	ERROR_MOVE_NOWHERE_TO_MOVE("Déplacement imposible : Pas d'endroit à aller !"),
+
 	/** The error move is occupied. */
 	ERROR_MOVE_IS_OCCUPED(
 			"Déplacement imposible : Il y a déjà un robot présent !"),
