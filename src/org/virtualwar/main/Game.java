@@ -326,7 +326,10 @@ public class Game {
 			if (input.equals("h")) {
 				System.out.println(TextData.LABEL_REGLE);
 			}
-			if (!inputGood) {
+			else if (input.equals("q")){
+				System.exit(0);
+			}
+			else if (!inputGood) {
 				System.out.println("Entrée non valide !");
 			}
 
