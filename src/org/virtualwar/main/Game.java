@@ -88,7 +88,6 @@ public class Game {
 		sc = new Scanner(System.in);
 	}
 
-
 	/**
 	 * Safely read a int
 	 * 
@@ -105,7 +104,6 @@ public class Game {
 		}
 	}
 
-
 	/**
 	 * Inits the team.
 	 */
@@ -115,6 +113,7 @@ public class Game {
 		System.out.println("Nom de la team 2 :");
 		nameTeam2 = sc.nextLine();
 	}
+
 	/**
 	 * Inits the nmb robot.
 	 */
@@ -325,11 +324,9 @@ public class Game {
 			}
 			if (input.equals("h")) {
 				System.out.println(TextData.LABEL_REGLE);
-			}
-			else if (input.equals("q")){
+			} else if (input.equals("q")) {
 				System.exit(0);
-			}
-			else if (!inputGood) {
+			} else if (!inputGood) {
 				System.out.println("Entrée non valide !");
 			}
 

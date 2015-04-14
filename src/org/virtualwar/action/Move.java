@@ -60,20 +60,14 @@ public class Move extends Action {
 		}
 
 		Robot rob = super.getRobotSource();
-
+		System.out.println(toAct.getCoordinates().minus(rob.getCoordinates()));
 		if (rob instanceof Tank
 				&& rob.getMoving().contains(
 						toAct.getCoordinates().minus(rob.getCoordinates()))) {
-			Cell middle = rob.getBoard().getCell(super.getDirection().divide(2));
-			if (middle.mineContains() != 0) {
+			Cell middle = rob.getBoard().getCell(rob.getCoordinates().add(super.getDirection().divide(2)));
+			if (middle != null && middle.mineContains() != 0) {
 				rob.hasBeenMined();
 				middle.setMine(0);
-				try {
-					Thread.sleep(700);
-				} catch (InterruptedException e) {
-
-				}
-				new ThreadSoundRun("sounds/boom.wav", 800).start();
 			}
 
 		}
@@ -85,12 +79,6 @@ public class Move extends Action {
 		if (toAct.mineContains() != 0) {
 			rob.hasBeenMined();
 			toAct.setMine(0);
-			try {
-				Thread.sleep(700);
-			} catch (InterruptedException e) {
-
-			}
-			new ThreadSoundRun("sounds/boom.wav", 800).start();
 		}
 	}
 

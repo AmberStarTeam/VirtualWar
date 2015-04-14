@@ -15,6 +15,8 @@
 package org.virtualwar.test;
 
 import org.virtualwar.board.Board;
+import org.virtualwar.robot.Tank;
+import org.virtualwar.util.Coordinates;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -45,5 +47,8 @@ public class TestingFormater {
 			System.out.println((tmp == null) ? "NULL " + i : tmp
 					.outGrindPlusLegend(1));
 		}
+		Board b = Board.newBoard(10, 10);
+		Tank tank = new Tank(1, new Coordinates(5, 9), b);
+		System.out.println(tank.getMoving().contains(new Coordinates(-2, 0)));
 	}
 }
