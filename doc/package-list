@@ -1,3 +1,8 @@
-org.amberstar.test
-org.amberstar.virtualwar
-org.amberstar.virtualwar.sound
+org.virtualwar.action
+org.virtualwar.board
+org.virtualwar.config
+org.virtualwar.main
+org.virtualwar.robot
+org.virtualwar.test
+org.virtualwar.util
+org.virtualwar.util.sound

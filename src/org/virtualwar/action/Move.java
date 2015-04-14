@@ -44,8 +44,7 @@ public class Move extends Action {
 
 	/**
 	 * . (non-Javadoc)
-	 * 
-	 * @see org.amberstar.virtualwar.Action#act()
+	 * @see org.virtualwar.action.Action#act()
 	 */
 	@Override
 	public void act() {
