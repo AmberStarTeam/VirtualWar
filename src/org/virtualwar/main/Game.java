@@ -329,9 +329,6 @@ public class Game {
 			if (!inputGood) {
 				System.out.println("Entrée non valide !");
 			}
-			if (input.equals("q")){
-				System.exit(0);
-			}
 
 		} while (!inputGood);
 

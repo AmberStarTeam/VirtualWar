@@ -42,8 +42,8 @@ public class Move extends Action {
 		super(robotIn, direction);
 	}
 
-	/**
-	 * . (non-Javadoc)
+	/**.
+	 * (non-Javadoc)
 	 * 
 	 * @see org.amberstar.virtualwar.Action#act()
 	 */
@@ -65,10 +65,7 @@ public class Move extends Action {
 		rob.setEnergy(rob.getEnergy() - rob.getCostMoving());
 		new ThreadSoundRun(rob.getMoveSound(), 1000).start();
 
-		Coordinates tmp;
-		Coordinates tmp2;
-
-		if (toAct.mineContains() != 0 && !(robSour instanceof Tank)) {
+		if (toAct.mineContains() != 0) {
 			rob.hasBeenMined();
 			toAct.setMine(0);
 			try {
@@ -77,49 +74,6 @@ public class Move extends Action {
 
 			}
 			new ThreadSoundRun("sounds/boom.wav", 800).start();
-		}
-		if (robSour instanceof Tank) {
-			Coordinates time1 = super.getDirection().divide(2);
-			Coordinates time2 = super.getDirection();
-			Coordinates robCords = robSour.getCoordinates();
-			if (robSour.isValid(robCords.add(time2)) == null
-					&& robSour.isValid(robCords.add(time1)) == null) {
-				tmp2 = robCords.add(time2);
-				tmp = robCords.add(time1);
-				if (tmp.mineContains() != 0) {
-					rob.hasBeenMined();
-					tmp.setMine(0);
-					try {
-						Thread.sleep(700);
-					} catch (InterruptedException e) {
-					}
-					new ThreadSoundRun("sounds/boom.wav", 800).start();
-				}
-				if (tmp2.mineContains() != 0) {
-					rob.hasBeenMined();
-					tmp2.setMine(0);
-					try {
-						Thread.sleep(700);
-					} catch (InterruptedException e) {
-					}
-					new ThreadSoundRun("sounds/boom.wav", 800).start();
-				}
-
-			} else if (robSour.isValid(robCords.add(time1)) == null) {
-				tmp = robCords.add(time1);
-				if (tmp.mineContains() != 0) {
-					rob.hasBeenMined();
-					toAct.setMine(0);
-					try {
-						Thread.sleep(700);
-					} catch (InterruptedException e) {
-					}
-					new ThreadSoundRun("sounds/boom.wav", 800).start();
-				}
-			} else {
-				return;
-			}
-
 		}
 	}
 
@@ -163,8 +117,8 @@ public class Move extends Action {
 		return cellOfTmp;
 	}
 
-	/**
-	 * . (non-Javadoc)
+	/**.
+	 * (non-Javadoc)
 	 * 
 	 * @see org.virtualwar.action.Action#canDoIt()
 	 */
