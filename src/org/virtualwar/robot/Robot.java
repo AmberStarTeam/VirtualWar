@@ -25,6 +25,7 @@ import org.virtualwar.board.Board;
 import org.virtualwar.board.Cell;
 import org.virtualwar.config.Constant;
 import org.virtualwar.util.Coordinates;
+import org.virtualwar.util.sound.ThreadSoundRun;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -337,6 +338,18 @@ public abstract class Robot {
 
 	public void hasBeenMined() {
 		setEnergy(energy - getDamageTaken());
+	
+		new Thread(new Runnable() {
+			public void run() {
+
+				try {
+					Thread.sleep(700);
+				} catch (InterruptedException e) {
+
+				}
+				new ThreadSoundRun("sounds/boom.wav", 800).start();
+			}
+		}).start();
 	}
 
 	/*
