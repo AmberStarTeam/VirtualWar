@@ -42,8 +42,8 @@ public class Move extends Action {
 		super(robotIn, direction);
 	}
 
-	/**.
-	 * (non-Javadoc)
+	/**
+	 * . (non-Javadoc)
 	 * 
 	 * @see org.amberstar.virtualwar.Action#act()
 	 */
@@ -60,6 +60,23 @@ public class Move extends Action {
 		}
 
 		Robot rob = super.getRobotSource();
+
+		if (rob instanceof Tank
+				&& rob.getMoving().contains(
+						toAct.getCoordinates().minus(rob.getCoordinates()))) {
+			Cell middle = rob.getBoard().getCell(super.getDirection().divide(2));
+			if (middle.mineContains() != 0) {
+				rob.hasBeenMined();
+				middle.setMine(0);
+				try {
+					Thread.sleep(700);
+				} catch (InterruptedException e) {
+
+				}
+				new ThreadSoundRun("sounds/boom.wav", 800).start();
+			}
+
+		}
 
 		rob.getBoard().setRobot(rob, toAct.getCoordinates());
 		rob.setEnergy(rob.getEnergy() - rob.getCostMoving());
@@ -117,8 +134,8 @@ public class Move extends Action {
 		return cellOfTmp;
 	}
 
-	/**.
-	 * (non-Javadoc)
+	/**
+	 * . (non-Javadoc)
 	 * 
 	 * @see org.virtualwar.action.Action#canDoIt()
 	 */
