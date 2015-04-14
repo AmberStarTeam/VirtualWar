@@ -96,7 +96,7 @@ public class Game {
 	private int readSafeInt() {
 		while (true) {
 			try {
-				return readSafeInt();
+				return Integer.parseInt(sc.nextLine());
 			} catch (NumberFormatException e) {
 				System.out.println("Pas un nombre!");
 				continue;
