@@ -111,7 +111,13 @@ public class Game {
 		System.out.println("Nom de la team 1 :");
 		nameTeam1 = sc.nextLine();
 		System.out.println("Nom de la team 2 :");
-		nameTeam2 = sc.nextLine();
+		do {
+			nameTeam2 = sc.nextLine();
+			if (nameTeam1.equals(nameTeam2)) {
+				System.out.println("Les deux équipes ont le même nom !");
+			}
+		} while (nameTeam1.equals(nameTeam2));
+
 	}
 
 	/**
@@ -248,9 +254,9 @@ public class Game {
 			}
 		}
 		if (t1.isEmpty() || !anyCanDo(t1)) {
-			System.out.println("L'équipe "  + nameTeam2 + " à gagner !");
+			System.out.println("L'équipe " + nameTeam2 + " à gagner !");
 		} else {
-			System.out.println("L'équipe "  + nameTeam1 + " à gagner !");
+			System.out.println("L'équipe " + nameTeam1 + " à gagner !");
 		}
 		System.out.println("Apuillez sur une touche pour quiter.");
 		sc.nextLine();
@@ -425,19 +431,19 @@ public class Game {
 				String inData = "";
 				String outData = "";
 				outData += "(0) annuler, ";
-				inData+="0\n";
-				if (robTmp.canMove()){
-					inData +="1\n";
-					outData +="(1) Déplacer";
+				inData += "0\n";
+				if (robTmp.canMove()) {
+					inData += "1\n";
+					outData += "(1) Déplacer";
 				}
 				if (robTmp.canAttack()) {
-					inData +="2\n";
+					inData += "2\n";
 					if (!outData.equals("(0) annuler, ")) {
 						outData += " ou ";
 					}
 					outData += ((robTmp instanceof Scavenger) ? "(2) pieger"
 							: "(2) attaquer");
-					
+
 				}
 
 				String type = getInputValue(inData, outData);

@@ -1,18 +1,18 @@
 * Afficher un message quand attaquer/piéger/se déplacer est impossible.
 
-* Un message "Entrée non valide" s'affiche quand on demande les règles.
+* Un message "Entrée non valide" s'affiche quand on demande les règles. --Nicolas   <=> fait !
 
-* La commande q pour quitter ne fonctionne pas.
+* La commande q pour quitter ne fonctionne pas. --Thaumas   <=> fait !
 
 * Rajouter un Syso pour quand on roule sur une mine.
 
 * Légende, pas légande.
 
-* Le tank peux passer au-dessus des mines.
+* Le tank peux passer au-dessus des mines. --Nicolas   <=> fait !
 
 * Sécuriser l'initialisation. --Nicolas   <=> fait !
 
 * Dire le nombre de robots possible au moment de la création de l'équipe.
 (Vu qu'il en faut trois ici. Sinon le joueur va devoir essayer un chiffre au hasard jusqu'à taper trois.)
 
-* Les deux équipes peuvent avoir le même nom.
+* Les deux équipes peuvent avoir le même nom.  --Nicolas   <=> fait !

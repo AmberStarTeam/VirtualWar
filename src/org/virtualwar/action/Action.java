@@ -1,4 +1,5 @@
 package org.virtualwar.action;
+
 import org.virtualwar.robot.Robot;
 import org.virtualwar.util.Coordinates;
 
@@ -18,61 +19,61 @@ import org.virtualwar.util.Coordinates;
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 // TODO: Auto-generated Javadoc
 /**
  * The Action Class.
+ * 
  * @author amberstar
  */
 public abstract class Action {
 
-    /** the robot source. */
-    private Robot robotIn;
+	/** the robot source. */
+	private Robot robotIn;
 
-    /** the direction of action. */
-    private Coordinates direction;
+	/** the direction of action. */
+	private Coordinates direction;
 
-    /**
-     * Instantiates a new action.
-     *
-     * @param robot
-     *            robot from action
-     * @param dir
-     *            direction to do act
-     */
-    public Action(Robot robot, Coordinates dir) {
-        this.robotIn = robot;
-        this.direction = dir;
-    }
+	/**
+	 * Instantiates a new action.
+	 *
+	 * @param robot
+	 *            robot from action
+	 * @param dir
+	 *            direction to do act
+	 */
+	public Action(Robot robot, Coordinates dir) {
+		this.robotIn = robot;
+		this.direction = dir;
+	}
 
-    /**
-     * Gets the robot source.
-     *
-     * @return the source of the action
-     */
-    public Robot getRobotSource() {
-        return robotIn;
-    }
+	/**
+	 * Gets the robot source.
+	 *
+	 * @return the source of the action
+	 */
+	public Robot getRobotSource() {
+		return robotIn;
+	}
 
-    /**
-     * Gets the direction of action.
-     *
-     * @return the direction of the action
-     */
-    public Coordinates getDirection() {
-        return direction;
-    }
+	/**
+	 * Gets the direction of action.
+	 *
+	 * @return the direction of the action
+	 */
+	public Coordinates getDirection() {
+		return direction;
+	}
 
-    /**
-     * run the action.
-     */
-    public abstract void act();
-    
-    /**
-     * Can do it.
-     *
-     * @return if possible
-     */
-    public abstract boolean canDoIt();
+	/**
+	 * run the action.
+	 */
+	public abstract void act();
+
+	/**
+	 * Can do it.
+	 *
+	 * @return if possible
+	 */
+	public abstract boolean canDoIt();
 
 }

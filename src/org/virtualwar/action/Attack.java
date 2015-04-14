@@ -52,12 +52,11 @@ public class Attack extends Action {
 		return null;
 	}
 
-	/**.
-	 * (non-Javadoc)
+	/**
+	 * . (non-Javadoc)
 	 * 
 	 * @see org.virtualwar.action.Action#act()
 	 */
-	@Override
 	public void act() {
 		if (super.getRobotSource().getEnergy()
 				- super.getRobotSource().getCostAction() < 0) {
@@ -103,7 +102,7 @@ public class Attack extends Action {
 				System.out.println(TextData.ERROR_ATTTACK_IS_OUT_OF_BOUND);
 				return;
 			}
-			if (loc.getBoard().isObstacle(cords) == true) {
+			if (loc.getBoard().isObstacle(cords)) {
 				System.out.println(TextData.ERROR_ATTACK_CANT_MINE_OBSTACLE);
 				return;
 			}
@@ -114,12 +113,12 @@ public class Attack extends Action {
 		}
 	}
 
-	/**.
-	 * (non-Javadoc)
+	/**
+	 * . (non-Javadoc)
 	 * 
 	 * @see org.virtualwar.action.Action#canDoIt()
+	 * @return if it can run the action
 	 */
-	@Override
 	public boolean canDoIt() {
 		if (super.getRobotSource().getEnergy()
 				- super.getRobotSource().getCostAction() < 0) {
@@ -129,10 +128,12 @@ public class Attack extends Action {
 		if (!(super.getRobotSource() instanceof Scavenger)) {
 
 			Robot toAttack = getObjectif();
-			if (toAttack == null
-					|| (super.getRobotSource() instanceof Tank && toAttack
-							.getCoordinates().minus(getDirection())
-							.equals(super.getRobotSource().getCoordinates()))) {
+			if (toAttack == null) {
+				return false;
+			}
+			if (super.getRobotSource() instanceof Tank
+					&& toAttack.getCoordinates().minus(getDirection())
+							.equals(super.getRobotSource().getCoordinates())) {
 				return false;
 			}
 

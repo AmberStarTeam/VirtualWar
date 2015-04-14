@@ -542,7 +542,7 @@ public class Board {
 			out[i] += "   ";
 			status[i] = false;
 		}
-		int[] lsInt = new int[] { 2, 4, 6, 8, 10, 12, 14, 16, 18 };
+		int[] lsInt = new int[]{2, 4, 6, 8, 10, 12, 14, 16, 18 };
 		String[] lsTxt = new String[] {
 				TextData.LABEL_LEGENDE_TITLE.toString(),
 				TextData.LABEL_LEGENDE_BASE.toString(),
@@ -554,7 +554,7 @@ public class Board {
 				TextData.LABEL_LEGENDE_ENERGY.toString(),
 				TextData.LABEL_LEGENDE_NMB_MINE.toString() };
 		if (sizeHeight == 4) {
-			lsInt = new int[] { 1, 3, 4, 5, 6, 7, 8, 9, 10 };
+			lsInt = new int[]{1, 3, 4, 5, 6, 7, 8, 9, 10 };
 		}
 		for (int i = 0; i < lsTxt.length; i++) {
 			out[lsInt[i]] += String.format("|   %-20s|",
