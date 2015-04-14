@@ -1,5 +1,6 @@
 package org.virtualwar.action;
 
+import org.virtualwar.board.Base;
 import org.virtualwar.board.Cell;
 import org.virtualwar.config.Constant;
 import org.virtualwar.config.TextData;
@@ -63,26 +64,35 @@ public class Attack extends Action {
 			System.out.println(TextData.ERROR_ATTACK_NOT_ENOUTH_ENERGY);
 			return;
 		}
-		if (super.getRobotSource() instanceof Base){
+		if (super.getRobotSource().getCell() instanceof Base){
 			return;
 		}
 
 		if (!(super.getRobotSource() instanceof Scavenger)) {
 
 			Robot toAttack = getObjectif();
+
+			
 			if (toAttack == null) {
 				System.out.println(TextData.ERROR_ATTACK_NOTHING_TO_ATTACK);
 				return;
 			}
+
+			if (toAttack.getCell() instanceof Base){
+				System.out.println(TextData.ERROR_ATTACK_CANT_FROM_BASE);
+				return; 
+			}
+			
 			super.getRobotSource().removeEnergy(
 					super.getRobotSource().getCostAction());
 			toAttack.hasBeenShoot(super.getRobotSource());
 			new ThreadSoundRun(super.getRobotSource().getAttackSound()).start();
-			System.out.println(super.getRobotSource().getType()+TextData().ROBOT_HAS_BEEN_SHOT);
+			System.out.println(super.getRobotSource().getType()+TextData.ROBOT_HAS_BEEN_SHOT);
 
 		} else {
 			Scavenger loc = (Scavenger) super.getRobotSource();
 			if (loc.getStock() <= 0) {
+				System.out.println(TextData.ERROR_ATTACK_CANT_ATTACK_BASE);
 				return;
 			}
 			Coordinates cords = loc.getCoordinates().add(super.getDirection());
@@ -109,7 +119,7 @@ public class Attack extends Action {
 			loc.getBoard().setMine(cords, loc.getTeam());
 			loc.removeEnergy(loc.getCostAction());
 			loc.dropMine();
-			System.out.println(TextData().ROBOT_MINE)
+			System.out.println(TextData.ROBOT_MINE);
 		}
 	}
 
@@ -120,6 +130,10 @@ public class Attack extends Action {
 	 * @return if it can run the action
 	 */
 	public boolean canDoIt() {
+
+		if (super.getRobotSource().getCell() instanceof Base) {
+			return false;
+		}
 		if (super.getRobotSource().getEnergy()
 				- super.getRobotSource().getCostAction() < 0) {
 			return false;
@@ -129,6 +143,10 @@ public class Attack extends Action {
 
 			Robot toAttack = getObjectif();
 			if (toAttack == null) {
+				return false;
+			}
+
+			if (toAttack.getCell() instanceof Base) {
 				return false;
 			}
 			if (super.getRobotSource() instanceof Tank

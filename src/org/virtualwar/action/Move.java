@@ -71,7 +71,7 @@ public class Move extends Action {
 			}
 
 		}
-		system.out.println(super.getRobotSource().getType()+TextData.ROBOT_HAS_BEEN_SHOT);
+		System.out.println(super.getRobotSource().getType()+TextData.ROBOT_HAS_BEEN_SHOT);
 		rob.getBoard().setRobot(rob, toAct.getCoordinates());
 		rob.setEnergy(rob.getEnergy() - rob.getCostMoving());
 		new ThreadSoundRun(rob.getMoveSound(), 1000).start();

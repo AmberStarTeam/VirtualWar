@@ -342,7 +342,17 @@ public abstract class Robot {
 		}).start();
 	}
 
-	/*
+
+	/**
+	 * (non-Javadoc)
+	 * 
+	 * @return the cell the robot is in
+	 */
+	public Cell getCell(){
+		return board.getCell(coordinates);
+	}
+
+	/**
 	 * (non-Javadoc)
 	 * 
 	 * @see java.lang.Object#hashCode()

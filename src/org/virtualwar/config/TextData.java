@@ -179,7 +179,8 @@ public enum TextData {
 			"Attaque imposible : Il n'a pas assez d'énergie"),
 
 	/** The error nothing to attack. */
-	ERROR_ATTACK_NOTHING_TO_ATTACK("Attaque imposible : Il n'y a rien à attaquer"),
+	ERROR_ATTACK_NOTHING_TO_ATTACK(
+			"Attaque imposible : Il n'y a rien à attaquer"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_NOT_ENOUTH_MINE(
@@ -187,6 +188,14 @@ public enum TextData {
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_ALREADY_MINED("Attaque imposible : Il y a déja une mine !"),
+
+	/** The error nothing to attack. */
+	ERROR_ATTACK_CANT_ATTACK_BASE(
+			"Attaque imposible : Tu ne peut pas attaquer une base"),
+
+	/** The error nothing to attack. */
+	ERROR_ATTACK_CANT_FROM_BASE(
+			"Attaque imposible : Tu ne peut pas attaquer depuis base"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_MINE_BASE(
@@ -232,14 +241,17 @@ public enum TextData {
 
 	/** The error board must be positive. */
 	ERROR_BOARD_MUST_BE_POSITIF(
-			"Création impossible : Les valeurs doivent être positives");
-	
-	ROBOT_HAS_BEEN_SHOT(" a été touché !");
-	
-	ROBOT_HAS_BEEN_MINE(" a été piégé !");
-	
-	ROBOT_MINE("Un piégeur a miné !")
-	
+			"Création impossible : Les valeurs doivent être positives"),
+
+	/** The robot has been shot. */
+	ROBOT_HAS_BEEN_SHOT(" a été touché !"),
+
+	/** The robot has been mine. */
+	ROBOT_HAS_BEEN_MINE(" a été piégé !"),
+
+	/** The robot mine. */
+	ROBOT_MINE("Un piégeur a miné !");
+
 	/** The name. */
 	private String nameFr = "";
 
