@@ -1,5 +1,3 @@
-package org.virtualwar.util.sound;
-
 /*
  * This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -14,6 +12,7 @@ package org.virtualwar.util.sound;
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.virtualwar.util.sound;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -21,7 +20,7 @@ import java.io.InputStream;
 // TODO: Auto-generated Javadoc
 /**
  * The Class ThreadSoundRun.
- * 
+ *
  * @author amberstar
  */
 public class ThreadSoundRun extends Thread {
@@ -31,6 +30,22 @@ public class ThreadSoundRun extends Thread {
 
 	/** The is. */
 	private InputStream is;
+
+	/**
+	 * Instantiates a new thread sound run.
+	 *
+	 * @param sound
+	 *            the sound
+	 * @param is
+	 *            the is
+	 */
+	public ThreadSoundRun(Sound sound, InputStream is) {
+		if (sound == null) {
+			return;
+		}
+		this.sound = sound;
+		this.is = is;
+	}
 
 	/**
 	 * Instantiates a new thread sound run.
@@ -63,26 +78,11 @@ public class ThreadSoundRun extends Thread {
 	}
 
 	/**
-	 * Instantiates a new thread sound run.
-	 *
-	 * @param sound
-	 *            the sound
-	 * @param is
-	 *            the is
-	 */
-	public ThreadSoundRun(Sound sound, InputStream is) {
-		if (sound == null) {
-			return;
-		}
-		this.sound = sound;
-		this.is = is;
-	}
-
-	/**
 	 * . (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Thread#run()
 	 */
+	@Override
 	public void run() {
 		if (sound == null) {
 			return;

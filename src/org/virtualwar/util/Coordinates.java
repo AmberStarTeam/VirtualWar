@@ -1,23 +1,21 @@
-package org.virtualwar.util;
-
-import org.virtualwar.config.Constant;
-import org.virtualwar.config.TextData;
-
-// TODO: Auto-generated Javadoc
 /*
  * This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.virtualwar.util;
+
+import org.virtualwar.config.Constant;
+import org.virtualwar.config.TextData;
 
 /**
  * The Coordinates rightClass.
@@ -46,69 +44,6 @@ public class Coordinates {
 	}
 
 	/**
-	 * Gets the width coordinate.
-	 *
-	 * @return the width
-	 */
-	public int getWidth() {
-		return width;
-	}
-
-	/**
-	 * Gets the height coordinate.
-	 *
-	 * @return the height
-	 */
-	public int getHeight() {
-		return height;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "Coordinates [height=" + height + ", width=" + width + "]";
-	}
-
-	/**
-	 * Return the text value of the direction if know
-	 * @return the value
-	 */
-	public String toStr() {
-		if (this.equals(Constant.UP) || this.equals(Constant.UP.times(2))) {
-			return TextData.LABEL_UP.toString();
-		}
-		if (this.equals(Constant.DOWN) || this.equals(Constant.DOWN.times(2))) {
-			return TextData.LABEL_DOWN.toString();
-		}
-		if (this.equals(Constant.RIGHT) || this.equals(Constant.RIGHT.times(2))) {
-			return TextData.LABEL_RIGHT.toString();
-		}
-		if (this.equals(Constant.LEFT) || this.equals(Constant.LEFT.times(2))) {
-			return TextData.LABEL_LEFT.toString();
-		}
-
-		if (this.equals(Constant.DIAG_DOWN_LEFT)) {
-			return TextData.LABEL_DOWN_LEFT.toString();
-		}
-		if (this.equals(Constant.DIAG_DOWN_RIGHT)) {
-			return TextData.LABEL_DOWN_RIGHT.toString(); 
-		}
-
-		if (this.equals(Constant.DIAG_UP_LEFT)) {
-			return TextData.LABEL_UP_LEFT.toString();
-		}
-		if (this.equals(Constant.DIAG_UP_RIGHT)) {
-			return TextData.LABEL_UP_RIGHT.toString();
-		}
-
-		return "(w" + width + ": h" + height + ")";
-	}
-
-	/**
 	 * Adds the.
 	 *
 	 * @param c
@@ -120,28 +55,6 @@ public class Coordinates {
 	}
 
 	/**
-	 * Minus.
-	 *
-	 * @param c
-	 *            coordinate to minus
-	 * @return a new coordinate
-	 */
-	public Coordinates minus(Coordinates c) {
-		return new Coordinates(width - c.width, height - c.height);
-	}
-
-	/**
-	 * Times.
-	 *
-	 * @param n
-	 *            the number to multiply by
-	 * @return a new coordinate
-	 */
-	public Coordinates times(int n) {
-		return new Coordinates(width * n, height * n);
-	}
-
-	/**
 	 * Divide.
 	 *
 	 * @param n
@@ -150,20 +63,6 @@ public class Coordinates {
 	 */
 	public Coordinates divide(int n) {
 		return new Coordinates(width / n, height / n);
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + height;
-		result = prime * result + width;
-		return result;
 	}
 
 	/*
@@ -190,6 +89,106 @@ public class Coordinates {
 			return false;
 		}
 		return true;
+	}
+
+	/**
+	 * Gets the height coordinate.
+	 *
+	 * @return the height
+	 */
+	public int getHeight() {
+		return height;
+	}
+
+	/**
+	 * Gets the width coordinate.
+	 *
+	 * @return the width
+	 */
+	public int getWidth() {
+		return width;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + height;
+		result = prime * result + width;
+		return result;
+	}
+
+	/**
+	 * Minus.
+	 *
+	 * @param c
+	 *            coordinate to minus
+	 * @return a new coordinate
+	 */
+	public Coordinates minus(Coordinates c) {
+		return new Coordinates(width - c.width, height - c.height);
+	}
+
+	/**
+	 * Times.
+	 *
+	 * @param n
+	 *            the number to multiply by
+	 * @return a new coordinate
+	 */
+	public Coordinates times(int n) {
+		return new Coordinates(width * n, height * n);
+	}
+
+	/**
+	 * Return the text value of the direction if know
+	 *
+	 * @return the value
+	 */
+	public String toStr() {
+		if (equals(Constant.UP) || equals(Constant.UP.times(2))) {
+			return TextData.LABEL_UP.toString();
+		}
+		if (equals(Constant.DOWN) || equals(Constant.DOWN.times(2))) {
+			return TextData.LABEL_DOWN.toString();
+		}
+		if (equals(Constant.RIGHT) || equals(Constant.RIGHT.times(2))) {
+			return TextData.LABEL_RIGHT.toString();
+		}
+		if (equals(Constant.LEFT) || equals(Constant.LEFT.times(2))) {
+			return TextData.LABEL_LEFT.toString();
+		}
+
+		if (equals(Constant.DIAG_DOWN_LEFT)) {
+			return TextData.LABEL_DOWN_LEFT.toString();
+		}
+		if (equals(Constant.DIAG_DOWN_RIGHT)) {
+			return TextData.LABEL_DOWN_RIGHT.toString();
+		}
+
+		if (equals(Constant.DIAG_UP_LEFT)) {
+			return TextData.LABEL_UP_LEFT.toString();
+		}
+		if (equals(Constant.DIAG_UP_RIGHT)) {
+			return TextData.LABEL_UP_RIGHT.toString();
+		}
+
+		return "(w" + width + ": h" + height + ")";
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
+	@Override
+	public String toString() {
+		return "Coordinates [height=" + height + ", width=" + width + "]";
 	}
 
 }

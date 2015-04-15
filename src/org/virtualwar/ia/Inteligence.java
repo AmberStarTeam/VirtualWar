@@ -1,8 +1,23 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.virtualwar.ia;
 
 import java.util.List;
 
 import org.virtualwar.action.Action;
+import org.virtualwar.board.Board;
 import org.virtualwar.robot.Robot;
 
 // TODO: Auto-generated Javadoc
@@ -12,39 +27,71 @@ import org.virtualwar.robot.Robot;
  * @author Nicolas Beaussart
  */
 public abstract class Inteligence {
-	
+
 	/** The ls robot. */
 	private List<Robot> lsRobot;
-	
+
 	/** The team. */
 	private final int team;
-	
+
+	/** The board. */
+	private Board board;
+
 	/**
 	 * Instantiates a new inteligence.
 	 *
-	 * @param robots the robots
-	 * @param team the team
+	 * @param team
+	 *            the team
+	 * @param board
+	 *            the board
 	 */
-	public Inteligence(List<Robot> robots, int team){
+	public Inteligence(int team, Board board) {
+		this.team = team;
+		this.board = board;
+	}
+
+	/**
+	 * Instantiates a new inteligence.
+	 *
+	 * @param robots
+	 *            the robots
+	 * @param team
+	 *            the team
+	 * @param board
+	 *            the board
+	 */
+	public Inteligence(List<Robot> robots, int team, Board board) {
 		lsRobot = robots;
 		this.team = team;
+		this.board = board;
 	}
-	
+
 	/**
-	 * Instantiates a new inteligence.
+	 * Gets the board.
 	 *
-	 * @param team the team
+	 * @return the board
 	 */
-	public Inteligence(int team){
-		this.team = team;
+	public Board getBoard() {
+		return board;
 	}
-	
+
 	/**
-	 * Make turn.
+	 * Gets the initial robots.
+	 *
+	 * @param numberOfBots
+	 *            the number of bots
+	 * @return the initial robots
 	 */
-	public abstract Action makeTurn();
-	
 	public abstract List<Robot> getInitialRobots(int numberOfBots);
+
+	/**
+	 * Gets the ls robot.
+	 *
+	 * @return the ls robot
+	 */
+	public List<Robot> getLsRobot() {
+		return lsRobot;
+	}
 
 	/**
 	 * Gets the team.
@@ -56,11 +103,17 @@ public abstract class Inteligence {
 	}
 
 	/**
-	 * Gets the ls robot.
+	 * Make turn.
 	 *
-	 * @return the ls robot
+	 * @return the action
 	 */
-	public List<Robot> getLsRobot() {
-		return lsRobot;
+	public abstract Action makeTurn();
+
+	public void setBoard(Board board) {
+		this.board = board;
+	}
+
+	public void setLsRobot(List<Robot> lsRobot) {
+		this.lsRobot = lsRobot;
 	}
 }

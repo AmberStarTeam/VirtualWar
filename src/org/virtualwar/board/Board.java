@@ -1,19 +1,18 @@
-package org.virtualwar.board;
-
 /*
  * This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.virtualwar.board;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,20 +31,11 @@ import org.virtualwar.util.Coordinates;
 /**
  * The Board class is the class for the actual board of game containing robots,
  * obstacle and mines.
- * 
+ *
  * @author amberstar
  *
  */
 public class Board {
-
-	/** the size of the board in height. */
-	private int sizeHeight;
-
-	/** the size of the board in width. */
-	private int sizeWidth;
-
-	/** a array of Cell for storing the grind. */
-	private Cell[][] grind;
 
 	/**
 	 * Board factory.
@@ -63,6 +53,15 @@ public class Board {
 		return new Board(height, width);
 	}
 
+	/** the size of the board in height. */
+	private int sizeHeight;
+
+	/** the size of the board in width. */
+	private int sizeWidth;
+
+	/** a array of Cell for storing the grind. */
+	private Cell[][] grind;
+
 	/**
 	 * private constructor.
 	 *
@@ -72,41 +71,38 @@ public class Board {
 	 *            the width size of the board
 	 */
 	private Board(int height, int width) {
-		this.sizeHeight = height;
-		this.sizeWidth = width;
+		sizeHeight = height;
+		sizeWidth = width;
 		initEmptyGrind();
 	}
 
-	/**
-	 * Create a empty Board with only the bases.
-	 */
-	private void initEmptyGrind() {
-		grind = new Cell[sizeHeight][sizeWidth];
-		for (int i = 0; i < grind.length; i++) {
-			for (int j = 0; j < grind[0].length; j++) {
-				grind[i][j] = new Case(new Coordinates(j, i));
-			}
-		}
-		grind[0][0] = new Base(new Coordinates(0, 0), Constant.ID_TEAM_A);
-
-		grind[sizeHeight - 1][sizeWidth - 1] = new Base(new Coordinates(
-				sizeHeight - 1, sizeWidth - 1), Constant.ID_TEAM_B);
-	}
-
-	/**
-	 * Generate.
+	/*
+	 * (non-Javadoc)
 	 *
-	 * @param pourcentageGen
-	 *            the percentage of obstacles in the way
-	 * @param containsTank
-	 *            True will generate for tanks, False for other (tank can't go
-	 *            in diagonal)
+	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
-	public void generate(int pourcentageGen, boolean containsTank) {
-		initEmptyGrind();
-		if (pourcentageGen > 0) {
-			fillAlea(pourcentageGen, containsTank);
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
 		}
+		if (obj == null) {
+			return false;
+		}
+		if (getClass() != obj.getClass()) {
+			return false;
+		}
+		Board other = (Board) obj;
+		if (!Arrays.deepEquals(grind, other.grind)) {
+			return false;
+		}
+		if (sizeHeight != other.sizeHeight) {
+			return false;
+		}
+		if (sizeWidth != other.sizeWidth) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -144,117 +140,19 @@ public class Board {
 	}
 
 	/**
-	 * Checks for path.
+	 * Generate.
 	 *
+	 * @param pourcentageGen
+	 *            the percentage of obstacles in the way
 	 * @param containsTank
-	 *            If true, will check so a tank can pass by
-	 * @return if valid path exist
+	 *            True will generate for tanks, False for other (tank can't go
+	 *            in diagonal)
 	 */
-	private boolean hasPath(boolean containsTank) {
-		int[][] grindToInt = new int[sizeHeight][sizeWidth];
-		int[][] tmpGrind = new int[sizeHeight][sizeWidth];
-		for (int i = 0; i < grindToInt.length; i++) {
-			for (int j = 0; j < tmpGrind[0].length; j++) {
-				if (grind[i][j].isObstacle()) {
-					grindToInt[i][j] = 0;
-				} else {
-					grindToInt[i][j] = 1;
-				}
-			}
+	public void generate(int pourcentageGen, boolean containsTank) {
+		initEmptyGrind();
+		if (pourcentageGen > 0) {
+			fillAlea(pourcentageGen, containsTank);
 		}
-		for (int i = 0; i < tmpGrind.length; i++) {
-			Arrays.fill(tmpGrind[i], -1);
-		}
-		return hasPathHelper(grindToInt, tmpGrind, 0, 0, containsTank);
-	}
-
-	/**
-	 * recursive function for finding if a path exist only for regular units.
-	 *
-	 * @param grindToInt
-	 *            Board converted to numbers : 0 obstacle, 1 empty
-	 * @param tmpGrind
-	 *            array of integer (-1 : visited, 0 visited, 1 good path)
-	 * @param i
-	 *            equivalent to y
-	 * @param j
-	 *            equivalent to x
-	 * @param hasTank
-	 *            if true, will find a path for tanks
-	 * @return if tmpGrind[i][j] == 1
-	 */
-	private boolean hasPathHelper(int[][] grindToInt, int[][] tmpGrind, int i,
-			int j, boolean hasTank) {
-		if (i < 0 || j < 0 || i >= grindToInt.length
-				|| j >= grindToInt[0].length || tmpGrind[i][j] >= 0) {
-			return false; // Index out of bounds
-		}
-
-		tmpGrind[i][j] = 0; // Mark as visited
-		if (grindToInt[i][j] == 0) {
-			return false;
-		}
-		if (j == grindToInt[0].length - 1 && i == grindToInt.length - 1 || // Right
-																			// side
-																			// reached!
-				hasPathHelper(grindToInt, tmpGrind, i + 1, j, hasTank) || // Check
-																			// down
-				hasPathHelper(grindToInt, tmpGrind, i - 1, j, hasTank) || // Check
-																			// up
-				hasPathHelper(grindToInt, tmpGrind, i, j + 1, hasTank) || // Check
-																			// right
-				hasPathHelper(grindToInt, tmpGrind, i, j - 1, hasTank) // Check
-																		// left
-		) {
-			tmpGrind[i][j] = 1; // Mark as good path
-		}
-
-		if (!hasTank) {
-			if (j == grindToInt[0].length - 1
-					&& i == grindToInt.length - 1
-					|| // Right
-						// side
-						// reached!
-					hasPathHelper(grindToInt, tmpGrind, i - 1, j + 1, hasTank)
-					|| // Check
-						// upper
-						// right
-					hasPathHelper(grindToInt, tmpGrind, i + 1, j + 1, hasTank)
-					|| // Check
-						// lower
-						// right
-					hasPathHelper(grindToInt, tmpGrind, i + 1, j - 1, hasTank)
-					|| // Check
-						// lower
-						// left
-					hasPathHelper(grindToInt, tmpGrind, i + 1, j - 1, hasTank)
-			// Check
-			// upper
-			// left
-			) {
-				tmpGrind[i][j] = 1; // Mark as good path
-			}
-		}
-
-		return tmpGrind[i][j] == 1;
-	}
-
-	/**
-	 * Gets the height.
-	 *
-	 * @return sizeHeight
-	 */
-	public final int getHeight() {
-		return sizeHeight;
-	}
-
-	/**
-	 * Gets the width.
-	 *
-	 * @return sizeWidth
-	 */
-	public int getWidth() {
-		return sizeWidth;
 	}
 
 	/**
@@ -269,6 +167,20 @@ public class Board {
 				.getWidth()] : null;
 	}
 
+	public Coordinates getCoordsBase(int team) {
+		return (team == Constant.ID_TEAM_A) ? new Coordinates(0, 0)
+				: new Coordinates(sizeWidth - 1, sizeHeight - 1);
+	}
+
+	/**
+	 * Gets the height.
+	 *
+	 * @return sizeHeight
+	 */
+	public final int getHeight() {
+		return sizeHeight;
+	}
+
 	/**
 	 * Gets the robot.
 	 *
@@ -280,103 +192,6 @@ public class Board {
 	public Robot getRobot(Coordinates coordinates) {
 		return (isValid(coordinates)) ? getCell(coordinates).getRobotIn()
 				: null;
-	}
-
-	/**
-	 * set robot to the given coordinates; don't do anything if coordinates
-	 * aren't valid.
-	 *
-	 * @param r
-	 *            robot to set to
-	 * @param coordinates
-	 *            the place to set to
-	 * @return the success
-	 */
-	public boolean setRobot(Robot r, Coordinates coordinates) {
-		Cell tmp = getCell(coordinates);
-		if (tmp == null) {
-			return false;
-		}
-		if (r.getCoordinates() != null && getCell(r.getCoordinates()) != null) {
-			getCell(r.getCoordinates()).removeRobotIn(r);
-		}
-		r.setCoordinates(coordinates);
-
-		if (tmp instanceof Base) {
-			Base tmap = (Base) tmp;
-			return tmap.moveOn(r);
-		}
-
-		return tmp.moveOn(r);
-	}
-
-	/**
-	 * set robot to the given coordinates; don't do anything if coordinates
-	 * aren't valid.
-	 *
-	 * @param cords
-	 *            the place to set to
-	 * @param mine
-	 *            mine to set to
-	 * @return if success
-	 */
-	public boolean setMine(Coordinates cords, int mine) {
-		Cell tmp = getCell(cords);
-		if (tmp instanceof Base || tmp == null) {
-			return false;
-		}
-		tmp.setMine(mine);
-		return true;
-	}
-
-	/**
-	 * Checks if is base.
-	 *
-	 * @param coordinates
-	 *            the position of the test
-	 * @return true if base
-	 */
-	public int isBase(Coordinates coordinates) {
-		return (isValid(coordinates)) ? getCell(coordinates).isBase()
-				: Constant.ID_TEAM_NULL;
-	}
-
-	/**
-	 * Checks if is obstacle.
-	 *
-	 * @param coordinates
-	 *            the position of the test
-	 * @return true if obstacle
-	 */
-	public boolean isObstacle(Coordinates coordinates) {
-		return (isValid(coordinates)) ? getCell(coordinates).isObstacle()
-				: false;
-	}
-
-	/**
-	 * Checks if is mine.
-	 *
-	 * @param coordinates
-	 *            the position of the test
-	 * @return true if mine
-	 */
-	public int isMine(Coordinates coordinates) {
-		return (isValid(coordinates)) ? getCell(coordinates).mineContains()
-				: Constant.ID_TEAM_NULL;
-	}
-
-	/**
-	 * if coordinates are valid.
-	 *
-	 * @param coordinates
-	 *            input coordinates
-	 * @return true if good
-	 */
-	public boolean isValid(Coordinates coordinates) {
-		return 0 <= coordinates.getHeight()
-				&& coordinates.getHeight() < sizeHeight
-				&& 0 <= coordinates.getWidth()
-				&& coordinates.getWidth() < sizeWidth;
 	}
 
 	/**
@@ -479,6 +294,192 @@ public class Board {
 	}
 
 	/**
+	 * Gets the width.
+	 *
+	 * @return sizeWidth
+	 */
+	public int getWidth() {
+		return sizeWidth;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see java.lang.Object#hashCode()
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + Arrays.hashCode(grind);
+		result = prime * result + sizeHeight;
+		result = prime * result + sizeWidth;
+		return result;
+	}
+
+	/**
+	 * Checks for path.
+	 *
+	 * @param containsTank
+	 *            If true, will check so a tank can pass by
+	 * @return if valid path exist
+	 */
+	private boolean hasPath(boolean containsTank) {
+		int[][] grindToInt = new int[sizeHeight][sizeWidth];
+		int[][] tmpGrind = new int[sizeHeight][sizeWidth];
+		for (int i = 0; i < grindToInt.length; i++) {
+			for (int j = 0; j < tmpGrind[0].length; j++) {
+				if (grind[i][j].isObstacle()) {
+					grindToInt[i][j] = 0;
+				} else {
+					grindToInt[i][j] = 1;
+				}
+			}
+		}
+		for (int i = 0; i < tmpGrind.length; i++) {
+			Arrays.fill(tmpGrind[i], -1);
+		}
+		return hasPathHelper(grindToInt, tmpGrind, 0, 0, containsTank);
+	}
+
+	/**
+	 * recursive function for finding if a path exist only for regular units.
+	 *
+	 * @param grindToInt
+	 *            Board converted to numbers : 0 obstacle, 1 empty
+	 * @param tmpGrind
+	 *            array of integer (-1 : visited, 0 visited, 1 good path)
+	 * @param i
+	 *            equivalent to y
+	 * @param j
+	 *            equivalent to x
+	 * @param hasTank
+	 *            if true, will find a path for tanks
+	 * @return if tmpGrind[i][j] == 1
+	 */
+	private boolean hasPathHelper(int[][] grindToInt, int[][] tmpGrind, int i,
+			int j, boolean hasTank) {
+		if (i < 0 || j < 0 || i >= grindToInt.length
+				|| j >= grindToInt[0].length || tmpGrind[i][j] >= 0) {
+			return false; // Index out of bounds
+		}
+
+		tmpGrind[i][j] = 0; // Mark as visited
+		if (grindToInt[i][j] == 0) {
+			return false;
+		}
+		if (j == grindToInt[0].length - 1 && i == grindToInt.length - 1 || // Right
+																			// side
+																			// reached!
+				hasPathHelper(grindToInt, tmpGrind, i + 1, j, hasTank) || // Check
+																			// down
+				hasPathHelper(grindToInt, tmpGrind, i - 1, j, hasTank) || // Check
+																			// up
+				hasPathHelper(grindToInt, tmpGrind, i, j + 1, hasTank) || // Check
+																			// right
+				hasPathHelper(grindToInt, tmpGrind, i, j - 1, hasTank) // Check
+																		// left
+		) {
+			tmpGrind[i][j] = 1; // Mark as good path
+		}
+
+		if (!hasTank) {
+			if (j == grindToInt[0].length - 1
+					&& i == grindToInt.length - 1
+					|| // Right
+						// side
+						// reached!
+					hasPathHelper(grindToInt, tmpGrind, i - 1, j + 1, hasTank)
+					|| // Check
+						// upper
+						// right
+					hasPathHelper(grindToInt, tmpGrind, i + 1, j + 1, hasTank)
+					|| // Check
+						// lower
+						// right
+					hasPathHelper(grindToInt, tmpGrind, i + 1, j - 1, hasTank)
+					|| // Check
+						// lower
+						// left
+					hasPathHelper(grindToInt, tmpGrind, i + 1, j - 1, hasTank)
+			// Check
+			// upper
+			// left
+			) {
+				tmpGrind[i][j] = 1; // Mark as good path
+			}
+		}
+
+		return tmpGrind[i][j] == 1;
+	}
+
+	/**
+	 * Create a empty Board with only the bases.
+	 */
+	private void initEmptyGrind() {
+		grind = new Cell[sizeHeight][sizeWidth];
+		for (int i = 0; i < grind.length; i++) {
+			for (int j = 0; j < grind[0].length; j++) {
+				grind[i][j] = new Case(new Coordinates(j, i));
+			}
+		}
+		grind[0][0] = new Base(new Coordinates(0, 0), Constant.ID_TEAM_A);
+
+		grind[sizeHeight - 1][sizeWidth - 1] = new Base(new Coordinates(
+				sizeHeight - 1, sizeWidth - 1), Constant.ID_TEAM_B);
+	}
+
+	/**
+	 * Checks if is base.
+	 *
+	 * @param coordinates
+	 *            the position of the test
+	 * @return true if base
+	 */
+	public int isBase(Coordinates coordinates) {
+		return (isValid(coordinates)) ? getCell(coordinates).isBase()
+				: Constant.ID_TEAM_NULL;
+	}
+
+	/**
+	 * Checks if is mine.
+	 *
+	 * @param coordinates
+	 *            the position of the test
+	 * @return true if mine
+	 */
+	public int isMine(Coordinates coordinates) {
+		return (isValid(coordinates)) ? getCell(coordinates).mineContains()
+				: Constant.ID_TEAM_NULL;
+	}
+
+	/**
+	 * Checks if is obstacle.
+	 *
+	 * @param coordinates
+	 *            the position of the test
+	 * @return true if obstacle
+	 */
+	public boolean isObstacle(Coordinates coordinates) {
+		return (isValid(coordinates)) ? getCell(coordinates).isObstacle()
+				: false;
+	}
+
+	/**
+	 * if coordinates are valid.
+	 *
+	 * @param coordinates
+	 *            input coordinates
+	 * @return true if good
+	 */
+	public boolean isValid(Coordinates coordinates) {
+		return 0 <= coordinates.getHeight()
+				&& coordinates.getHeight() < sizeHeight
+				&& 0 <= coordinates.getWidth()
+				&& coordinates.getWidth() < sizeWidth;
+	}
+
+	/**
 	 * generate a printable version.
 	 *
 	 * @param equipe
@@ -542,7 +543,7 @@ public class Board {
 			out[i] += "   ";
 			status[i] = false;
 		}
-		int[] lsInt = new int[]{2, 4, 6, 8, 10, 12, 14, 16, 18 };
+		int[] lsInt = new int[] { 2, 4, 6, 8, 10, 12, 14, 16, 18 };
 		String[] lsTxt = new String[] {
 				TextData.LABEL_LEGENDE_TITLE.toString(),
 				TextData.LABEL_LEGENDE_BASE.toString(),
@@ -554,7 +555,7 @@ public class Board {
 				TextData.LABEL_LEGENDE_ENERGY.toString(),
 				TextData.LABEL_LEGENDE_NMB_MINE.toString() };
 		if (sizeHeight == 4) {
-			lsInt = new int[]{1, 3, 4, 5, 6, 7, 8, 9, 10 };
+			lsInt = new int[] { 1, 3, 4, 5, 6, 7, 8, 9, 10 };
 		}
 		for (int i = 0; i < lsTxt.length; i++) {
 			out[lsInt[i]] += String.format("|   %-20s|",
@@ -589,10 +590,58 @@ public class Board {
 	}
 
 	/**
+	 * set robot to the given coordinates; don't do anything if coordinates
+	 * aren't valid.
+	 *
+	 * @param cords
+	 *            the place to set to
+	 * @param mine
+	 *            mine to set to
+	 * @return if success
+	 */
+	public boolean setMine(Coordinates cords, int mine) {
+		Cell tmp = getCell(cords);
+		if (tmp instanceof Base || tmp == null) {
+			return false;
+		}
+		tmp.setMine(mine);
+		return true;
+	}
+
+	/**
+	 * set robot to the given coordinates; don't do anything if coordinates
+	 * aren't valid.
+	 *
+	 * @param r
+	 *            robot to set to
+	 * @param coordinates
+	 *            the place to set to
+	 * @return the success
+	 */
+	public boolean setRobot(Robot r, Coordinates coordinates) {
+		Cell tmp = getCell(coordinates);
+		if (tmp == null) {
+			return false;
+		}
+		if (r.getCoordinates() != null && getCell(r.getCoordinates()) != null) {
+			getCell(r.getCoordinates()).removeRobotIn(r);
+		}
+		r.setCoordinates(coordinates);
+
+		if (tmp instanceof Base) {
+			Base tmap = (Base) tmp;
+			return tmap.moveOn(r);
+		}
+
+		return tmp.moveOn(r);
+	}
+
+	/**
 	 * To string.
 	 *
 	 * @return return a debug version only with bases and obstacles
 	 */
+	@Override
 	public String toString() {
 		String ret = "";
 		for (int i = 0; i < grind.length; i++) {
@@ -610,50 +659,6 @@ public class Board {
 			ret += "\n";
 		}
 		return ret;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#hashCode()
-	 */
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + Arrays.hashCode(grind);
-		result = prime * result + sizeHeight;
-		result = prime * result + sizeWidth;
-		return result;
-	}
-
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see java.lang.Object#equals(java.lang.Object)
-	 */
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (obj == null) {
-			return false;
-		}
-		if (getClass() != obj.getClass()) {
-			return false;
-		}
-		Board other = (Board) obj;
-		if (!Arrays.deepEquals(grind, other.grind)) {
-			return false;
-		}
-		if (sizeHeight != other.sizeHeight) {
-			return false;
-		}
-		if (sizeWidth != other.sizeWidth) {
-			return false;
-		}
-		return true;
 	}
 
 }

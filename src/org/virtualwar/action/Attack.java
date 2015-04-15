@@ -1,3 +1,17 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.virtualwar.action;
 
 import org.virtualwar.board.Base;
@@ -31,40 +45,18 @@ public class Attack extends Action {
 	}
 
 	/**
-	 * Gets the objectif.
-	 *
-	 * @return the Robot of objective, if none then null
-	 */
-	private Robot getObjectif() {
-		for (int i = 0; i < super.getRobotSource().getRange(); i++) {
-			Coordinates tmp = super.getRobotSource().getCoordinates()
-					.add(super.getDirection().times(i + 1));
-			Cell cellOf = super.getRobotSource().getBoard().getCell(tmp);
-			if (cellOf == null || cellOf.isObstacle() || cellOf.isBase() != 0) {
-				return null;
-			} else if (cellOf.getRobotIn() != null) {
-				if (cellOf.getRobotIn().getTeam() == super.getRobotSource()
-						.getTeam()) {
-					return null;
-				}
-				return cellOf.getRobotIn();
-			}
-		}
-		return null;
-	}
-
-	/**
 	 * . (non-Javadoc)
-	 * 
+	 *
 	 * @see org.virtualwar.action.Action#act()
 	 */
+	@Override
 	public void act() {
 		if (super.getRobotSource().getEnergy()
 				- super.getRobotSource().getCostAction() < 0) {
 			System.out.println(TextData.ERROR_ATTACK_NOT_ENOUTH_ENERGY);
 			return;
 		}
-		if (super.getRobotSource().getCell() instanceof Base){
+		if (super.getRobotSource().getCell() instanceof Base) {
 			return;
 		}
 
@@ -72,22 +64,22 @@ public class Attack extends Action {
 
 			Robot toAttack = getObjectif();
 
-			
 			if (toAttack == null) {
 				System.out.println(TextData.ERROR_ATTACK_NOTHING_TO_ATTACK);
 				return;
 			}
 
-			if (toAttack.getCell() instanceof Base){
+			if (toAttack.getCell() instanceof Base) {
 				System.out.println(TextData.ERROR_ATTACK_CANT_FROM_BASE);
-				return; 
+				return;
 			}
-			
+
 			super.getRobotSource().removeEnergy(
 					super.getRobotSource().getCostAction());
 			toAttack.hasBeenShoot(super.getRobotSource());
+			System.out.println(toAttack.getType()
+					+ TextData.ROBOT_HAS_BEEN_SHOT);
 			new ThreadSoundRun(super.getRobotSource().getAttackSound()).start();
-			System.out.println(toAttack.getType()+TextData.ROBOT_HAS_BEEN_SHOT);
 
 		} else {
 			Scavenger loc = (Scavenger) super.getRobotSource();
@@ -125,10 +117,11 @@ public class Attack extends Action {
 
 	/**
 	 * . (non-Javadoc)
-	 * 
+	 *
 	 * @see org.virtualwar.action.Action#canDoIt()
 	 * @return if it can run the action
 	 */
+	@Override
 	public boolean canDoIt() {
 
 		if (super.getRobotSource().getCell() instanceof Base) {
@@ -161,19 +154,45 @@ public class Attack extends Action {
 				return false;
 			}
 			Coordinates cords = loc.getCoordinates().add(super.getDirection());
-			if (loc.getBoard().isMine(cords) != 0) {
+			if (!loc.getBoard().isValid(cords)) {
 				return false;
 			}
-			if (loc.getBoard().isBase(cords) != 0) {
+			if (loc.getBoard().isMine(cords) != Constant.ID_TEAM_NULL) {
+				return false;
+			}
+			if (loc.getBoard().isBase(cords) != Constant.ID_TEAM_NULL) {
 				return false;
 			}
 			if (loc.getBoard().getRobot(cords) != null) {
 				return false;
 			}
-			if (!loc.getBoard().isValid(cords)) {
+			if (loc.getBoard().isObstacle(cords)) {
 				return false;
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Gets the objectif.
+	 *
+	 * @return the Robot of objective, if none then null
+	 */
+	private Robot getObjectif() {
+		for (int i = 0; i < super.getRobotSource().getRange(); i++) {
+			Coordinates tmp = super.getRobotSource().getCoordinates()
+					.add(super.getDirection().times(i + 1));
+			Cell cellOf = super.getRobotSource().getBoard().getCell(tmp);
+			if (cellOf == null || cellOf.isObstacle() || cellOf.isBase() != 0) {
+				return null;
+			} else if (cellOf.getRobotIn() != null) {
+				if (cellOf.getRobotIn().getTeam() == super.getRobotSource()
+						.getTeam()) {
+					return null;
+				}
+				return cellOf.getRobotIn();
+			}
+		}
+		return null;
 	}
 }

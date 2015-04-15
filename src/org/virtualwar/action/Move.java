@@ -1,27 +1,26 @@
-package org.virtualwar.action;
-
-import org.virtualwar.board.Cell;
-import org.virtualwar.config.TextData;
-import org.virtualwar.robot.Robot;
-import org.virtualwar.robot.Tank;
-import org.virtualwar.util.Coordinates;
-import org.virtualwar.util.sound.ThreadSoundRun;
-
-// TODO: Auto-generated Javadoc
 /*
  * This program is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+package org.virtualwar.action;
+
+import org.virtualwar.board.Cell;
+import org.virtualwar.config.Constant;
+import org.virtualwar.config.TextData;
+import org.virtualwar.robot.Robot;
+import org.virtualwar.robot.Tank;
+import org.virtualwar.util.Coordinates;
+import org.virtualwar.util.sound.ThreadSoundRun;
 
 /**
  * The Move Class.
@@ -44,6 +43,7 @@ public class Move extends Action {
 
 	/**
 	 * . (non-Javadoc)
+	 *
 	 * @see org.virtualwar.action.Action#act()
 	 */
 	@Override
@@ -59,15 +59,18 @@ public class Move extends Action {
 		}
 
 		Robot rob = super.getRobotSource();
-		System.out.println(toAct.getCoordinates().minus(rob.getCoordinates()));
+		System.out.println("Déplacement en " + toAct.getCoordinates());
 		if (rob instanceof Tank
 				&& rob.getMoving().contains(
 						toAct.getCoordinates().minus(rob.getCoordinates()))) {
-			Cell middle = rob.getBoard().getCell(rob.getCoordinates().add(super.getDirection().divide(2)));
-			if (middle != null && middle.mineContains() != 0) {
-				System.out.println(super.getRobotSource().getType()+TextData.ROBOT_HAS_BEEN_MINE);
+			Cell middle = rob.getBoard().getCell(
+					rob.getCoordinates().add(super.getDirection().divide(2)));
+			if (middle != null
+					&& middle.mineContains() != Constant.ID_TEAM_NULL) {
+				System.out.println(super.getRobotSource().getType()
+						+ TextData.ROBOT_HAS_BEEN_MINE);
 				rob.hasBeenMined();
-				middle.setMine(0);
+				middle.setMine(Constant.ID_TEAM_NULL);
 			}
 
 		}
@@ -75,11 +78,30 @@ public class Move extends Action {
 		rob.setEnergy(rob.getEnergy() - rob.getCostMoving());
 		new ThreadSoundRun(rob.getMoveSound(), 1000).start();
 
-		if (toAct.mineContains() != 0) {
-			System.out.println(super.getRobotSource().getType()+TextData.ROBOT_HAS_BEEN_MINE);
+		if (toAct.mineContains() != Constant.ID_TEAM_NULL) {
+			System.out.println(super.getRobotSource().getType()
+					+ TextData.ROBOT_HAS_BEEN_MINE);
 			rob.hasBeenMined();
-			toAct.setMine(0);
+			toAct.setMine(Constant.ID_TEAM_NULL);
 		}
+	}
+
+	/**
+	 * . (non-Javadoc)
+	 *
+	 * @see org.virtualwar.action.Action#canDoIt()
+	 */
+	@Override
+	public boolean canDoIt() {
+		if (super.getRobotSource().getEnergy()
+				- super.getRobotSource().getCostMoving() < 0) {
+			return false;
+		}
+		Cell toAct = getObjectif();
+		if (toAct == null) {
+			return false;
+		}
+		return true;
 	}
 
 	/**
@@ -120,23 +142,5 @@ public class Move extends Action {
 		}
 
 		return cellOfTmp;
-	}
-
-	/**
-	 * . (non-Javadoc)
-	 * 
-	 * @see org.virtualwar.action.Action#canDoIt()
-	 */
-	@Override
-	public boolean canDoIt() {
-		if (super.getRobotSource().getEnergy()
-				- super.getRobotSource().getCostMoving() < 0) {
-			return false;
-		}
-		Cell toAct = getObjectif();
-		if (toAct == null) {
-			return false;
-		}
-		return true;
 	}
 }
