@@ -112,16 +112,16 @@ public enum TextData {
 	LABEL_OBSTACLE("O"),
 
 	/** The label legende title. */
-	LABEL_LEGENDE_TITLE("Légende"),
+	LABEL_LEGENDE_TITLE("Légende", "Legend"),
 
 	/** The tank name. */
-	TANK_NAME("tank", "tank"),
+	TANK_NAME("Tank", "Tank"),
 
 	/** The scavenger name. */
-	SCAVENGER_NAME("piegeur", "Scavenger"),
+	SCAVENGER_NAME("Piegeur", "Scavenger"),
 
 	/** The shooter name. */
-	SHOOTER_NAME("tireur", "shooter"),
+	SHOOTER_NAME("Tireur", "Shooter"),
 
 	/** The label legende base. */
 	LABEL_LEGENDE_BASE(LABEL_BASE_TEAM_A + "\\" + LABEL_BASE_TEAM_B + " : base"),

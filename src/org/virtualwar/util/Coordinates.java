@@ -178,7 +178,8 @@ public class Coordinates {
 			return TextData.LABEL_UP_RIGHT.toString();
 		}
 
-		return "(w" + width + ": h" + height + ")";
+		return "(" + TextData.GAME_WIDTH.toString().charAt(0) + width + ": "
+				+ TextData.GAME_HEIGHT.toString().charAt(0) + height + ")";
 	}
 
 	/*
@@ -188,7 +189,8 @@ public class Coordinates {
 	 */
 	@Override
 	public String toString() {
-		return "Coordinates [height=" + height + ", width=" + width + "]";
+		return "[" + TextData.GAME_HEIGHT + "=" + height + ", "
+				+ TextData.GAME_WIDTH + "=" + width + "]";
 	}
 
 }

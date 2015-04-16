@@ -12,10 +12,10 @@ package org.virtualwar.config;
 public class Config {
 
 	/** The sound on. */
-	public static boolean soundOn = true;
+	public static boolean soundOn = false;
 
 	/** The language. */
-	public static String language = "en";
+	public static String language = "fr";
 	
 	/** The sleep_time_ia. */
 	public static int sleep_time_ia = 2;

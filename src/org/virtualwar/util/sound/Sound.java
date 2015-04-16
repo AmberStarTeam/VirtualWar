@@ -26,6 +26,8 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.SourceDataLine;
 
+import org.virtualwar.config.Config;
+
 // TODO: Auto-generated Javadoc
 /**
  * The Class Sound.
@@ -112,6 +114,9 @@ public class Sound {
 	 *            the source
 	 */
 	public void play(InputStream source) {
+		if (!Config.soundOn) {
+			return;
+		}
 		int bufferSize = format.getFrameSize()
 				* Math.round(format.getSampleRate() / 10);
 		byte[] buffer = new byte[bufferSize];
