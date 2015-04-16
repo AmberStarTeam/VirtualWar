@@ -59,7 +59,7 @@ public class Move extends Action {
 		}
 
 		Robot rob = super.getRobotSource();
-		System.out.println("Déplacement en " + toAct.getCoordinates());
+		System.out.println(""+TextData.GAME_MOVING_ON + toAct.getCoordinates());
 		if (rob instanceof Tank
 				&& rob.getMoving().contains(
 						toAct.getCoordinates().minus(rob.getCoordinates()))) {

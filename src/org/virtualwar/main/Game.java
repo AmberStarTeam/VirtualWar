@@ -22,6 +22,7 @@ import org.virtualwar.action.Action;
 import org.virtualwar.action.Attack;
 import org.virtualwar.action.Move;
 import org.virtualwar.board.Board;
+import org.virtualwar.config.Config;
 import org.virtualwar.config.Constant;
 import org.virtualwar.config.TextData;
 import org.virtualwar.ia.Inteligence;
@@ -33,9 +34,8 @@ import org.virtualwar.robot.Tank;
 import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.sound.ThreadSoundRun;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Game.
+ * The Class Game where the magic hapends !
  *
  * @author amberstar
  */
@@ -110,7 +110,7 @@ public class Game {
 	}
 
 	/**
-	 * Any can do.
+	 * Check if any robots can do somthing
 	 *
 	 * @param lsRobot
 	 *            the list robot
@@ -118,9 +118,6 @@ public class Game {
 	 */
 	private boolean anyCanDo(List<Robot> lsRobot) {
 		for (Robot rob : lsRobot) {
-			// System.out.println(rob);
-			// System.out.println("\t\t" + rob.getAvailableAtacks() + "\n\t\t"
-			// + rob.getAvailableMove());
 			if (rob.getAvailableAtacks() != null
 					|| rob.getAvailableMove() != null) {
 				return true;
@@ -140,7 +137,7 @@ public class Game {
 		for (Robot rob : lsRobot) {
 			if (rob.getEnergy() <= 0) {
 				rob.getBoard().getCell(rob.getCoordinates()).removeRobotIn(rob);
-				new ThreadSoundRun("sounds/deathOfRobots.wav", 1000).start();
+				new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, 1000).start();
 				robToRemove.add(rob);
 			}
 		}
@@ -165,11 +162,11 @@ public class Game {
 		Robot robot;
 
 		for (int i = 0; i < nb; i++) {
-			System.out.println("1-Tireur\n2-Piegeur\n3-Char");
+			System.out.println("1-" + TextData.SHOOTER_NAME + "\n2-"
+					+ TextData.SCAVENGER_NAME + "\n3-" + TextData.TANK_NAME);
 			int r = readSafeInt();
 			while (0 > r || r > 3) {
-				System.out
-						.println("Tu as choisi un mauvais numéro ! Try again !");
+				System.out.println(TextData.GAME_INVALID_INPUT);
 				r = readSafeInt();
 			}
 			if (team == 1) {
@@ -245,7 +242,7 @@ public class Game {
 			do {
 				String inData = "";
 				String outData = "";
-				outData += "(0) annuler, ";
+				outData += "(0) " + TextData.GAME_CANCEL + ", ";
 				inData += "0\n";
 				if (robTmp.canMove()) {
 					inData += "1\n";
@@ -253,11 +250,11 @@ public class Game {
 				}
 				if (robTmp.canAttack()) {
 					inData += "2\n";
-					if (!outData.equals("(0) annuler, ")) {
-						outData += " ou ";
+					if (!outData.equals("(0) " + TextData.GAME_CANCEL + ", ")) {
+						outData += " " + TextData.GAME_OR + " ";
 					}
-					outData += ((robTmp instanceof Scavenger) ? "(2) pieger"
-							: "(2) attaquer");
+					outData += ((robTmp instanceof Scavenger) ? "(2) " + TextData.GAME_MINE
+							: "(2) " + TextData.GAME_ATTACK);
 
 				}
 
@@ -295,19 +292,19 @@ public class Game {
 			Action tmp = ls.get(i);
 			if (tmp instanceof Attack) {
 				if (tmp.getRobotSource() instanceof Scavenger) {
-					txtOut += "pieger : ";
+					txtOut += TextData.GAME_MINE + " : ";
 				} else {
-					txtOut += "attaquer : ";
+					txtOut += TextData.GAME_ATTACK + " : ";
 				}
 			} else if (tmp instanceof Move) {
-				txtOut += "se déplacer : ";
+				txtOut += TextData.GAME_MOVE + " : ";
 			}
 			txtOut += tmp.getDirection().toStr() + "\n";
 			strChoix += (i + 1) + "\n";
 		}
 
 		return Integer.parseInt(getInputValue(strChoix + "0\n", txtOut
-				+ "0 annuler\n")) - 1;
+				+ "0 " + TextData.GAME_CANCEL + "\n")) - 1;
 	}
 
 	/**
@@ -359,7 +356,7 @@ public class Game {
 			} else if (input.equals("q")) {
 				System.exit(0);
 			} else if (!inputGood) {
-				System.out.println("Entrée non valide !");
+				System.out.println(TextData.GAME_INVALID_INPUT);
 			}
 
 		} while (!inputGood);
@@ -371,18 +368,18 @@ public class Game {
 	 * Inits the board.
 	 */
 	private void initBoard() {
-		System.out.println("Choisissez la taille du plateau"
-				+ "(elle ne doit pas être inférieur à 3)\n Hauteur :");
+		System.out.println(TextData.GAME_BOARD_SIZE);
+		System.out.println(TextData.GAME_HEIGHT + " :");
 		height = readSafeInt();
-		System.out.println("Largeur :");
+		System.out.println(TextData.GAME_WIDTH + " :");
 		width = readSafeInt();
 
 		while (width < 3 || height < 3) { // A changer avec : factory
-			System.out.println("Choisissez une nouvelle taille du plateau");
+			System.out.println(TextData.GAME_INVALID_INPUT);
 			height = readSafeInt();
 			width = readSafeInt();
 		}
-		System.out.println("Poucentage d'obstacle : ");
+		System.out.println(TextData.GAME_OBSTACLE);
 		pourcent = readSafeInt();
 		board = Board.newBoard(height, width);
 
@@ -390,15 +387,20 @@ public class Game {
 	}
 
 	private void initIa() {
-		System.out.println("Le joeur 1 est une ia ? ");
-		String in = getInputValue("o\nn", "(o) oui, (n) non");
-		if (in.equals("o")) {
+		String left = TextData.GAME_CHOSE_IA_INPUT.toString().split(""+'\u9999')[0];
+		String right = TextData.GAME_CHOSE_IA_INPUT.toString().split(""+'\u9999')[1];
+		
+		System.out.println(TextData.GAME_IS_PLAYER_X_IA.toString()
+				.replaceAll("X", "1"));
+		String in = getInputValue(left, right);
+		if (in.equals(left.charAt(0))) {
 			isPlayerOneHuman = false;
 			playerOne = new RandomInteligence(Constant.ID_TEAM_A, null);
 		}
-		System.out.println("Le joeur 2 est une ia ? ");
-		in = getInputValue("o\nn", "(o) oui, (n) non");
-		if (in.equals("o")) {
+		System.out.println(TextData.GAME_IS_PLAYER_X_IA.toString()
+				.replaceAll("X", "2"));
+		in = getInputValue(left, right);
+		if (in.equals(left.charAt(0))) {
 			isPlayerTwoHuman = false;
 			playerTwo = new RandomInteligence(Constant.ID_TEAM_B, null);
 		}
@@ -408,11 +410,10 @@ public class Game {
 	 * Inits the nmb robot.
 	 */
 	private void initNmbRobot() {
-		// System.out.println(Rules.rules());
-		System.out.println("Choisissez le nombre de robot pour les équipes :");
+		System.out.println(TextData.GAME_CHOSE_NMB_BOTS);
 		nmbRobots = readSafeInt();
-		while (nmbRobots >= 6) {
-			System.out.println("Choisissez un nouveau nombre de robot");
+		while (nmbRobots >= 6 || nmbRobots <= 0) {
+			System.out.println(TextData.GAME_INVALID_INPUT);
 			nmbRobots = readSafeInt();
 		}
 		// int nbRobotTeam2 = nbRobotTeam1;
@@ -423,8 +424,8 @@ public class Game {
 	 */
 	private void initRobots() {
 		if (isPlayerOneHuman) {
-			System.out.println("Choisissez le type de vos robots pour "
-					+ nameTeam1 + " : ");
+			System.out.println(TextData.GAME_CHOSE_ROBOTS_TYPE.toString()
+					.replaceAll("X", nameTeam1));
 			t1 = choiceOfRobots(nmbRobots, Constant.ID_TEAM_A, board);
 		} else {
 			playerOne.setBoard(board);
@@ -432,8 +433,8 @@ public class Game {
 		}
 
 		if (isPlayerTwoHuman) {
-			System.out.println("Choisissez le type de vos robots pour "
-					+ nameTeam2 + " : ");
+			System.out.println(TextData.GAME_CHOSE_ROBOTS_TYPE.toString()
+					.replaceAll("X", nameTeam2));
 			t2 = choiceOfRobots(nmbRobots, Constant.ID_TEAM_B, board);
 		} else {
 			playerTwo.setBoard(board);
@@ -448,13 +449,15 @@ public class Game {
 	 * Inits the team.
 	 */
 	private void initTeam() {
-		System.out.println("Nom de la team 1 :");
+		System.out.println(TextData.GAME_NAME_TEAM_X.toString().replaceAll("X",
+				"1"));
 		nameTeam1 = sc.nextLine();
-		System.out.println("Nom de la team 2 :");
+		System.out.println(TextData.GAME_NAME_TEAM_X.toString().replaceAll("X",
+				"1"));
 		do {
 			nameTeam2 = sc.nextLine();
 			if (nameTeam1.equals(nameTeam2)) {
-				System.out.println("Les deux équipes ont le même nom !");
+				System.out.println(TextData.ERROR_TEAM_SAME_NAME);
 			}
 		} while (nameTeam1.equals(nameTeam2));
 	}
@@ -469,7 +472,7 @@ public class Game {
 			try {
 				return Integer.parseInt(sc.nextLine());
 			} catch (NumberFormatException e) {
-				System.out.println("Pas un nombre!");
+				System.out.println(TextData.ERROR_NOT_NUMBER);
 				continue;
 			}
 		}
@@ -491,18 +494,17 @@ public class Game {
 
 		Action actT1 = null;
 		Action actT2 = null;
-		final int SLEEP_TIME = 100;
 
 		while (!end) {
 			System.out.println(board.outGrindPlusLegend(Constant.ID_TEAM_A));
 			if (anyCanDo(t1)) {
 				if (isPlayerOneHuman) {
-					System.out.println("Au tour de " + nameTeam1);
+					System.out.println(TextData.GAME_TURN_PLAYER + nameTeam1);
 					actT1 = getAction(t1);
 				} else {
 					actT1 = playerOne.makeTurn();
 					try {
-						Thread.sleep(SLEEP_TIME);
+						Thread.sleep(Config.sleep_time_ia);
 					} catch (InterruptedException e) {
 					}
 				}
@@ -519,12 +521,12 @@ public class Game {
 			System.out.println(board.outGrindPlusLegend(Constant.ID_TEAM_B));
 			if (anyCanDo(t2)) {
 				if (isPlayerTwoHuman) {
-					System.out.println("Au tour de " + nameTeam2);
+					System.out.println(TextData.GAME_TURN_PLAYER + nameTeam2);
 					actT2 = getAction(t2);
 				} else {
 					actT2 = playerTwo.makeTurn();
 					try {
-						Thread.sleep(SLEEP_TIME);
+						Thread.sleep(Config.sleep_time_ia);
 					} catch (InterruptedException e) {
 					}
 				}
@@ -555,11 +557,13 @@ public class Game {
 		}
 
 		if (t1.isEmpty() || !anyCanDo(t1)) {
-			System.out.println("L'équipe " + nameTeam2 + " à gagner !\n");
+			System.out.println(TextData.GAME_WIN_TEAM.toString().replaceAll(
+					"XXX", nameTeam2));
 		} else {
-			System.out.println("L'équipe " + nameTeam1 + " à gagner !\n");
+			System.out.println(TextData.GAME_WIN_TEAM.toString().replaceAll(
+					"XXX", nameTeam1));
 		}
-		System.out.println("Apuillez sur une touche pour quiter.");
+		System.out.println(TextData.GAME_END);
 		sc.nextLine();
 	}
 

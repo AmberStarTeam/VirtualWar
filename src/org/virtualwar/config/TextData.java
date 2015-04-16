@@ -51,28 +51,32 @@ public enum TextData {
 					+ "Quand il retourne dans sa base, un robot récupère peu à peu son énergie."),
 
 	/** The label up. */
-	LABEL_UP("haut"),
+	LABEL_UP("haut", "up"),
 
 	/** The label down. */
-	LABEL_DOWN("bas"),
+	LABEL_DOWN("bas", "down"),
 
 	/** The label right. */
-	LABEL_RIGHT("droite"),
+	LABEL_RIGHT("droite", "right"),
 
 	/** The label left. */
-	LABEL_LEFT("gauche"),
+	LABEL_LEFT("gauche", "left"),
 
 	/** The label up right. */
-	LABEL_UP_RIGHT(LABEL_UP + " à " + LABEL_RIGHT),
+	LABEL_UP_RIGHT(LABEL_UP.get("fr") + " à " + LABEL_RIGHT.get("fr"), LABEL_UP
+			.get("en") + " " + LABEL_RIGHT.get("en")),
 
 	/** The label up left. */
-	LABEL_UP_LEFT(LABEL_UP + " à " + LABEL_LEFT),
+	LABEL_UP_LEFT(LABEL_UP.get("fr") + " à " + LABEL_LEFT.get("fr"), LABEL_UP
+			.get("en") + " " + LABEL_LEFT.get("en")),
 
 	/** The label down right. */
-	LABEL_DOWN_RIGHT(LABEL_DOWN + " à " + LABEL_RIGHT),
+	LABEL_DOWN_RIGHT(LABEL_DOWN.get("fr") + " à " + LABEL_RIGHT.get("fr"),
+			LABEL_DOWN.get("en") + " " + LABEL_RIGHT.get("en")),
 
 	/** The label down left. */
-	LABEL_DOWN_LEFT(LABEL_DOWN + " à " + LABEL_LEFT),
+	LABEL_DOWN_LEFT(LABEL_DOWN.get("fr") + " à " + LABEL_LEFT.get("fr"),
+			LABEL_DOWN.get("en") + " " + LABEL_LEFT.get("en")),
 
 	/** The label tank team a. */
 	LABEL_TANK_TEAM_A("t"),
@@ -110,19 +114,33 @@ public enum TextData {
 	/** The label legende title. */
 	LABEL_LEGENDE_TITLE("Légende"),
 
+	/** The tank name. */
+	TANK_NAME("tank", "tank"),
+
+	/** The scavenger name. */
+	SCAVENGER_NAME("piegeur", "Scavenger"),
+
+	/** The shooter name. */
+	SHOOTER_NAME("tireur", "shooter"),
+
 	/** The label legende base. */
 	LABEL_LEGENDE_BASE(LABEL_BASE_TEAM_A + "\\" + LABEL_BASE_TEAM_B + " : base"),
 
 	/** The label legende char. */
-	LABEL_LEGENDE_CHAR(LABEL_TANK_TEAM_A + "\\" + LABEL_TANK_TEAM_B + " : char"),
+	LABEL_LEGENDE_CHAR(LABEL_TANK_TEAM_A + "\\" + LABEL_TANK_TEAM_B + " : "
+			+ TANK_NAME.get("fr"), LABEL_TANK_TEAM_A + "\\" + LABEL_TANK_TEAM_B
+			+ " : " + TANK_NAME.get("en")),
 
 	/** The label legende shooter. */
 	LABEL_LEGENDE_SHOOTER(LABEL_SHOOTER_TEAM_A + "\\" + LABEL_SHOOTER_TEAM_B
-			+ " : tireur"),
+			+ " : " + SHOOTER_NAME.get("fr"), LABEL_SHOOTER_TEAM_A + "\\"
+			+ LABEL_SHOOTER_TEAM_B + " : " + SHOOTER_NAME.get("en")),
 
 	/** The label legende scavenger. */
 	LABEL_LEGENDE_SCAVENGER(LABEL_SCAVENGER_TEAM_A + "\\"
-			+ LABEL_SCAVENGER_TEAM_B + " : piegeur"),
+			+ LABEL_SCAVENGER_TEAM_B + " : " + SCAVENGER_NAME.get("fr"),
+			LABEL_SCAVENGER_TEAM_A + "\\" + LABEL_SCAVENGER_TEAM_B + " : "
+					+ SCAVENGER_NAME.get("en")),
 
 	/** The label legende mine. */
 	LABEL_LEGENDE_MINE(LABEL_MINE_TEAM_A + "\\" + LABEL_MINE_TEAM_B + " : mine"),
@@ -131,127 +149,245 @@ public enum TextData {
 	LABEL_LEGENDE_OBSTACLE(LABEL_OBSTACLE + " : obstacle"),
 
 	/** The label legende energy. */
-	LABEL_LEGENDE_ENERGY("E : energie"),
+	LABEL_LEGENDE_ENERGY("E : energie", "E : energy"),
 
 	/** The label legende nmb mine. */
-	LABEL_LEGENDE_NMB_MINE("M : nombre de mines"),
+	LABEL_LEGENDE_NMB_MINE("M : nombre de mines", "M : number of mines"),
 
 	/** The label legende help. */
-	LABEL_LEGENDE_HELP("h - regles"),
+	LABEL_LEGENDE_HELP("h - regles", "h - rules"),
 
 	/** The label legende quit. */
-	LABEL_LEGENDE_QUIT("q - quitter"),
-
-	/** The tank name. */
-	TANK_NAME("tank"),
-
-	/** The scavenger name. */
-	SCAVENGER_NAME("piegeur"),
-
-	/** The shooter name. */
-	SHOOTER_NAME("tireur"),
+	LABEL_LEGENDE_QUIT("q - quitter", "q - quit"),
 
 	/** The error move is obstacle. */
-	ERROR_MOVE_IS_OBSTACLE("Déplacement imposible : Il y a un obstacle !"),
+	ERROR_MOVE_IS_OBSTACLE("Déplacement imposible : Il y a un obstacle !",
+			"Move impossible : There is a obstacle on the way !"),
 
 	/** The error move is obstacle. */
 	ERROR_MOVE_NOT_ENOUTH_ENERGY(
-			"Déplacement imposible : Il n'a pas assez d'énergie"),
+			"Déplacement imposible : Il n'a pas assez d'énergie",
+			"Move impossible : You don't have enouth energy !"),
 
 	/** The error move is obstacle. */
 	ERROR_ATTACK_NOT_ENOUTH_ENERGY(
-			"Attaque imposible : Il n'a pas assez d'énergie"),
+			"Attaque imposible : Il n'a pas assez d'énergie",
+			"Attack impossible : You don't have enouth energy !"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_NOTHING_TO_ATTACK(
-			"Attaque imposible : Il n'y a rien à attaquer"),
+			"Attaque imposible : Il n'y a rien à attaquer",
+			"Attack impossible : Nothing to attack"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_NOT_ENOUTH_MINE(
-			"Attaque imposible : Il n'a pas assez de mines"),
+			"Attaque imposible : Il n'a pas assez de mines",
+			"Attack impossible : You don't have enouth mine !"),
 
 	/** The error nothing to attack. */
-	ERROR_ATTACK_ALREADY_MINED("Attaque imposible : Il y a déja une mine !"),
+	ERROR_ATTACK_ALREADY_MINED("Attaque imposible : Il y a déja une mine !",
+			"Attack impossible : There is already a mine here !"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_ATTACK_BASE(
-			"Attaque imposible : Tu ne peut pas attaquer une base"),
+			"Attaque imposible : Tu ne peut pas attaquer une base",
+			"Attack impossible : You can't attack a base"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_FROM_BASE(
-			"Attaque imposible : Tu ne peut pas attaquer depuis base"),
+			"Attaque imposible : Tu ne peut pas attaquer depuis base",
+			"Attack impossible : you can attack from your base"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_MINE_BASE(
-			"Attaque imposible : Tu ne peux pas miner une base !"),
+			"Attaque imposible : Tu ne peux pas miner une base !",
+			"Attack impossible : You can't mine a base !"),
 
 	/** The error nothing to attack. */
 	ERROR_ATTACK_CANT_MINE_ROBOT(
-			"Attaque imposible : Tu ne peux pas miner un robot !"),
+			"Attaque imposible : Tu ne peux pas miner un robot !",
+			"Attack impossible : You can't mine a robot !"),
 
 	/** The error nothing to attack. */
-	ERROR_ATTACK_CANT_MINE_OBSTACLE(
-			"Attaque imposible : Il y a déjà un obstacle !"),
+	ERROR_ATTACK_CANT_MINE_OBSTACLE("Mine imposible : Il y a un obstacle !",
+			"Mine impossible : It's a obstacle"),
 
 	/** The error move is out of bound. */
 	ERROR_ATTTACK_IS_OUT_OF_BOUND(
-			"Attaque imposible : Ce n'est pas sur le plateau !"),
+			"Attaque imposible : Ce n'est pas sur le plateau !",
+			"Attack impossible : It's not on the board"),
 
 	/** The robot has been shot. */
 	ERROR_MOVE_NOWHERE_TO_MOVE(
-			"Déplacement imposible : Pas d'endroit à aller !"),
+			"Déplacement imposible : Pas d'endroit à aller !",
+			"Move impossible : Nowhere to go !"),
 
 	/** The error move is occupied. */
 	ERROR_MOVE_IS_OCCUPED(
-			"Déplacement imposible : Il y a déjà un robot présent !"),
+			"Déplacement imposible : Il y a déjà un robot présent !",
+			"Move impossible : A robot is already there !"),
 
 	/** The error move is mine. */
 	ERROR_MOVE_IS_MINE(
-			"Déplacement imposible : Il y a une mine de votre équipe !"),
+			"Déplacement imposible : Il y a une mine de votre équipe !",
+			"Move impossible : There are a mine of you're team !"),
 
 	/** The error move is out of bound. */
 	ERROR_MOVE_IS_OUT_OF_BOUND(
-			"Déplacement imposible : Ce n'est pas sur le plateau !"),
+			"Déplacement imposible : Ce n'est pas sur le plateau !",
+			"Move impossible : It's not on the board !"),
 
 	/** The error move is base other. */
 	ERROR_MOVE_IS_BASE_OTHER(
-			"Déplacement imposible : Ce n'est pas votre base !"),
+			"Déplacement imposible : Ce n'est pas votre base !",
+			"Move impossible : It's not your base !"),
 
 	/** The error move is not valid. */
 	ERROR_MOVE_IS_NOT_VALID(
-			"Déplacement imposible : Ce n'est pas un déplacement possible pour cette unitée !"),
+			"Déplacement imposible : Ce n'est pas un déplacement possible pour cette unitée !",
+			"Move impossible : It's not a valid move for this robot !"),
 
 	/** The error board too small. */
-	ERROR_BOARD_TOO_SMALL("Création impossible : Le plateau est trop petit !"),
+	ERROR_BOARD_TOO_SMALL("Création impossible : Le plateau est trop petit !",
+			"Creation impossible : the board is to small !"),
 
 	/** The error board too big. */
-	ERROR_BOARD_TOO_BIG("Création impossible : Le plateau est trop grand !"),
+	ERROR_BOARD_TOO_BIG("Création impossible : Le plateau est trop grand !",
+			"Creation impossible : the board is too big !"),
 
 	/** The error board must be positive. */
 	ERROR_BOARD_MUST_BE_POSITIF(
-			"Création impossible : Les valeurs doivent être positives"),
+			"Création impossible : Les valeurs doivent être positives",
+			"Creation impossible : the values must be positive"),
 
 	/** The robot has been shot. */
-	ROBOT_HAS_BEEN_SHOT(" a été touché !"),
+	ROBOT_HAS_BEEN_SHOT(" a été touché !", "has been shoot"),
 
 	/** The robot has been mine. */
-	ROBOT_HAS_BEEN_MINE(" a été piégé !"),
+	ROBOT_HAS_BEEN_MINE(" a été piégé !", "has been mined"),
 
 	/** The robot mine. */
-	ROBOT_MINE("Un piégeur a miné !");
+	ROBOT_MINE("Un piégeur a miné !", "A scavenger has mined !"),
 
-	/** The name. */
-	private String nameFr = "";
+	/** The game move. */
+	GAME_MOVE("Déplacer", "Move"),
+
+	/** The game attack. */
+	GAME_ATTACK("Attaquer", "Attack"),
+
+	/** The game mine. */
+	GAME_MINE("Miner", "Mine"),
+
+	/** The game or. */
+	GAME_OR("ou", "or"),
+
+	/** The game cancel. */
+	GAME_CANCEL("Anuler", "Cancel"),
+	
+	GAME_MOVING_ON("Déplacemnet en ", "Moving on "),
+
+	/** The game board size. */
+	GAME_BOARD_SIZE(
+			"Choisissez la taille du plateau (elle ne doit pas être inférieur à 3)",
+			"Chose a board size (can't be inferior to 3)"),
+			
+	/** The game height. */
+	GAME_HEIGHT("Hauteur","Height"),
+	
+	/** The game width. */
+	GAME_WIDTH("Largeur","Width"),
+	
+	/** The game is player x ia. */
+	GAME_IS_PLAYER_X_IA("Le joeur X est une ia ? ","Is the player X an ia?"),
+	
+	/** The game chose ia input. */
+	GAME_CHOSE_IA_INPUT("o\nn" + '\u9999' + "(o) oui, (n) non", "y\nn" + '\u9999' + "(y) yes, (n) no"),
+	
+	/** The game obstacle. */
+	GAME_OBSTACLE("Pourcentage d'obstacle : ", "Percentage of obstacle : "),
+	
+	/** The game turn player. */
+	GAME_TURN_PLAYER("Au tour de ", "It's the turn of "),
+
+	/** The game win team. */
+	GAME_WIN_TEAM("L'équipe XXX à gagner !", "The team XXX has won !"),
+
+	/** The game end. */
+	GAME_END("Appuillez sur une touche pour quiter", "Push any key to quit"),
+
+	/** The game name team x. */
+	GAME_NAME_TEAM_X("Nom de la team X : ", "Name of the X team : "),
+
+	/** The game chose nmb bots. */
+	GAME_CHOSE_NMB_BOTS(
+			"Choisissez le nombre de robot pour les équipes (<6:) :",
+			"Chose the number of robots for all teams (<6) :"),
+
+	/** The game invalid input. */
+	GAME_INVALID_INPUT("Entrée invalide ! ", "Invalid input !"),
+
+	/** The game chose robots type. */
+	GAME_CHOSE_ROBOTS_TYPE("Choisissez le type de vos robots pour X : ",
+			"Chose the robots type for X : "),
+
+	/** The error not number. */
+	ERROR_NOT_NUMBER("Ce n'est pas un nombre !", "Not a number !"),
+
+	/** The error team same name. */
+	ERROR_TEAM_SAME_NAME("Les deux équipes ont le même nom !",
+			"Both team have the same name !");
+
+	/** The french name. */
+	private String fr;
+
+	/** The English name. */
+	private String en;
 
 	// Constructeur
 	/**
 	 * Instantiates a new text data.
 	 *
-	 * @param nameFr
+	 * @param fr
 	 *            the name
 	 */
-	private TextData(String nameFr) {
-		this.nameFr = nameFr;
+	private TextData(String fr) {
+		this.fr = fr;
+	}
+
+	/**
+	 * Instantiates a new text data.
+	 *
+	 * @param fr
+	 *            the fr
+	 * @param en
+	 *            the en
+	 */
+	private TextData(String fr, String en) {
+		this.fr = fr;
+		this.en = en;
+	}
+
+	/**
+	 * Gets the.
+	 *
+	 * @param language
+	 *            the language
+	 * @return the string
+	 */
+	public String get(String language) {
+		if (language.equals("en")) {
+			if (en != null) {
+				return en;
+			} else {
+				return fr;
+			}
+		}
+		if (language.equals("fr")) {
+			if (fr != null) {
+				return fr;
+			}
+		}
+		return fr;
 	}
 
 	/**
@@ -262,6 +398,18 @@ public enum TextData {
 	 */
 	@Override
 	public String toString() {
-		return nameFr;
+		if (Config.language.equals("en")) {
+			if (en != null) {
+				return en;
+			} else {
+				return fr;
+			}
+		}
+		if (Config.language.equals("fr")) {
+			if (fr != null) {
+				return fr;
+			}
+		}
+		return fr;
 	}
 }
