@@ -54,43 +54,43 @@ public class Game {
 	/** The sc. */
 	private Scanner sc;
 
-	/** The contains tank. */
+	/** If contains tank. */
 	private boolean containsTank = false;
 
-	/** The pourcent. */
+	/** The pourcent of obstacle. */
 	private int pourcent;
 
-	/** The t1. */
+	/** The robots of team 1. */
 	private List<Robot> t1;
 
-	/** The t2. */
+	/** The The robots of team 2. */
 	private List<Robot> t2;
 
-	/** The name_team_1. */
+	/** The name of team 1. */
 	private String nameTeam1;
 
-	/** The name_team_2. */
+	/** The name of team 2. */
 	private String nameTeam2;
 
-	/** The width. */
+	/** The width of the board. */
 	private int width;
 
-	/** The height. */
+	/** The height of the board. */
 	private int height;
 
 	/** The board. */
 	private Board board;
 
-	/** The end. */
+	/** If it is the end. */
 	private boolean end = false;
 
 	/** The nmb robots. */
 	private int nmbRobots;
 
-	/** The b1. */
+	/** The coordinate of the base 1. */
 	private Coordinates b1 = new Coordinates(0, 0);
 
-	/** The b2. */
+	/** The The coordinate of the base 2. */
 	private Coordinates b2;
 
 	/** The is player one human. */
@@ -127,7 +127,8 @@ public class Game {
 	}
 
 	/**
-	 * Check alive.
+	 * Check every robot if it should die, then if it does, make the sound and
+	 * remove it.
 	 *
 	 * @param lsRobot
 	 *            the ls robot
@@ -199,7 +200,7 @@ public class Game {
 	}
 
 	/**
-	 * Do base check.
+	 * If any robot are in base, make them do the base action.
 	 *
 	 * @param lsRobot
 	 *            the ls robot
@@ -213,7 +214,7 @@ public class Game {
 	}
 
 	/**
-	 * Gets the action.
+	 * Gets the action for the team.
 	 *
 	 * @param lsRobot
 	 *            the ls robot
@@ -279,7 +280,7 @@ public class Game {
 	}
 
 	/**
-	 * Gets the index val act.
+	 * Gets the index value of the action.
 	 *
 	 * @param ls
 	 *            the ls
@@ -309,7 +310,7 @@ public class Game {
 	}
 
 	/**
-	 * Gets the index val rob.
+	 * Gets the index value of the robot.
 	 *
 	 * @param ls
 	 *            the ls
@@ -366,7 +367,7 @@ public class Game {
 	}
 
 	/**
-	 * Inits the board.
+	 * Init the board.
 	 */
 	private void initBoard() {
 		System.out.println(TextData.GAME_BOARD_SIZE);
@@ -387,6 +388,9 @@ public class Game {
 		b2 = board.getCoordsBase(Constant.ID_TEAM_B);
 	}
 
+	/**
+	 * Init the config.
+	 */
 	private void initConfig() {
 		String left = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[0];
 		String right = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[1];
@@ -399,6 +403,9 @@ public class Game {
 
 	}
 
+	/**
+	 * Init the ia.
+	 */
 	private void initIa() {
 		String left = TextData.GAME_CHOSE_IA_INPUT.toString().split(
 				"" + '\u9999')[0];
@@ -422,7 +429,7 @@ public class Game {
 	}
 
 	/**
-	 * Inits the nmb robot.
+	 * Inits the number of robot.
 	 */
 	private void initNmbRobot() {
 		System.out.println(TextData.GAME_CHOSE_NMB_BOTS);
@@ -431,7 +438,6 @@ public class Game {
 			System.out.println(TextData.GAME_INVALID_INPUT);
 			nmbRobots = readSafeInt();
 		}
-		// int nbRobotTeam2 = nbRobotTeam1;
 	}
 
 	/**
@@ -445,6 +451,11 @@ public class Game {
 		} else {
 			playerOne.setBoard(board);
 			t1 = playerOne.getInitialRobots(nmbRobots);
+			for (Robot robot : t1) {
+				if (robot instanceof Tank) {
+					containsTank = true;
+				}
+			}
 		}
 
 		if (isPlayerTwoHuman) {
@@ -454,6 +465,11 @@ public class Game {
 		} else {
 			playerTwo.setBoard(board);
 			t2 = playerTwo.getInitialRobots(nmbRobots);
+			for (Robot robot : t2) {
+				if (robot instanceof Tank) {
+					containsTank = true;
+				}
+			}
 		}
 
 		board.generate(pourcent, containsTank);
@@ -494,7 +510,7 @@ public class Game {
 	}
 
 	/**
-	 * Run.
+	 * Run the game.
 	 */
 	public void run() {
 		initConfig();
@@ -581,10 +597,11 @@ public class Game {
 		}
 		System.out.println(TextData.GAME_END);
 		sc.nextLine();
+		sc.close();
 	}
 
 	/**
-	 * Start debug.
+	 * Start the debug mode.
 	 */
 	private void startDebug() {
 		nameTeam1 = "team 1";
@@ -607,6 +624,9 @@ public class Game {
 
 	}
 
+	/**
+	 * Start the ia debug mode.
+	 */
 	private void startDebugIa() {
 		nameTeam1 = "team 1";
 		nameTeam2 = "team 2";
@@ -631,7 +651,7 @@ public class Game {
 	}
 
 	/**
-	 * Start normal.
+	 * Start the normal game.
 	 */
 	private void startNormal() {
 		initTeam();

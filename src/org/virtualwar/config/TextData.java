@@ -14,7 +14,6 @@
  */
 package org.virtualwar.config;
 
-// TODO: Auto-generated Javadoc
 /**
  * The TextData Enum.
  *
@@ -353,7 +352,6 @@ public enum TextData {
 	/** The English name. */
 	private String en;
 
-	// Constructeur
 	/**
 	 * Instantiates a new text data.
 	 *

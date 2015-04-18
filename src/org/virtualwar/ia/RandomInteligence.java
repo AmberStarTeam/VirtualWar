@@ -32,7 +32,7 @@ import org.virtualwar.util.Coordinates;
  */
 public class RandomInteligence extends Inteligence {
 
-	/** The ran. */
+	/** The random generator. */
 	private Random ran = new Random();
 
 	/**
@@ -40,6 +40,8 @@ public class RandomInteligence extends Inteligence {
 	 *
 	 * @param team
 	 *            the team
+	 * @param board
+	 *            the board
 	 */
 	public RandomInteligence(int team, Board board) {
 		super(team, board);
@@ -49,9 +51,11 @@ public class RandomInteligence extends Inteligence {
 	 * Instantiates a new random inteligence.
 	 *
 	 * @param robots
-	 *            the robots
+	 *            the robots of the team
 	 * @param team
 	 *            the team
+	 * @param board
+	 *            the board
 	 */
 	public RandomInteligence(List<Robot> robots, int team, Board board) {
 		super(robots, team, board);
@@ -59,7 +63,7 @@ public class RandomInteligence extends Inteligence {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.virtualwar.ia.Inteligence#getInitialRobots(int)
 	 */
 	@Override
@@ -88,7 +92,7 @@ public class RandomInteligence extends Inteligence {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.virtualwar.ia.Inteligence#makeTurn()
 	 */
 	@Override

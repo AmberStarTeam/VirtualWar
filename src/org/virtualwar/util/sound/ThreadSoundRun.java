@@ -83,9 +83,9 @@ public class ThreadSoundRun extends Thread {
 
 	}
 
-	/**
+	/*
 	 * . (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Thread#run()
 	 */
 	@Override

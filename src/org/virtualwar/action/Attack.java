@@ -24,7 +24,6 @@ import org.virtualwar.robot.Tank;
 import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.sound.ThreadSoundRun;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Attack Class.
  *
@@ -44,9 +43,9 @@ public class Attack extends Action {
 		super(robot, dir);
 	}
 
-	/**
+	/*
 	 * . (non-Javadoc)
-	 *
+	 * 
 	 * @see org.virtualwar.action.Action#act()
 	 */
 	@Override
@@ -115,10 +114,11 @@ public class Attack extends Action {
 		}
 	}
 
-	/**
+	/*
 	 * . (non-Javadoc)
-	 *
+	 * 
 	 * @see org.virtualwar.action.Action#canDoIt()
+	 * 
 	 * @return if it can run the action
 	 */
 	@Override

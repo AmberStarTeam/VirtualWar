@@ -3,11 +3,10 @@
  */
 package org.virtualwar.config;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Config.
+ * The Class for configs.
  *
- * @author Nicolas Beaussart
+ * @author amberstar
  */
 public class Config {
 

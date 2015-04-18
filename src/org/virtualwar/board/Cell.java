@@ -20,9 +20,8 @@ import org.virtualwar.config.Constant;
 import org.virtualwar.robot.Robot;
 import org.virtualwar.util.Coordinates;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Cell Class.
+ * The abstract class for the tile base map.
  *
  * @author amberstar
  */
@@ -82,7 +81,7 @@ public abstract class Cell {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -150,7 +149,7 @@ public abstract class Cell {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -194,7 +193,7 @@ public abstract class Cell {
 	}
 
 	/**
-	 * Move on.
+	 * Move the robot on.
 	 *
 	 * @param robot
 	 *            the robot to get in
@@ -242,7 +241,7 @@ public abstract class Cell {
 	}
 
 	/**
-	 * Sets the mine contains.
+	 * Sets the mine inside.
 	 *
 	 * @param mineIn
 	 *            the mine to set

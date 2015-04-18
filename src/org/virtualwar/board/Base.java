@@ -20,7 +20,6 @@ import java.util.List;
 import org.virtualwar.robot.Robot;
 import org.virtualwar.util.Coordinates;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Base Class who stock multiple robots.
  *
@@ -46,7 +45,7 @@ public class Base extends Cell {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.amberstar.virtualwar.Cell#addMine(int)
 	 */
 	@Override
@@ -57,7 +56,7 @@ public class Base extends Cell {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.amberstar.virtualwar.Cell#clearBox()
 	 */
 	@Override
@@ -67,7 +66,7 @@ public class Base extends Cell {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.amberstar.virtualwar.Cell#getContents()
 	 */
 	@Override
@@ -84,7 +83,7 @@ public class Base extends Cell {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.amberstar.virtualwar.Cell#getRobotIn()
 	 */
 	@Override
@@ -95,7 +94,7 @@ public class Base extends Cell {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.amberstar.virtualwar.Cell#removeRobotIn(org.amberstar.virtualwar.
 	 * Robot)
@@ -107,7 +106,7 @@ public class Base extends Cell {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see
 	 * org.amberstar.virtualwar.Cell#setRobotIn(org.amberstar.virtualwar.Robot)
 	 */

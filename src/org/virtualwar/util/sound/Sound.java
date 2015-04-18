@@ -108,7 +108,7 @@ public class Sound {
 	}
 
 	/**
-	 * Play.
+	 * Play the sound if the config is on.
 	 *
 	 * @param source
 	 *            the source

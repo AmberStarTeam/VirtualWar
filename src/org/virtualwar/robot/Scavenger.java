@@ -21,7 +21,6 @@ import org.virtualwar.config.Constant;
 import org.virtualwar.config.TextData;
 import org.virtualwar.util.Coordinates;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Scavenger Class.
  *
@@ -48,7 +47,7 @@ public class Scavenger extends Robot {
 	}
 
 	/**
-	 * Drop mine.
+	 * Drop a mine.
 	 */
 	public void dropMine() {
 		nmbMine--;
@@ -61,7 +60,7 @@ public class Scavenger extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getAttackSound()
 	 */
 	@Override
@@ -71,7 +70,7 @@ public class Scavenger extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getCostAction()
 	 */
 	@Override
@@ -81,7 +80,7 @@ public class Scavenger extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getCostMoving()
 	 */
 	@Override
@@ -91,7 +90,7 @@ public class Scavenger extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getDamageTaken()
 	 */
 	@Override
@@ -101,7 +100,7 @@ public class Scavenger extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getMoveSound()
 	 */
 	@Override
@@ -111,7 +110,7 @@ public class Scavenger extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getMoving()
 	 */
 	@Override
@@ -121,7 +120,7 @@ public class Scavenger extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getRange()
 	 */
 	@Override
@@ -140,7 +139,7 @@ public class Scavenger extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getType()
 	 */
 	@Override
@@ -150,7 +149,7 @@ public class Scavenger extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see org.amberstar.virtualwar.Robot#runBaseAction()
 	 */
 	@Override

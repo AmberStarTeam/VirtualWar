@@ -26,9 +26,8 @@ import org.virtualwar.config.Constant;
 import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.sound.ThreadSoundRun;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Robot Class.
+ * The abstract class of robots.
  *
  * @author amberstar
  */
@@ -86,7 +85,7 @@ public abstract class Robot {
 	}
 
 	/**
-	 * Can move.
+	 * If can move.
 	 *
 	 * @return if robot can move
 	 */
@@ -148,9 +147,9 @@ public abstract class Robot {
 	public abstract String getAttackSound();
 
 	/**
-	 * Gets the available move.
+	 * Gets the available attacks as a list.
 	 *
-	 * @return the available move
+	 * @return the available attacks
 	 */
 	public List<Action> getAvailableAtacks() {
 		List<Action> retVal = new ArrayList<Action>();
@@ -164,9 +163,9 @@ public abstract class Robot {
 	}
 
 	/**
-	 * Gets the availenergyove.
+	 * Gets the the available attacks as a list.
 	 *
-	 * @return the available move
+	 * @return the available attacks
 	 */
 	public List<Action> getAvailableMove() {
 		List<Action> retVal = new ArrayList<Action>();
@@ -189,7 +188,7 @@ public abstract class Robot {
 	}
 
 	/**
-	 * (non-Javadoc)
+	 * Get the cell where the robot is in
 	 *
 	 * @return the cell the robot is in
 	 */
@@ -214,14 +213,14 @@ public abstract class Robot {
 	public abstract int getCostAction();
 
 	/**
-	 * Gets the cost moving.
+	 * Gets the cost of moving.
 	 *
 	 * @return the coast of moving
 	 */
 	public abstract int getCostMoving();
 
 	/**
-	 * Gets the damage taken.
+	 * Gets the damage it make.
 	 *
 	 * @return the amount of damage it takes
 	 */
@@ -253,7 +252,7 @@ public abstract class Robot {
 	public abstract String getMoveSound();
 
 	/**
-	 * Gets the moving.
+	 * Gets the moving in relative position.
 	 *
 	 * @return the list of Coordinates it can moves
 	 */
@@ -296,7 +295,7 @@ public abstract class Robot {
 	 */
 
 	public void hasBeenMined() {
-		setEnergy(energy - getDamageTaken());
+		setEnergy(energy - Constant.SCAVENGER_DAMAGE_SUBMIT);
 
 		new Thread(new Runnable() {
 			@Override
@@ -321,7 +320,7 @@ public abstract class Robot {
 		setEnergy(energy - rob.getDamageTaken());
 	}
 
-	/**
+	/*
 	 * (non-Javadoc)
 	 *
 	 * @see java.lang.Object#hashCode()
@@ -350,7 +349,7 @@ public abstract class Robot {
 	}
 
 	/**
-	 * Checks if is valid.
+	 * Checks if the coordinate are valid.
 	 *
 	 * @param cords
 	 *            the coordinates of the cell to test
@@ -387,7 +386,7 @@ public abstract class Robot {
 	}
 
 	/**
-	 * Run base action.
+	 * Run the action when the robot is in his base.
 	 */
 	public abstract void runBaseAction();
 

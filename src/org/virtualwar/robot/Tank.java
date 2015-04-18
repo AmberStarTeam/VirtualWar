@@ -21,7 +21,6 @@ import org.virtualwar.config.Constant;
 import org.virtualwar.config.TextData;
 import org.virtualwar.util.Coordinates;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Tank Class.
  *
@@ -46,7 +45,7 @@ public class Tank extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getAttackSound()
 	 */
 	@Override
@@ -56,7 +55,7 @@ public class Tank extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getCostAction()
 	 */
 	@Override
@@ -66,7 +65,7 @@ public class Tank extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getCostMoving()
 	 */
 	@Override
@@ -76,7 +75,7 @@ public class Tank extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getDamageTaken()
 	 */
 	@Override
@@ -86,7 +85,7 @@ public class Tank extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getMoveSound()
 	 */
 	@Override
@@ -96,7 +95,7 @@ public class Tank extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getMoving()
 	 */
 	@Override
@@ -106,7 +105,7 @@ public class Tank extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getRange()
 	 */
 	@Override
@@ -116,7 +115,7 @@ public class Tank extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.amberstar.virtualwar.Robot#getType()
 	 */
 	@Override
@@ -126,7 +125,7 @@ public class Tank extends Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see org.virtualwar.robot.Robot#runBaseAction()
 	 */
 	@Override

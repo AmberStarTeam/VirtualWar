@@ -20,7 +20,6 @@ import org.virtualwar.action.Action;
 import org.virtualwar.board.Board;
 import org.virtualwar.robot.Robot;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Inteligence.
  *
@@ -28,7 +27,7 @@ import org.virtualwar.robot.Robot;
  */
 public abstract class Inteligence {
 
-	/** The ls robot. */
+	/** The list of robot. */
 	private List<Robot> lsRobot;
 
 	/** The team. */
@@ -79,15 +78,15 @@ public abstract class Inteligence {
 	 * Gets the initial robots.
 	 *
 	 * @param numberOfBots
-	 *            the number of bots
+	 *            the number of robots
 	 * @return the initial robots
 	 */
 	public abstract List<Robot> getInitialRobots(int numberOfBots);
 
 	/**
-	 * Gets the ls robot.
+	 * Gets the list of robot.
 	 *
-	 * @return the ls robot
+	 * @return the list of robot
 	 */
 	public List<Robot> getLsRobot() {
 		return lsRobot;

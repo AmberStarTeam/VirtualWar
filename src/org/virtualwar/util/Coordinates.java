@@ -44,7 +44,7 @@ public class Coordinates {
 	}
 
 	/**
-	 * Adds the.
+	 * Adds the coordinate c into this one as a new one.
 	 *
 	 * @param c
 	 *            coordinate to add
@@ -55,7 +55,7 @@ public class Coordinates {
 	}
 
 	/**
-	 * Divide.
+	 * Divide the coordinate c into this one as a new one.
 	 *
 	 * @param n
 	 *            the number to divide by
@@ -67,7 +67,7 @@ public class Coordinates {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -111,7 +111,7 @@ public class Coordinates {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -124,7 +124,7 @@ public class Coordinates {
 	}
 
 	/**
-	 * Minus.
+	 * Minus the coordinate c into this one as a new one.
 	 *
 	 * @param c
 	 *            coordinate to minus
@@ -135,7 +135,7 @@ public class Coordinates {
 	}
 
 	/**
-	 * Times.
+	 * Multiplies the coordinate c into this one as a new one.
 	 *
 	 * @param n
 	 *            the number to multiply by
@@ -184,7 +184,7 @@ public class Coordinates {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

@@ -17,9 +17,8 @@ package org.virtualwar.action;
 import org.virtualwar.robot.Robot;
 import org.virtualwar.util.Coordinates;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Action Class.
+ * The abstract class for actions.
  *
  * @author amberstar
  */
@@ -28,7 +27,7 @@ public abstract class Action {
 	/** the robot source. */
 	private Robot robotIn;
 
-	/** the direction of action. */
+	/** the direction of the action in relative position. */
 	private Coordinates direction;
 
 	/**
@@ -50,14 +49,14 @@ public abstract class Action {
 	public abstract void act();
 
 	/**
-	 * Can do it.
+	 * Can the action be run?
 	 *
 	 * @return if possible
 	 */
 	public abstract boolean canDoIt();
 
 	/**
-	 * Gets the direction of action.
+	 * Gets the direction of an action.
 	 *
 	 * @return the direction of the action
 	 */
@@ -66,7 +65,7 @@ public abstract class Action {
 	}
 
 	/**
-	 * Gets the robot source.
+	 * Gets the source robot.
 	 *
 	 * @return the source of the action
 	 */

@@ -27,7 +27,6 @@ import org.virtualwar.robot.Shooter;
 import org.virtualwar.robot.Tank;
 import org.virtualwar.util.Coordinates;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Board class is the class for the actual board of game containing robots,
  * obstacle and mines.
@@ -44,7 +43,7 @@ public class Board {
 	 *            the height size of the board
 	 * @param width
 	 *            the width size of the board
-	 * @return the instance, if nt valid, get a null instance
+	 * @return the instance, if not valid, get a null instance
 	 */
 	public static Board newBoard(int height, int width) {
 		if (height <= 3 || width <= 3) {
@@ -78,7 +77,7 @@ public class Board {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -140,7 +139,7 @@ public class Board {
 	}
 
 	/**
-	 * Generate.
+	 * Generate the whole grind.
 	 *
 	 * @param pourcentageGen
 	 *            the percentage of obstacles in the way
@@ -195,12 +194,12 @@ public class Board {
 	}
 
 	/**
-	 * Out grind plus legend.
+	 * Get the value of the cell row (state) with the view (equip) into it.
 	 *
 	 * @param cell
 	 *            the cell of chose
 	 * @param state
-	 *            1, 2 or 3
+	 *            0, 1 or 2
 	 * @param equipe
 	 *            the equip
 	 * @return the string
@@ -304,7 +303,7 @@ public class Board {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -354,7 +353,7 @@ public class Board {
 	 * @param j
 	 *            equivalent to x
 	 * @param hasTank
-	 *            if true, will find a path for tanks
+	 *            if true, will find a path for tanks too
 	 * @return if tmpGrind[i][j] == 1
 	 */
 	private boolean hasPathHelper(int[][] grindToInt, int[][] tmpGrind, int i,
@@ -434,7 +433,7 @@ public class Board {
 	 *
 	 * @param coordinates
 	 *            the position of the test
-	 * @return true if base
+	 * @return the team of the base (0 if none)
 	 */
 	public int isBase(Coordinates coordinates) {
 		return (isValid(coordinates)) ? getCell(coordinates).isBase()
@@ -446,7 +445,7 @@ public class Board {
 	 *
 	 * @param coordinates
 	 *            the position of the test
-	 * @return true if mine
+	 * @return the team of the mine (0 if none)
 	 */
 	public int isMine(Coordinates coordinates) {
 		return (isValid(coordinates)) ? getCell(coordinates).mineContains()
@@ -454,7 +453,7 @@ public class Board {
 	}
 
 	/**
-	 * Checks if is obstacle.
+	 * Checks if it is a obstacle.
 	 *
 	 * @param coordinates
 	 *            the position of the test
@@ -480,7 +479,7 @@ public class Board {
 	}
 
 	/**
-	 * generate a printable version.
+	 * generate a printable version (only the board).
 	 *
 	 * @param equipe
 	 *            the team to generate for
@@ -528,7 +527,7 @@ public class Board {
 	}
 
 	/**
-	 * Out grind plus legend.
+	 * Generate a printable version with the legend.
 	 *
 	 * @param equipe
 	 *            the equip
