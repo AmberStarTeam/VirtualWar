@@ -587,6 +587,7 @@ public class Game {
 	 * Start debug.
 	 */
 	private void startDebug() {
+		initConfig();
 		nameTeam1 = "team 1";
 		nameTeam2 = "team 2";
 		nmbRobots = 2;
@@ -608,6 +609,7 @@ public class Game {
 	}
 
 	private void startDebugIa() {
+		initConfig();
 		nameTeam1 = "team 1";
 		nameTeam2 = "team 2";
 		nmbRobots = 4;

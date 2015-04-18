@@ -16,9 +16,9 @@ public class Config {
 
 	/** The language. */
 	public static String language = "fr";
-	
+
 	/** The sleep_time_ia. */
-	public static int sleep_time_ia = 2;
+	public static int sleep_time_ia = 400;
 
 	/**
 	 * private constructor.
