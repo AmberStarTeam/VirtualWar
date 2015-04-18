@@ -388,15 +388,14 @@ public class Game {
 	}
 
 	private void initConfig() {
-		String left = TextData.GAME_CHOSE_SOUND_INPUT.toString().split(
-				"" + '\u9999')[0];
-		String right = TextData.GAME_CHOSE_SOUND_INPUT.toString().split(
-				"" + '\u9999')[1];
+		String left = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[0];
+		String right = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[1];
+		Config.language = getInputValue(left, right);
+
+		left = TextData.GAME_CHOSE_SOUND_INPUT.toString().split("" + '\u9999')[0];
+		right = TextData.GAME_CHOSE_SOUND_INPUT.toString().split("" + '\u9999')[1];
 		System.out.println(TextData.GAME_CHOSE_SOUND);
 		Config.soundOn = getInputValue(left, right).equals(left.charAt(0));
-		left = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[0];
-		right = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[1];
-		Config.language = getInputValue(left, right);
 
 	}
 
@@ -498,7 +497,8 @@ public class Game {
 	 * Run.
 	 */
 	public void run() {
-		System.out.println("Debug mode ?  :");
+		initConfig();
+		System.out.println("(ia) / (debug) / (normal) ?  :");
 		String inp = sc.nextLine().toLowerCase();
 		if (inp.equals("true")) {
 			startDebug();
@@ -587,7 +587,6 @@ public class Game {
 	 * Start debug.
 	 */
 	private void startDebug() {
-		initConfig();
 		nameTeam1 = "team 1";
 		nameTeam2 = "team 2";
 		nmbRobots = 2;
@@ -609,7 +608,6 @@ public class Game {
 	}
 
 	private void startDebugIa() {
-		initConfig();
 		nameTeam1 = "team 1";
 		nameTeam2 = "team 2";
 		nmbRobots = 4;
@@ -636,7 +634,6 @@ public class Game {
 	 * Start normal.
 	 */
 	private void startNormal() {
-		initConfig();
 		initTeam();
 		initNmbRobot();
 		initIa();
