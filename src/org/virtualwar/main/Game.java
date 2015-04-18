@@ -634,6 +634,7 @@ public class Game {
 	 * Start normal.
 	 */
 	private void startNormal() {
+		initConfig();
 		initTeam();
 		initNmbRobot();
 		initIa();
