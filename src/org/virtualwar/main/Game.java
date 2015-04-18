@@ -246,15 +246,16 @@ public class Game {
 				inData += "0\n";
 				if (robTmp.canMove()) {
 					inData += "1\n";
-					outData += "(1) Déplacer";
+					outData += "(1) DÃ©placer";
 				}
 				if (robTmp.canAttack()) {
 					inData += "2\n";
 					if (!outData.equals("(0) " + TextData.GAME_CANCEL + ", ")) {
 						outData += " " + TextData.GAME_OR + " ";
 					}
-					outData += ((robTmp instanceof Scavenger) ? "(2) " + TextData.GAME_MINE
-							: "(2) " + TextData.GAME_ATTACK);
+					outData += ((robTmp instanceof Scavenger) ? "(2) "
+							+ TextData.GAME_MINE : "(2) "
+							+ TextData.GAME_ATTACK);
 
 				}
 
@@ -303,8 +304,8 @@ public class Game {
 			strChoix += (i + 1) + "\n";
 		}
 
-		return Integer.parseInt(getInputValue(strChoix + "0\n", txtOut
-				+ "0 " + TextData.GAME_CANCEL + "\n")) - 1;
+		return Integer.parseInt(getInputValue(strChoix + "0\n", txtOut + "0 "
+				+ TextData.GAME_CANCEL + "\n")) - 1;
 	}
 
 	/**
@@ -386,19 +387,34 @@ public class Game {
 		b2 = board.getCoordsBase(Constant.ID_TEAM_B);
 	}
 
+	private void initConfig() {
+		String left = TextData.GAME_CHOSE_SOUND_INPUT.toString().split(
+				"" + '\u9999')[0];
+		String right = TextData.GAME_CHOSE_SOUND_INPUT.toString().split(
+				"" + '\u9999')[1];
+		System.out.println(TextData.GAME_CHOSE_SOUND);
+		Config.soundOn = getInputValue(left, right).equals(left.charAt(0));
+		left = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[0];
+		right = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[1];
+		Config.language = getInputValue(left, right);
+
+	}
+
 	private void initIa() {
-		String left = TextData.GAME_CHOSE_IA_INPUT.toString().split(""+'\u9999')[0];
-		String right = TextData.GAME_CHOSE_IA_INPUT.toString().split(""+'\u9999')[1];
-		
-		System.out.println(TextData.GAME_IS_PLAYER_X_IA.toString()
-				.replaceAll("X", "1"));
+		String left = TextData.GAME_CHOSE_IA_INPUT.toString().split(
+				"" + '\u9999')[0];
+		String right = TextData.GAME_CHOSE_IA_INPUT.toString().split(
+				"" + '\u9999')[1];
+
+		System.out.println(TextData.GAME_IS_PLAYER_X_IA.toString().replaceAll(
+				"X", "1"));
 		String in = getInputValue(left, right);
 		if (in.equals(left.charAt(0))) {
 			isPlayerOneHuman = false;
 			playerOne = new RandomInteligence(Constant.ID_TEAM_A, null);
 		}
-		System.out.println(TextData.GAME_IS_PLAYER_X_IA.toString()
-				.replaceAll("X", "2"));
+		System.out.println(TextData.GAME_IS_PLAYER_X_IA.toString().replaceAll(
+				"X", "2"));
 		in = getInputValue(left, right);
 		if (in.equals(left.charAt(0))) {
 			isPlayerTwoHuman = false;

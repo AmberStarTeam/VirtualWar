@@ -283,29 +283,39 @@ public enum TextData {
 
 	/** The game cancel. */
 	GAME_CANCEL("Anuler", "Cancel"),
-	
+
+	/** The game moving on. */
 	GAME_MOVING_ON("Déplacement en ", "Moving on "),
 
 	/** The game board size. */
 	GAME_BOARD_SIZE(
 			"Choisissez la taille du plateau (elle ne doit pas être inférieure à 3)",
 			"Chose a board size (can't be inferior to 3)"),
-			
+
 	/** The game height. */
-	GAME_HEIGHT("Hauteur","Height"),
-	
+	GAME_HEIGHT("Hauteur", "Height"),
+
 	/** The game width. */
-	GAME_WIDTH("Largeur","Width"),
-	
+	GAME_WIDTH("Largeur", "Width"),
+
 	/** The game is player x ia. */
-	GAME_IS_PLAYER_X_IA("Le joueur X est-il une ia? ","Is the player X an ia?"),
-	
+	GAME_IS_PLAYER_X_IA("Le joueur X est-il une ia? ", "Is the player X an ia?"),
+
 	/** The game chose ia input. */
-	GAME_CHOSE_IA_INPUT("o\nn" + '\u9999' + "(o) oui, (n) non", "y\nn" + '\u9999' + "(y) yes, (n) no"),
-	
+	GAME_CHOSE_IA_INPUT("o\nn" + '\u9999' + "(o) oui, (n) non", "y\nn"
+			+ '\u9999' + "(y) yes, (n) no"),
+
+	GAME_LANG_INPUT("fr\nen" + '\u9999' + "en " + GAME_OR.get("fr") + " en :"),
+
+	/** The game chose sound. */
+	GAME_CHOSE_SOUND("Son : ", "Sound : "),
+
+	/** The game chose ia input. */
+	GAME_CHOSE_SOUND_INPUT("o\nf" + '\u9999' + "(o) on, (f) off"),
+
 	/** The game obstacle. */
 	GAME_OBSTACLE("Pourcentage d'obstacles : ", "Percentage of obstacle : "),
-	
+
 	/** The game turn player. */
 	GAME_TURN_PLAYER("Au tour de ", "It's the turn of "),
 
