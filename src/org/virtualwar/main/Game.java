@@ -399,7 +399,7 @@ public class Game {
 		left = TextData.GAME_CHOSE_SOUND_INPUT.toString().split("" + '\u9999')[0];
 		right = TextData.GAME_CHOSE_SOUND_INPUT.toString().split("" + '\u9999')[1];
 		System.out.println(TextData.GAME_CHOSE_SOUND);
-		Config.soundOn = getInputValue(left, right).equals(left.charAt(0));
+		Config.soundOn = getInputValue(left, right).equals(""+left.charAt(0));
 
 	}
 
