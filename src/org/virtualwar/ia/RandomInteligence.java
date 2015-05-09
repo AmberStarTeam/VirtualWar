@@ -38,6 +38,14 @@ public class RandomInteligence extends Inteligence {
 	/**
 	 * Instantiates a new random inteligence.
 	 *
+	 */
+	public RandomInteligence() {
+		super();
+	}
+
+	/**
+	 * Instantiates a new random inteligence.
+	 *
 	 * @param team
 	 *            the team
 	 * @param board

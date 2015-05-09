@@ -116,7 +116,7 @@ public class Game {
 	 *            the list robot
 	 * @return true, if anything to do
 	 */
-	private boolean anyCanDo(List<Robot> lsRobot) {
+	public boolean anyCanDo(List<Robot> lsRobot) {
 		for (Robot rob : lsRobot) {
 			if (rob.getAvailableAtacks() != null
 					|| rob.getAvailableMove() != null) {
@@ -133,7 +133,7 @@ public class Game {
 	 * @param lsRobot
 	 *            the ls robot
 	 */
-	private void checkAlive(List<Robot> lsRobot) {
+	public void checkAlive(List<Robot> lsRobot) {
 		List<Robot> robToRemove = new ArrayList<Robot>();
 		for (Robot rob : lsRobot) {
 			if (rob.getEnergy() <= 0) {
@@ -158,7 +158,7 @@ public class Game {
 	 *            the board
 	 * @return the list
 	 */
-	private List<Robot> choiceOfRobots(int nb, int team, Board board) {
+	public List<Robot> choiceOfRobots(int nb, int team, Board board) {
 		List<Robot> l = new ArrayList<Robot>();
 		Robot robot;
 
@@ -205,7 +205,7 @@ public class Game {
 	 * @param lsRobot
 	 *            the ls robot
 	 */
-	private void doBaseCheck(List<Robot> lsRobot) {
+	public void doBaseCheck(List<Robot> lsRobot) {
 		for (Robot rob : lsRobot) {
 			if (rob.isInBase()) {
 				rob.runBaseAction();
@@ -220,7 +220,7 @@ public class Game {
 	 *            the ls robot
 	 * @return the action
 	 */
-	private Action getAction(List<Robot> lsRobot) {
+	public Action getAction(List<Robot> lsRobot) {
 		while (true) {
 			List<Robot> robotListFinal = new ArrayList<Robot>();
 			for (Robot rob : lsRobot) {
@@ -286,7 +286,7 @@ public class Game {
 	 *            the ls
 	 * @return the index val act
 	 */
-	private int getIndexValAct(List<Action> ls) {
+	public int getIndexValAct(List<Action> ls) {
 		String txtOut = "";
 		String strChoix = "";
 		for (int i = 0; i < ls.size(); i++) {
@@ -316,7 +316,7 @@ public class Game {
 	 *            the ls
 	 * @return the index val rob
 	 */
-	private int getIndexValRob(List<Robot> ls) {
+	public int getIndexValRob(List<Robot> ls) {
 		String strChoix = "";
 		String txtToOut = "";
 		Coordinates tmpCords = null;
@@ -341,7 +341,7 @@ public class Game {
 	 *            the text to print
 	 * @return the value of input
 	 */
-	private String getInputValue(String lsChoix, String txtToOut) {
+	public String getInputValue(String lsChoix, String txtToOut) {
 		String[] lsChoixTab = lsChoix.split("\n");
 		System.out.println(txtToOut);
 		boolean inputGood = false;
@@ -369,7 +369,7 @@ public class Game {
 	/**
 	 * Init the board.
 	 */
-	private void initBoard() {
+	public void initBoard() {
 		System.out.println(TextData.GAME_BOARD_SIZE);
 		System.out.println(TextData.GAME_HEIGHT + " :");
 		height = readSafeInt();
@@ -391,7 +391,7 @@ public class Game {
 	/**
 	 * Init the config.
 	 */
-	private void initConfig() {
+	public void initConfig() {
 		String left = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[0];
 		String right = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[1];
 		Config.language = getInputValue(left, right);
@@ -406,7 +406,7 @@ public class Game {
 	/**
 	 * Init the ia.
 	 */
-	private void initIa() {
+	public void initIa() {
 		String left = TextData.GAME_CHOSE_IA_INPUT.toString().split(
 				"" + '\u9999')[0];
 		String right = TextData.GAME_CHOSE_IA_INPUT.toString().split(
@@ -431,7 +431,7 @@ public class Game {
 	/**
 	 * Inits the number of robot.
 	 */
-	private void initNmbRobot() {
+	public void initNmbRobot() {
 		System.out.println(TextData.GAME_CHOSE_NMB_BOTS);
 		nmbRobots = readSafeInt();
 		while (nmbRobots >= 6 || nmbRobots <= 0) {
@@ -443,7 +443,7 @@ public class Game {
 	/**
 	 * Inits the robots.
 	 */
-	private void initRobots() {
+	public void initRobots() {
 		if (isPlayerOneHuman) {
 			System.out.println(TextData.GAME_CHOSE_ROBOTS_TYPE.toString()
 					.replaceAll("X", nameTeam1));
@@ -479,7 +479,7 @@ public class Game {
 	/**
 	 * Inits the team.
 	 */
-	private void initTeam() {
+	public void initTeam() {
 		System.out.println(TextData.GAME_NAME_TEAM_X.toString().replaceAll("X",
 				"1"));
 		nameTeam1 = sc.nextLine();
@@ -498,7 +498,7 @@ public class Game {
 	 *
 	 * @return the value
 	 */
-	private int readSafeInt() {
+	public int readSafeInt() {
 		while (true) {
 			try {
 				return Integer.parseInt(sc.nextLine());
@@ -603,7 +603,7 @@ public class Game {
 	/**
 	 * Start the debug mode.
 	 */
-	private void startDebug() {
+	public void startDebug() {
 		nameTeam1 = "team 1";
 		nameTeam2 = "team 2";
 		nmbRobots = 2;
@@ -627,7 +627,7 @@ public class Game {
 	/**
 	 * Start the ia debug mode.
 	 */
-	private void startDebugIa() {
+	public void startDebugIa() {
 		nameTeam1 = "team 1";
 		nameTeam2 = "team 2";
 		nmbRobots = 4;
@@ -653,7 +653,7 @@ public class Game {
 	/**
 	 * Start the normal game.
 	 */
-	private void startNormal() {
+	public void startNormal() {
 		initTeam();
 		initNmbRobot();
 		initIa();

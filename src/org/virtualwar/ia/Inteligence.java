@@ -31,10 +31,21 @@ public abstract class Inteligence {
 	private List<Robot> lsRobot;
 
 	/** The team. */
-	private final int team;
+	private int team;
 
 	/** The board. */
 	private Board board;
+
+	/**
+	 * Instantiates a new inteligence.
+	 *
+	 * @param team
+	 *            the team
+	 * @param board
+	 *            the board
+	 */
+	public Inteligence() {
+	}
 
 	/**
 	 * Instantiates a new inteligence.
@@ -114,5 +125,9 @@ public abstract class Inteligence {
 
 	public void setLsRobot(List<Robot> lsRobot) {
 		this.lsRobot = lsRobot;
+	}
+
+	public void setTeam(int team) {
+		this.team = team;
 	}
 }
