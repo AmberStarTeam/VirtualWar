@@ -25,7 +25,7 @@ import org.virtualwar.util.Coordinates;
 public abstract class Action {
 
 	/** the robot source. */
-	private static Robot robotIn;
+	private Robot robotIn;
 
 	/** the direction of the action in relative position. */
 	private Coordinates direction;
@@ -69,7 +69,7 @@ public abstract class Action {
 	 *
 	 * @return the source of the action
 	 */
-	public static Robot getRobotSource() {
+	public Robot getRobotSource() {
 		return robotIn;
 	}
 
