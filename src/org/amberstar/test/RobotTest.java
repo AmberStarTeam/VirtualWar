@@ -102,9 +102,6 @@ public class RobotTest {
 			} catch (Exception e) {
 				fail("Not yet implemented"); // TODO
 			}
-			while (tmp.isAlive()) {
-				System.out.println("Running");
-			}
 			try {
 				Thread.sleep(1000);
 			} catch (Exception e) {
@@ -115,11 +112,38 @@ public class RobotTest {
 
 	@Test
 	public final void testGetAvailableAtacks() {
+		/*Board b2 = Board.newBoard(4, 10);
+		Coordinates c2 = new Coordinates(0, 0);
+		Robot r2 = new Scavenger(1, c2, b2);
+		Coordinates c3 = new Coordinates(1, 1);
+		Shooter s2 = new Shooter(2, c3, b2);
+		assertEquals(s2.getAvailableAtacks(), null);
+		
+		Move ms = new Move(r2, Constant.RIGHT);
+		ms.act();
+		int y =r2.getAvailableAtacks().size();
+		String t1 ="";
+		for(int i =0 ; i<y ; i++){
+			t1 = t1 +r2.getAvailableAtacks().get(i).toString();
+		}
+		System.out.println(t1);
+		assertEquals(t1,"invalide");*/
 		// fail("Not yet implemented"); // TODO
 	}
 
 	@Test
 	public final void testGetAvailableMove() {
+		/*Board b2 = Board.newBoard(4, 10);
+		Coordinates c2 = new Coordinates(0, 0);
+		Robot r2 = new Scavenger(1, c2, b2);
+		
+		int y =r2.getAvailableMove().size();
+		String t1 ="";
+		for(int i =0 ; i<y ; i++){
+			t1 = t1 +r2.getAvailableMove().get(i).toString();
+		}
+		System.out.println(t1);
+		*/
 		// fail("Not yet implemented"); // TODO
 	}
 
@@ -253,9 +277,6 @@ public class RobotTest {
 				tmp.start();
 			} catch (Exception e) {
 				fail("Not yet implemented"); // TODO
-			}
-			while (tmp.isAlive()) {
-				System.out.println("Running");
 			}
 			try {
 				Thread.sleep(1000);

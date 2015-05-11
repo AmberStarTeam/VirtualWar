@@ -1,9 +1,15 @@
 package org.amberstar.test;
 
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.virtualwar.board.Board;
+import org.virtualwar.robot.Robot;
+import org.virtualwar.robot.Scavenger;
+import org.virtualwar.util.Coordinates;
+
+import com.sun.swing.internal.plaf.basic.resources.basic;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -12,7 +18,12 @@ import org.junit.Test;
  * @author amberStar
  */
 public class BoardTest {
-    
+	
+	Board b = new Board(10, 5);
+	Coordinates c = new Coordinates(0,0);
+	Coordinates c2 = new Coordinates(2,2);
+	Robot r = new Scavenger(0,c2,b);
+	
     /**
      * Sets the up before class.
      *
@@ -27,7 +38,7 @@ public class BoardTest {
      */
     @Test
     public void testBoard() {
-        fail("Not yet implemented");
+        //fail("Not yet implemented");
     }
 
     /**
@@ -35,7 +46,7 @@ public class BoardTest {
      */
     @Test
     public void testGenerate() {
-        fail("Not yet implemented");
+        //fail("Not yet implemented");
     }
 
     /**
@@ -43,7 +54,8 @@ public class BoardTest {
      */
     @Test
     public void testGetHeight() {
-        fail("Not yet implemented");
+    	assertEquals(b.getHeight(),10);
+        //fail("Not yet implemented");
     }
 
     /**
@@ -51,7 +63,8 @@ public class BoardTest {
      */
     @Test
     public void testGetWidth() {
-        fail("Not yet implemented");
+    	assertEquals(b.getWidth(),5);
+        //fail("Not yet implemented");
     }
 
     /**
@@ -59,7 +72,9 @@ public class BoardTest {
      */
     @Test
     public void testGetCell() {
-        fail("Not yet implemented");
+    	System.out.println(b.getCell(c));
+    	assertEquals(b.getCell(c),c);
+        //fail("Not yet implemented");
     }
 
     /**
@@ -67,7 +82,9 @@ public class BoardTest {
      */
     @Test
     public void testGetRobot() {
-        fail("Not yet implemented");
+    	assertEquals(b.getRobot(c),null);
+    	assertEquals(b.getRobot(c2), "Piegeur[energy=50, team=1, coordinates=[Hauteur=0, Largeur=0], regenBase=2, maxEng=50, moves=[[Hauteur=-1, Largeur=0], [Hauteur=1, Largeur=0], [Hauteur=0, Largeur=1], [Hauteur=0, Largeur=-1], [Hauteur=-1, Largeur=1], [Hauteur=-1, Largeur=-1], [Hauteur=1, Largeur=1], [Hauteur=1, Largeur=-1]]]");
+        //fail("Not yet implemented");
     }
 
     /**
@@ -75,7 +92,7 @@ public class BoardTest {
      */
     @Test
     public void testSetRobot() {
-        fail("Not yet implemented");
+        //fail("Not yet implemented");
     }
 
     /**
@@ -83,7 +100,7 @@ public class BoardTest {
      */
     @Test
     public void testSetMine() {
-        fail("Not yet implemented");
+        //fail("Not yet implemented");
     }
 
     /**
@@ -91,7 +108,8 @@ public class BoardTest {
      */
     @Test
     public void testIsBase() {
-        fail("Not yet implemented");
+    	assertEquals(b.isBase(c), 1);
+        //fail("Not yet implemented");
     }
 
     /**
@@ -99,7 +117,7 @@ public class BoardTest {
      */
     @Test
     public void testIsObstacle() {
-        fail("Not yet implemented");
+        //fail("Not yet implemented");
     }
 
     /**
@@ -107,7 +125,7 @@ public class BoardTest {
      */
     @Test
     public void testIsMine() {
-        fail("Not yet implemented");
+        //fail("Not yet implemented");
     }
 
     /**
@@ -115,7 +133,8 @@ public class BoardTest {
      */
     @Test
     public void testIsValid() {
-        fail("Not yet implemented");
+    	assertEquals(b.isValid(c),true);
+        //fail("Not yet implemented");
     }
 
     /**
@@ -123,7 +142,12 @@ public class BoardTest {
      */
     @Test
     public void testOutGrind() {
-        fail("Not yet implemented");
+    	b.outGrind(1);
+    	try{
+    		Robot r = new Scavenger(1,c2,b);
+    	} catch (Exception e){
+    	}
+    	//fail("Not yet implemented");
     }
 
     /**
@@ -131,7 +155,7 @@ public class BoardTest {
      */
     @Test
     public void testToString() {
-        fail("Not yet implemented");
+        //fail("Not yet implemented");
     }
 
 }
