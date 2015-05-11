@@ -1,9 +1,23 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.amberstar.test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
-import org.virtualwar.action.Action;
 import org.virtualwar.action.Attack;
 import org.virtualwar.action.Move;
 import org.virtualwar.board.Base;
@@ -22,29 +36,16 @@ public class RobotTest {
 	Robot r = new Scavenger(1, c, b);
 
 	@Test
-	public final void testHashCode() {
-		// fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testRobot() {
-		// fail("Not yet implemented"); // TODO
-		Board b1 = Board.newBoard(4, 10);
-		Coordinates c1 = new Coordinates(0, 0);
-		Robot r1 = new Scavenger(1, c1, b1);
-	}
-
-	@Test
 	public final void testCanAttack() {
 		Board b2 = Board.newBoard(4, 10);
 		Coordinates c2 = new Coordinates(0, 0);
 		Robot r2 = new Scavenger(1, c2, b2);
 		Coordinates c3 = new Coordinates(1, 1);
 		Shooter s2 = new Shooter(2, c3, b2);
-		assertEquals(s2.canAttack(),false);
+		assertEquals(s2.canAttack(), false);
 		Move ms = new Move(r2, Constant.RIGHT);
 		ms.act();
-		assertEquals(s2.canAttack(),true);		
+		assertEquals(s2.canAttack(), true);
 		// fail("Not yet implemented"); // TODO
 	}
 
@@ -53,17 +54,22 @@ public class RobotTest {
 		Board b2 = Board.newBoard(4, 10);
 		Coordinates c2 = new Coordinates(0, 2);
 		Robot r2 = new Scavenger(1, c2, b2);
-		Coordinates o1 = new Coordinates(0,1);
-		Coordinates o2 = new Coordinates(1,2);
-		Coordinates o3 = new Coordinates(0,3);
-		Coordinates o4 = new Coordinates(1,1);
-		Coordinates o5 = new Coordinates(1,3);
+		Coordinates o1 = new Coordinates(0, 1);
+		Coordinates o2 = new Coordinates(1, 2);
+		Coordinates o3 = new Coordinates(0, 3);
+		Coordinates o4 = new Coordinates(1, 1);
+		Coordinates o5 = new Coordinates(1, 3);
 		Robot r3 = new Scavenger(1, o1, b2);
 		Robot r4 = new Scavenger(1, o2, b2);
 		Robot r5 = new Scavenger(1, o3, b2);
 		Robot r6 = new Scavenger(1, o4, b2);
 		Robot r7 = new Scavenger(1, o5, b2);
-		assertEquals(r2.canMove(),false);
+		assertEquals(r2.canMove(), false);
+		// fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testClone() {
 		// fail("Not yet implemented"); // TODO
 	}
 
@@ -71,6 +77,16 @@ public class RobotTest {
 	public final void testEqualsObject() {
 		// fail("Not yet implemented"); // TODO
 
+	}
+
+	@Test
+	public final void testEqualsObject1() {
+		// fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testFinalize() {
+		// fail("Not yet implemented"); // TODO
 	}
 
 	@Test
@@ -121,6 +137,11 @@ public class RobotTest {
 	}
 
 	@Test
+	public final void testGetClass() {
+		// fail("Not yet implemented"); // TODO
+	}
+
+	@Test
 	public final void testGetCoordinates() {
 		Coordinates c1 = new Coordinates(0, 0);
 		assertEquals(r.getCoordinates(), c1);
@@ -134,11 +155,11 @@ public class RobotTest {
 		for (Robot r1 : new Robot[] { new Tank(0, new Coordinates(0, 0), boa),
 				new Scavenger(0, cords, boa), new Shooter(0, cords, boa) }) {
 			System.out.println(r);
-			if (Action.getRobotSource() instanceof Tank) {
+			if (r1 instanceof Tank) {
 				assertEquals(r1.getCostAction(), Constant.TANK_ENERGY_ACTION);
-			} else if (Action.getRobotSource() instanceof Shooter) {
+			} else if (r1 instanceof Shooter) {
 				assertEquals(r1.getCostAction(), Constant.SHOOTER_ENERGY_ACTION);
-			} else if (Action.getRobotSource() instanceof Scavenger) {
+			} else if (r1 instanceof Scavenger) {
 				assertEquals(r1.getCostAction(),
 						Constant.SCAVENGER_ENERGY_ACTION);
 			}
@@ -154,11 +175,11 @@ public class RobotTest {
 		for (Robot r1 : new Robot[] { new Tank(0, new Coordinates(0, 0), boa),
 				new Scavenger(0, cords, boa), new Shooter(0, cords, boa) }) {
 			System.out.println(r);
-			if (Action.getRobotSource() instanceof Tank) {
+			if (r1 instanceof Tank) {
 				assertEquals(r1.getCostMoving(), Constant.TANK_ENERGY_MOVE);
-			} else if (Action.getRobotSource() instanceof Shooter) {
+			} else if (r1 instanceof Shooter) {
 				assertEquals(r1.getCostMoving(), Constant.SHOOTER_ENERGY_MOVE);
-			} else if (Action.getRobotSource() instanceof Scavenger) {
+			} else if (r1 instanceof Scavenger) {
 				assertEquals(r1.getCostMoving(), Constant.SCAVENGER_ENERGY_MOVE);
 			}
 		}
@@ -173,11 +194,11 @@ public class RobotTest {
 		for (Robot r1 : new Robot[] { new Tank(0, new Coordinates(0, 0), boa),
 				new Scavenger(0, cords, boa), new Shooter(0, cords, boa) }) {
 			System.out.println(r);
-			if (Action.getRobotSource() instanceof Tank) {
+			if (r1 instanceof Tank) {
 				assertEquals(r1.getCostMoving(), Constant.TANK_ENERGY_MOVE);
-			} else if (Action.getRobotSource() instanceof Shooter) {
+			} else if (r1 instanceof Shooter) {
 				assertEquals(r1.getCostMoving(), Constant.SHOOTER_ENERGY_MOVE);
-			} else if (Action.getRobotSource() instanceof Scavenger) {
+			} else if (r1 instanceof Scavenger) {
 				assertEquals(r1.getCostMoving(), Constant.SCAVENGER_ENERGY_MOVE);
 			}
 		}
@@ -192,11 +213,11 @@ public class RobotTest {
 		for (Robot r1 : new Robot[] { new Tank(0, new Coordinates(0, 0), boa),
 				new Scavenger(0, cords, boa), new Shooter(0, cords, boa) }) {
 			System.out.println(r);
-			if (Action.getRobotSource() instanceof Tank) {
+			if (r1 instanceof Tank) {
 				assertEquals(r1.getEnergy(), Constant.TANK_ENERGY_INITIAL);
-			} else if (Action.getRobotSource() instanceof Shooter) {
+			} else if (r1 instanceof Shooter) {
 				assertEquals(r1.getEnergy(), Constant.SHOOTER_ENERGY_INITIAL);
-			} else if (Action.getRobotSource() instanceof Scavenger) {
+			} else if (r1 instanceof Scavenger) {
 				assertEquals(r1.getEnergy(), Constant.SCAVENGER_ENERGY_INITIAL);
 			}
 		}
@@ -210,11 +231,11 @@ public class RobotTest {
 		for (Robot r1 : new Robot[] { new Tank(0, new Coordinates(0, 0), boa),
 				new Scavenger(0, cords, boa), new Shooter(0, cords, boa) }) {
 			System.out.println(r);
-			if (Action.getRobotSource() instanceof Tank) {
+			if (r1 instanceof Tank) {
 				assertEquals(r1.getEnergy(), Constant.TANK_ENERGY_INITIAL);
-			} else if (Action.getRobotSource() instanceof Shooter) {
+			} else if (r1 instanceof Shooter) {
 				assertEquals(r1.getEnergy(), Constant.SHOOTER_ENERGY_INITIAL);
-			} else if (Action.getRobotSource() instanceof Scavenger) {
+			} else if (r1 instanceof Scavenger) {
 				assertEquals(r1.getEnergy(), Constant.SCAVENGER_ENERGY_INITIAL);
 			}
 		}
@@ -257,11 +278,11 @@ public class RobotTest {
 		for (Robot r1 : new Robot[] { new Tank(0, new Coordinates(0, 0), boa),
 				new Scavenger(0, cords, boa), new Shooter(0, cords, boa) }) {
 			System.out.println(r);
-			if (Action.getRobotSource() instanceof Tank) {
+			if (r1 instanceof Tank) {
 				assertEquals(r1.getRange(), Constant.TANK_RANGE);
-			} else if (Action.getRobotSource() instanceof Shooter) {
+			} else if (r1 instanceof Shooter) {
 				assertEquals(r1.getRange(), Constant.SHOOTER_RANGE);
-			} else if (Action.getRobotSource() instanceof Scavenger) {
+			} else if (r1 instanceof Scavenger) {
 				assertEquals(r1.getRange(), Constant.SCAVENGER_RANGE);
 			}
 		}
@@ -275,11 +296,11 @@ public class RobotTest {
 		for (Robot r1 : new Robot[] { new Tank(0, new Coordinates(0, 0), boa),
 				new Scavenger(0, cords, boa), new Shooter(0, cords, boa) }) {
 			System.out.println(r);
-			if (Action.getRobotSource() instanceof Tank) {
+			if (r1 instanceof Tank) {
 				assertEquals(r1.getRegenBase(), Constant.TANK_ENERGY_REGEN);
-			} else if (Action.getRobotSource() instanceof Shooter) {
+			} else if (r1 instanceof Shooter) {
 				assertEquals(r1.getRegenBase(), Constant.SHOOTER_ENERGY_REGEN);
-			} else if (Action.getRobotSource() instanceof Scavenger) {
+			} else if (r1 instanceof Scavenger) {
 				assertEquals(r1.getRegenBase(), Constant.SCAVENGER_ENERGY_REGEN);
 			}
 		}
@@ -328,6 +349,11 @@ public class RobotTest {
 	}
 
 	@Test
+	public final void testHashCode() {
+		// fail("Not yet implemented"); // TODO
+	}
+
+	@Test
 	public final void testIsInBase() {
 		Coordinates cords1 = new Coordinates(1, 1);
 		Shooter s = new Shooter(2, cords1, b);
@@ -344,6 +370,21 @@ public class RobotTest {
 	}
 
 	@Test
+	public final void testNotify() {
+		// fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testNotifyAll() {
+		// fail("Not yet implemented"); // TODO
+	}
+
+	@Test
+	public final void testObject() {
+		// fail("Not yet implemented"); // TODO
+	}
+
+	@Test
 	public final void testRemoveEnergy() {
 		r.removeEnergy(10);
 		assertEquals(r.getEnergy(), Constant.SCAVENGER_ENERGY_INITIAL - 10);
@@ -351,11 +392,19 @@ public class RobotTest {
 	}
 
 	@Test
+	public final void testRobot() {
+		// fail("Not yet implemented"); // TODO
+		Board b1 = Board.newBoard(4, 10);
+		Coordinates c1 = new Coordinates(0, 0);
+		Robot r1 = new Scavenger(1, c1, b1);
+	}
+
+	@Test
 	public final void testRunBaseAction() {
 		r.getBoard().setMine(Constant.RIGHT, r.getTeam());
 		r.setEnergy(10);
 		r.runBaseAction();
-		assertEquals(r.getEnergy(),12);
+		assertEquals(r.getEnergy(), 12);
 		// fail("Not yet implemented"); // TODO
 	}
 
@@ -384,37 +433,12 @@ public class RobotTest {
 	}
 
 	@Test
-	public final void testObject() {
-		// fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testGetClass() {
-		// fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testEqualsObject1() {
-		// fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testClone() {
-		// fail("Not yet implemented"); // TODO
-	}
-
-	@Test
 	public final void testToString1() {
 		// fail("Not yet implemented"); // TODO
 	}
 
 	@Test
-	public final void testNotify() {
-		// fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testNotifyAll() {
+	public final void testWait() {
 		// fail("Not yet implemented"); // TODO
 	}
 
@@ -425,16 +449,6 @@ public class RobotTest {
 
 	@Test
 	public final void testWaitLongInt() {
-		// fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testWait() {
-		// fail("Not yet implemented"); // TODO
-	}
-
-	@Test
-	public final void testFinalize() {
 		// fail("Not yet implemented"); // TODO
 	}
 
