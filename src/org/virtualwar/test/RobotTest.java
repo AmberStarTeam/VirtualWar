@@ -64,6 +64,7 @@ public class RobotTest {
 		Robot r5 = new Scavenger(1, o3, b2);
 		Robot r6 = new Scavenger(1, o4, b2);
 		Robot r7 = new Scavenger(1, o5, b2);
+		b2.setRobot(r7, o1);
 		assertEquals(r2.canMove(), false);
 
 	}
