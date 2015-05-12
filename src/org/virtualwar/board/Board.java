@@ -69,7 +69,7 @@ public class Board {
 	 * @param width
 	 *            the width size of the board
 	 */
-	private Board(int height, int width) {
+	public Board(int height, int width) {
 		sizeHeight = height;
 		sizeWidth = width;
 		initEmptyGrind();
