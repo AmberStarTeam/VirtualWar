@@ -329,7 +329,7 @@ public enum TextData {
 
 	/** The game chose nmb bots. */
 	GAME_CHOSE_NMB_BOTS(
-			"Choisissez le nombre de robots pour les équipes (<6:) :",
+			"Choisissez le nombre de robots pour les équipes (<6) :",
 			"Chose the number of robots for all teams (<6) :"),
 
 	/** The game invalid input. */

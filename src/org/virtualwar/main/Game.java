@@ -484,7 +484,7 @@ public class Game {
 				"1"));
 		nameTeam1 = sc.nextLine();
 		System.out.println(TextData.GAME_NAME_TEAM_X.toString().replaceAll("X",
-				"1"));
+				"2"));
 		do {
 			nameTeam2 = sc.nextLine();
 			if (nameTeam1.equals(nameTeam2)) {
