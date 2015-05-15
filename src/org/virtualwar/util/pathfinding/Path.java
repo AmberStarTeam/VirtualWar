@@ -16,6 +16,8 @@ package org.virtualwar.util.pathfinding;
 
 import java.util.ArrayList;
 
+import org.virtualwar.util.Coordinates;
+
 /**
  * A path determined by some path finding algorithm. A series of steps from the
  * starting location to the target location. This includes a step for the
@@ -34,6 +36,18 @@ public class Path {
 		private int x;
 		/** The y coordinate at the given step */
 		private int y;
+		/** The coordinates at the given step */
+		private Coordinates cords;
+
+		/**
+		 * Create a new step
+		 *
+		 * @param cords
+		 *            The coordinate of the new step
+		 */
+		public Step(Coordinates cords) {
+			this.cords = cords;
+		}
 
 		/**
 		 * Create a new step
@@ -56,10 +70,14 @@ public class Path {
 			if (other instanceof Step) {
 				Step o = (Step) other;
 
-				return (o.x == x) && (o.y == y);
+				return (o.cords.equals(cords));
 			}
 
 			return false;
+		}
+
+		public Coordinates getCoords() {
+			return cords;
 		}
 
 		/**
@@ -68,7 +86,7 @@ public class Path {
 		 * @return The x coodindate of the new step
 		 */
 		public int getX() {
-			return x;
+			return cords.getX();
 		}
 
 		/**
@@ -77,7 +95,7 @@ public class Path {
 		 * @return The y coodindate of the new step
 		 */
 		public int getY() {
-			return y;
+			return cords.getY();
 		}
 
 		/**
@@ -85,7 +103,7 @@ public class Path {
 		 */
 		@Override
 		public int hashCode() {
-			return x * y;
+			return cords.hashCode();
 		}
 	}
 
@@ -97,6 +115,16 @@ public class Path {
 	 */
 	public Path() {
 
+	}
+
+	/**
+	 * Append a step to the path.
+	 *
+	 * @param cords
+	 *            The coordinate of the new step
+	 */
+	public void appendStep(Coordinates cords) {
+		steps.add(new Step(cords));
 	}
 
 	/**
@@ -114,6 +142,17 @@ public class Path {
 	/**
 	 * Check if this path contains the given step
 	 *
+	 * @param cords
+	 *            The coordinate of the step to check for
+	 * @return True if the path contains the given step
+	 */
+	public boolean contains(Coordinates cords) {
+		return steps.contains(new Step(cords));
+	}
+
+	/**
+	 * Check if this path contains the given step
+	 *
 	 * @param x
 	 *            The x coordinate of the step to check for
 	 * @param y
@@ -122,6 +161,17 @@ public class Path {
 	 */
 	public boolean contains(int x, int y) {
 		return steps.contains(new Step(x, y));
+	}
+
+	/**
+	 * Get the coordinate for the step at the given index
+	 *
+	 * @param index
+	 *            The index of the step whose y coordinate should be retrieved
+	 * @return The coordinate at the step
+	 */
+	public Coordinates getCoords(int index) {
+		return getStep(index).cords;
 	}
 
 	/**
@@ -165,6 +215,18 @@ public class Path {
 	 */
 	public int getY(int index) {
 		return getStep(index).y;
+	}
+
+	/**
+	 * Prepend a step to the path.
+	 *
+	 * @param x
+	 *            The x coordinate of the new step
+	 * @param y
+	 *            The y coordinate of the new step
+	 */
+	public void prependStep(Coordinates cords) {
+		steps.add(0, new Step(cords));
 	}
 
 	/**

@@ -24,7 +24,7 @@ import org.virtualwar.util.pathfinding.TileBasedMap;
  * tile. In this case the sqrt is removed and the distance squared is used
  * instead
  *
- * @author Kevin Glass
+ * @author beaussan
  */
 public class ClosestSquaredHeuristic implements AStarHeuristic {
 	/**

@@ -109,6 +109,24 @@ public class Coordinates {
 		return width;
 	}
 
+	/**
+	 * Gets the x coordinate.
+	 *
+	 * @return x
+	 */
+	public int getX() {
+		return getWidth();
+	}
+
+	/**
+	 * Gets the y coordinate.
+	 *
+	 * @return y
+	 */
+	public int getY() {
+		return getHeight();
+	}
+
 	/*
 	 * (non-Javadoc)
 	 *

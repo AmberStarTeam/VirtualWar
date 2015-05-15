@@ -23,7 +23,7 @@ import org.virtualwar.util.pathfinding.TileBasedMap;
  * A heuristic that drives the search based on the Manhattan distance between
  * the current location and the target
  *
- * @author Kevin Glass
+ * @author beaussan
  */
 public class ManhattanHeuristic implements AStarHeuristic {
 	/** The minimum movement cost from any one square to the next */

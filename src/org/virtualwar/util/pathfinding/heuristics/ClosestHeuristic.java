@@ -23,7 +23,7 @@ import org.virtualwar.util.pathfinding.TileBasedMap;
  * A heuristic that uses the tile that is closest to the target as the next best
  * tile.
  *
- * @author Kevin Glass
+ * @author beaussan
  */
 public class ClosestHeuristic implements AStarHeuristic {
 	/**
