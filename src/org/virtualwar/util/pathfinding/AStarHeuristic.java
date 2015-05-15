@@ -21,7 +21,7 @@ import org.virtualwar.util.Coordinates;
  * target location and entity being moved. This heuristic controls what priority
  * is placed on different tiles during the search for a path
  *
- * @author Kevin Glass
+ * @author beaussan
  */
 public interface AStarHeuristic {
 
