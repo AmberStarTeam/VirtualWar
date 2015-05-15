@@ -30,6 +30,7 @@ public class ClosestHeuristic implements AStarHeuristic {
 	 * @see AStarHeuristic#getCost(TileBasedMap, Mover, Coordinates,
 	 *      Coordinates)
 	 */
+	@Override
 	public float getCost(TileBasedMap map, Mover mover, Coordinates coorFrom,
 			Coordinates coorTo) {
 		float dx = coorTo.getWidth() - coorFrom.getWidth();

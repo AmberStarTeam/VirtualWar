@@ -27,10 +27,11 @@ import org.virtualwar.util.pathfinding.TileBasedMap;
  * @author Kevin Glass
  */
 public class ClosestSquaredHeuristic implements AStarHeuristic {
-
 	/**
-	 * @see AStarHeuristic#getCost(TileBasedMap, Mover, int, int, int, int)
+	 * @see AStarHeuristic#getCost(TileBasedMap, Mover, Coordinates,
+	 *      Coordinates)
 	 */
+	@Override
 	public float getCost(TileBasedMap map, Mover mover, Coordinates coorFrom,
 			Coordinates coorTo) {
 		float dx = coorTo.getWidth() - coorFrom.getWidth();
