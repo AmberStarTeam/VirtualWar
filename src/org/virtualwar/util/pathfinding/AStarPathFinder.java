@@ -18,23 +18,22 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.pathfinding.heuristics.ClosestHeuristic;
 
 /**
  * A path finder implementation that uses the AStar heuristic based algorithm to
  * determine a path.
  *
- * @author Kevin Glass
+ * @author beaussan
  */
 public class AStarPathFinder implements PathFinder {
 	/**
 	 * A single node in the search graph
 	 */
 	private class Node implements Comparable<Node> {
-		/** The x coordinate of the node */
-		private int x;
-		/** The y coordinate of the node */
-		private int y;
+		/** The coordinate of the node */
+		private Coordinates cords;
 		/** The path cost for this node */
 		private float cost;
 		/** The parent of this node, how we reached it in the search */
@@ -52,9 +51,8 @@ public class AStarPathFinder implements PathFinder {
 		 * @param y
 		 *            The y coordinate of the node
 		 */
-		public Node(int x, int y) {
-			this.x = x;
-			this.y = y;
+		public Node(Coordinates cords) {
+			this.cords = cords;
 		}
 
 		/**
@@ -94,7 +92,7 @@ public class AStarPathFinder implements PathFinder {
 	/**
 	 * A simple sorted list
 	 *
-	 * @author kevin
+	 * @author beaussan
 	 */
 	private class SortedList {
 		/** The list of elements */
@@ -135,7 +133,7 @@ public class AStarPathFinder implements PathFinder {
 		 *
 		 * @return The first element from the list
 		 */
-		public Object first() {
+		public Node first() {
 			return list.get(0);
 		}
 
@@ -214,7 +212,7 @@ public class AStarPathFinder implements PathFinder {
 		nodes = new Node[map.getWidthInTiles()][map.getHeightInTiles()];
 		for (int x = 0; x < map.getWidthInTiles(); x++) {
 			for (int y = 0; y < map.getHeightInTiles(); y++) {
-				nodes[x][y] = new Node(x, y);
+				nodes[x][y] = new Node(new Coordinates(y, x));
 			}
 		}
 	}
@@ -239,26 +237,24 @@ public class AStarPathFinder implements PathFinder {
 		open.add(node);
 	}
 
-	/**
-	 * @see PathFinder#findPath(Mover, int, int, int, int)
-	 */
 	@Override
-	public Path findPath(Mover mover, int sx, int sy, int tx, int ty) {
+	public Path findPath(Mover mover, Coordinates cordsSource,
+			Coordinates cordsTo) {
 		// easy first check, if the destination is blocked, we can't get there
-		if (map.blocked(mover, tx, ty)) {
+		if (map.blocked(mover, cordsTo)) {
 			return null;
 		}
 
 		// initial state for A*. The closed group is empty. Only the starting
 		// tile is in the open list and it's cost is zero, i.e. we're already
 		// there
-		nodes[sx][sy].cost = 0;
-		nodes[sx][sy].depth = 0;
+		getNode(cordsSource).cost = 0;
+		getNode(cordsSource).depth = 0;
 		closed.clear();
 		open.clear();
-		open.add(nodes[sx][sy]);
+		open.add(getNode(cordsSource));
 
-		nodes[tx][ty].parent = null;
+		getNode(cordsTo).parent = null;
 
 		// while we haven't found the goal and haven't exceeded our max search
 		// depth
@@ -267,7 +263,7 @@ public class AStarPathFinder implements PathFinder {
 			// pull out the first node in our open list, this is determined to
 			// be the most likely to be the next step based on our heuristic
 			Node current = getFirstInOpen();
-			if (current == nodes[tx][ty]) {
+			if (current == getNode(cordsTo)) {
 				break;
 			}
 
@@ -292,20 +288,20 @@ public class AStarPathFinder implements PathFinder {
 					}
 
 					// determine the location of the neighbour and evaluate it
-					int xp = x + current.x;
-					int yp = y + current.y;
+					int xp = x + current.cords.getHeight();
+					int yp = y + current.cords.getWidth();
+					Coordinates xCords = new Coordinates(xp, yp);
 
-					if (isValidLocation(mover, sx, sy, xp, yp)) {
+					if (isValidLocation(mover, cordsSource, xCords)) {
 						// the cost to get to this node is cost the current plus
 						// the movement
 						// cost to reach this node. Note that the heursitic
 						// value is only used
 						// in the sorted open list
 						float nextStepCost = current.cost
-								+ getMovementCost(mover, current.x, current.y,
-										xp, yp);
-						Node neighbour = nodes[xp][yp];
-						map.pathFinderVisited(xp, yp);
+								+ getMovementCost(mover, current.cords, xCords);
+						Node neighbour = getNode(xCords);
+						map.pathFinderVisited(xCords);
 
 						// if the new cost we've determined for this node is
 						// lower than
@@ -331,8 +327,8 @@ public class AStarPathFinder implements PathFinder {
 						if (!inOpenList(neighbour)
 								&& !(inClosedList(neighbour))) {
 							neighbour.cost = nextStepCost;
-							neighbour.heuristic = getHeuristicCost(mover, xp,
-									yp, tx, ty);
+							neighbour.heuristic = getHeuristicCost(mover,
+									xCords, cordsTo);
 							maxDepth = Math.max(maxDepth,
 									neighbour.setParent(current));
 							addToOpen(neighbour);
@@ -344,7 +340,7 @@ public class AStarPathFinder implements PathFinder {
 
 		// since we've got an empty open list or we've run out of search
 		// there was no path. Just return null
-		if (nodes[tx][ty].parent == null) {
+		if (getNode(cordsTo).parent == null) {
 			return null;
 		}
 
@@ -352,12 +348,12 @@ public class AStarPathFinder implements PathFinder {
 		// references of the nodes to find out way from the target location back
 		// to the start recording the nodes on the way.
 		Path path = new Path();
-		Node target = nodes[tx][ty];
-		while (target != nodes[sx][sy]) {
-			path.prependStep(target.x, target.y);
+		Node target = getNode(cordsTo);
+		while (target != getNode(cordsSource)) {
+			path.prependStep(target.cords);
 			target = target.parent;
 		}
-		path.prependStep(sx, sy);
+		path.prependStep(cordsSource);
 
 		// thats it, we have our path
 		return path;
@@ -370,7 +366,7 @@ public class AStarPathFinder implements PathFinder {
 	 * @return The first element in the open list
 	 */
 	protected Node getFirstInOpen() {
-		return (Node) open.first();
+		return open.first();
 	}
 
 	/**
@@ -389,8 +385,9 @@ public class AStarPathFinder implements PathFinder {
 	 *            The y coordinate of the target location
 	 * @return The heuristic cost assigned to the tile
 	 */
-	public float getHeuristicCost(Mover mover, int x, int y, int tx, int ty) {
-		return heuristic.getCost(map, mover, x, y, tx, ty);
+	public float getHeuristicCost(Mover mover, Coordinates cordsSource,
+			Coordinates cordsTo) {
+		return heuristic.getCost(map, mover, cordsSource, cordsTo);
 	}
 
 	/**
@@ -408,8 +405,13 @@ public class AStarPathFinder implements PathFinder {
 	 *            The y coordinate of the target location
 	 * @return The cost of movement through the given tile
 	 */
-	public float getMovementCost(Mover mover, int sx, int sy, int tx, int ty) {
-		return map.getCost(mover, sx, sy, tx, ty);
+	public float getMovementCost(Mover mover, Coordinates cordsSource,
+			Coordinates cordsTo) {
+		return map.getCost(mover, cordsSource, cordsTo);
+	}
+
+	private Node getNode(Coordinates cords) {
+		return nodes[cords.getWidth()][cords.getHeight()];
 	}
 
 	/**
@@ -449,12 +451,14 @@ public class AStarPathFinder implements PathFinder {
 	 *            The y coordinate of the location to check
 	 * @return True if the location is valid for the given mover
 	 */
-	protected boolean isValidLocation(Mover mover, int sx, int sy, int x, int y) {
-		boolean invalid = (x < 0) || (y < 0) || (x >= map.getWidthInTiles())
-				|| (y >= map.getHeightInTiles());
+	protected boolean isValidLocation(Mover mover, Coordinates cordsSource,
+			Coordinates cordsTo) {
+		boolean invalid = (cordsTo.getWidth() < 0) || (cordsTo.getHeight() < 0)
+				|| (cordsTo.getWidth() >= map.getWidthInTiles())
+				|| (cordsTo.getHeight() >= map.getHeightInTiles());
 
-		if ((!invalid) && ((sx != x) || (sy != y))) {
-			invalid = map.blocked(mover, x, y);
+		if ((!invalid) && (!cordsSource.equals(cordsTo))) {
+			invalid = map.blocked(mover, cordsTo);
 		}
 
 		return !invalid;

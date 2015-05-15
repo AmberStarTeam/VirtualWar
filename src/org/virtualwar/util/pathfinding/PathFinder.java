@@ -3,12 +3,12 @@
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -21,14 +21,14 @@ import org.virtualwar.util.Coordinates;
  * a tile map to another based on information provided by that tile map.
  *
  * @see TileBasedMap
- * @author Kevin Glass
+ * @author beaussan
  */
 public interface PathFinder {
 
 	/**
-	 * Find a path from the starting location provided (sx,sy) to the target
-	 * location (tx,ty) avoiding blockages and attempting to honour costs
-	 * provided by the tile map.
+	 * Find a path from the starting location provided (cordsSource) to the
+	 * target location (cordsTo) avoiding blockages and attempting to honour
+	 * costs provided by the tile map.
 	 *
 	 * @param mover
 	 *            The entity that will be moving along the path. This provides a
