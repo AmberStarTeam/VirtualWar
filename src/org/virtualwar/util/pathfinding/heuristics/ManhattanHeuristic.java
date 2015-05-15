@@ -51,13 +51,4 @@ public class ManhattanHeuristic implements AStarHeuristic {
 						.abs(coorFrom.getHeight() - coorTo.getHeight()));
 	}
 
-	/**
-	 * @see AStarHeuristic#getCost(TileBasedMap, Mover, int, int, int, int)
-	 */
-	@Override
-	public float getCost(TileBasedMap map, Mover mover, int x, int y, int tx,
-			int ty) {
-		return minimumCost * (Math.abs(x - tx) + Math.abs(y - ty));
-	}
-
 }
