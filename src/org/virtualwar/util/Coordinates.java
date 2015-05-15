@@ -67,7 +67,7 @@ public class Coordinates {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -109,27 +109,9 @@ public class Coordinates {
 		return width;
 	}
 
-	/**
-	 * Gets the x coordinate.
-	 *
-	 * @return x
-	 */
-	public int getX() {
-		return getWidth();
-	}
-
-	/**
-	 * Gets the y coordinate.
-	 *
-	 * @return y
-	 */
-	public int getY() {
-		return getHeight();
-	}
-
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -202,7 +184,7 @@ public class Coordinates {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
