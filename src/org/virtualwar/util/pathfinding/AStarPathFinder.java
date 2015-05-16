@@ -168,6 +168,8 @@ public class AStarPathFinder implements PathFinder {
 	private int maxSearchDistance;
 	/** The complete set of nodes across the map */
 	private Node[][] nodes;
+	/** The moving distance */
+	private int moveRange;
 
 	/** True if we allow diaganol movement */
 	private boolean allowDiagMovement;
@@ -187,7 +189,8 @@ public class AStarPathFinder implements PathFinder {
 	 */
 	public AStarPathFinder(TileBasedMap map, int maxSearchDistance,
 			boolean allowDiagMovement) {
-		this(map, maxSearchDistance, allowDiagMovement, new ClosestHeuristic());
+		this(map, maxSearchDistance, allowDiagMovement, 1,
+				new ClosestHeuristic());
 	}
 
 	/**
@@ -204,10 +207,46 @@ public class AStarPathFinder implements PathFinder {
 	 */
 	public AStarPathFinder(TileBasedMap map, int maxSearchDistance,
 			boolean allowDiagMovement, AStarHeuristic heuristic) {
+		this(map, maxSearchDistance, allowDiagMovement, 1, heuristic);
+	}
+
+	/**
+	 * Create a path finder with the default heuristic - closest to target.
+	 *
+	 * @param map
+	 *            The map to be searched
+	 * @param maxSearchDistance
+	 *            The maximum depth we'll search before giving up
+	 * @param allowDiagMovement
+	 *            True if the search should try diaganol movement
+	 * @param moveRange
+	 *            the maximal range of moving from a single tile
+	 */
+	public AStarPathFinder(TileBasedMap map, int maxSearchDistance,
+			boolean allowDiagMovement, int moveRange) {
+		this(map, maxSearchDistance, allowDiagMovement, moveRange,
+				new ClosestHeuristic());
+	}
+
+	/**
+	 * Create a path finder
+	 *
+	 * @param heuristic
+	 *            The heuristic used to determine the search order of the map
+	 * @param map
+	 *            The map to be searched
+	 * @param maxSearchDistance
+	 *            The maximum depth we'll search before giving up
+	 * @param allowDiagMovement
+	 *            True if the search should try diaganol movement
+	 */
+	public AStarPathFinder(TileBasedMap map, int maxSearchDistance,
+			boolean allowDiagMovement, int moveRange, AStarHeuristic heuristic) {
 		this.heuristic = heuristic;
 		this.map = map;
 		this.maxSearchDistance = maxSearchDistance;
 		this.allowDiagMovement = allowDiagMovement;
+		this.moveRange = moveRange;
 
 		nodes = new Node[map.getWidthInTiles()][map.getHeightInTiles()];
 		for (int x = 0; x < map.getWidthInTiles(); x++) {
@@ -288,10 +327,21 @@ public class AStarPathFinder implements PathFinder {
 					}
 
 					// determine the location of the neighbour and evaluate it
-					int xp = x + current.cords.getHeight();
-					int yp = y + current.cords.getWidth();
+					int xp = x * moveRange + current.cords.getHeight();
+					int yp = y * moveRange + current.cords.getWidth();
 					Coordinates xCords = new Coordinates(xp, yp);
 
+					if (!isValidLocation(mover, cordsSource, xCords)
+							&& moveRange != 1) {
+						int curVal = moveRange;
+						while (curVal > 1
+								&& !isValidLocation(mover, cordsSource, xCords)) {
+							curVal--;
+							xp = x * curVal + current.cords.getHeight();
+							yp = y * curVal + current.cords.getWidth();
+							xCords = new Coordinates(xp, yp);
+						}
+					}
 					if (isValidLocation(mover, cordsSource, xCords)) {
 						// the cost to get to this node is cost the current plus
 						// the movement
