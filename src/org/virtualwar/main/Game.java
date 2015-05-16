@@ -25,6 +25,7 @@ import org.virtualwar.board.Board;
 import org.virtualwar.config.Config;
 import org.virtualwar.config.Constant;
 import org.virtualwar.config.TextData;
+import org.virtualwar.ia.AdvancedIntelligence;
 import org.virtualwar.ia.Inteligence;
 import org.virtualwar.ia.RandomInteligence;
 import org.virtualwar.robot.Robot;
@@ -519,7 +520,7 @@ public class Game {
 		if (inp.equals("debug")) {
 			startDebug();
 		} else if (inp.equals("ia")) {
-			startDebugIa();
+			iaChoice();
 		} else {
 			startNormal();
 		}
@@ -623,6 +624,19 @@ public class Game {
 		board.generate(1000, containsTank);
 
 	}
+	
+	/**
+	 * Start ia choice
+	 */
+	public void iaChoice(){
+		System.out.println("(normal ia) / (advanced ia) ?");
+		String entree = sc.nextLine().toLowerCase();
+		if (entree.equals("normal")) {
+			startDebugIa();
+		} else {
+			startDebugAdvIa();
+		}
+	}
 
 	/**
 	 * Start the ia debug mode.
@@ -642,6 +656,32 @@ public class Game {
 
 		isPlayerTwoHuman = false;
 		playerTwo = new RandomInteligence(Constant.ID_TEAM_B, board);
+
+		t2 = playerTwo.getInitialRobots(nmbRobots);
+
+		containsTank = true;
+
+		board.generate(10, containsTank);
+	}
+	
+	/**
+	 * Start the advanced ia debug mode
+	 */
+	public void startDebugAdvIa(){
+		nameTeam1 = "team 1";
+		nameTeam2 = "team 2";
+		nmbRobots = 4;
+		board = Board.newBoard(10, 10);
+
+		b2 = new Coordinates(board.getWidth() - 1, board.getHeight() - 1);
+
+		isPlayerOneHuman = false;
+		playerOne = new AdvancedIntelligence(Constant.ID_TEAM_A, board);
+
+		t1 = playerOne.getInitialRobots(nmbRobots);
+
+		isPlayerTwoHuman = false;
+		playerTwo = new AdvancedIntelligence(Constant.ID_TEAM_B, board);
 
 		t2 = playerTwo.getInitialRobots(nmbRobots);
 

@@ -9,6 +9,7 @@ import org.virtualwar.board.Board;
 import org.virtualwar.config.Constant;
 import org.virtualwar.util.Coordinates;
 
+
 // TODO: Auto-generated Javadoc
 /**
  * The BoardTest Class.
