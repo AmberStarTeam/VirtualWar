@@ -3,12 +3,12 @@
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
- * 
+ *
  *  This program is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- * 
+ *
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
@@ -113,7 +113,7 @@ public class IaBenchmark {
 		System.setOut(new PrintStream(new OutputStream() {
 			@Override
 			public void write(int b) {
-				// DO NOTHING
+				// so we don't have outputs to slow us down :)
 			}
 		}));
 		for (int i = 0; i < nmb; i++) {
@@ -134,12 +134,20 @@ public class IaBenchmark {
 			while (!(t1.isEmpty() || t2.isEmpty() || !(anyCanDo(t1) && anyCanDo(t2)))) {
 
 				if (anyCanDo(t1)) {
-					actT1 = it1.makeTurn();
+					try {
+						actT1 = it1.makeTurn();
+					} catch (Exception e) {
+						System.err.println("Error : ia 1 breaking the game...");
+						System.err.println(e.toString());
+						e.printStackTrace(System.err);
+						break;
+					}
 					if (actT1 != null) {
 						actT1.act();
 						actT1 = null;
 					} else {
 						System.err.println("Error : diden't chose (ia 1)");
+						break;
 					}
 				}
 
@@ -147,12 +155,20 @@ public class IaBenchmark {
 				checkAlive(t2);
 
 				if (anyCanDo(t2)) {
-					actT2 = it2.makeTurn();
+					try {
+						actT2 = it2.makeTurn();
+					} catch (Exception e) {
+						System.err.println("Error : ia 2 breaking the game...");
+						System.err.println(e.toString());
+						e.printStackTrace(System.err);
+						break;
+					}
 					if (actT2 != null) {
 						actT2.act();
 						actT2 = null;
 					} else {
 						System.err.println("Error : diden't chose (ia 2)");
+						break;
 					}
 				}
 
@@ -163,8 +179,10 @@ public class IaBenchmark {
 				checkAlive(t2);
 			}
 			if (t1.isEmpty() || !anyCanDo(t1)) {
+				System.err.println("Team 2 won  " + it2.toString());
 				res[1]++;
-			} else {
+			} else if (t2.isEmpty() || !anyCanDo(t2)) {
+				System.err.println("Team 1 won  " + it1.toString());
 				res[0]++;
 			}
 			System.err.println("" + i);
