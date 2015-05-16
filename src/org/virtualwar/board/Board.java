@@ -26,6 +26,10 @@ import org.virtualwar.robot.Scavenger;
 import org.virtualwar.robot.Shooter;
 import org.virtualwar.robot.Tank;
 import org.virtualwar.util.Coordinates;
+import org.virtualwar.util.pathfinding.AStarPathFinder;
+import org.virtualwar.util.pathfinding.Mover;
+import org.virtualwar.util.pathfinding.Path;
+import org.virtualwar.util.pathfinding.TileBasedMap;
 
 /**
  * The Board class is the class for the actual board of game containing robots,
@@ -34,7 +38,7 @@ import org.virtualwar.util.Coordinates;
  * @author amberstar
  *
  */
-public class Board {
+public class Board implements TileBasedMap {
 
 	/**
 	 * Board factory.
@@ -61,6 +65,9 @@ public class Board {
 	/** a array of Cell for storing the grind. */
 	private Cell[][] grind;
 
+	/** a array of Cell for storing the grind. */
+	private boolean[][] pathVisited;
+
 	/**
 	 * private constructor.
 	 *
@@ -75,9 +82,19 @@ public class Board {
 		initEmptyGrind();
 	}
 
+	@Override
+	public boolean blocked(Mover mover, Coordinates cords) {
+		if (mover instanceof Robot) {
+			Robot rob = (Robot) mover;
+			return rob.isValid(cords) != null;
+		}
+		System.out.println("NOPE NOPE NOPE NOT GOOD");
+		return false;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -171,12 +188,23 @@ public class Board {
 				: new Coordinates(sizeWidth - 1, sizeHeight - 1);
 	}
 
+	@Override
+	public float getCost(Mover mover, Coordinates cordsSource,
+			Coordinates cordsTo) {
+		return 1; // this is the most basic implementation
+	}
+
 	/**
 	 * Gets the height.
 	 *
 	 * @return sizeHeight
 	 */
 	public final int getHeight() {
+		return sizeHeight;
+	}
+
+	@Override
+	public int getHeightInTiles() {
 		return sizeHeight;
 	}
 
@@ -301,9 +329,14 @@ public class Board {
 		return sizeWidth;
 	}
 
+	@Override
+	public int getWidthInTiles() {
+		return sizeWidth;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -324,102 +357,24 @@ public class Board {
 	 * @return if valid path exist
 	 */
 	private boolean hasPath(boolean containsTank) {
-		int[][] grindToInt = new int[sizeHeight][sizeWidth];
-		int[][] tmpGrind = new int[sizeHeight][sizeWidth];
-		for (int i = 0; i < grindToInt.length; i++) {
-			for (int j = 0; j < tmpGrind[0].length; j++) {
-				if (grind[i][j].isObstacle()) {
-					grindToInt[i][j] = 0;
-				} else {
-					grindToInt[i][j] = 1;
-				}
-			}
-		}
-		for (int i = 0; i < tmpGrind.length; i++) {
-			Arrays.fill(tmpGrind[i], -1);
-		}
-		return hasPathHelper(grindToInt, tmpGrind, 0, 0, containsTank);
-	}
-
-	/**
-	 * recursive function for finding if a path exist only for regular units.
-	 *
-	 * @param grindToInt
-	 *            Board converted to numbers : 0 obstacle, 1 empty
-	 * @param tmpGrind
-	 *            array of integer (-1 : visited, 0 visited, 1 good path)
-	 * @param i
-	 *            equivalent to y
-	 * @param j
-	 *            equivalent to x
-	 * @param hasTank
-	 *            if true, will find a path for tanks too
-	 * @return if tmpGrind[i][j] == 1
-	 */
-	private boolean hasPathHelper(int[][] grindToInt, int[][] tmpGrind, int i,
-			int j, boolean hasTank) {
-		if (i < 0 || j < 0 || i >= grindToInt.length
-				|| j >= grindToInt[0].length || tmpGrind[i][j] >= 0) {
-			return false; // Index out of bounds
-		}
-
-		tmpGrind[i][j] = 0; // Mark as visited
-		if (grindToInt[i][j] == 0) {
-			return false;
-		}
-		if (j == grindToInt[0].length - 1 && i == grindToInt.length - 1 || // Right
-																			// side
-																			// reached!
-				hasPathHelper(grindToInt, tmpGrind, i + 1, j, hasTank) || // Check
-																			// down
-				hasPathHelper(grindToInt, tmpGrind, i - 1, j, hasTank) || // Check
-																			// up
-				hasPathHelper(grindToInt, tmpGrind, i, j + 1, hasTank) || // Check
-																			// right
-				hasPathHelper(grindToInt, tmpGrind, i, j - 1, hasTank) // Check
-																		// left
-		) {
-			tmpGrind[i][j] = 1; // Mark as good path
-		}
-
-		if (!hasTank) {
-			if (j == grindToInt[0].length - 1
-					&& i == grindToInt.length - 1
-					|| // Right
-						// side
-						// reached!
-					hasPathHelper(grindToInt, tmpGrind, i - 1, j + 1, hasTank)
-					|| // Check
-						// upper
-						// right
-					hasPathHelper(grindToInt, tmpGrind, i + 1, j + 1, hasTank)
-					|| // Check
-						// lower
-						// right
-					hasPathHelper(grindToInt, tmpGrind, i + 1, j - 1, hasTank)
-					|| // Check
-						// lower
-						// left
-					hasPathHelper(grindToInt, tmpGrind, i + 1, j - 1, hasTank)
-			// Check
-			// upper
-			// left
-			) {
-				tmpGrind[i][j] = 1; // Mark as good path
-			}
-		}
-
-		return tmpGrind[i][j] == 1;
+		Robot rob = new Shooter(0, new Coordinates(0, 0), this);
+		AStarPathFinder pathFind = new AStarPathFinder(this, 10000,
+				!containsTank);
+		Path path = pathFind.findPath(rob, rob.getCoordinates(),
+				getCoordsBase(2));
+		return path != null;
 	}
 
 	/**
 	 * Create a empty Board with only the bases.
 	 */
 	private void initEmptyGrind() {
+		pathVisited = new boolean[sizeHeight][sizeWidth];
 		grind = new Cell[sizeHeight][sizeWidth];
 		for (int i = 0; i < grind.length; i++) {
 			for (int j = 0; j < grind[0].length; j++) {
 				grind[i][j] = new Case(new Coordinates(j, i));
+				pathVisited[i][j] = false;
 			}
 		}
 		grind[0][0] = new Base(new Coordinates(0, 0), Constant.ID_TEAM_A);
@@ -586,6 +541,11 @@ public class Board {
 			finalOut.append('\n');
 		}
 		return finalOut.toString();
+	}
+
+	@Override
+	public void pathFinderVisited(Coordinates cords) {
+
 	}
 
 	/**

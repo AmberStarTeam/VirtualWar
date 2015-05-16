@@ -1,3 +1,17 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ * 
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ * 
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.virtualwar.ia;
 
 import java.io.OutputStream;
@@ -13,13 +27,16 @@ import org.virtualwar.robot.Robot;
 import org.virtualwar.util.sound.ThreadSoundRun;
 
 public class IaBenchmark {
-	
+
 	public static void main(String[] args) {
 		Long timeBef = System.currentTimeMillis();
-		int[] dat = new IaBenchmark(new RandomInteligence(), new RandomInteligence(),1_000).run();
+		int[] dat = new IaBenchmark(new RandomInteligence(),
+				new AdvancedIntelligence(), 1_000).run();
 		Long timeAft = System.currentTimeMillis();
-		System.out.println(Arrays.toString(dat) +" , took " + (timeAft - timeBef));
+		System.out.println(Arrays.toString(dat) + " , took "
+				+ (timeAft - timeBef));
 	}
+
 	private Inteligence it1;
 	private Inteligence it2;
 
@@ -88,17 +105,17 @@ public class IaBenchmark {
 			}
 		}
 	}
-	
+
 	public int[] run() {
 		int[] res = new int[] { 0, 0 };
 		PrintStream out = System.out;
-		
+
 		System.setOut(new PrintStream(new OutputStream() {
-                @Override
-				public void write(int b) {
-                    //DO NOTHING
-                }
-            }));
+			@Override
+			public void write(int b) {
+				// DO NOTHING
+			}
+		}));
 		for (int i = 0; i < nmb; i++) {
 			int nmbRobots = 5;
 			Board board = Board.newBoard(8, 8);
@@ -150,7 +167,7 @@ public class IaBenchmark {
 			} else {
 				res[0]++;
 			}
-			System.err.println("" +i );
+			System.err.println("" + i);
 		}
 		System.setOut(out);
 		return res;
