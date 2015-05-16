@@ -24,6 +24,7 @@ import org.virtualwar.board.Board;
 import org.virtualwar.board.Cell;
 import org.virtualwar.config.Constant;
 import org.virtualwar.util.Coordinates;
+import org.virtualwar.util.pathfinding.Mover;
 import org.virtualwar.util.sound.ThreadSoundRun;
 
 /**
@@ -31,7 +32,7 @@ import org.virtualwar.util.sound.ThreadSoundRun;
  *
  * @author amberstar
  */
-public abstract class Robot {
+public abstract class Robot implements Mover {
 
 	/** the current energy of the robot. */
 	private int energy;
@@ -95,7 +96,7 @@ public abstract class Robot {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -322,7 +323,7 @@ public abstract class Robot {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -363,13 +364,14 @@ public abstract class Robot {
 		if (tmp.isObstacle()) {
 			return "obstacle";
 		}
-		if (tmp.mineContains() == team) {
+		if (team != 0 && tmp.mineContains() == team) {
 			return "mine";
 		}
 		if (tmp.getRobotIn() != null) {
 			return "not empty";
 		}
-		if (board.isBase(cords) != 0 && (board.isBase(cords) != team)) {
+		if (board.isBase(cords) != 0
+				&& (team != 0 && board.isBase(cords) != team)) {
 			return "other base";
 		}
 		return null;
@@ -418,7 +420,7 @@ public abstract class Robot {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

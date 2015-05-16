@@ -70,6 +70,11 @@ public class Path {
 		public int hashCode() {
 			return cords.hashCode();
 		}
+
+		@Override
+		public String toString() {
+			return "" + cords;
+		}
 	}
 
 	/** The list of steps building up this path */
@@ -145,6 +150,11 @@ public class Path {
 	 */
 	public void prependStep(Coordinates cords) {
 		steps.add(0, new Step(cords));
+	}
+
+	@Override
+	public String toString() {
+		return steps.toString();
 	}
 
 }
