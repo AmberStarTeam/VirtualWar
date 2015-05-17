@@ -178,7 +178,7 @@ public class Attack extends Action {
 	 *
 	 * @return the Robot of objective, if none then null
 	 */
-	private Robot getObjectif() {
+	public Robot getObjectif() {
 		for (int i = 0; i < super.getRobotSource().getRange(); i++) {
 			Coordinates tmp = super.getRobotSource().getCoordinates()
 					.add(super.getDirection().times(i + 1));
