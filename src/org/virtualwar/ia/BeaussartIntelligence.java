@@ -30,14 +30,19 @@ public class BeaussartIntelligence extends Inteligence {
 
 	public BeaussartIntelligence(int team, Board board) {
 		super(team, board);
-		pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
-		pathFindStrait = new AStarPathFinder(super.getBoard(), 10000, false, 2);
+		if (board != null) {
+			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
+			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000, false, 2);
+		}
+		
 	}
 
 	public BeaussartIntelligence(List<Robot> robots, int team, Board board) {
 		super(robots, team, board);
-		pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
-		pathFindStrait = new AStarPathFinder(super.getBoard(), 10000, false, 2);
+		if (board != null) {
+			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
+			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000, false, 2);
+		}
 	}
 
 	private boolean canAttackSafely(Robot rob) {
@@ -147,8 +152,13 @@ public class BeaussartIntelligence extends Inteligence {
 	}
 
 	private Action goToNextStep(Robot rob, Path path) {
-
-		Coordinates to = path.getCoordsRelativ(1);
+		Coordinates to;
+		try{
+			to = path.getCoordsRelativ(1);
+		}catch (Exception e){
+			return null;
+		}
+		
 		if (rob.getAvailableMove() == null) {
 			return null;
 		}
@@ -168,7 +178,7 @@ public class BeaussartIntelligence extends Inteligence {
 			if (pathToHome == null) {
 				continue;
 			}
-			if (pathToHome.getLength() * rob.getCostMoving() <= 10) {
+			if (pathToHome.getLength() * rob.getCostMoving() <= 1) {
 				retVal.add(rob);
 			}
 		}
@@ -217,7 +227,9 @@ public class BeaussartIntelligence extends Inteligence {
 			}
 		}
 
-		List<Robot> robLost = willNotMakeHome();
+		List<Robot> robLost = new ArrayList<Robot>(getLsRobot()); //willNotMakeHome();
+		robLost.removeAll(haveToGoHome());
+		robLost.addAll(willNotMakeHome());
 		if (!robLost.isEmpty()) {
 			Collections.shuffle(robLost, ran);
 			Coordinates goToBase;
@@ -231,8 +243,8 @@ public class BeaussartIntelligence extends Inteligence {
 				goTo = new Coordinates(goToBase);
 				while (rob.isValid(goTo) != null) {
 					goTo = new Coordinates(goToBase);
-					goTo.setHeight(goTo.getHeight() + ran.nextInt(4) - 2);
-					goTo.setWidth(goTo.getWidth() + ran.nextInt(4) - 2);
+					goTo.setHeight(goTo.getHeight() + ran.nextInt(6) - 2);
+					goTo.setWidth(goTo.getWidth() + ran.nextInt(6) - 2);
 				}
 				Action act = goToNextStep(rob, getPathTo(rob, goTo));
 				if (act != null) {

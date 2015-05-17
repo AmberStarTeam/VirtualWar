@@ -304,6 +304,11 @@ public enum TextData {
 	GAME_CHOSE_IA_INPUT("o\nn" + '\u9999' + "(o) oui, (n) non", "y\nn"
 			+ '\u9999' + "(y) yes, (n) no"),
 
+	/** The game chose ia input. */
+	GAME_CHOSE_IA_LIST("b\na\nav" + '\u9999'
+			+ "(B)eaussart, (A)léatoire, (Av)ancée", "b\nr\nad" + '\u9999'
+			+ "(B)eaussart, (R)andom, (Ad)vanced"),
+
 	GAME_LANG_INPUT("fr\nen" + '\u9999' + "fr " + GAME_OR.get("fr") + " en :"),
 
 	/** The game chose sound. */
