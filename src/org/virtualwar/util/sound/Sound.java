@@ -114,7 +114,17 @@ public class Sound {
 	 *            the source
 	 */
 	public void play(InputStream source) {
-		if (!Config.soundOn) {
+		play(source, false);
+	}
+
+	/**
+	 * Play the sound if the config is on.
+	 *
+	 * @param source
+	 *            the source
+	 */
+	public void play(InputStream source, boolean forced) {
+		if (!forced && !Config.soundOn) {
 			return;
 		}
 		int bufferSize = format.getFrameSize()

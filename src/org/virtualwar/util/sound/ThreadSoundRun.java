@@ -30,6 +30,8 @@ public class ThreadSoundRun extends Thread {
 
 	/** The is. */
 	private InputStream is;
+	/** if sound is forced on */
+	private boolean forced;
 
 	/**
 	 * Instantiates a new thread sound run.
@@ -66,6 +68,21 @@ public class ThreadSoundRun extends Thread {
 	 *
 	 * @param file
 	 *            the file
+	 */
+	public ThreadSoundRun(String file, boolean forced) {
+		if (file == null) {
+			return;
+		}
+		sound = new Sound(file);
+		is = new ByteArrayInputStream(sound.getSamples());
+		this.forced = forced;
+	}
+
+	/**
+	 * Instantiates a new thread sound run.
+	 *
+	 * @param file
+	 *            the file
 	 * @param timeRunning
 	 *            the time running
 	 */
@@ -83,6 +100,29 @@ public class ThreadSoundRun extends Thread {
 
 	}
 
+	/**
+	 * Instantiates a new thread sound run.
+	 *
+	 * @param file
+	 *            the file
+	 * @param timeRunning
+	 *            the time running
+	 */
+	public ThreadSoundRun(String file, long timeRunning, boolean forced) {
+		if (file == null) {
+			return;
+		}
+		sound = new Sound(file, timeRunning);
+		try {
+			is = new ByteArrayInputStream(sound.getSamples());
+		} catch (Exception e) {
+			sound = null;
+			return;
+		}
+		this.forced = forced;
+
+	}
+
 	/*
 	 * . (non-Javadoc)
 	 * 
@@ -93,6 +133,6 @@ public class ThreadSoundRun extends Thread {
 		if (sound == null) {
 			return;
 		}
-		sound.play(is);
+		sound.play(is, forced);
 	}
 }

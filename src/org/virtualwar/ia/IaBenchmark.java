@@ -22,6 +22,7 @@ import java.util.List;
 
 import org.virtualwar.action.Action;
 import org.virtualwar.board.Board;
+import org.virtualwar.config.Config;
 import org.virtualwar.config.Constant;
 import org.virtualwar.robot.Robot;
 import org.virtualwar.util.sound.ThreadSoundRun;
@@ -83,7 +84,6 @@ public class IaBenchmark {
 		for (Robot rob : lsRobot) {
 			if (rob.getEnergy() <= 0) {
 				rob.getBoard().getCell(rob.getCoordinates()).removeRobotIn(rob);
-				new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, 1000).start();
 				robToRemove.add(rob);
 			}
 		}
@@ -137,6 +137,7 @@ public class IaBenchmark {
 					try {
 						actT1 = it1.makeTurn();
 					} catch (Exception e) {
+						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true).start();
 						System.err.println("Error : ia 1 breaking the game...");
 						System.err.println(e.toString());
 						e.printStackTrace(System.err);
@@ -146,6 +147,7 @@ public class IaBenchmark {
 						actT1.act();
 						actT1 = null;
 					} else {
+						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true).start();
 						System.err.println("Error : diden't chose (ia 1)");
 						break;
 					}
@@ -158,6 +160,9 @@ public class IaBenchmark {
 					try {
 						actT2 = it2.makeTurn();
 					} catch (Exception e) {
+						Config.soundOn = true;
+						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true).start();
+						Config.soundOn = false;
 						System.err.println("Error : ia 2 breaking the game...");
 						System.err.println(e.toString());
 						e.printStackTrace(System.err);
@@ -167,6 +172,9 @@ public class IaBenchmark {
 						actT2.act();
 						actT2 = null;
 					} else {
+						Config.soundOn = true;
+						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true).start();
+						Config.soundOn = false;
 						System.err.println("Error : diden't chose (ia 2)");
 						break;
 					}
