@@ -1,3 +1,17 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.virtualwar.gui;
 
 import java.awt.BorderLayout;
@@ -22,18 +36,20 @@ import org.virtualwar.robot.Tank;
 import org.virtualwar.util.Coordinates;
 
 /**
- * Classe qui créer l'affichage d'une case selon son type (Base, obstacle, mine, robots).
+ * The class caseRobot. Create a JFrame with a picture of the type of a cell.
  * 
- * @author Joël OBLED
+ * @author amberstar
  *
  */
 
 @SuppressWarnings("serial")
 public class caseRobot extends JFrame {
-
-	private int hp;
-
-	// Constructeur utilisant une case entree en parametre
+	
+	/**
+	 * Instantiates a new caseRobot.
+	 * @param cell
+	 * 		the cell
+	 */
 	public caseRobot(Cell cell) {
 		this.setSize(10, 10);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -43,9 +59,12 @@ public class caseRobot extends JFrame {
 		this.setVisible(true);
 	}
 
-	// Creation d'un JPanel contenant l'image correspondante au type de case en 
-	// parametre : base, obstacle, mine ou le type de robot qu'elle contient avec sa barre de vie et/
-	// ou mine.
+	/**
+	 * Create a JPanel with a picture of the type of cell.
+	 * @param cell
+	 * 		the cell
+	 * @return JPanel
+	 */
 	public JPanel initCase(Cell cell) {
 		if (cell.isBase() > 0) {
 			JPanel base = new JPanel();
@@ -96,7 +115,12 @@ public class caseRobot extends JFrame {
 		return null;
 	}
 
-	// Creation de la barre de vie selon l'energie du type de Robot
+	/**
+	 * Create the lifebar of a robot
+	 * @param robot
+	 * 		the robot
+	 * @return JProgressBar
+	 */
 	public JProgressBar etatVie(Robot robot) {
 		JProgressBar jHP = new JProgressBar(JProgressBar.VERTICAL, 0, robot.getMaxEng());
 		jHP.setForeground(Color.red);
@@ -108,7 +132,12 @@ public class caseRobot extends JFrame {
 		return jHP;
 	}
 
-	// Creation de la barre de mine selon les mines actuelles du robot.
+	/**
+	 * Create the minebar of a scavenger
+	 * @param robot
+	 * 		the robot
+	 * @return JProgressBar
+	 */
 	public JProgressBar etatMine(Robot robot) {
 		JProgressBar jMine = new JProgressBar(JProgressBar.VERTICAL, 0,10);
 		jMine.setForeground(Color.yellow);
@@ -119,7 +148,11 @@ public class caseRobot extends JFrame {
 		jMine.setPreferredSize(size);
 		return jMine;
 	}
-	
+	/**
+	 * The main function
+	 * @param args
+	 * @throws InterruptedException
+	 */
 	public static void main(String[] args) throws InterruptedException {
 
 		// Test des differentes cases
