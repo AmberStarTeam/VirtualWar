@@ -17,7 +17,6 @@ package org.virtualwar.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Graphics;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -44,25 +43,157 @@ import org.virtualwar.util.Coordinates;
 
 @SuppressWarnings("serial")
 public class CaseRobot extends JFrame {
-	
+
+	/**
+	 * The main function
+	 * 
+	 * @param args
+	 * @throws InterruptedException
+	 */
+	public static void main(String[] args) throws InterruptedException {
+
+		// Test des differentes cases
+		// Génération des robots et des cases
+		Tank tank = new Tank(1, new Coordinates(1, 1), Board.newBoard(10, 10));
+		Shooter shooter = new Shooter(1, new Coordinates(1, 1), Board.newBoard(
+				10, 10));
+		Scavenger scavenger = new Scavenger(1, new Coordinates(1, 1),
+				Board.newBoard(10, 10));
+		Cell test = new Case(new Coordinates(1, 1));
+
+		System.out
+				.println("Un robot scavenger avec énergie maximum et mines maximum");
+		test.setRobotIn(scavenger);
+		CaseRobot caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+
+		System.out.println("Un robot scavenger ayant perdu 20 énergie");
+		scavenger.removeEnergy(20);
+		caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+
+		System.out.println("Un robot scavenger ayant déposé une mine");
+		scavenger.dropMine();
+		caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+
+		System.out.println("Un tank avec énergie maximum");
+		test.removeRobotIn(scavenger);
+		test.setRobotIn(tank);
+		caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+
+		System.out.println("Un tank ayant perdu la moitié de son énergie");
+		tank.removeEnergy(30);
+		caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+
+		System.out.println("Un shooter avec énergie maximum");
+		test.removeRobotIn(tank);
+		test.setRobotIn(shooter);
+		caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+
+		System.out
+				.println("Quand un robot est mort il laisse place à une case vide");
+		test.removeRobotIn(shooter);
+		caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+
+		System.out.println("Case occupée par un obstacle");
+		test.setObstacle();
+		caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+
+		System.out.println("Case occupée par une mine");
+		test.removeObstacle();
+		test.addMine(1);
+		caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+
+		System.out.println("Case étant une base");
+		test = new Base(new Coordinates(1, 1), 1);
+		caseTest = new CaseRobot(test);
+
+		Thread.sleep(4000);
+		caseTest.dispose();
+	}
+
 	/**
 	 * Instantiates a new caseRobot.
+	 * 
 	 * @param cell
-	 * 		the cell
+	 *            the cell
 	 */
 	public CaseRobot(Cell cell) {
 		this.setSize(10, 10);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLocationRelativeTo(null);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocationRelativeTo(null);
 		this.add(initCase(cell));
-		this.pack();
-		this.setVisible(true);
+		pack();
+		setVisible(true);
+	}
+
+	/**
+	 * Create the minebar of a scavenger
+	 * 
+	 * @param robot
+	 *            the robot
+	 * @return JProgressBar
+	 */
+	public JProgressBar etatMine(Robot robot) {
+		JProgressBar jMine = new JProgressBar(JProgressBar.VERTICAL, 0, 10);
+		jMine.setForeground(Color.yellow);
+		jMine.setValue(((Scavenger) robot).getStock());
+		Dimension size = jMine.getPreferredSize();
+		size.width = 10;
+		size.height = 60;
+		jMine.setPreferredSize(size);
+		return jMine;
+	}
+
+	/**
+	 * Create the lifebar of a robot
+	 * 
+	 * @param robot
+	 *            the robot
+	 * @return JProgressBar
+	 */
+	public JProgressBar etatVie(Robot robot) {
+		JProgressBar jHP = new JProgressBar(JProgressBar.VERTICAL, 0,
+				robot.getMaxEng());
+		jHP.setForeground(Color.red);
+		jHP.setValue(robot.getEnergy());
+		Dimension size = jHP.getPreferredSize();
+		size.width = 10;
+		size.height = 60;
+		jHP.setPreferredSize(size);
+		return jHP;
 	}
 
 	/**
 	 * Create a JPanel with a picture of the type of cell.
+	 * 
 	 * @param cell
-	 * 		the cell
+	 *            the cell
 	 * @return JPanel
 	 */
 	public JPanel initCase(Cell cell) {
@@ -113,128 +244,5 @@ public class CaseRobot extends JFrame {
 			return vide;
 		}
 		return null;
-	}
-
-	/**
-	 * Create the lifebar of a robot
-	 * @param robot
-	 * 		the robot
-	 * @return JProgressBar
-	 */
-	public JProgressBar etatVie(Robot robot) {
-		JProgressBar jHP = new JProgressBar(JProgressBar.VERTICAL, 0, robot.getMaxEng());
-		jHP.setForeground(Color.red);
-		jHP.setValue(robot.getEnergy());
-		Dimension size = jHP.getPreferredSize();
-		size.width = 10;
-		size.height = 60;
-		jHP.setPreferredSize(size);
-		return jHP;
-	}
-
-	/**
-	 * Create the minebar of a scavenger
-	 * @param robot
-	 * 		the robot
-	 * @return JProgressBar
-	 */
-	public JProgressBar etatMine(Robot robot) {
-		JProgressBar jMine = new JProgressBar(JProgressBar.VERTICAL, 0,10);
-		jMine.setForeground(Color.yellow);
-		jMine.setValue(((Scavenger) robot).getStock());
-		Dimension size = jMine.getPreferredSize();
-		size.width = 10;
-		size.height = 60;
-		jMine.setPreferredSize(size);
-		return jMine;
-	}
-	/**
-	 * The main function
-	 * @param args
-	 * @throws InterruptedException
-	 */
-	public static void main(String[] args) throws InterruptedException {
-
-		// Test des differentes cases
-		//Génération des robots et des cases
-		Tank tank = new Tank(1, new Coordinates(1, 1), Board.newBoard(10, 10));
-		Shooter shooter = new Shooter(1, new Coordinates(1, 1), Board.newBoard(
-				10, 10));
-		Scavenger scavenger = new Scavenger(1, new Coordinates(1, 1),
-				Board.newBoard(10, 10));
-		Cell test = new Case(new Coordinates(1,1));
-		
-		System.out.println("Un robot scavenger avec énergie maximum et mines maximum");
-		test.setRobotIn(scavenger);
-		CaseRobot caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
-		
-		System.out.println("Un robot scavenger ayant perdu 20 énergie");
-		scavenger.removeEnergy(20);
-		caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
-		
-		System.out.println("Un robot scavenger ayant déposé une mine");
-		scavenger.dropMine();
-		caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
-		
-		System.out.println("Un tank avec énergie maximum");
-		test.removeRobotIn(scavenger);
-		test.setRobotIn(tank);
-		caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
-		
-		System.out.println("Un tank ayant perdu la moitié de son énergie");
-		tank.removeEnergy(30);
-		caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
-		
-		System.out.println("Un shooter avec énergie maximum");
-		test.removeRobotIn(tank);
-		test.setRobotIn(shooter);
-		caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
-		
-		System.out.println("Quand un robot est mort il laisse place à une case vide");
-		test.removeRobotIn(shooter);
-		caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
-		
-		System.out.println("Case occupée par un obstacle");
-		test.setObstacle();
-		caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
-		
-		System.out.println("Case occupée par une mine");
-		test.removeObstacle();
-		test.addMine(1);
-		caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
-		
-		System.out.println("Case étant une base");
-		test = new Base(new Coordinates(1,1),1);
-		caseTest = new CaseRobot(test);
-		
-		Thread.sleep(4000);
-		caseTest.dispose();
 	}
 }

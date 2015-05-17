@@ -20,6 +20,7 @@ import org.virtualwar.action.Action;
 import org.virtualwar.board.Board;
 import org.virtualwar.robot.Robot;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Class Inteligence.
  *
@@ -39,10 +40,6 @@ public abstract class Inteligence {
 	/**
 	 * Instantiates a new inteligence.
 	 *
-	 * @param team
-	 *            the team
-	 * @param board
-	 *            the board
 	 */
 	public Inteligence() {
 	}
@@ -119,18 +116,41 @@ public abstract class Inteligence {
 	 */
 	public abstract Action makeTurn();
 
+	/**
+	 * Sets the board.
+	 *
+	 * @param board
+	 *            the new board
+	 */
 	public void setBoard(Board board) {
 		this.board = board;
 	}
 
+	/**
+	 * Sets the list of robot.
+	 *
+	 * @param lsRobot
+	 *            the new list of robot
+	 */
 	public void setLsRobot(List<Robot> lsRobot) {
 		this.lsRobot = lsRobot;
 	}
 
+	/**
+	 * Sets the team.
+	 *
+	 * @param team
+	 *            the new team
+	 */
 	public void setTeam(int team) {
 		this.team = team;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "Intelligence ";

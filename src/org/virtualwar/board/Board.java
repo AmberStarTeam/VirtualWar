@@ -31,6 +31,7 @@ import org.virtualwar.util.pathfinding.Mover;
 import org.virtualwar.util.pathfinding.Path;
 import org.virtualwar.util.pathfinding.TileBasedMap;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Board class is the class for the actual board of game containing robots,
  * obstacle and mines.
@@ -82,6 +83,13 @@ public class Board implements TileBasedMap {
 		initEmptyGrind();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.virtualwar.util.pathfinding.TileBasedMap#blocked(org.virtualwar.util
+	 * .pathfinding.Mover, org.virtualwar.util.Coordinates)
+	 */
 	@Override
 	public boolean blocked(Mover mover, Coordinates cords) {
 		if (mover instanceof Robot) {
@@ -94,7 +102,7 @@ public class Board implements TileBasedMap {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -183,11 +191,26 @@ public class Board implements TileBasedMap {
 				.getWidth()] : null;
 	}
 
+	/**
+	 * Gets the coords base.
+	 *
+	 * @param team
+	 *            the team
+	 * @return the coords base
+	 */
 	public Coordinates getCoordsBase(int team) {
 		return (team == Constant.ID_TEAM_A) ? new Coordinates(0, 0)
 				: new Coordinates(sizeWidth - 1, sizeHeight - 1);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.virtualwar.util.pathfinding.TileBasedMap#getCost(org.virtualwar.util
+	 * .pathfinding.Mover, org.virtualwar.util.Coordinates,
+	 * org.virtualwar.util.Coordinates)
+	 */
 	@Override
 	public float getCost(Mover mover, Coordinates cordsSource,
 			Coordinates cordsTo) {
@@ -203,6 +226,11 @@ public class Board implements TileBasedMap {
 		return sizeHeight;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.virtualwar.util.pathfinding.TileBasedMap#getHeightInTiles()
+	 */
 	@Override
 	public int getHeightInTiles() {
 		return sizeHeight;
@@ -329,6 +357,11 @@ public class Board implements TileBasedMap {
 		return sizeWidth;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.virtualwar.util.pathfinding.TileBasedMap#getWidthInTiles()
+	 */
 	@Override
 	public int getWidthInTiles() {
 		return sizeWidth;
@@ -336,7 +369,7 @@ public class Board implements TileBasedMap {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#hashCode()
 	 */
 	@Override
@@ -543,6 +576,13 @@ public class Board implements TileBasedMap {
 		return finalOut.toString();
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.virtualwar.util.pathfinding.TileBasedMap#pathFinderVisited(org.virtualwar
+	 * .util.Coordinates)
+	 */
 	@Override
 	public void pathFinderVisited(Coordinates cords) {
 

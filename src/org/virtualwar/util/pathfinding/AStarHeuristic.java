@@ -41,6 +41,6 @@ public interface AStarHeuristic {
 	 *            The coordinate of the target location
 	 * @return The cost associated with the given tile
 	 */
-	public float getCost(TileBasedMap map, Mover mover, Coordinates coorFrom,
+	float getCost(TileBasedMap map, Mover mover, Coordinates coorFrom,
 			Coordinates coorTo);
 }

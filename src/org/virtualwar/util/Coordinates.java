@@ -17,6 +17,7 @@ package org.virtualwar.util;
 import org.virtualwar.config.Constant;
 import org.virtualwar.config.TextData;
 
+// TODO: Auto-generated Javadoc
 /**
  * The Coordinates rightClass.
  *
@@ -145,10 +146,22 @@ public class Coordinates {
 		return new Coordinates(width - c.width, height - c.height);
 	}
 
+	/**
+	 * Sets the height coordinate.
+	 *
+	 * @param height
+	 *            the new height coordinate
+	 */
 	public void setHeight(int height) {
 		this.height = height;
 	}
 
+	/**
+	 * Sets the width coordinate.
+	 *
+	 * @param width
+	 *            the new width coordinate
+	 */
 	public void setWidth(int width) {
 		this.width = width;
 	}
@@ -165,7 +178,7 @@ public class Coordinates {
 	}
 
 	/**
-	 * Return the text value of the direction if know
+	 * Return the text value of the direction if know.
 	 *
 	 * @return the value
 	 */

@@ -35,7 +35,7 @@ public interface TileBasedMap {
 	 *            The coordinate of the tile to check
 	 * @return True if the location is blocked
 	 */
-	public boolean blocked(Mover mover, Coordinates cords);
+	boolean blocked(Mover mover, Coordinates cords);
 
 	/**
 	 * Get the cost of moving through the given tile. This can be used to make
@@ -50,7 +50,7 @@ public interface TileBasedMap {
 	 *            The coordinate of the tile we're moving to
 	 * @return The relative cost of moving across the given tile
 	 */
-	public float getCost(Mover mover, Coordinates cordsSource,
+	float getCost(Mover mover, Coordinates cordsSource,
 			Coordinates cordsTo);
 
 	/**
@@ -59,7 +59,7 @@ public interface TileBasedMap {
 	 *
 	 * @return The number of tiles down the map
 	 */
-	public int getHeightInTiles();
+	int getHeightInTiles();
 
 	/**
 	 * Get the width of the tile map. The slightly odd name is used to
@@ -67,7 +67,7 @@ public interface TileBasedMap {
 	 *
 	 * @return The number of tiles across the map
 	 */
-	public int getWidthInTiles();
+	int getWidthInTiles();
 
 	/**
 	 * Notification that the path finder visited a given tile. This is used for
@@ -76,6 +76,6 @@ public interface TileBasedMap {
 	 * @param cords
 	 *            The coordinate of the tile that was visited
 	 */
-	public void pathFinderVisited(Coordinates cords);
+	void pathFinderVisited(Coordinates cords);
 
 }

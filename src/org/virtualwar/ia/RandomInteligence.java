@@ -141,8 +141,6 @@ public class RandomInteligence extends Inteligence {
 		super.setBoard(board);
 		ran = new Random();
 	}
-	
-
 
 	@Override
 	public String toString() {

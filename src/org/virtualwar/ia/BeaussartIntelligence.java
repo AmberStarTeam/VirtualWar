@@ -1,3 +1,17 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.virtualwar.ia;
 
 import java.util.ArrayList;
@@ -16,35 +30,73 @@ import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.pathfinding.AStarPathFinder;
 import org.virtualwar.util.pathfinding.Path;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The BeaussartIntelligence Class.
+ *
+ * @author Nicolas Beaussart
+ */
 public class BeaussartIntelligence extends Inteligence {
 
 	/** The random generator. */
 	private Random ran = new Random();
 
+	/** The path find diag. */
 	AStarPathFinder pathFindDiag;
 
+	/** The path find strait. */
 	AStarPathFinder pathFindStrait;
 
+	/**
+	 * Instantiates a new beaussart intelligence.
+	 */
 	public BeaussartIntelligence() {
 	}
 
+	/**
+	 * Instantiates a new beaussart intelligence.
+	 *
+	 * @param team
+	 *            the team
+	 * @param board
+	 *            the board
+	 */
 	public BeaussartIntelligence(int team, Board board) {
 		super(team, board);
 		if (board != null) {
 			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
-			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000, false, 2);
+			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000,
+					false, 2);
 		}
-		
+
 	}
 
+	/**
+	 * Instantiates a new beaussart intelligence.
+	 *
+	 * @param robots
+	 *            the robots
+	 * @param team
+	 *            the team
+	 * @param board
+	 *            the board
+	 */
 	public BeaussartIntelligence(List<Robot> robots, int team, Board board) {
 		super(robots, team, board);
 		if (board != null) {
 			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
-			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000, false, 2);
+			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000,
+					false, 2);
 		}
 	}
 
+	/**
+	 * Can attack safely.
+	 *
+	 * @param rob
+	 *            the rob
+	 * @return true, if successful
+	 */
 	private boolean canAttackSafely(Robot rob) {
 		if (rob instanceof Scavenger) {
 			return true;
@@ -61,6 +113,13 @@ public class BeaussartIntelligence extends Inteligence {
 		return false;
 	}
 
+	/**
+	 * Dodge.
+	 *
+	 * @param att
+	 *            the att
+	 * @return the action
+	 */
 	private Action dodge(Attack att) {
 		Robot robSource = att.getRobotSource();
 		if (att.getDirection().getHeight() != 0) { // attaque vers Height
@@ -121,6 +180,11 @@ public class BeaussartIntelligence extends Inteligence {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.virtualwar.ia.Inteligence#getInitialRobots(int)
+	 */
 	@Override
 	public List<Robot> getInitialRobots(int numberOfBots) {
 		List<Robot> retVal = new ArrayList<Robot>();
@@ -139,10 +203,26 @@ public class BeaussartIntelligence extends Inteligence {
 		return retVal;
 	}
 
+	/**
+	 * Gets the path home.
+	 *
+	 * @param rob
+	 *            the rob
+	 * @return the path home
+	 */
 	private Path getPathHome(Robot rob) {
 		return getPathTo(rob, getBoard().getCoordsBase(getTeam()));
 	}
 
+	/**
+	 * Gets the path to.
+	 *
+	 * @param rob
+	 *            the rob
+	 * @param cords
+	 *            the cords
+	 * @return the path to
+	 */
 	private Path getPathTo(Robot rob, Coordinates cords) {
 		if (rob instanceof Tank) {
 			return pathFindStrait.findPath(rob, rob.getCoordinates(), cords);
@@ -151,14 +231,23 @@ public class BeaussartIntelligence extends Inteligence {
 		}
 	}
 
+	/**
+	 * Go to next step.
+	 *
+	 * @param rob
+	 *            the rob
+	 * @param path
+	 *            the path
+	 * @return the action
+	 */
 	private Action goToNextStep(Robot rob, Path path) {
 		Coordinates to;
-		try{
+		try {
 			to = path.getCoordsRelativ(1);
-		}catch (Exception e){
+		} catch (Exception e) {
 			return null;
 		}
-		
+
 		if (rob.getAvailableMove() == null) {
 			return null;
 		}
@@ -170,6 +259,11 @@ public class BeaussartIntelligence extends Inteligence {
 		return null;
 	}
 
+	/**
+	 * Have to go home.
+	 *
+	 * @return the list
+	 */
 	private List<Robot> haveToGoHome() {
 		List<Robot> lsRobot = new ArrayList<Robot>(super.getLsRobot());
 		List<Robot> retVal = new ArrayList<Robot>();
@@ -185,6 +279,11 @@ public class BeaussartIntelligence extends Inteligence {
 		return retVal;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.virtualwar.ia.Inteligence#makeTurn()
+	 */
 	@Override
 	public Action makeTurn() {
 		List<Robot> lsRobot = new ArrayList<Robot>(super.getLsRobot());
@@ -227,7 +326,7 @@ public class BeaussartIntelligence extends Inteligence {
 			}
 		}
 
-		List<Robot> robLost = new ArrayList<Robot>(getLsRobot()); //willNotMakeHome();
+		List<Robot> robLost = new ArrayList<Robot>(getLsRobot()); // willNotMakeHome();
 		robLost.removeAll(haveToGoHome());
 		robLost.addAll(willNotMakeHome());
 		if (!robLost.isEmpty()) {
@@ -293,6 +392,11 @@ public class BeaussartIntelligence extends Inteligence {
 
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.virtualwar.ia.Inteligence#setBoard(org.virtualwar.board.Board)
+	 */
 	@Override
 	public void setBoard(Board board) {
 		super.setBoard(board);
@@ -301,6 +405,13 @@ public class BeaussartIntelligence extends Inteligence {
 		ran = new Random();
 	}
 
+	/**
+	 * Shooter attack.
+	 *
+	 * @param lsAction
+	 *            the ls action
+	 * @return the action
+	 */
 	private Action shooterAttack(List<Attack> lsAction) {
 		if (!lsAction.isEmpty()) {
 			Collections.shuffle(lsAction, ran);
@@ -320,6 +431,13 @@ public class BeaussartIntelligence extends Inteligence {
 		return null;
 	}
 
+	/**
+	 * Tank attack.
+	 *
+	 * @param lsAction
+	 *            the ls action
+	 * @return the action
+	 */
 	private Action tankAttack(List<Action> lsAction) {
 		for (Action att : lsAction) {
 			if (att.getRobotSource() instanceof Tank) {
@@ -336,11 +454,21 @@ public class BeaussartIntelligence extends Inteligence {
 		return null;
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.virtualwar.ia.Inteligence#toString()
+	 */
 	@Override
 	public String toString() {
 		return super.toString() + "Beausssart";
 	}
 
+	/**
+	 * Will not make home.
+	 *
+	 * @return the list
+	 */
 	private List<Robot> willNotMakeHome() {
 		List<Robot> lsRobot = new ArrayList<Robot>(super.getLsRobot());
 		List<Robot> retVal = new ArrayList<Robot>();

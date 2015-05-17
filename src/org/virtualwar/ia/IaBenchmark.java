@@ -27,8 +27,20 @@ import org.virtualwar.config.Constant;
 import org.virtualwar.robot.Robot;
 import org.virtualwar.util.sound.ThreadSoundRun;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The IaBenchmark Class.
+ *
+ * @author Nicolas Beaussart
+ */
 public class IaBenchmark {
 
+	/**
+	 * The main method.
+	 *
+	 * @param args
+	 *            the arguments
+	 */
 	public static void main(String[] args) {
 		Long timeBef = System.currentTimeMillis();
 		int[] dat = new IaBenchmark(new RandomInteligence(),
@@ -38,17 +50,39 @@ public class IaBenchmark {
 				+ (timeAft - timeBef));
 	}
 
+	/** The it1. */
 	private Inteligence it1;
+
+	/** The it2. */
 	private Inteligence it2;
 
+	/** The nmb. */
 	private int nmb;
 
+	/**
+	 * Instantiates a new ia benchmark.
+	 *
+	 * @param it1
+	 *            the it1
+	 * @param it2
+	 *            the it2
+	 */
 	public IaBenchmark(Inteligence it1, Inteligence it2) {
 		this.it1 = it1;
 		this.it2 = it2;
 		nmb = 1_000;
 	}
 
+	/**
+	 * Instantiates a new ia benchmark.
+	 *
+	 * @param it1
+	 *            the it1
+	 * @param it2
+	 *            the it2
+	 * @param nmb
+	 *            the nmb
+	 */
 	public IaBenchmark(Inteligence it1, Inteligence it2, int nmb) {
 		this.it1 = it1;
 		this.it2 = it2;
@@ -56,7 +90,7 @@ public class IaBenchmark {
 	}
 
 	/**
-	 * Check if any robots can do somthing
+	 * Check if any robots can do somthing.
 	 *
 	 * @param lsRobot
 	 *            the list robot
@@ -106,6 +140,11 @@ public class IaBenchmark {
 		}
 	}
 
+	/**
+	 * Run.
+	 *
+	 * @return the int[] result
+	 */
 	public int[] run() {
 		int[] res = new int[] { 0, 0 };
 		PrintStream out = System.out;
@@ -137,7 +176,8 @@ public class IaBenchmark {
 					try {
 						actT1 = it1.makeTurn();
 					} catch (Exception e) {
-						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true).start();
+						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true)
+								.start();
 						System.err.println("Error : ia 1 breaking the game...");
 						System.err.println(e.toString());
 						e.printStackTrace(System.err);
@@ -147,7 +187,8 @@ public class IaBenchmark {
 						actT1.act();
 						actT1 = null;
 					} else {
-						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true).start();
+						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true)
+								.start();
 						System.err.println("Error : diden't chose (ia 1)");
 						break;
 					}
@@ -161,7 +202,8 @@ public class IaBenchmark {
 						actT2 = it2.makeTurn();
 					} catch (Exception e) {
 						Config.soundOn = true;
-						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true).start();
+						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true)
+								.start();
 						Config.soundOn = false;
 						System.err.println("Error : ia 2 breaking the game...");
 						System.err.println(e.toString());
@@ -173,7 +215,8 @@ public class IaBenchmark {
 						actT2 = null;
 					} else {
 						Config.soundOn = true;
-						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true).start();
+						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true)
+								.start();
 						Config.soundOn = false;
 						System.err.println("Error : diden't chose (ia 2)");
 						break;

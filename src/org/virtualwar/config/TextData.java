@@ -308,7 +308,7 @@ public enum TextData {
 	GAME_CHOSE_IA_LIST("b\na\nav" + '\u9999'
 			+ "(B)eaussart, (A)léatoire, (Av)ancée", "b\nr\nad" + '\u9999'
 			+ "(B)eaussart, (R)andom, (Ad)vanced"),
-
+	/** thje lang input choise */
 	GAME_LANG_INPUT("fr\nen" + '\u9999' + "fr " + GAME_OR.get("fr") + " en :"),
 
 	/** The game chose sound. */

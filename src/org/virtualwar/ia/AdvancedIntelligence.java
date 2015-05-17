@@ -1,3 +1,17 @@
+/*
+ * This program is free software: you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation, either version 3 of the License, or
+ *  (at your option) any later version.
+ *
+ *  This program is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *
+ *  You should have received a copy of the GNU General Public License
+ *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package org.virtualwar.ia;
 
 import java.util.ArrayList;
@@ -12,7 +26,14 @@ import org.virtualwar.robot.Shooter;
 import org.virtualwar.robot.Tank;
 import org.virtualwar.util.Coordinates;
 
+/**
+ * The AdvancedIntelligence Class.
+ *
+ * @author Nicolas Beaussart
+ */
 public class AdvancedIntelligence extends Inteligence {
+
+	/** The ran. */
 	private Random ran = new Random();
 
 	/**
@@ -49,78 +70,13 @@ public class AdvancedIntelligence extends Inteligence {
 		super(robots, team, board);
 	}
 
-	@Override
-	public List<Robot> getInitialRobots(int numberOfBots) {
-		List<Robot> retVal = new ArrayList<Robot>();
-		Coordinates cords = getBoard().getCoordsBase(getTeam());
-		for (int i = 0; i < numberOfBots; i++) {
-			switch (i) {
-			case 0:
-				retVal.add(new Tank(getTeam(), cords, getBoard()));
-				break;
-			case 1:
-				retVal.add(new Shooter(getTeam(), cords, getBoard()));
-				break;
-			case 2:
-				retVal.add(new Shooter(getTeam(), cords, getBoard()));
-				break;
-			case 3:
-				retVal.add(new Scavenger(getTeam(), cords, getBoard()));
-				break;
-
-			default:
-				break;
-			}
-		}
-		setLsRobot(retVal);
-		return retVal;
-	}
-
-	@Override
-	public Action makeTurn() {
-		List<Robot> lsRobot = super.getLsRobot();
-		if (lsRobot == null) {
-			return null;
-		}
-		List<Action> attacks = new ArrayList<Action>();
-		for (Robot rob : lsRobot) {
-			if (!(rob instanceof Scavenger) && rob.canAttack()) {
-				attacks.addAll(rob.getAvailableAtacks());
-
-				// Priorité aux attaques de tank
-				for (Action att : attacks) {
-					if (att.getRobotSource() instanceof Tank) {
-						return att;
-					}
-				}
-
-				// Ensuite les shooter /!\ pas fini /!\ si les deux shooter
-				// peuvent effectuer l'action, ce sera le premier shooter qui
-				// pourra effectuer l'action
-				for (Action att : attacks) {
-					if (att.getRobotSource() instanceof Shooter) {
-						return att;
-					}
-				}
-			}
-		}
-
-		Robot tmp = lsRobot.get(ran.nextInt(lsRobot.size()));
-		if (tmp instanceof Scavenger) {
-			
-		}
-
-		if (tmp instanceof Shooter) {
-			List<Action> lsAct = tmp.getAvailableMove();
-			return lsAct.get(ran.nextInt(lsAct.size()));
-		} else if (tmp.canMove()) {
-			List<Action> lsAct = tmp.getAvailableMove();
-			return lsAct.get(ran.nextInt(lsAct.size()));
-		}
-		return null;
-
-	}
-
+	/**
+	 * Detect robot height.
+	 *
+	 * @param r
+	 *            the r
+	 * @return true, if successful
+	 */
 	public boolean detectRobotHeight(Robot r) {
 		Coordinates c = r.getCoordinates();
 		int t = r.getTeam();
@@ -157,6 +113,13 @@ public class AdvancedIntelligence extends Inteligence {
 		return false;
 	}
 
+	/**
+	 * Detect robot width.
+	 *
+	 * @param r
+	 *            the r
+	 * @return true, if successful
+	 */
 	public boolean detectRobotWidth(Robot r) {
 		Coordinates c = r.getCoordinates();
 		int t = r.getTeam();
@@ -191,5 +154,87 @@ public class AdvancedIntelligence extends Inteligence {
 		}
 
 		return false;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.virtualwar.ia.Inteligence#getInitialRobots(int)
+	 */
+	@Override
+	public List<Robot> getInitialRobots(int numberOfBots) {
+		List<Robot> retVal = new ArrayList<Robot>();
+		Coordinates cords = getBoard().getCoordsBase(getTeam());
+		for (int i = 0; i < numberOfBots; i++) {
+			switch (i) {
+			case 0:
+				retVal.add(new Tank(getTeam(), cords, getBoard()));
+				break;
+			case 1:
+				retVal.add(new Shooter(getTeam(), cords, getBoard()));
+				break;
+			case 2:
+				retVal.add(new Shooter(getTeam(), cords, getBoard()));
+				break;
+			case 3:
+				retVal.add(new Scavenger(getTeam(), cords, getBoard()));
+				break;
+
+			default:
+				break;
+			}
+		}
+		setLsRobot(retVal);
+		return retVal;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see org.virtualwar.ia.Inteligence#makeTurn()
+	 */
+	@Override
+	public Action makeTurn() {
+		List<Robot> lsRobot = super.getLsRobot();
+		if (lsRobot == null) {
+			return null;
+		}
+		List<Action> attacks = new ArrayList<Action>();
+		for (Robot rob : lsRobot) {
+			if (!(rob instanceof Scavenger) && rob.canAttack()) {
+				attacks.addAll(rob.getAvailableAtacks());
+
+				// Prioritï¿½ aux attaques de tank
+				for (Action att : attacks) {
+					if (att.getRobotSource() instanceof Tank) {
+						return att;
+					}
+				}
+
+				// Ensuite les shooter /!\ pas fini /!\ si les deux shooter
+				// peuvent effectuer l'action, ce sera le premier shooter qui
+				// pourra effectuer l'action
+				for (Action att : attacks) {
+					if (att.getRobotSource() instanceof Shooter) {
+						return att;
+					}
+				}
+			}
+		}
+
+		Robot tmp = lsRobot.get(ran.nextInt(lsRobot.size()));
+		if (tmp instanceof Scavenger) {
+
+		}
+
+		if (tmp instanceof Shooter) {
+			List<Action> lsAct = tmp.getAvailableMove();
+			return lsAct.get(ran.nextInt(lsAct.size()));
+		} else if (tmp.canMove()) {
+			List<Action> lsAct = tmp.getAvailableMove();
+			return lsAct.get(ran.nextInt(lsAct.size()));
+		}
+		return null;
+
 	}
 }

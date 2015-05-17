@@ -122,6 +122,8 @@ public class Sound {
 	 *
 	 * @param source
 	 *            the source
+	 * @param forced
+	 *            If the sound is force played
 	 */
 	public void play(InputStream source, boolean forced) {
 		if (!forced && !Config.soundOn) {

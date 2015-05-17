@@ -30,7 +30,8 @@ public class ThreadSoundRun extends Thread {
 
 	/** The is. */
 	private InputStream is;
-	/** if sound is forced on */
+
+	/** if sound is forced on. */
 	private boolean forced;
 
 	/**
@@ -68,6 +69,8 @@ public class ThreadSoundRun extends Thread {
 	 *
 	 * @param file
 	 *            the file
+	 * @param forced
+	 *            If the sound is force played
 	 */
 	public ThreadSoundRun(String file, boolean forced) {
 		if (file == null) {
@@ -107,6 +110,8 @@ public class ThreadSoundRun extends Thread {
 	 *            the file
 	 * @param timeRunning
 	 *            the time running
+	 * @param forced
+	 *            If the sound is force played
 	 */
 	public ThreadSoundRun(String file, long timeRunning, boolean forced) {
 		if (file == null) {

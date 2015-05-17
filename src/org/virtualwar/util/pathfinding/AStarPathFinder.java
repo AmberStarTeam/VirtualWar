@@ -21,6 +21,7 @@ import java.util.List;
 import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.pathfinding.heuristics.ClosestHeuristic;
 
+// TODO: Auto-generated Javadoc
 /**
  * A path finder implementation that uses the AStar heuristic based algorithm to
  * determine a path.
@@ -28,34 +29,45 @@ import org.virtualwar.util.pathfinding.heuristics.ClosestHeuristic;
  * @author beaussan
  */
 public class AStarPathFinder implements PathFinder {
+
 	/**
-	 * A single node in the search graph
+	 * A single node in the search graph.
+	 *
+	 * @author Nicolas Beaussart
 	 */
 	private class Node implements Comparable<Node> {
-		/** The coordinate of the node */
+
+		/** The coordinate of the node. */
 		private Coordinates cords;
-		/** The path cost for this node */
+
+		/** The path cost for this node. */
 		private float cost;
-		/** The parent of this node, how we reached it in the search */
+
+		/** The parent of this node, how we reached it in the search. */
 		private Node parent;
-		/** The heuristic cost of this node */
+
+		/** The heuristic cost of this node. */
 		private float heuristic;
-		/** The search depth of this node */
+
+		/** The search depth of this node. */
 		private int depth;
 
 		/**
-		 * Create a new node
+		 * Create a new node.
 		 *
-		 * @param x
-		 *            The x coordinate of the node
-		 * @param y
-		 *            The y coordinate of the node
+		 * @param cords
+		 *            The coordinate of the node
 		 */
 		public Node(Coordinates cords) {
 			this.cords = cords;
 		}
 
 		/**
+		 * Compare to.
+		 *
+		 * @param other
+		 *            the other
+		 * @return the int
 		 * @see Comparable#compareTo(Object)
 		 */
 		@Override
@@ -75,7 +87,7 @@ public class AStarPathFinder implements PathFinder {
 		}
 
 		/**
-		 * Set the parent of this node
+		 * Set the parent of this node.
 		 *
 		 * @param parent
 		 *            The parent node which lead us to this node
@@ -90,17 +102,18 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * A simple sorted list
+	 * A simple sorted list.
 	 *
 	 * @author beaussan
 	 */
 	private class SortedList {
-		/** The list of elements */
+
+		/** The list of elements. */
 		// <Comparable<? super Comparable<? super Object>>>
 		private List<Node> list = new ArrayList<Node>();
 
 		/**
-		 * Add an element to the list - causes sorting
+		 * Add an element to the list - causes sorting.
 		 *
 		 * @param o
 		 *            The element to add
@@ -111,14 +124,14 @@ public class AStarPathFinder implements PathFinder {
 		}
 
 		/**
-		 * Empty the list
+		 * Empty the list.
 		 */
 		public void clear() {
 			list.clear();
 		}
 
 		/**
-		 * Check if an element is in the list
+		 * Check if an element is in the list.
 		 *
 		 * @param o
 		 *            The element to search for
@@ -129,7 +142,7 @@ public class AStarPathFinder implements PathFinder {
 		}
 
 		/**
-		 * Retrieve the first element from the list
+		 * Retrieve the first element from the list.
 		 *
 		 * @return The first element from the list
 		 */
@@ -138,7 +151,7 @@ public class AStarPathFinder implements PathFinder {
 		}
 
 		/**
-		 * Remove an element from the list
+		 * Remove an element from the list.
 		 *
 		 * @param o
 		 *            The element to remove
@@ -148,7 +161,7 @@ public class AStarPathFinder implements PathFinder {
 		}
 
 		/**
-		 * Get the number of elements in the list
+		 * Get the number of elements in the list.
 		 *
 		 * @return The number of element in the list
 		 */
@@ -157,24 +170,28 @@ public class AStarPathFinder implements PathFinder {
 		}
 	}
 
-	/** The set of nodes that have been searched through */
+	/** The set of nodes that have been searched through. */
 	private ArrayList<Node> closed = new ArrayList<Node>();
-	/** The set of nodes that we do not yet consider fully searched */
+
+	/** The set of nodes that we do not yet consider fully searched. */
 	private SortedList open = new SortedList();
 
-	/** The map being searched */
+	/** The map being searched. */
 	private TileBasedMap map;
-	/** The maximum depth of search we're willing to accept before giving up */
+
+	/** The maximum depth of search we're willing to accept before giving up. */
 	private int maxSearchDistance;
-	/** The complete set of nodes across the map */
+
+	/** The complete set of nodes across the map. */
 	private Node[][] nodes;
-	/** The moving distance */
+
+	/** The moving distance. */
 	private int moveRange;
 
-	/** True if we allow diaganol movement */
+	/** True if we allow diaganol movement. */
 	private boolean allowDiagMovement;
 
-	/** The heuristic we're applying to determine which nodes to search first */
+	/** The heuristic we're applying to determine which nodes to search first. */
 	private AStarHeuristic heuristic;
 
 	/**
@@ -194,16 +211,16 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Create a path finder
+	 * Create a path finder.
 	 *
-	 * @param heuristic
-	 *            The heuristic used to determine the search order of the map
 	 * @param map
 	 *            The map to be searched
 	 * @param maxSearchDistance
 	 *            The maximum depth we'll search before giving up
 	 * @param allowDiagMovement
 	 *            True if the search should try diaganol movement
+	 * @param heuristic
+	 *            The heuristic used to determine the search order of the map
 	 */
 	public AStarPathFinder(TileBasedMap map, int maxSearchDistance,
 			boolean allowDiagMovement, AStarHeuristic heuristic) {
@@ -229,16 +246,18 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Create a path finder
+	 * Create a path finder.
 	 *
-	 * @param heuristic
-	 *            The heuristic used to determine the search order of the map
 	 * @param map
 	 *            The map to be searched
 	 * @param maxSearchDistance
 	 *            The maximum depth we'll search before giving up
 	 * @param allowDiagMovement
 	 *            True if the search should try diaganol movement
+	 * @param moveRange
+	 *            the move range
+	 * @param heuristic
+	 *            The heuristic used to determine the search order of the map
 	 */
 	public AStarPathFinder(TileBasedMap map, int maxSearchDistance,
 			boolean allowDiagMovement, int moveRange, AStarHeuristic heuristic) {
@@ -257,7 +276,7 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Add a node to the closed list
+	 * Add a node to the closed list.
 	 *
 	 * @param node
 	 *            The node to add to the closed list
@@ -267,7 +286,7 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Add a node to the open list
+	 * Add a node to the open list.
 	 *
 	 * @param node
 	 *            The node to be added to the open list
@@ -276,6 +295,14 @@ public class AStarPathFinder implements PathFinder {
 		open.add(node);
 	}
 
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see
+	 * org.virtualwar.util.pathfinding.PathFinder#findPath(org.virtualwar.util
+	 * .pathfinding.Mover, org.virtualwar.util.Coordinates,
+	 * org.virtualwar.util.Coordinates)
+	 */
 	@Override
 	public Path findPath(Mover mover, Coordinates cordsSource,
 			Coordinates cordsTo) {
@@ -425,14 +452,10 @@ public class AStarPathFinder implements PathFinder {
 	 *
 	 * @param mover
 	 *            The entity that is being moved
-	 * @param x
-	 *            The x coordinate of the tile whose cost is being determined
-	 * @param y
-	 *            The y coordiante of the tile whose cost is being determined
-	 * @param tx
-	 *            The x coordinate of the target location
-	 * @param ty
-	 *            The y coordinate of the target location
+	 * @param cordsSource
+	 *            The coordinate of the tile whose cost is being determined
+	 * @param cordsTo
+	 *            The coordinate of the target location
 	 * @return The heuristic cost assigned to the tile
 	 */
 	public float getHeuristicCost(Mover mover, Coordinates cordsSource,
@@ -441,18 +464,14 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Get the cost to move through a given location
+	 * Get the cost to move through a given location.
 	 *
 	 * @param mover
 	 *            The entity that is being moved
-	 * @param sx
-	 *            The x coordinate of the tile whose cost is being determined
-	 * @param sy
-	 *            The y coordiante of the tile whose cost is being determined
-	 * @param tx
-	 *            The x coordinate of the target location
-	 * @param ty
-	 *            The y coordinate of the target location
+	 * @param cordsSource
+	 *            The coordinate of the tile whose cost is being determined
+	 * @param cordsTo
+	 *            The coordinate of the target location
 	 * @return The cost of movement through the given tile
 	 */
 	public float getMovementCost(Mover mover, Coordinates cordsSource,
@@ -460,12 +479,19 @@ public class AStarPathFinder implements PathFinder {
 		return map.getCost(mover, cordsSource, cordsTo);
 	}
 
+	/**
+	 * Gets the node.
+	 *
+	 * @param cords
+	 *            the cords
+	 * @return the node
+	 */
 	private Node getNode(Coordinates cords) {
 		return nodes[cords.getWidth()][cords.getHeight()];
 	}
 
 	/**
-	 * Check if the node supplied is in the closed list
+	 * Check if the node supplied is in the closed list.
 	 *
 	 * @param node
 	 *            The node to search for
@@ -476,7 +502,7 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Check if a node is in the open list
+	 * Check if a node is in the open list.
 	 *
 	 * @param node
 	 *            The node to check for
@@ -487,18 +513,14 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Check if a given location is valid for the supplied mover
+	 * Check if a given location is valid for the supplied mover.
 	 *
 	 * @param mover
 	 *            The mover that would hold a given location
-	 * @param sx
-	 *            The starting x coordinate
-	 * @param sy
-	 *            The starting y coordinate
-	 * @param x
-	 *            The x coordinate of the location to check
-	 * @param y
-	 *            The y coordinate of the location to check
+	 * @param cordsSource
+	 *            The starting coordinate
+	 * @param cordsTo
+	 *            The coordinate of the location to check
 	 * @return True if the location is valid for the given mover
 	 */
 	protected boolean isValidLocation(Mover mover, Coordinates cordsSource,
@@ -515,7 +537,7 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Remove a node from the closed list
+	 * Remove a node from the closed list.
 	 *
 	 * @param node
 	 *            The node to remove from the closed list
@@ -525,7 +547,7 @@ public class AStarPathFinder implements PathFinder {
 	}
 
 	/**
-	 * Remove a node from the open list
+	 * Remove a node from the open list.
 	 *
 	 * @param node
 	 *            The node to remove from the open list

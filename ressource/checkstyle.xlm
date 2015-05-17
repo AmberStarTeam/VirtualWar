@@ -5,7 +5,7 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: virtual war
+    Checkstyle-Configuration: virtual war checkstyule
     Description: none
 -->
 <module name="Checker">
@@ -16,7 +16,10 @@
     </module>
     <module name="JavadocType"/>
     <module name="JavadocVariable"/>
-    <module name="JavadocStyle"/>
+    <module name="JavadocStyle">
+      <property name="severity" value="ignore"/>
+      <metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="inherit"/>
+    </module>
     <module name="ConstantName"/>
     <module name="LocalFinalVariableName"/>
     <module name="LocalVariableName"/>
@@ -66,6 +69,9 @@
     <module name="UpperEll"/>
     <module name="LineLength">
       <property name="max" value="100"/>
+    </module>
+    <module name="LineLength">
+      <property name="max" value="120"/>
     </module>
   </module>
   <module name="JavadocPackage"/>

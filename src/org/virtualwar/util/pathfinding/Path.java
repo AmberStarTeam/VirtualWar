@@ -18,6 +18,7 @@ import java.util.ArrayList;
 
 import org.virtualwar.util.Coordinates;
 
+// TODO: Auto-generated Javadoc
 /**
  * A path determined by some path finding algorithm. A series of steps from the
  * starting location to the target location. This includes a step for the
@@ -26,26 +27,31 @@ import org.virtualwar.util.Coordinates;
  * @author beaussan
  */
 public class Path {
+	
 	/**
-	 * A single step within the path
+	 * A single step within the path.
 	 *
 	 * @author Kevin Glass
 	 */
 	public class Step {
-		/** The coordinates at the given step */
+		
+		/**  The coordinates at the given step. */
 		private Coordinates cords;
 
 		/**
-		 * Create a new step
+		 * Create a new step.
 		 *
-		 * @param cords
-		 *            The coordinate of the new step
+		 * @param cords            The coordinate of the new step
 		 */
 		public Step(Coordinates cords) {
 			this.cords = cords;
 		}
 
 		/**
+		 * Equals.
+		 *
+		 * @param other the other
+		 * @return true, if successful
 		 * @see Object#equals(Object)
 		 */
 		@Override
@@ -59,11 +65,19 @@ public class Path {
 			return false;
 		}
 
+		/**
+		 * Gets the coords.
+		 *
+		 * @return the coords
+		 */
 		public Coordinates getCoords() {
 			return cords;
 		}
 
 		/**
+		 * Hash code.
+		 *
+		 * @return the int
 		 * @see Object#hashCode()
 		 */
 		@Override
@@ -71,17 +85,20 @@ public class Path {
 			return cords.hashCode();
 		}
 
+		/* (non-Javadoc)
+		 * @see java.lang.Object#toString()
+		 */
 		@Override
 		public String toString() {
 			return "" + cords;
 		}
 	}
 
-	/** The list of steps building up this path */
+	/**  The list of steps building up this path. */
 	private ArrayList<Step> steps = new ArrayList<Step>();
 
 	/**
-	 * Create an empty path
+	 * Create an empty path.
 	 */
 	public Path() {
 
@@ -98,10 +115,9 @@ public class Path {
 	}
 
 	/**
-	 * Check if this path contains the given step
+	 * Check if this path contains the given step.
 	 *
-	 * @param cords
-	 *            The coordinate of the step to check for
+	 * @param cords            The coordinate of the step to check for
 	 * @return True if the path contains the given step
 	 */
 	public boolean contains(Coordinates cords) {
@@ -109,10 +125,9 @@ public class Path {
 	}
 
 	/**
-	 * Get the coordinate for the step at the given index
+	 * Get the coordinate for the step at the given index.
 	 *
-	 * @param index
-	 *            The index of the step whose y coordinate should be retrieved
+	 * @param index            The index of the step whose y coordinate should be retrieved
 	 * @return The coordinate at the step
 	 */
 	public Coordinates getCoords(int index) {
@@ -120,17 +135,16 @@ public class Path {
 	}
 
 	/**
-	 * Get the coordinate for the step at the given index from the previous step
+	 * Get the coordinate for the step at the given index from the previous step.
 	 *
-	 * @param index
-	 *            The index of the step whose y coordinate should be retrieved
+	 * @param index            The index of the step whose y coordinate should be retrieved
 	 * @return The coordinate at the step
 	 */
 	public Coordinates getCoordsRelativ(int index) {
 		if (index == 0) {
 			return new Coordinates(0, 0);
 		} else {
-			return getStep(index).cords.minus(getStep(index-1).cords);
+			return getStep(index).cords.minus(getStep(index - 1).cords);
 		}
 	}
 
@@ -144,10 +158,9 @@ public class Path {
 	}
 
 	/**
-	 * Get the step at a given index in the path
+	 * Get the step at a given index in the path.
 	 *
-	 * @param index
-	 *            The index of the step to retrieve. Note this should be >= 0
+	 * @param index            The index of the step to retrieve. Note this should be >= 0
 	 *            and < getLength();
 	 * @return The step information, the position on the map.
 	 */
@@ -158,15 +171,16 @@ public class Path {
 	/**
 	 * Prepend a step to the path.
 	 *
-	 * @param x
-	 *            The x coordinate of the new step
-	 * @param y
-	 *            The y coordinate of the new step
+	 * @param cords
+	 *            The coordinate of the new step
 	 */
 	public void prependStep(Coordinates cords) {
 		steps.add(0, new Step(cords));
 	}
 
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return steps.toString();

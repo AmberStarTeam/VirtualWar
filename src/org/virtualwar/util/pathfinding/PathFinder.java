@@ -42,6 +42,6 @@ public interface PathFinder {
 	 * @return The path found from start to end, or null if no path can be
 	 *         found.
 	 */
-	public Path findPath(Mover mover, Coordinates cordsSource,
+	Path findPath(Mover mover, Coordinates cordsSource,
 			Coordinates cordsTo);
 }
