@@ -176,7 +176,8 @@ public class IaBenchmark {
 					try {
 						actT1 = it1.makeTurn();
 					} catch (Exception e) {
-						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true)
+						new ThreadSoundRun(getClass().getResource(
+								"/org/virtualwar/res/deathOfRobots.wav").getPath(), true)
 								.start();
 						System.err.println("Error : ia 1 breaking the game...");
 						System.err.println(e.toString());
@@ -187,7 +188,8 @@ public class IaBenchmark {
 						actT1.act();
 						actT1 = null;
 					} else {
-						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true)
+						new ThreadSoundRun(getClass().getResource(
+								"/org/virtualwar/res/deathOfRobots.wav").getPath(), true)
 								.start();
 						System.err.println("Error : diden't chose (ia 1)");
 						break;
@@ -202,7 +204,8 @@ public class IaBenchmark {
 						actT2 = it2.makeTurn();
 					} catch (Exception e) {
 						Config.soundOn = true;
-						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true)
+						new ThreadSoundRun(getClass().getResource(
+								"/org/virtualwar/res/deathOfRobots.wav").getPath(), true)
 								.start();
 						Config.soundOn = false;
 						System.err.println("Error : ia 2 breaking the game...");
@@ -215,7 +218,8 @@ public class IaBenchmark {
 						actT2 = null;
 					} else {
 						Config.soundOn = true;
-						new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, true)
+						new ThreadSoundRun(getClass().getResource(
+								"/org/virtualwar/res/deathOfRobots.wav").getPath(), true)
 								.start();
 						Config.soundOn = false;
 						System.err.println("Error : diden't chose (ia 2)");

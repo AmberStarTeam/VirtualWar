@@ -144,7 +144,8 @@ public class Game {
 		for (Robot rob : lsRobot) {
 			if (rob.getEnergy() <= 0) {
 				rob.getBoard().getCell(rob.getCoordinates()).removeRobotIn(rob);
-				new ThreadSoundRun(Constant.ROBOT_DEATH_SOUND, 1000).start();
+				new ThreadSoundRun(getClass().getResource(
+						"/org/virtualwar/res/deathOfRobots.wav").getPath(), 1000).start();
 				robToRemove.add(rob);
 			}
 		}
@@ -402,8 +403,12 @@ public class Game {
 		// '\u9999')[0];
 		// String right = TextData.GAME_LANG_INPUT.toString().split("" +
 		// '\u9999')[1];
-		Config.language = InitGui.getLangFromUser();// getInputValue(left,
-													// right);
+		try {
+			Config.language = InitGui.getLangFromUser();
+		} catch (Exception e) {
+			System.exit(0);
+		}
+		
 
 		String left = TextData.GAME_CHOSE_SOUND_INPUT.toString().split(
 				"" + '\u9999')[0];

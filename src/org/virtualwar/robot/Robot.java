@@ -96,7 +96,7 @@ public abstract class Robot implements Mover {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#equals(java.lang.Object)
 	 */
 	@Override
@@ -306,7 +306,8 @@ public abstract class Robot implements Mover {
 				} catch (InterruptedException e) {
 
 				}
-				new ThreadSoundRun("src/org/virtualwar/res/boom.wav", 800).start();
+				new ThreadSoundRun(getClass().getResource(
+						"org/virtualwar/res/boom.wav").getPath(), 800).start();
 			}
 		}).start();
 	}
@@ -420,7 +421,7 @@ public abstract class Robot implements Mover {
 
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
