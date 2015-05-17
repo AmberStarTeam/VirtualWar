@@ -130,4 +130,9 @@ public abstract class Inteligence {
 	public void setTeam(int team) {
 		this.team = team;
 	}
+
+	@Override
+	public String toString() {
+		return "Intelligence ";
+	}
 }
