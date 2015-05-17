@@ -43,14 +43,14 @@ import org.virtualwar.util.Coordinates;
  */
 
 @SuppressWarnings("serial")
-public class caseRobot extends JFrame {
+public class CaseRobot extends JFrame {
 	
 	/**
 	 * Instantiates a new caseRobot.
 	 * @param cell
 	 * 		the cell
 	 */
-	public caseRobot(Cell cell) {
+	public CaseRobot(Cell cell) {
 		this.setSize(10, 10);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocationRelativeTo(null);
@@ -166,21 +166,21 @@ public class caseRobot extends JFrame {
 		
 		System.out.println("Un robot scavenger avec énergie maximum et mines maximum");
 		test.setRobotIn(scavenger);
-		caseRobot caseTest = new caseRobot(test);
+		CaseRobot caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
 		
 		System.out.println("Un robot scavenger ayant perdu 20 énergie");
 		scavenger.removeEnergy(20);
-		caseTest = new caseRobot(test);
+		caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
 		
 		System.out.println("Un robot scavenger ayant déposé une mine");
 		scavenger.dropMine();
-		caseTest = new caseRobot(test);
+		caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
@@ -188,14 +188,14 @@ public class caseRobot extends JFrame {
 		System.out.println("Un tank avec énergie maximum");
 		test.removeRobotIn(scavenger);
 		test.setRobotIn(tank);
-		caseTest = new caseRobot(test);
+		caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
 		
 		System.out.println("Un tank ayant perdu la moitié de son énergie");
 		tank.removeEnergy(30);
-		caseTest = new caseRobot(test);
+		caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
@@ -203,21 +203,21 @@ public class caseRobot extends JFrame {
 		System.out.println("Un shooter avec énergie maximum");
 		test.removeRobotIn(tank);
 		test.setRobotIn(shooter);
-		caseTest = new caseRobot(test);
+		caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
 		
 		System.out.println("Quand un robot est mort il laisse place à une case vide");
 		test.removeRobotIn(shooter);
-		caseTest = new caseRobot(test);
+		caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
 		
 		System.out.println("Case occupée par un obstacle");
 		test.setObstacle();
-		caseTest = new caseRobot(test);
+		caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
@@ -225,14 +225,14 @@ public class caseRobot extends JFrame {
 		System.out.println("Case occupée par une mine");
 		test.removeObstacle();
 		test.addMine(1);
-		caseTest = new caseRobot(test);
+		caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
 		
 		System.out.println("Case étant une base");
 		test = new Base(new Coordinates(1,1),1);
-		caseTest = new caseRobot(test);
+		caseTest = new CaseRobot(test);
 		
 		Thread.sleep(4000);
 		caseTest.dispose();
