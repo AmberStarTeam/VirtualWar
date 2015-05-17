@@ -31,6 +31,17 @@ public class Coordinates {
 	private int height;
 
 	/**
+	 * Copy constructor.
+	 *
+	 * @param other
+	 *            Other coordinates
+	 */
+	public Coordinates(Coordinates other) {
+		width = other.width;
+		height = other.height;
+	}
+
+	/**
 	 * default constructor.
 	 *
 	 * @param width
