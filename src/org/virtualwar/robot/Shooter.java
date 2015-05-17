@@ -50,7 +50,7 @@ public class Shooter extends Robot {
 	 */
 	@Override
 	public String getAttackSound() {
-		return "sounds/shotShooter.wav";
+		return "src/org/virtualwar/res/shotShooter.wav";
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class Shooter extends Robot {
 	 */
 	@Override
 	public String getMoveSound() {
-		return "sounds/running.wav";
+		return "src/org/virtualwar/res/running.wav";
 	}
 
 	/*

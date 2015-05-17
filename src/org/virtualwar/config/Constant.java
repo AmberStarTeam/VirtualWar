@@ -151,7 +151,7 @@ public final class Constant {
 	/** The id team b. */
 	public static final int ID_TEAM_NULL = 0;
 	/** The sound of death */
-	public static final String ROBOT_DEATH_SOUND = "sounds/deathOfRobots.wav";
+	public static final String ROBOT_DEATH_SOUND = "src/org/virtualwar/res/deathOfRobots.wav";
 
 	/**
 	 * private constructor so we don't create it.

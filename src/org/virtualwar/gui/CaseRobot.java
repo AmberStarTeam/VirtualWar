@@ -199,39 +199,41 @@ public class CaseRobot extends JFrame {
 	public JPanel initCase(Cell cell) {
 		if (cell.isBase() > 0) {
 			JPanel base = new JPanel();
-			JLabel iBase = new JLabel(new ImageIcon("pictures/Base-icon.png"));
+			JLabel iBase = new JLabel(new ImageIcon(
+					"src/org/virtualwar/res/Base-icon.png"));
 			base.add(iBase, BorderLayout.CENTER);
 			return base;
 		} else if (cell.isObstacle()) {
 			JPanel obstacle = new JPanel();
 			JLabel iObstacle = new JLabel(new ImageIcon(
-					"pictures/Obstacle-icon.png"));
+					"src/org/virtualwar/res/Obstacle-icon.png"));
 			obstacle.add(iObstacle, BorderLayout.CENTER);
 			return obstacle;
 		} else if (cell.mineContains() > 0) {
 			JPanel mine = new JPanel();
-			JLabel iMine = new JLabel(new ImageIcon("pictures/Mine-icon.png"));
+			JLabel iMine = new JLabel(new ImageIcon(
+					"src/org/virtualwar/res/Mine-icon.png"));
 			mine.add(iMine, BorderLayout.CENTER);
 			return mine;
 		} else if (cell.getRobotIn() != null) {
 			if (cell.getRobotIn() instanceof Tank) {
 				JPanel tank = new JPanel();
 				JLabel iTank = new JLabel(new ImageIcon(
-						"pictures/Tank-icon.png"));
+						"src/org/virtualwar/res/Tank-icon.png"));
 				tank.add(iTank, BorderLayout.WEST);
 				tank.add(etatVie(cell.getRobotIn()), BorderLayout.EAST);
 				return tank;
 			} else if (cell.getRobotIn() instanceof Shooter) {
 				JPanel shooter = new JPanel();
 				JLabel iShooter = new JLabel(new ImageIcon(
-						"pictures/Shooter-icon.png"));
+						"src/org/virtualwar/res/Shooter-icon.png"));
 				shooter.add(iShooter, BorderLayout.WEST);
 				shooter.add(etatVie(cell.getRobotIn()), BorderLayout.EAST);
 				return shooter;
 			} else if (cell.getRobotIn() instanceof Scavenger) {
 				JPanel scavenger = new JPanel();
 				JLabel iScavenger = new JLabel(new ImageIcon(
-						"pictures/Scavenger-icon.png"));
+						"src/org/virtualwar/res/Scavenger-icon.png"));
 				scavenger.add(iScavenger, BorderLayout.WEST);
 				scavenger.add(etatVie(cell.getRobotIn()), BorderLayout.EAST);
 				scavenger.add(etatMine(cell.getRobotIn()), BorderLayout.EAST);
@@ -239,7 +241,8 @@ public class CaseRobot extends JFrame {
 			}
 		} else {
 			JPanel vide = new JPanel();
-			JLabel iVide = new JLabel(new ImageIcon("pictures/Vide-icon.png"));
+			JLabel iVide = new JLabel(new ImageIcon(
+					"src/org/virtualwar/res/Vide-icon.png"));
 			vide.add(iVide, BorderLayout.CENTER);
 			return vide;
 		}

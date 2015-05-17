@@ -50,7 +50,7 @@ public class Tank extends Robot {
 	 */
 	@Override
 	public String getAttackSound() {
-		return "sounds/shotTank.wav";
+		return "src/org/virtualwar/res/shotTank.wav";
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class Tank extends Robot {
 	 */
 	@Override
 	public String getMoveSound() {
-		return "sounds/moveTank.wav";
+		return "src/org/virtualwar/res/moveTank.wav";
 	}
 
 	/*

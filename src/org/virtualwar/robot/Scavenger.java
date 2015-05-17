@@ -105,7 +105,7 @@ public class Scavenger extends Robot {
 	 */
 	@Override
 	public String getMoveSound() {
-		return "sounds/running.wav";
+		return "src/org/virtualwar/res/running.wav";
 	}
 
 	/*

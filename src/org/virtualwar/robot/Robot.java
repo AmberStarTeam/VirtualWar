@@ -306,7 +306,7 @@ public abstract class Robot implements Mover {
 				} catch (InterruptedException e) {
 
 				}
-				new ThreadSoundRun("sounds/boom.wav", 800).start();
+				new ThreadSoundRun("src/org/virtualwar/res/boom.wav", 800).start();
 			}
 		}).start();
 	}
