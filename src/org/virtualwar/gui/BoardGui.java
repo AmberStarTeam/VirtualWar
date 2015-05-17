@@ -37,11 +37,11 @@ public class BoardGui extends JFrame {
 		boardZoneC.gridy = 0;
 		
 		for(int i = 0; i<=boardZoneC.weightx; i++) {
-			boardZone.add(new caseRobot(board.getCell(new Coordinates(i,0))));
+			boardZone.add(new CaseRobot(board.getCell(new Coordinates(i,0))));
 			boardZoneC.gridx = boardZoneC.gridx + 1;
 		}
 		for(int i = 0; i<=boardZoneC.weighty; i++) {
-			boardZone.add(new caseRobot(board.getCell(new Coordinates(0,i))));
+			boardZone.add(new CaseRobot(board.getCell(new Coordinates(0,i))));
 			boardZoneC.gridy = boardZoneC.gridy + 1;
 		}
 		

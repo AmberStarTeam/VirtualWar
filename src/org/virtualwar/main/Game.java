@@ -26,9 +26,11 @@ import org.virtualwar.board.Board;
 import org.virtualwar.config.Config;
 import org.virtualwar.config.Constant;
 import org.virtualwar.config.TextData;
+import org.virtualwar.gui.CaseRobot;
 import org.virtualwar.gui.InitGui;
 import org.virtualwar.ia.AdvancedIntelligence;
 import org.virtualwar.ia.BeaussartIntelligence;
+import org.virtualwar.ia.IaBenchmark;
 import org.virtualwar.ia.Inteligence;
 import org.virtualwar.ia.RandomInteligence;
 import org.virtualwar.robot.Robot;
@@ -396,12 +398,17 @@ public class Game {
 	 * Init the config.
 	 */
 	public void initConfig() {
-		//String left = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[0];
-		//String right = TextData.GAME_LANG_INPUT.toString().split("" + '\u9999')[1];
-		Config.language = InitGui.getLangFromUser();//getInputValue(left, right);
+		// String left = TextData.GAME_LANG_INPUT.toString().split("" +
+		// '\u9999')[0];
+		// String right = TextData.GAME_LANG_INPUT.toString().split("" +
+		// '\u9999')[1];
+		Config.language = InitGui.getLangFromUser();// getInputValue(left,
+													// right);
 
-		String left = TextData.GAME_CHOSE_SOUND_INPUT.toString().split("" + '\u9999')[0];
-		String right = TextData.GAME_CHOSE_SOUND_INPUT.toString().split("" + '\u9999')[1];
+		String left = TextData.GAME_CHOSE_SOUND_INPUT.toString().split(
+				"" + '\u9999')[0];
+		String right = TextData.GAME_CHOSE_SOUND_INPUT.toString().split(
+				"" + '\u9999')[1];
 		System.out.println(TextData.GAME_CHOSE_SOUND);
 		Config.soundOn = getInputValue(left, right).equals("" + left.charAt(0));
 
@@ -420,12 +427,11 @@ public class Game {
 				"" + '\u9999')[0];
 		String rightIas = TextData.GAME_CHOSE_IA_LIST.toString().split(
 				"" + '\u9999')[1];
-		
+
 		System.out.println(TextData.GAME_IS_PLAYER_X_IA.toString().replaceAll(
 				"X", "1"));
 		String in = getInputValue(left, right);
-		System.out.println(left.charAt(0));
-		if (in.equals(""+left.charAt(0))) {
+		if (in.equals("" + left.charAt(0))) {
 			isPlayerOneHuman = false;
 			String inIa = getInputValue(leftIas, rightIas);
 			switch (inIa) {
@@ -447,7 +453,7 @@ public class Game {
 		System.out.println(TextData.GAME_IS_PLAYER_X_IA.toString().replaceAll(
 				"X", "2"));
 		in = getInputValue(left, right);
-		if (in.equals(""+left.charAt(0))) {
+		if (in.equals("" + left.charAt(0))) {
 			isPlayerTwoHuman = false;
 			String inIa = getInputValue(leftIas, rightIas);
 			switch (inIa) {
@@ -554,12 +560,21 @@ public class Game {
 	 */
 	public void run() {
 		initConfig();
-		System.out.println("(ia) / (debug) / (normal) ?  :");
+		System.out.println("(ia) / (debug) / (normal) / (ihm) / (ia test)?  :");
 		String inp = sc.nextLine().toLowerCase();
 		if (inp.equals("debug")) {
 			startDebug();
 		} else if (inp.equals("ia")) {
 			startDebugIa();
+		} else if (inp.equals("ia test")) {
+			startDebugIa();
+		} else if (inp.equals("ihm")) {
+			try {
+				CaseRobot.main(null);
+			} catch (InterruptedException e) {
+
+			}
+			System.exit(0);
 		} else {
 			startNormal();
 		}
@@ -618,16 +633,6 @@ public class Game {
 				end = true;
 			}
 		}
-		//System.out.println(nameTeam1);
-		for (Robot robot : t1) {
-			//System.out.println(robot);
-		}
-		//System.out.println();
-		//System.out.println(nameTeam2);
-		for (Robot robot : t2) {
-			//System.out.println(robot);
-		}
-
 		if (t1.isEmpty() || !anyCanDo(t1)) {
 			System.out.println(TextData.GAME_WIN_TEAM.toString().replaceAll(
 					"XXX", nameTeam2));
@@ -639,7 +644,7 @@ public class Game {
 		sc.nextLine();
 		sc.close();
 	}
-	
+
 	/**
 	 * Start the debug mode.
 	 */
@@ -663,16 +668,17 @@ public class Game {
 		board.generate(1000, containsTank);
 
 	}
-	
+
 	/**
 	 * Start the ia debug mode.
 	 */
 	public void startDebugIa() {
 		nameTeam1 = "team 1";
 		nameTeam2 = "team 2";
-		nmbRobots = new Random().nextInt(6)+1;
-		board = Board.newBoard(new Random().nextInt(6)+4, new Random().nextInt(6)+4);
-		
+		nmbRobots = new Random().nextInt(6) + 1;
+		board = Board.newBoard(new Random().nextInt(6) + 4,
+				new Random().nextInt(6) + 4);
+
 		b2 = board.getCoordsBase(Constant.ID_TEAM_B);
 
 		initIa();
@@ -683,7 +689,7 @@ public class Game {
 		if (!isPlayerTwoHuman) {
 			playerTwo.setBoard(board);
 		}
-		
+
 		t1 = playerOne.getInitialRobots(nmbRobots);
 
 		t2 = playerTwo.getInitialRobots(nmbRobots);
@@ -691,6 +697,59 @@ public class Game {
 		containsTank = true;
 
 		board.generate(10, containsTank);
+	}
+
+	public void startIaTest() {
+		String leftIas = TextData.GAME_CHOSE_IA_LIST.toString().split(
+				"" + '\u9999')[0];
+		String rightIas = TextData.GAME_CHOSE_IA_LIST.toString().split(
+				"" + '\u9999')[1];
+
+		System.out.println(TextData.GAME_IS_PLAYER_X_IA.toString().replaceAll(
+				"X", "1"));
+
+		isPlayerOneHuman = false;
+		String inIa = getInputValue(leftIas, rightIas);
+		switch (inIa) {
+		case "b":
+			playerOne = new BeaussartIntelligence(Constant.ID_TEAM_A, null);
+			break;
+		case "a":
+		case "r":
+			playerOne = new RandomInteligence(Constant.ID_TEAM_A, null);
+			break;
+		case "ad":
+		case "av":
+			playerOne = new AdvancedIntelligence(Constant.ID_TEAM_A, null);
+			break;
+		default:
+			break;
+		}
+		isPlayerTwoHuman = false;
+		inIa = getInputValue(leftIas, rightIas);
+		switch (inIa) {
+		case "b":
+			playerTwo = new BeaussartIntelligence(Constant.ID_TEAM_B, null);
+			break;
+		case "a":
+		case "r":
+			playerTwo = new RandomInteligence(Constant.ID_TEAM_B, null);
+			break;
+		case "ad":
+		case "av":
+			playerTwo = new AdvancedIntelligence(Constant.ID_TEAM_B, null);
+			break;
+		default:
+			break;
+		}
+		
+		int nmbRound = readSafeInt();
+		while (nmbRound > 0) {
+			System.out.println(TextData.GAME_INVALID_INPUT);
+			nmbRound = readSafeInt();
+		}
+		System.out.println(new IaBenchmark(playerOne, playerTwo).run());
+		
 	}
 
 	/**
