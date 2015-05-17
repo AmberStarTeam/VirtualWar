@@ -120,6 +120,21 @@ public class Path {
 	}
 
 	/**
+	 * Get the coordinate for the step at the given index from the previous step
+	 *
+	 * @param index
+	 *            The index of the step whose y coordinate should be retrieved
+	 * @return The coordinate at the step
+	 */
+	public Coordinates getCoordsRelativ(int index) {
+		if (index == 0) {
+			return new Coordinates(0, 0);
+		} else {
+			return getStep(index).cords.minus(getStep(index-1).cords);
+		}
+	}
+
+	/**
 	 * Get the length of the path, i.e. the number of steps
 	 *
 	 * @return The number of steps in this path
