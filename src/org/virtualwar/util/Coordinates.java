@@ -145,6 +145,14 @@ public class Coordinates {
 		return new Coordinates(width - c.width, height - c.height);
 	}
 
+	public void setHeight(int height) {
+		this.height = height;
+	}
+
+	public void setWidth(int width) {
+		this.width = width;
+	}
+
 	/**
 	 * Multiplies the coordinate c into this one as a new one.
 	 *
