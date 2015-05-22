@@ -105,7 +105,7 @@ public class Scavenger extends Robot {
 	 */
 	@Override
 	public String getMoveSound() {
-		return getClass().getResource("org/virtualwar/res/running.wav").getPath();
+		return getClass().getResource("/org/virtualwar/res/running.wav").getPath().replaceAll("%20", " ");
 	}
 
 	/*

@@ -61,7 +61,12 @@ public class ThreadSoundRun extends Thread {
 			return;
 		}
 		sound = new Sound(file);
-		is = new ByteArrayInputStream(sound.getSamples());
+		try {
+			is = new ByteArrayInputStream(sound.getSamples());
+		} catch (Exception e) {
+			System.err.println("Sound for " + file + " has buged !");
+		}
+		
 	}
 
 	/**
@@ -77,7 +82,13 @@ public class ThreadSoundRun extends Thread {
 			return;
 		}
 		sound = new Sound(file);
-		is = new ByteArrayInputStream(sound.getSamples());
+		try {
+			is = new ByteArrayInputStream(sound.getSamples());
+		} catch (Exception e) {
+			System.out.println("Sound not found");
+			sound = null;
+		}
+		
 		this.forced = forced;
 	}
 

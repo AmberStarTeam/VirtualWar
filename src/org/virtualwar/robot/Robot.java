@@ -307,7 +307,7 @@ public abstract class Robot implements Mover {
 
 				}
 				new ThreadSoundRun(getClass().getResource(
-						"org/virtualwar/res/boom.wav").getPath(), 800).start();
+						"/org/virtualwar/res/boom.wav").getPath().replaceAll("%20", " "), 800).start();
 			}
 		}).start();
 	}

@@ -50,7 +50,7 @@ public class Shooter extends Robot {
 	 */
 	@Override
 	public String getAttackSound() {
-		return getClass().getResource("/org/virtualwar/res/shotShooter.wav").getPath();
+		return getClass().getResource("/org/virtualwar/res/shotShooter.wav").getPath().replaceAll("%20", " ");
 	}
 
 	/*
@@ -90,7 +90,7 @@ public class Shooter extends Robot {
 	 */
 	@Override
 	public String getMoveSound() {
-		return getClass().getResource("org/virtualwar/res/running.wav").getPath();
+		return getClass().getResource("/org/virtualwar/res/running.wav").getPath().replaceAll("%20", " ");
 	}
 
 	/*
