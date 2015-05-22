@@ -13,10 +13,13 @@ import org.virtualwar.robot.Shooter;
 import org.virtualwar.robot.Tank;
 import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.pathfinding.AStarPathFinder;
+import org.virtualwar.util.pathfinding.Path;
 
 public class AdvancedIntelligence extends Inteligence {
 	private Random ran = new Random();
 	private Coordinates Ennemy;
+	private AStarPathFinder pathFindDiag;
+	private AStarPathFinder pathFindStrait;
 
 	/**
 	 * Instantiates a new advanced inteligence.
@@ -36,6 +39,11 @@ public class AdvancedIntelligence extends Inteligence {
 	 */
 	public AdvancedIntelligence(int team, Board board) {
 		super(team, board);
+		if (board != null) {
+			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
+			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000,
+					false, 2);
+		}
 	}
 
 	/**
@@ -50,6 +58,11 @@ public class AdvancedIntelligence extends Inteligence {
 	 */
 	public AdvancedIntelligence(List<Robot> robots, int team, Board board) {
 		super(robots, team, board);
+		if (board != null) {
+			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
+			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000,
+					false, 2);
+		}
 	}
 
 	@Override
@@ -81,9 +94,9 @@ public class AdvancedIntelligence extends Inteligence {
 
 	@Override
 	public Action makeTurn() {
-		List<Robot> lsRobot = super.getLsRobot();
+		List<Robot> lsRobot = new ArrayList<Robot>(super.getLsRobot());
 		List<Action> attacks = new ArrayList<Action>();
-		if (lsRobot == null) {
+		if (lsRobot.isEmpty()) {
 			return null;
 		}
 		for (Robot rob : lsRobot) {
@@ -102,53 +115,53 @@ public class AdvancedIntelligence extends Inteligence {
 		for (Robot rob : lsRobot) {
 			if (rob instanceof Scavenger && attackAndSafe(rob)
 					&& rob.canAttack()) {
-				attacks.addAll(rob.getAvailableAtacks());
-				return attacks.get(0);
+				if (detectRobotDown(rob) || detectRobotUp(rob)
+						|| detectRobotLeft(rob) || detectRobotRight(rob)) {
+					attacks.addAll(rob.getAvailableAtacks());
+					return attacks.get(0);
+				}
 			}
 		}
 
-		/*
-		 * for (Robot rob : lsRobot) { if (!(rob instanceof Scavenger) &&
-		 * rob.canAttack()) { attacks.addAll(rob.getAvailableAtacks());
-		 * 
-		 * // Priorité aux attaques de tank for (Action att : attacks) { if
-		 * (att.getRobotSource() instanceof Tank) { return att; } }
-		 * 
-		 * // Ensuite les shooter /!\ pas fini /!\ si les deux shooter //
-		 * peuvent effectuer l'action, ce sera le premier shooter qui // pourra
-		 * effectuer l'action for (Action att : attacks) { if
-		 * (att.getRobotSource() instanceof Shooter) { return att; } } } }
-		 */
-
+		Robot tmp = lsRobot.get(ran.nextInt(lsRobot.size()));
 		for (Robot rob : lsRobot) {
 			if (rob instanceof Tank && (!attackAndSafe(rob)) && rob.canMove()) {
+				if (getEnnemy(rob) == null) {
+					List<Action> lsAct = tmp.getAvailableMove();
+					return lsAct.get(ran.nextInt(lsAct.size()));
+				}
 				Coordinates c = getEnnemy(rob);
-				AStarPathFinder path = new AStarPathFinder(getBoard(), 10,
-						false, 2);
-				Coordinates m = path.findPath(rob, rob.getCoordinates(), c)
-						.getCoords(1);
+				Path path = pathFindStrait.findPath(rob, rob.getCoordinates(),
+						c);
+				Coordinates m = path.getCoordsRelativ(1);
 				Action move = new Move(rob, m);
 				return move;
 			}
 		}
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Shooter && (!attackAndSafe(rob)) && rob.canMove()) {
+			if (rob instanceof Shooter
+					&& /* (!attackAndSafe(rob)) && */rob.canMove()) {
+				if (getEnnemy(rob) == null) {
+					List<Action> lsAct = tmp.getAvailableMove();
+					return lsAct.get(ran.nextInt(lsAct.size()));
+				}
 				Coordinates c = getEnnemy(rob);
-				AStarPathFinder path = new AStarPathFinder(getBoard(), 10,
-						false, 2);
-				Coordinates m = path.findPath(rob, rob.getCoordinates(), c)
-						.getCoords(1);
+				Path path = pathFindDiag.findPath(rob, rob.getCoordinates(), c);
+				Coordinates m = path.getCoordsRelativ(1);
 				Action move = new Move(rob, m);
 				return move;
 			}
 		}
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Scavenger && (!attackAndSafe(rob)) && rob.canMove()) {
+			if (rob instanceof Scavenger
+					&& /* (!attackAndSafe(rob)) && */rob.canMove()) {
+				if (getEnnemy(rob) == null) {
+					List<Action> lsAct = tmp.getAvailableMove();
+					return lsAct.get(ran.nextInt(lsAct.size()));
+				}
 				Coordinates c = getEnnemy(rob);
-				AStarPathFinder path = new AStarPathFinder(getBoard(), 10,
-						false, 2);
-				Coordinates m = path.findPath(rob, rob.getCoordinates(), c)
-						.getCoords(1);
+				Path path = pathFindDiag.findPath(rob, rob.getCoordinates(), c);
+				Coordinates m = path.getCoordsRelativ(1);
 				Action move = new Move(rob, m);
 				return move;
 			}
@@ -317,7 +330,6 @@ public class AdvancedIntelligence extends Inteligence {
 	public Robot detectRobotJustLeft(Robot r) {
 		Coordinates c = r.getCoordinates();
 		int t = r.getTeam();
-
 		if (c.getWidth() == 0) {
 			return null;
 		}
@@ -332,21 +344,22 @@ public class AdvancedIntelligence extends Inteligence {
 	}
 
 	public Coordinates getEnnemy(Robot r) {
-		Ennemy = new Coordinates(40, 40);
-		int t = r.getTeam();
+		Ennemy = new Coordinates(100, 100);
 		List<Robot> lsRobot = super.getLsRobot();
-		ArrayList<Coordinates> c = new ArrayList<Coordinates>();
+		List<Coordinates> c = new ArrayList<Coordinates>();
 		for (Robot rob : lsRobot) {
-			if (rob.getTeam() != t) {
+			if (rob.getTeam() != r.getTeam()) {
 				c.add(rob.getCoordinates());
 			}
 		}
 		return getPlusProche(r, c, 0);
 	}
 
-	public Coordinates getPlusProche(Robot r, ArrayList<Coordinates> c,
-			int index) {
-		if (index == c.size()) {
+	public Coordinates getPlusProche(Robot r, List<Coordinates> c, int index) {
+		if (c.isEmpty()) {
+			return null;
+		}
+		if (index == c.size() - 1) {
 			return Ennemy;
 		}
 		int x = c.get(index).getWidth() - r.getCoordinates().getWidth();
@@ -362,11 +375,12 @@ public class AdvancedIntelligence extends Inteligence {
 			x2 = x2 - (2 * x2);
 		}
 		int y2 = Ennemy.getHeight() - r.getCoordinates().getHeight();
-		if(y2 < 0){
-			y2 = y2 - (2* y2);
+		if (y2 < 0) {
+			y2 = y2 - (2 * y2);
 		}
 		if (x + y < x2 + y2) {
-			Ennemy = new Coordinates(c.get(index).getHeight(), c.get(index).getWidth());
+			Ennemy = new Coordinates(c.get(index).getWidth(), c.get(index)
+					.getHeight());
 		}
 		index = index + 1;
 		return getPlusProche(r, c, index);
