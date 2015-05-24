@@ -36,7 +36,7 @@ import org.virtualwar.util.pathfinding.Path;
  *
  * @author Nicolas Beaussart
  */
-public class BeaussartIntelligence extends Inteligence {
+public class BeaussartIntelligence extends Intelligence {
 
 	/** The random generator. */
 	private Random ran = new Random();
@@ -45,7 +45,7 @@ public class BeaussartIntelligence extends Inteligence {
 	AStarPathFinder pathFindDiag;
 
 	/** The path find strait. */
-	AStarPathFinder pathFindStrait;
+	AStarPathFinder pathFindStraight;
 
 	/**
 	 * Instantiates a new beaussart intelligence.
@@ -65,7 +65,7 @@ public class BeaussartIntelligence extends Inteligence {
 		super(team, board);
 		if (board != null) {
 			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
-			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000,
+			pathFindStraight = new AStarPathFinder(super.getBoard(), 10000,
 					false, 2);
 		}
 
@@ -85,7 +85,7 @@ public class BeaussartIntelligence extends Inteligence {
 		super(robots, team, board);
 		if (board != null) {
 			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
-			pathFindStrait = new AStarPathFinder(super.getBoard(), 10000,
+			pathFindStraight = new AStarPathFinder(super.getBoard(), 10000,
 					false, 2);
 		}
 	}
@@ -186,10 +186,10 @@ public class BeaussartIntelligence extends Inteligence {
 	 * @see org.virtualwar.ia.Inteligence#getInitialRobots(int)
 	 */
 	@Override
-	public List<Robot> getInitialRobots(int numberOfBots) {
+	public List<Robot> getInitialRobots(int numberOfRobots) {
 		List<Robot> retVal = new ArrayList<Robot>();
 		Coordinates cords = getBoard().getCoordsBase(getTeam());
-		for (int i = 0; i < numberOfBots; i++) {
+		for (int i = 0; i < numberOfRobots; i++) {
 			int outRand = ran.nextInt(100);
 			if (outRand < 10) {
 				retVal.add(new Scavenger(getTeam(), cords, getBoard()));
@@ -225,7 +225,7 @@ public class BeaussartIntelligence extends Inteligence {
 	 */
 	private Path getPathTo(Robot rob, Coordinates cords) {
 		if (rob instanceof Tank) {
-			return pathFindStrait.findPath(rob, rob.getCoordinates(), cords);
+			return pathFindStraight.findPath(rob, rob.getCoordinates(), cords);
 		} else {
 			return pathFindDiag.findPath(rob, rob.getCoordinates(), cords);
 		}
@@ -401,7 +401,7 @@ public class BeaussartIntelligence extends Inteligence {
 	public void setBoard(Board board) {
 		super.setBoard(board);
 		pathFindDiag = new AStarPathFinder(board, 10000, true);
-		pathFindStrait = new AStarPathFinder(board, 10000, false, 2);
+		pathFindStraight = new AStarPathFinder(board, 10000, false, 2);
 		ran = new Random();
 	}
 

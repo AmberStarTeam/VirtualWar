@@ -30,7 +30,7 @@ import org.virtualwar.util.Coordinates;
 /**
  * The RandomInteligence Class.
  */
-public class RandomInteligence extends Inteligence {
+public class RandomInteligence extends Intelligence {
 
 	/** The random generator. */
 	private Random ran = new Random();
@@ -44,7 +44,7 @@ public class RandomInteligence extends Inteligence {
 	}
 
 	/**
-	 * Instantiates a new random inteligence.
+	 * Instantiates a new random intelligence.
 	 *
 	 * @param team
 	 *            the team

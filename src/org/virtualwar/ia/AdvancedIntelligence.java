@@ -15,14 +15,14 @@ import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.pathfinding.AStarPathFinder;
 import org.virtualwar.util.pathfinding.Path;
 
-public class AdvancedIntelligence extends Inteligence {
+public class AdvancedIntelligence extends Intelligence {
 	private Random ran = new Random();
 	private Coordinates Ennemy;
 	private AStarPathFinder pathFindDiag;
 	private AStarPathFinder pathFindStrait;
 
 	/**
-	 * Instantiates a new advanced inteligence.
+	 * Instantiates a new advanced intelligence.
 	 *
 	 */
 	public AdvancedIntelligence() {
@@ -30,7 +30,7 @@ public class AdvancedIntelligence extends Inteligence {
 	}
 
 	/**
-	 * Instantiates a new advanced inteligence.
+	 * Instantiates a new advanced intelligence.
 	 *
 	 * @param team
 	 *            the team
@@ -47,7 +47,7 @@ public class AdvancedIntelligence extends Inteligence {
 	}
 
 	/**
-	 * Instantiates a new advanced inteligence.
+	 * Instantiates a new advanced intelligence.
 	 *
 	 * @param robots
 	 *            the robots of the team
@@ -66,10 +66,10 @@ public class AdvancedIntelligence extends Inteligence {
 	}
 
 	@Override
-	public List<Robot> getInitialRobots(int numberOfBots) {
+	public List<Robot> getInitialRobots(int numberOfRobots) {
 		List<Robot> retVal = new ArrayList<Robot>();
 		Coordinates cords = getBoard().getCoordsBase(getTeam());
-		for (int i = 0; i < numberOfBots; i++) {
+		for (int i = 0; i < numberOfRobots; i++) {
 			switch (i) {
 			case 0:
 				retVal.add(new Tank(getTeam(), cords, getBoard()));

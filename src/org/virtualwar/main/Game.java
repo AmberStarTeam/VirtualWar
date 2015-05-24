@@ -31,7 +31,7 @@ import org.virtualwar.gui.InitGui;
 import org.virtualwar.ia.AdvancedIntelligence;
 import org.virtualwar.ia.BeaussartIntelligence;
 import org.virtualwar.ia.IaBenchmark;
-import org.virtualwar.ia.Inteligence;
+import org.virtualwar.ia.Intelligence;
 import org.virtualwar.ia.RandomInteligence;
 import org.virtualwar.robot.Robot;
 import org.virtualwar.robot.Scavenger;
@@ -105,8 +105,8 @@ public class Game {
 	/** The is player two human. */
 	private boolean isPlayerTwoHuman = true;
 
-	private Inteligence playerOne;
-	private Inteligence playerTwo;
+	private Intelligence playerOne;
+	private Intelligence playerTwo;
 
 	/**
 	 * Instantiates a new game.

@@ -6,7 +6,6 @@ import java.util.Random;
 
 import org.virtualwar.action.Action;
 import org.virtualwar.board.Board;
-import org.virtualwar.board.Case;
 import org.virtualwar.robot.Robot;
 import org.virtualwar.robot.Scavenger;
 import org.virtualwar.robot.Shooter;
@@ -15,9 +14,7 @@ import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.pathfinding.AStarPathFinder;
 import org.virtualwar.util.pathfinding.Path;
 
-import com.sun.corba.se.impl.ior.GenericTaggedComponent;
-
-public class IACamille extends Inteligence {
+public class IACamille extends Intelligence {
 
 	private Random ran = new Random();
 

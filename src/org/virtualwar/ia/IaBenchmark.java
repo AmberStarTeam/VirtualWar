@@ -51,10 +51,10 @@ public class IaBenchmark {
 	}
 
 	/** The it1. */
-	private Inteligence it1;
+	private Intelligence it1;
 
 	/** The it2. */
-	private Inteligence it2;
+	private Intelligence it2;
 
 	/** The nmb. */
 	private int nmb;
@@ -67,7 +67,7 @@ public class IaBenchmark {
 	 * @param it2
 	 *            the it2
 	 */
-	public IaBenchmark(Inteligence it1, Inteligence it2) {
+	public IaBenchmark(Intelligence it1, Intelligence it2) {
 		this.it1 = it1;
 		this.it2 = it2;
 		nmb = 1_000;
@@ -83,14 +83,14 @@ public class IaBenchmark {
 	 * @param nmb
 	 *            the nmb
 	 */
-	public IaBenchmark(Inteligence it1, Inteligence it2, int nmb) {
+	public IaBenchmark(Intelligence it1, Intelligence it2, int nmb) {
 		this.it1 = it1;
 		this.it2 = it2;
 		this.nmb = nmb;
 	}
 
 	/**
-	 * Check if any robots can do somthing.
+	 * Check if any robots can do something.
 	 *
 	 * @param lsRobot
 	 *            the list robot

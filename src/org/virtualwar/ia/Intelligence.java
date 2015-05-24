@@ -22,11 +22,11 @@ import org.virtualwar.robot.Robot;
 
 // TODO: Auto-generated Javadoc
 /**
- * The Class Inteligence.
+ * The Class Intelligence.
  *
  * @author Nicolas Beaussart
  */
-public abstract class Inteligence {
+public abstract class Intelligence {
 
 	/** The list of robot. */
 	private List<Robot> lsRobot;
@@ -38,27 +38,27 @@ public abstract class Inteligence {
 	private Board board;
 
 	/**
-	 * Instantiates a new inteligence.
+	 * Instantiates a new intelligence.
 	 *
 	 */
-	public Inteligence() {
+	public Intelligence() {
 	}
 
 	/**
-	 * Instantiates a new inteligence.
+	 * Instantiates a new intelligence.
 	 *
 	 * @param team
 	 *            the team
 	 * @param board
 	 *            the board
 	 */
-	public Inteligence(int team, Board board) {
+	public Intelligence(int team, Board board) {
 		this.team = team;
 		this.board = board;
 	}
 
 	/**
-	 * Instantiates a new inteligence.
+	 * Instantiates a new intelligence.
 	 *
 	 * @param robots
 	 *            the robots
@@ -67,7 +67,7 @@ public abstract class Inteligence {
 	 * @param board
 	 *            the board
 	 */
-	public Inteligence(List<Robot> robots, int team, Board board) {
+	public Intelligence(List<Robot> robots, int team, Board board) {
 		lsRobot = robots;
 		this.team = team;
 		this.board = board;
