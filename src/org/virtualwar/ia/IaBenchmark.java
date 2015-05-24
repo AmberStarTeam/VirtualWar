@@ -44,7 +44,7 @@ public class IaBenchmark {
 	public static void main(String[] args) {
 		Long timeBef = System.currentTimeMillis();
 		int[] dat = new IaBenchmark(new RandomInteligence(),
-				new AdvancedIntelligence(), 100).run();
+				new IACamille(), 1000).run();
 		Long timeAft = System.currentTimeMillis();
 		System.out.println(Arrays.toString(dat) + " , took "
 				+ (timeAft - timeBef));

@@ -160,21 +160,25 @@ public class IACamille extends Inteligence {
 	}
 
 	public Robot lowRobot(Robot r1, List<Robot> ennemies) {
-		Robot r = ennemies.get(0);
-		if (r.getEnergy() < r1.getEnergy()) {
-			for (int i = 1; i < ennemies.size(); i++) {
-				if (ennemies.get(i).getEnergy() < r.getEnergy()) {
-					r = ennemies.get(i);
+		Robot result =null;
+		Robot r = r1;
+		if (!(ennemies.isEmpty())) {
+			for (Robot robot : ennemies) {
+				if(!(robot==null)){
+					if(robot.getEnergy()<=r.getEnergy()){
+						r=robot;
+					}
 				}
 			}
-		} else {
-			for (int i = 1; i < ennemies.size(); i++) {
-				if (ennemies.get(i).getEnergy() < r.getEnergy()) {
-					r = ennemies.get(i);
-				}
+			if(r==r1){
+				int i = ran.nextInt(ennemies.size());
+				r=ennemies.get(i);
 			}
 		}
-		return r;
+		if(!(r==r1)){
+			result=r;			
+		}
+		return result;
 	}
 
 	public Action dirOfLow(Robot r, Robot rLow) {
