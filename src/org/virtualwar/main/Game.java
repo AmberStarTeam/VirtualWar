@@ -28,7 +28,7 @@ import org.virtualwar.config.Constant;
 import org.virtualwar.config.TextData;
 import org.virtualwar.gui.CaseRobot;
 import org.virtualwar.gui.InitGui;
-import org.virtualwar.ia.AdvancedIntelligence;
+import org.virtualwar.ia.IAThomas;
 import org.virtualwar.ia.BeaussartIntelligence;
 import org.virtualwar.ia.IaBenchmark;
 import org.virtualwar.ia.Intelligence;
@@ -449,7 +449,7 @@ public class Game {
 				break;
 			case "ad":
 			case "av":
-				playerOne = new AdvancedIntelligence(Constant.ID_TEAM_A, null);
+				playerOne = new IAThomas(Constant.ID_TEAM_A, null);
 				break;
 			default:
 				break;
@@ -471,7 +471,7 @@ public class Game {
 				break;
 			case "ad":
 			case "av":
-				playerTwo = new AdvancedIntelligence(Constant.ID_TEAM_B, null);
+				playerTwo = new IAThomas(Constant.ID_TEAM_B, null);
 				break;
 			default:
 				break;
@@ -725,7 +725,7 @@ public class Game {
 			break;
 		case "ad":
 		case "av":
-			playerOne = new AdvancedIntelligence(Constant.ID_TEAM_A, null);
+			playerOne = new IAThomas(Constant.ID_TEAM_A, null);
 			break;
 		default:
 			break;
@@ -742,7 +742,7 @@ public class Game {
 			break;
 		case "ad":
 		case "av":
-			playerTwo = new AdvancedIntelligence(Constant.ID_TEAM_B, null);
+			playerTwo = new IAThomas(Constant.ID_TEAM_B, null);
 			break;
 		default:
 			break;

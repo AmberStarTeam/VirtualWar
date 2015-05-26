@@ -15,7 +15,7 @@ import org.virtualwar.util.Coordinates;
 import org.virtualwar.util.pathfinding.AStarPathFinder;
 import org.virtualwar.util.pathfinding.Path;
 
-public class AdvancedIntelligence extends Intelligence {
+public class IAThomas extends Intelligence {
 	private Random ran = new Random();
 	private Coordinates Ennemy;
 	private AStarPathFinder pathFindDiag;
@@ -25,7 +25,7 @@ public class AdvancedIntelligence extends Intelligence {
 	 * Instantiates a new advanced intelligence.
 	 *
 	 */
-	public AdvancedIntelligence() {
+	public IAThomas() {
 		super();
 	}
 
@@ -37,7 +37,7 @@ public class AdvancedIntelligence extends Intelligence {
 	 * @param board
 	 *            the board
 	 */
-	public AdvancedIntelligence(int team, Board board) {
+	public IAThomas(int team, Board board) {
 		super(team, board);
 		if (board != null) {
 			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
@@ -56,7 +56,7 @@ public class AdvancedIntelligence extends Intelligence {
 	 * @param board
 	 *            the board
 	 */
-	public AdvancedIntelligence(List<Robot> robots, int team, Board board) {
+	public IAThomas(List<Robot> robots, int team, Board board) {
 		super(robots, team, board);
 		if (board != null) {
 			pathFindDiag = new AStarPathFinder(super.getBoard(), 10000, true);
@@ -99,21 +99,24 @@ public class AdvancedIntelligence extends Intelligence {
 		if (lsRobot.isEmpty()) {
 			return null;
 		}
+		
+		//actions d'attaques
+		
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Tank && attackAndSafe(rob) && rob.canAttack()) {
+			if (rob instanceof Tank && (!attackAndSafe(rob)) && rob.canAttack()) {
 				attacks.addAll(rob.getAvailableAtacks());
 				return attacks.get(0);
 			}
 		}
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Shooter && attackAndSafe(rob) && rob.canAttack()) {
+			if (rob instanceof Shooter && (!attackAndSafe(rob)) && rob.canAttack()) {
 				attacks.addAll(rob.getAvailableAtacks());
 				return attacks.get(0);
 			}
 		}
 
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Scavenger && attackAndSafe(rob)
+			if (rob instanceof Scavenger && (!attackAndSafe(rob))
 					&& rob.canAttack()) {
 				if (detectRobotDown(rob) || detectRobotUp(rob)
 						|| detectRobotLeft(rob) || detectRobotRight(rob)) {
@@ -123,26 +126,13 @@ public class AdvancedIntelligence extends Intelligence {
 			}
 		}
 
-		Robot tmp = lsRobot.get(ran.nextInt(lsRobot.size()));
-		for (Robot rob : lsRobot) {
-			if (rob instanceof Tank && (!attackAndSafe(rob)) && rob.canMove()) {
-				if (getEnnemy(rob) == null) {
-					List<Action> lsAct = tmp.getAvailableMove();
-					return lsAct.get(ran.nextInt(lsAct.size()));
-				}
-				Coordinates c = getEnnemy(rob);
-				Path path = pathFindStrait.findPath(rob, rob.getCoordinates(),
-						c);
-				Coordinates m = path.getCoordsRelativ(1);
-				Action move = new Move(rob, m);
-				return move;
-			}
-		}
+		//actions de mouvements
+		
 		for (Robot rob : lsRobot) {
 			if (rob instanceof Shooter
-					&& /* (!attackAndSafe(rob)) && */rob.canMove()) {
+					&&  (!attackAndSafe(rob)) && rob.canMove()) {
 				if (getEnnemy(rob) == null) {
-					List<Action> lsAct = tmp.getAvailableMove();
+					List<Action> lsAct = rob.getAvailableMove();
 					return lsAct.get(ran.nextInt(lsAct.size()));
 				}
 				Coordinates c = getEnnemy(rob);
@@ -154,9 +144,9 @@ public class AdvancedIntelligence extends Intelligence {
 		}
 		for (Robot rob : lsRobot) {
 			if (rob instanceof Scavenger
-					&& /* (!attackAndSafe(rob)) && */rob.canMove()) {
+					&&  (!attackAndSafe(rob)) && rob.canMove()) {
 				if (getEnnemy(rob) == null) {
-					List<Action> lsAct = tmp.getAvailableMove();
+					List<Action> lsAct = rob.getAvailableMove();
 					return lsAct.get(ran.nextInt(lsAct.size()));
 				}
 				Coordinates c = getEnnemy(rob);
@@ -166,6 +156,22 @@ public class AdvancedIntelligence extends Intelligence {
 				return move;
 			}
 		}
+		for (Robot rob : lsRobot) {
+			if (rob instanceof Tank  && (!attackAndSafe(rob)) 
+					&& rob.canMove()) {
+				if (getEnnemy(rob) == null) {
+					List<Action> lsAct = rob.getAvailableMove();
+					return lsAct.get(ran.nextInt(lsAct.size()));
+				}
+				Coordinates c = getEnnemy(rob);
+				Path path = pathFindStrait.findPath(rob, rob.getCoordinates(),
+						c);
+				Coordinates m = path.getCoordsRelativ(1);
+				Action move = new Move(rob, m);
+				return move;
+			}
+		}
+		
 		return null;
 
 	}
@@ -244,35 +250,31 @@ public class AdvancedIntelligence extends Intelligence {
 
 	public boolean attackAndSafe(Robot r) {
 		if (detectRobotRight(r)
-				&& (detectRobotDown(r)
-						|| detectRobotLeft(r)
+				&& (detectRobotDown(r) || detectRobotLeft(r)
 						|| detectRobotUp(r)
-						|| !(detectRobotJustDown(r) instanceof Scavenger || detectRobotJustDown(r) == null)
-						|| !(detectRobotJustUp(r) instanceof Scavenger || detectRobotJustDown(r) == null) || !(detectRobotJustLeft(r) instanceof Scavenger || detectRobotJustDown(r) == null))) {
-			return false;
+						|| detectRobotJustDown(r) != null
+						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
+			return true;
 		} else if (detectRobotLeft(r)
-				&& (detectRobotDown(r)
-						|| detectRobotRight(r)
+				&& (detectRobotDown(r) || detectRobotRight(r)
 						|| detectRobotUp(r)
-						|| !(detectRobotJustDown(r) instanceof Scavenger || detectRobotJustDown(r) == null)
-						|| !(detectRobotJustUp(r) instanceof Scavenger || detectRobotJustDown(r) == null) || !(detectRobotJustRight(r) instanceof Scavenger || detectRobotJustDown(r) == null))) {
-			return false;
+						|| detectRobotJustDown(r) != null
+						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
+			return true;
 		} else if (detectRobotUp(r)
-				&& (detectRobotDown(r)
-						|| detectRobotLeft(r)
+				&& (detectRobotDown(r) || detectRobotLeft(r)
 						|| detectRobotRight(r)
-						|| !(detectRobotJustDown(r) instanceof Scavenger || detectRobotJustDown(r) == null)
-						|| !(detectRobotJustRight(r) instanceof Scavenger || detectRobotJustDown(r) == null) || !(detectRobotJustLeft(r) instanceof Scavenger || detectRobotJustDown(r) == null))) {
-			return false;
+						|| detectRobotJustDown(r) != null
+						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
+			return true;
 		} else if (detectRobotDown(r)
-				&& (detectRobotUp(r)
-						|| detectRobotLeft(r)
+				&& (detectRobotUp(r) || detectRobotLeft(r)
 						|| detectRobotRight(r)
-						|| !(detectRobotJustRight(r) instanceof Scavenger || detectRobotJustDown(r) == null)
-						|| !(detectRobotJustUp(r) instanceof Scavenger || detectRobotJustDown(r) == null) || !(detectRobotJustLeft(r) instanceof Scavenger || detectRobotJustDown(r) == null))) {
-			return false;
+						|| detectRobotJustDown(r) != null
+						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
+			return true;
 		}
-		return true;
+		return false;
 
 	}
 
@@ -348,7 +350,7 @@ public class AdvancedIntelligence extends Intelligence {
 		List<Robot> lsRobot = super.getLsRobot();
 		List<Coordinates> c = new ArrayList<Coordinates>();
 		for (Robot rob : lsRobot) {
-			if (rob.getTeam() != r.getTeam()) {
+			if (rob.getTeam() != r.getTeam() && !(rob.isInBase())) {
 				c.add(rob.getCoordinates());
 			}
 		}
