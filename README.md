@@ -17,3 +17,7 @@ Il y a aussi un sous programme permetant devoir l'avancement dela partie IHM.
 Le jeux est jouable en anglais ou en français, et il y a du son. Le volume n'est pas réglable.
 
 Une implémentation de l'algorithme A* a été utiliser pour une recherche de chemin. Le programme a été diviser en plusieurs package pour avoir une visibilité et une organisation plus importante.
+
+
+#POUR CAMILLE
+git rm -rf bin
