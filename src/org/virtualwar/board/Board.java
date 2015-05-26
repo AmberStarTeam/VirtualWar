@@ -77,7 +77,7 @@ public class Board implements TileBasedMap {
 	 * @param width
 	 *            the width size of the board
 	 */
-	public Board(int height, int width) {
+	private Board(int height, int width) {
 		sizeHeight = height;
 		sizeWidth = width;
 		initEmptyGrind();
