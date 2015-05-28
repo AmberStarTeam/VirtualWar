@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.virtualwar.action.Action;
+import org.virtualwar.action.Attack;
 import org.virtualwar.action.Move;
 import org.virtualwar.board.Board;
 import org.virtualwar.robot.Robot;
@@ -23,7 +24,7 @@ public class IAThomas extends Intelligence {
 
 	/**
 	 * Instantiates a new advanced intelligence.
-	 *
+	 * 
 	 */
 	public IAThomas() {
 		super();
@@ -31,7 +32,7 @@ public class IAThomas extends Intelligence {
 
 	/**
 	 * Instantiates a new advanced intelligence.
-	 *
+	 * 
 	 * @param team
 	 *            the team
 	 * @param board
@@ -48,7 +49,7 @@ public class IAThomas extends Intelligence {
 
 	/**
 	 * Instantiates a new advanced intelligence.
-	 *
+	 * 
 	 * @param robots
 	 *            the robots of the team
 	 * @param team
@@ -99,9 +100,9 @@ public class IAThomas extends Intelligence {
 		if (lsRobot.isEmpty()) {
 			return null;
 		}
-		
-		//actions d'attaques
-		
+
+		// actions d'attaques
+
 		for (Robot rob : lsRobot) {
 			if (rob instanceof Tank && (!attackAndSafe(rob)) && rob.canAttack()) {
 				attacks.addAll(rob.getAvailableAtacks());
@@ -109,28 +110,56 @@ public class IAThomas extends Intelligence {
 			}
 		}
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Shooter && (!attackAndSafe(rob)) && rob.canAttack()) {
+			if (rob instanceof Shooter && (!attackAndSafe(rob))
+					&& rob.canAttack()) {
 				attacks.addAll(rob.getAvailableAtacks());
 				return attacks.get(0);
 			}
 		}
 
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Scavenger && (!attackAndSafe(rob))
-					&& rob.canAttack()) {
-				if (detectRobotDown(rob) || detectRobotUp(rob)
-						|| detectRobotLeft(rob) || detectRobotRight(rob)) {
-					attacks.addAll(rob.getAvailableAtacks());
-					return attacks.get(0);
+			if (rob instanceof Scavenger && (!attackAndSafe(rob))) {
+				if (detectRobotJustDown(rob) != null) {
+					Coordinates c = new Coordinates(rob.getCoordinates()
+							.getWidth() - 1,
+							rob.getCoordinates().getHeight() + 1);
+					Action att = new Attack(rob, c);
+					return att;
+				} else if (detectRobotJustLeft(rob) != null) {
+					Coordinates c = new Coordinates(rob.getCoordinates()
+							.getWidth() - 1,
+							rob.getCoordinates().getHeight() + 1);
+					Action att = new Attack(rob, c);
+					return att;
+				} else if (detectRobotJustRight(rob) != null) {
+					Coordinates c = new Coordinates(rob.getCoordinates()
+							.getWidth() + 1,
+							rob.getCoordinates().getHeight() - 1);
+					Action att = new Attack(rob, c);
+					return att;
+				} else if (detectRobotJustUp(rob) != null) {
+					Coordinates c = new Coordinates(rob.getCoordinates()
+							.getWidth() - 1,
+							rob.getCoordinates().getHeight() + 1);
+					Action att = new Attack(rob, c);
+					return att;
 				}
 			}
 		}
 
-		//actions de mouvements
-		
+		// actions de mouvements
+
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Shooter
-					&&  (!attackAndSafe(rob)) && rob.canMove()) {
+			if (rob instanceof Shooter && (!attackAndSafe(rob))
+					&& rob.canMove() /*&& canReturnBase(rob)*/) {
+				/*if (rob.getEnergy() <= 10) {
+					Coordinates c = rob.getBoard().getCoordsBase(rob.getTeam());
+					Path path = pathFindDiag.findPath(rob,
+							rob.getCoordinates(), c);
+					Coordinates m = path.getCoordsRelativ(1);
+					Action move = new Move(rob, m);
+					return move;
+				}*/
 				if (getEnnemy(rob) == null) {
 					List<Action> lsAct = rob.getAvailableMove();
 					return lsAct.get(ran.nextInt(lsAct.size()));
@@ -143,8 +172,16 @@ public class IAThomas extends Intelligence {
 			}
 		}
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Scavenger
-					&&  (!attackAndSafe(rob)) && rob.canMove()) {
+			if (rob instanceof Scavenger && (!attackAndSafe(rob))
+					&& rob.canMove() /*&& canReturnBase(rob)*/) {
+				/*if (rob.getEnergy() <= 10) {
+					Coordinates c = rob.getBoard().getCoordsBase(rob.getTeam());
+					Path path = pathFindDiag.findPath(rob,
+							rob.getCoordinates(), c);
+					Coordinates m = path.getCoordsRelativ(1);
+					Action move = new Move(rob, m);
+					return move;
+				}*/
 				if (getEnnemy(rob) == null) {
 					List<Action> lsAct = rob.getAvailableMove();
 					return lsAct.get(ran.nextInt(lsAct.size()));
@@ -157,8 +194,17 @@ public class IAThomas extends Intelligence {
 			}
 		}
 		for (Robot rob : lsRobot) {
-			if (rob instanceof Tank  && (!attackAndSafe(rob)) 
+			if (rob instanceof Tank
+					&& (!attackAndSafe(rob) /*&& canReturnBase(rob)*/)
 					&& rob.canMove()) {
+				/*if (rob.getEnergy() <= 6) {
+					Coordinates c = rob.getBoard().getCoordsBase(rob.getTeam());
+					Path path = pathFindDiag.findPath(rob,
+							rob.getCoordinates(), c);
+					Coordinates m = path.getCoordsRelativ(1);
+					Action move = new Move(rob, m);
+					return move;
+				}*/
 				if (getEnnemy(rob) == null) {
 					List<Action> lsAct = rob.getAvailableMove();
 					return lsAct.get(ran.nextInt(lsAct.size()));
@@ -171,7 +217,7 @@ public class IAThomas extends Intelligence {
 				return move;
 			}
 		}
-		
+
 		return null;
 
 	}
@@ -251,14 +297,12 @@ public class IAThomas extends Intelligence {
 	public boolean attackAndSafe(Robot r) {
 		if (detectRobotRight(r)
 				&& (detectRobotDown(r) || detectRobotLeft(r)
-						|| detectRobotUp(r)
-						|| detectRobotJustDown(r) != null
+						|| detectRobotUp(r) || detectRobotJustDown(r) != null
 						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
 			return true;
 		} else if (detectRobotLeft(r)
 				&& (detectRobotDown(r) || detectRobotRight(r)
-						|| detectRobotUp(r)
-						|| detectRobotJustDown(r) != null
+						|| detectRobotUp(r) || detectRobotJustDown(r) != null
 						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
 			return true;
 		} else if (detectRobotUp(r)
@@ -386,6 +430,24 @@ public class IAThomas extends Intelligence {
 		}
 		index = index + 1;
 		return getPlusProche(r, c, index);
+
+	}
+
+	public boolean canReturnBase(Robot r) {
+		if (!(r instanceof Tank)) {
+			Coordinates c = r.getBoard().getCoordsBase(r.getTeam());
+			Path path2 = pathFindStrait.findPath(r, r.getCoordinates(), c);
+			if (r.getEnergy() > path2.getLength()) {
+				return true;
+			}
+		} else {
+			Coordinates c = r.getBoard().getCoordsBase(r.getTeam());
+			Path path2 = pathFindDiag.findPath(r, r.getCoordinates(), c);
+			if (r.getEnergy() > path2.getLength()) {
+				return true;
+			}
+		}
+		return false;
 
 	}
 }
