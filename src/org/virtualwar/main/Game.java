@@ -28,8 +28,9 @@ import org.virtualwar.config.Constant;
 import org.virtualwar.config.TextData;
 import org.virtualwar.gui.CaseRobot;
 import org.virtualwar.gui.InitGui;
-import org.virtualwar.ia.IAThomas;
 import org.virtualwar.ia.BeaussartIntelligence;
+import org.virtualwar.ia.IACamille;
+import org.virtualwar.ia.IAThomas;
 import org.virtualwar.ia.IaBenchmark;
 import org.virtualwar.ia.Intelligence;
 import org.virtualwar.ia.RandomInteligence;
@@ -144,8 +145,9 @@ public class Game {
 		for (Robot rob : lsRobot) {
 			if (rob.getEnergy() <= 0) {
 				rob.getBoard().getCell(rob.getCoordinates()).removeRobotIn(rob);
-				new ThreadSoundRun(getClass().getResource(
-						"/org/virtualwar/res/deathOfRobots.wav").getPath(), 1000).start();
+				new ThreadSoundRun(getClass()
+						.getResource("/org/virtualwar/res/deathOfRobots.wav")
+						.getPath().replaceAll("%20", " "), 1000).start();
 				robToRemove.add(rob);
 			}
 		}
@@ -408,7 +410,6 @@ public class Game {
 		} catch (Exception e) {
 			System.exit(0);
 		}
-		
 
 		String left = TextData.GAME_CHOSE_SOUND_INPUT.toString().split(
 				"" + '\u9999')[0];
@@ -447,9 +448,11 @@ public class Game {
 			case "r":
 				playerOne = new RandomInteligence(Constant.ID_TEAM_A, null);
 				break;
-			case "ad":
-			case "av":
+			case "t":
 				playerOne = new IAThomas(Constant.ID_TEAM_A, null);
+				break;
+			case "c":
+				playerOne = new IACamille(Constant.ID_TEAM_A, null);
 				break;
 			default:
 				break;
@@ -747,14 +750,14 @@ public class Game {
 		default:
 			break;
 		}
-		
+
 		int nmbRound = readSafeInt();
 		while (nmbRound > 0) {
 			System.out.println(TextData.GAME_INVALID_INPUT);
 			nmbRound = readSafeInt();
 		}
 		System.out.println(new IaBenchmark(playerOne, playerTwo).run());
-		
+
 	}
 
 	/**

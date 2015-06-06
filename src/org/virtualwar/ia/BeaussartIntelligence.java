@@ -477,7 +477,7 @@ public class BeaussartIntelligence extends Intelligence {
 			if (pathToHome == null) {
 				continue;
 			}
-			if (pathToHome.getLength() * rob.getCostMoving() <= 0) {
+			if (pathToHome.getLength()-1 * rob.getCostMoving() <= 2) {
 				retVal.add(rob);
 			}
 		}

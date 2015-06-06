@@ -43,8 +43,8 @@ public class IaBenchmark {
 	 */
 	public static void main(String[] args) {
 		Long timeBef = System.currentTimeMillis();
-		int[] dat = new IaBenchmark(new RandomInteligence(),
-				new IAThomas(), 100).run();
+		int[] dat = new IaBenchmark(new BeaussartIntelligence(), new IAThomas(),
+				100).run();
 		Long timeAft = System.currentTimeMillis();
 		System.out.println(Arrays.toString(dat) + " , took "
 				+ (timeAft - timeBef));
@@ -176,8 +176,11 @@ public class IaBenchmark {
 					try {
 						actT1 = it1.makeTurn();
 					} catch (Exception e) {
-						new ThreadSoundRun(getClass().getResource(
-								"/org/virtualwar/res/deathOfRobots.wav").getPath(), true)
+						new ThreadSoundRun(
+								getClass()
+										.getResource(
+												"/org/virtualwar/res/deathOfRobots.wav")
+										.getPath().replaceAll("%20", " "), true)
 								.start();
 						System.err.println("Error : ia 1 breaking the game...");
 						System.err.println(e.toString());
@@ -188,8 +191,11 @@ public class IaBenchmark {
 						actT1.act();
 						actT1 = null;
 					} else {
-						new ThreadSoundRun(getClass().getResource(
-								"/org/virtualwar/res/deathOfRobots.wav").getPath(), true)
+						new ThreadSoundRun(
+								getClass()
+										.getResource(
+												"/org/virtualwar/res/deathOfRobots.wav")
+										.getPath().replaceAll("%20", " "), true)
 								.start();
 						System.err.println("Error : diden't chose (ia 1)");
 						break;
@@ -205,8 +211,8 @@ public class IaBenchmark {
 					} catch (Exception e) {
 						Config.soundOn = true;
 						new ThreadSoundRun(getClass().getResource(
-								"/org/virtualwar/res/deathOfRobots.wav").getPath(), true)
-								.start();
+								"/org/virtualwar/res/deathOfRobots.wav")
+								.getPath(), true).start();
 						Config.soundOn = false;
 						System.err.println("Error : ia 2 breaking the game...");
 						System.err.println(e.toString());
@@ -219,8 +225,8 @@ public class IaBenchmark {
 					} else {
 						Config.soundOn = true;
 						new ThreadSoundRun(getClass().getResource(
-								"/org/virtualwar/res/deathOfRobots.wav").getPath(), true)
-								.start();
+								"/org/virtualwar/res/deathOfRobots.wav")
+								.getPath(), true).start();
 						Config.soundOn = false;
 						System.err.println("Error : diden't chose (ia 2)");
 						break;

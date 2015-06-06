@@ -1,6 +1,7 @@
 package org.virtualwar.ia;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -66,6 +67,203 @@ public class IAThomas extends Intelligence {
 		}
 	}
 
+	public boolean attackAndSafe(Robot r) {
+		if (detectRobotRight(r)
+				&& (detectRobotDown(r) || detectRobotLeft(r)
+						|| detectRobotUp(r) || detectRobotJustDown(r) != null
+						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
+			return true;
+		} else if (detectRobotLeft(r)
+				&& (detectRobotDown(r) || detectRobotRight(r)
+						|| detectRobotUp(r) || detectRobotJustDown(r) != null
+						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
+			return true;
+		} else if (detectRobotUp(r)
+				&& (detectRobotDown(r) || detectRobotLeft(r)
+						|| detectRobotRight(r)
+						|| detectRobotJustDown(r) != null
+						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
+			return true;
+		} else if (detectRobotDown(r)
+				&& (detectRobotUp(r) || detectRobotLeft(r)
+						|| detectRobotRight(r)
+						|| detectRobotJustDown(r) != null
+						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
+			return true;
+		}
+		return false;
+
+	}
+
+	public boolean canReturnBase(Robot r) {
+		if (!(r instanceof Tank)) {
+			Coordinates c = r.getBoard().getCoordsBase(r.getTeam());
+			Path path2 = pathFindStrait.findPath(r, r.getCoordinates(), c);
+			if (r.getEnergy() > path2.getLength()) {
+				return true;
+			}
+		} else {
+			Coordinates c = r.getBoard().getCoordsBase(r.getTeam());
+			Path path2 = pathFindDiag.findPath(r, r.getCoordinates(), c);
+			if (r.getEnergy() > path2.getLength()) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	public boolean detectRobotDown(Robot r) {
+		Coordinates c = r.getCoordinates();
+		int t = r.getTeam();
+
+		if (c.getHeight() + 1 == getBoard().getHeight() - 1) {
+			return false;
+		}
+
+		for (int i = c.getHeight(); i < getBoard().getHeight() + 1; i++) {
+			Coordinates detectTank = new Coordinates(c.getWidth(), i);
+			if (getBoard().getRobot(detectTank) instanceof Tank
+					&& getBoard().getRobot(detectTank).getTeam() != t) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Robot detectRobotJustDown(Robot r) {
+		Coordinates c = r.getCoordinates();
+		int t = r.getTeam();
+
+		if (c.getHeight() == getBoard().getHeight() - 1) {
+			return null;
+		}
+		Coordinates detect = new Coordinates(c.getWidth(), c.getHeight() + 1);
+		if (getBoard().getRobot(detect) != null) {
+			if (!(getBoard().getRobot(detect) instanceof Scavenger)
+					&& getBoard().getRobot(detect).getTeam() != t) {
+				return getBoard().getRobot(detect);
+			}
+		}
+		return null;
+	}
+
+	public Robot detectRobotJustLeft(Robot r) {
+		Coordinates c = r.getCoordinates();
+		int t = r.getTeam();
+		if (c.getWidth() == 0) {
+			return null;
+		}
+		Coordinates detect = new Coordinates(c.getWidth() - 1, c.getHeight());
+		if (getBoard().getRobot(detect) != null) {
+			if (!(getBoard().getRobot(detect) instanceof Scavenger)
+					&& getBoard().getRobot(detect).getTeam() != t) {
+				return getBoard().getRobot(detect);
+			}
+		}
+		return null;
+	}
+
+	public Robot detectRobotJustRight(Robot r) {
+		Coordinates c = r.getCoordinates();
+		int t = r.getTeam();
+
+		if (c.getWidth() == getBoard().getWidth() - 1) {
+			return null;
+		}
+		Coordinates detect = new Coordinates(c.getWidth() + 1, c.getHeight());
+		if (getBoard().getRobot(detect) != null) {
+			if (!(getBoard().getRobot(detect) instanceof Scavenger)
+					&& getBoard().getRobot(detect).getTeam() != t) {
+				return getBoard().getRobot(detect);
+			}
+		}
+		return null;
+	}
+
+	public Robot detectRobotJustUp(Robot r) {
+		Coordinates c = r.getCoordinates();
+		int t = r.getTeam();
+
+		if (c.getHeight() == 0) {
+			return null;
+		}
+		Coordinates detect = new Coordinates(c.getWidth(), c.getHeight() - 1);
+		if (getBoard().getRobot(detect) != null) {
+			if (!(getBoard().getRobot(detect) instanceof Scavenger)
+					&& getBoard().getRobot(detect).getTeam() != t) {
+				return getBoard().getRobot(detect);
+			}
+		}
+		return null;
+	}
+
+	public boolean detectRobotLeft(Robot r) {
+		Coordinates c = r.getCoordinates();
+		int t = r.getTeam();
+
+		if (c.getWidth() - 1 == 0) {
+			return false;
+		}
+
+		for (int i = c.getWidth(); i > -1; i--) {
+			Coordinates detectTank = new Coordinates(i, c.getHeight());
+			if (getBoard().getRobot(detectTank) instanceof Tank
+					&& getBoard().getRobot(detectTank).getTeam() != t) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean detectRobotRight(Robot r) {
+		Coordinates c = r.getCoordinates();
+		int t = r.getTeam();
+
+		if (c.getWidth() + 1 == getBoard().getWidth() - 1) {
+			return false;
+		}
+
+		for (int i = c.getWidth(); i < getBoard().getWidth() + 2; i++) {
+			Coordinates detectTank = new Coordinates(c.getWidth(), i);
+			if (getBoard().getRobot(detectTank) instanceof Tank
+					&& getBoard().getRobot(detectTank).getTeam() != t) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean detectRobotUp(Robot r) {
+		Coordinates c = r.getCoordinates();
+		int t = r.getTeam();
+
+		if (c.getHeight() - 1 == 0) {
+			return false;
+		}
+
+		for (int i = c.getHeight(); i > -1; i--) {
+			Coordinates detectTank = new Coordinates(c.getWidth(), i);
+			if (getBoard().getRobot(detectTank) instanceof Tank
+					&& getBoard().getRobot(detectTank).getTeam() != t) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public Coordinates getEnnemy(Robot r) {
+		Ennemy = new Coordinates(100, 100);
+		List<Robot> lsRobot = super.getLsRobot();
+		List<Coordinates> c = new ArrayList<Coordinates>();
+		for (Robot rob : lsRobot) {
+			if (rob.getTeam() != r.getTeam() && !(rob.isInBase())) {
+				c.add(rob.getCoordinates());
+			}
+		}
+		return getPlusProche(r, c, 0);
+	}
+
 	@Override
 	public List<Robot> getInitialRobots(int numberOfRobots) {
 		List<Robot> retVal = new ArrayList<Robot>();
@@ -91,6 +289,38 @@ public class IAThomas extends Intelligence {
 		}
 		setLsRobot(retVal);
 		return retVal;
+	}
+
+	public Coordinates getPlusProche(Robot r, List<Coordinates> c, int index) {
+		if (c.isEmpty()) {
+			return null;
+		}
+		if (index == c.size() - 1) {
+			return Ennemy;
+		}
+		int x = c.get(index).getWidth() - r.getCoordinates().getWidth();
+		if (x < 0) {
+			x = x - (2 * x);
+		}
+		int y = c.get(index).getHeight() - r.getCoordinates().getHeight();
+		if (y < 0) {
+			y = y - (2 * y);
+		}
+		int x2 = Ennemy.getWidth() - r.getCoordinates().getWidth();
+		if (x2 < 0) {
+			x2 = x2 - (2 * x2);
+		}
+		int y2 = Ennemy.getHeight() - r.getCoordinates().getHeight();
+		if (y2 < 0) {
+			y2 = y2 - (2 * y2);
+		}
+		if (x + y < x2 + y2) {
+			Ennemy = new Coordinates(c.get(index).getWidth(), c.get(index)
+					.getHeight());
+		}
+		index = index + 1;
+		return getPlusProche(r, c, index);
+
 	}
 
 	@Override
@@ -218,236 +448,35 @@ public class IAThomas extends Intelligence {
 			}
 		}
 
-		return null;
+		// WHOOPS ! well, random...
+		lsRobot = new ArrayList<Robot>(super.getLsRobot());
+		Collections.shuffle(lsRobot, ran);
 
-	}
-
-	public boolean detectRobotUp(Robot r) {
-		Coordinates c = r.getCoordinates();
-		int t = r.getTeam();
-
-		if (c.getHeight() - 1 == 0) {
-			return false;
-		}
-
-		for (int i = c.getHeight(); i > -1; i--) {
-			Coordinates detectTank = new Coordinates(c.getWidth(), i);
-			if (getBoard().getRobot(detectTank) instanceof Tank
-					&& getBoard().getRobot(detectTank).getTeam() != t) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean detectRobotLeft(Robot r) {
-		Coordinates c = r.getCoordinates();
-		int t = r.getTeam();
-
-		if (c.getWidth() - 1 == 0) {
-			return false;
-		}
-
-		for (int i = c.getWidth(); i > -1; i--) {
-			Coordinates detectTank = new Coordinates(i, c.getHeight());
-			if (getBoard().getRobot(detectTank) instanceof Tank
-					&& getBoard().getRobot(detectTank).getTeam() != t) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean detectRobotDown(Robot r) {
-		Coordinates c = r.getCoordinates();
-		int t = r.getTeam();
-
-		if (c.getHeight() + 1 == getBoard().getHeight() - 1) {
-			return false;
-		}
-
-		for (int i = c.getHeight(); i < getBoard().getHeight() + 1; i++) {
-			Coordinates detectTank = new Coordinates(c.getWidth(), i);
-			if (getBoard().getRobot(detectTank) instanceof Tank
-					&& getBoard().getRobot(detectTank).getTeam() != t) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean detectRobotRight(Robot r) {
-		Coordinates c = r.getCoordinates();
-		int t = r.getTeam();
-
-		if (c.getWidth() + 1 == getBoard().getWidth() - 1) {
-			return false;
-		}
-
-		for (int i = c.getWidth(); i < getBoard().getWidth() + 2; i++) {
-			Coordinates detectTank = new Coordinates(c.getWidth(), i);
-			if (getBoard().getRobot(detectTank) instanceof Tank
-					&& getBoard().getRobot(detectTank).getTeam() != t) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public boolean attackAndSafe(Robot r) {
-		if (detectRobotRight(r)
-				&& (detectRobotDown(r) || detectRobotLeft(r)
-						|| detectRobotUp(r) || detectRobotJustDown(r) != null
-						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
-			return true;
-		} else if (detectRobotLeft(r)
-				&& (detectRobotDown(r) || detectRobotRight(r)
-						|| detectRobotUp(r) || detectRobotJustDown(r) != null
-						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
-			return true;
-		} else if (detectRobotUp(r)
-				&& (detectRobotDown(r) || detectRobotLeft(r)
-						|| detectRobotRight(r)
-						|| detectRobotJustDown(r) != null
-						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
-			return true;
-		} else if (detectRobotDown(r)
-				&& (detectRobotUp(r) || detectRobotLeft(r)
-						|| detectRobotRight(r)
-						|| detectRobotJustDown(r) != null
-						|| detectRobotJustDown(r) != null || detectRobotJustDown(r) != null)) {
-			return true;
-		}
-		return false;
-
-	}
-
-	public Robot detectRobotJustDown(Robot r) {
-		Coordinates c = r.getCoordinates();
-		int t = r.getTeam();
-
-		if (c.getHeight() == getBoard().getHeight() - 1) {
-			return null;
-		}
-		Coordinates detect = new Coordinates(c.getWidth(), c.getHeight() + 1);
-		if (getBoard().getRobot(detect) != null) {
-			if (!(getBoard().getRobot(detect) instanceof Scavenger)
-					&& getBoard().getRobot(detect).getTeam() != t) {
-				return getBoard().getRobot(detect);
-			}
-		}
-		return null;
-	}
-
-	public Robot detectRobotJustUp(Robot r) {
-		Coordinates c = r.getCoordinates();
-		int t = r.getTeam();
-
-		if (c.getHeight() == 0) {
-			return null;
-		}
-		Coordinates detect = new Coordinates(c.getWidth(), c.getHeight() - 1);
-		if (getBoard().getRobot(detect) != null) {
-			if (!(getBoard().getRobot(detect) instanceof Scavenger)
-					&& getBoard().getRobot(detect).getTeam() != t) {
-				return getBoard().getRobot(detect);
-			}
-		}
-		return null;
-	}
-
-	public Robot detectRobotJustRight(Robot r) {
-		Coordinates c = r.getCoordinates();
-		int t = r.getTeam();
-
-		if (c.getWidth() == getBoard().getWidth() - 1) {
-			return null;
-		}
-		Coordinates detect = new Coordinates(c.getWidth() + 1, c.getHeight());
-		if (getBoard().getRobot(detect) != null) {
-			if (!(getBoard().getRobot(detect) instanceof Scavenger)
-					&& getBoard().getRobot(detect).getTeam() != t) {
-				return getBoard().getRobot(detect);
-			}
-		}
-		return null;
-	}
-
-	public Robot detectRobotJustLeft(Robot r) {
-		Coordinates c = r.getCoordinates();
-		int t = r.getTeam();
-		if (c.getWidth() == 0) {
-			return null;
-		}
-		Coordinates detect = new Coordinates(c.getWidth() - 1, c.getHeight());
-		if (getBoard().getRobot(detect) != null) {
-			if (!(getBoard().getRobot(detect) instanceof Scavenger)
-					&& getBoard().getRobot(detect).getTeam() != t) {
-				return getBoard().getRobot(detect);
-			}
-		}
-		return null;
-	}
-
-	public Coordinates getEnnemy(Robot r) {
-		Ennemy = new Coordinates(100, 100);
-		List<Robot> lsRobot = super.getLsRobot();
-		List<Coordinates> c = new ArrayList<Coordinates>();
 		for (Robot rob : lsRobot) {
-			if (rob.getTeam() != r.getTeam() && !(rob.isInBase())) {
-				c.add(rob.getCoordinates());
+			if (rob.canAttack()) {
+				if (rob instanceof Scavenger && ran.nextBoolean()
+						&& ran.nextBoolean()) {
+
+					List<Action> lsAct = rob.getAvailableAtacks();
+					return lsAct.get(ran.nextInt(lsAct.size()));
+				}
+			}
+			if (rob.canMove()) {
+				List<Action> lsAct = rob.getAvailableMove();
+				return lsAct.get(ran.nextInt(lsAct.size()));
 			}
 		}
-		return getPlusProche(r, c, 0);
-	}
-
-	public Coordinates getPlusProche(Robot r, List<Coordinates> c, int index) {
-		if (c.isEmpty()) {
-			return null;
-		}
-		if (index == c.size() - 1) {
-			return Ennemy;
-		}
-		int x = c.get(index).getWidth() - r.getCoordinates().getWidth();
-		if (x < 0) {
-			x = x - (2 * x);
-		}
-		int y = c.get(index).getHeight() - r.getCoordinates().getHeight();
-		if (y < 0) {
-			y = y - (2 * y);
-		}
-		int x2 = Ennemy.getWidth() - r.getCoordinates().getWidth();
-		if (x2 < 0) {
-			x2 = x2 - (2 * x2);
-		}
-		int y2 = Ennemy.getHeight() - r.getCoordinates().getHeight();
-		if (y2 < 0) {
-			y2 = y2 - (2 * y2);
-		}
-		if (x + y < x2 + y2) {
-			Ennemy = new Coordinates(c.get(index).getWidth(), c.get(index)
-					.getHeight());
-		}
-		index = index + 1;
-		return getPlusProche(r, c, index);
-
-	}
-
-	public boolean canReturnBase(Robot r) {
-		if (!(r instanceof Tank)) {
-			Coordinates c = r.getBoard().getCoordsBase(r.getTeam());
-			Path path2 = pathFindStrait.findPath(r, r.getCoordinates(), c);
-			if (r.getEnergy() > path2.getLength()) {
-				return true;
-			}
-		} else {
-			Coordinates c = r.getBoard().getCoordsBase(r.getTeam());
-			Path path2 = pathFindDiag.findPath(r, r.getCoordinates(), c);
-			if (r.getEnergy() > path2.getLength()) {
-				return true;
+		for (Robot rob : lsRobot) {
+			if (rob.canAttack()) {
+				if (rob instanceof Scavenger) {
+					List<Action> lsAct = rob.getAvailableAtacks();
+					return lsAct.get(ran.nextInt(lsAct.size()));
+				}
 			}
 		}
-		return false;
+		
+		
+		return null;
 
 	}
 }

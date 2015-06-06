@@ -47,7 +47,34 @@ public enum TextData {
 					+ "B) Bases et energie : \n\n"
 					+ "Chaque action coûte de l'énergie."
 					+ "Quand un robot n'a plus d'énergie, il ne peut plus jouer.\n\n"
-					+ "Quand il retourne dans sa base, un robot récupère peu à peu son énergie."),
+					+ "Quand il retourne dans sa base, un robot récupère peu à peu son énergie.",
+					
+					
+					"\tRules of game :\n"
+					+ "Countries clash with robots on a board.\n\n"
+					+ "The game unfolds on turn by turn."
+					+ "The team who start is selected randoml.\n\n"
+					+ "Robots start in their respective base.\n\n"
+					+ "At every turn, each team select:"
+					+ " one of his robots to realize one of her action.\n\n"
+					+ "A team can't pass his turn.\n"
+					+ "She must play as long as his robots have"
+					+ " enough energy to perform an action.\n\n"
+					+ "During the game each team must"
+					+ " keep at least a robot out of her base.\n\n"
+					+ "The game ends as soon as one of the two teams"
+					+ " hasn't more living robot.\n\n"
+					+ "\t How to play ? : \n\n"
+					+ "A) Robots : \n\n"
+					+ "Shooter : robot lightweight, capable to shoot at a short distance."
+					+ " Can move in all directions.\n\n"
+					+ "Scavenger : Poseur of mine. Can move in all directions.\n\n"
+					+ "Tank : Robot heavy, capable to shoot at a long distance."
+					+ " can't move diagonally.\n\n\n"
+					+ "B) Bases and energy : \n\n"
+					+ "Each action costs energy."
+					+ "When a robot hasn't hasn't energy, he doesn't move.\n\n"
+					+ "When he returns in his base, a robot gradually recovers his energy."),
 
 	/** The label up. */
 	LABEL_UP("haut", "up"),
@@ -305,9 +332,9 @@ public enum TextData {
 			+ '\u9999' + "(y) yes, (n) no"),
 
 	/** The game chose ia input. */
-	GAME_CHOSE_IA_LIST("b\na\nav" + '\u9999'
-			+ "(B)eaussart, (A)léatoire, (Av)ancée", "b\nr\nad" + '\u9999'
-			+ "(B)eaussart, (R)andom, (Ad)vanced"),
+	GAME_CHOSE_IA_LIST("b\na\nt\nc" + '\u9999'
+			+ "(B)eaussart, (A)léatoire, (T)homas, (C)amille", "b\nr\nt\nc" + '\u9999'
+			+ "(B)eaussart, (R)andom, (T)homas, (C)amille"),
 	/** thje lang input choise */
 	GAME_LANG_INPUT("fr\nen" + '\u9999' + "fr " + GAME_OR.get("fr") + " en :"),
 
